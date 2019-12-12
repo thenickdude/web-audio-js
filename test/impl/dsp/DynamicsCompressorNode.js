@@ -51,12 +51,13 @@ describe("impl/dsp/DynamicsCompressor", () => {
       context._impl.process(channelData, i * blockSize);
     }
 
-    const out = channelData[0].slice(0, length);
-    for (let i = 0; i < out.length; i++) {
-      const a = out[i];
-      const a2 = out[i];
+    const out1 = channelData[0].slice(0, length);
+    const out2 = channelData[1].slice(0, length);
+    for (let i = 0; i < out2.length; i++) {
+      const a1 = out1[i];
+      const a2 = out2[i];
       const b = DynamicsCompressorData[i];
-      assert(Math.abs(a - b) <= 1e-4);
+      assert(Math.abs(a1 - b) <= 1e-4);
       assert(Math.abs(a2 - b) <= 1e-4);
     }
   });
