@@ -42,7 +42,7 @@ class DynamicsCompressorNode extends AudioNode {
     this._attack = this.addParam(CONTROL_RATE, attack);
     this._release = this.addParam(CONTROL_RATE, release);
 
-    this.compressor = new DynamicsCompressor(this.sampleRate, this.numberOfOutputs);
+    this.compressor = new DynamicsCompressor(this.sampleRate, this.outputs[0].getNumberOfChannels());
   }
 
   /**
@@ -89,18 +89,16 @@ class DynamicsCompressorNode extends AudioNode {
 
   dspInit() {
     super.dspInit();
-
-
   }
 
   dspProcess() {
     super.dspProcess();
 
-    this.compressor.setParameterValue(CompressorParameters.THRESHOLD, this._threshold.value);
-    this.compressor.setParameterValue(CompressorParameters.KNEE, this._knee.value);
-    this.compressor.setParameterValue(CompressorParameters.RATIO, this._ratio.value);
-    this.compressor.setParameterValue(CompressorParameters.ATTACK, this._attack.value);
-    this.compressor.setParameterValue(CompressorParameters.RELEASE, this._release.value);
+    this.compressor.setParameterValue(CompressorParameters.THRESHOLD, this._threshold.getValue());
+    this.compressor.setParameterValue(CompressorParameters.KNEE, this._knee.getValue());
+    this.compressor.setParameterValue(CompressorParameters.RATIO, this._ratio.getValue());
+    this.compressor.setParameterValue(CompressorParameters.ATTACK, this._attack.getValue());
+    this.compressor.setParameterValue(CompressorParameters.RELEASE, this._release.getValue());
 
     this.compressor.dspProcess(this.inputs, this.outputs, this.blockSize);
   }

@@ -56,12 +56,12 @@ describe("impl/AnalyserNode", () => {
     const waveform = new Uint8Array(channel.length);
 
     analyser.getByteTimeDomainData(waveform);
-    assert.deepEqual(waveform, np.full(waveform.length, 128));
+    assert.deepEqual(waveform, np.full(waveform.length, 128, Uint8Array));
 
     context.process(channels, 0);
     analyser.getByteTimeDomainData(waveform);
 
-    assert.deepEqual(waveform, [
+    assert.deepEqual([...waveform], [
       128, 171, 209, 237, 253, 253, 239, 212,
       174, 132,  88,  49,  20,   3,   1,  14,
       40,   77, 119, 163, 202, 233, 251, 254,

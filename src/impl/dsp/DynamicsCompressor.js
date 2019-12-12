@@ -191,8 +191,8 @@ class DynamicsCompressor {
   }
 
   setNumberOfChannels(numberOfChannels) {
-    this.sourceChannels = nmap(numberOfChannels, new Float32Array());
-    this.destinationChannels = nmap(numberOfChannels, new Float32Array());
+    this.sourceChannels = nmap(numberOfChannels, () => new Float32Array());
+    this.destinationChannels = nmap(numberOfChannels, () => new Float32Array());
 
     this.compressor.setNumberOfChannels(numberOfChannels);
     this.numberOfChannels = numberOfChannels;
