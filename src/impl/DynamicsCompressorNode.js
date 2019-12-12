@@ -1,7 +1,7 @@
 "use strict";
 
 const AudioNode = require("./AudioNode");
-const DynamicsCompressorNodeDSP = require("./dsp/DynamicsCompressorNode");
+const { DynamicsCompressor, CompressorParameters } = require("./dsp/DynamicsCompressor");
 const { defaults } = require("../utils");
 const { EXPLICIT } = require("../constants/ChannelCountMode");
 const { CONTROL_RATE } = require("../constants/AudioParamRate");
@@ -41,24 +41,26 @@ class DynamicsCompressorNode extends AudioNode {
     this._ratio = this.addParam(CONTROL_RATE, ratio);
     this._attack = this.addParam(CONTROL_RATE, attack);
     this._release = this.addParam(CONTROL_RATE, release);
+
+    this.compressor = new DynamicsCompressor(this.sampleRate, this.numberOfOutputs);
   }
 
   /**
-   * @param {AudioParam}
+   * @return {AudioParam}
    */
   getThreshold() {
     return this._threshold;
   }
 
   /**
-   * @param {AudioParam}
+   * @return {AudioParam}
    */
   getKnee() {
     return this._knee;
   }
 
   /**
-   * @param {AudioParam}
+   * @return {AudioParam}
    */
   getRatio() {
     return this._ratio;
@@ -67,26 +69,41 @@ class DynamicsCompressorNode extends AudioNode {
   /**
    * @return {number}
    */
-  /* istanbul ignore next */
   getReduction() {
-    throw new TypeError("NOT YET IMPLEMENTED");
+    return this.compressor.parameterValue(CompressorParameters.REDUCTION);
   }
 
   /**
-   * @param {AudioParam}
+   * @return {AudioParam}
    */
   getAttack() {
     return this._attack;
   }
 
   /**
-   * @param {AudioParam}
+   * @return {AudioParam}
    */
   getRelease() {
     return this._release;
   }
-}
 
-Object.assign(DynamicsCompressorNode.prototype, DynamicsCompressorNodeDSP);
+  dspInit() {
+    super.dspInit();
+
+
+  }
+
+  dspProcess() {
+    super.dspProcess();
+
+    this.compressor.setParameterValue(CompressorParameters.THRESHOLD, this._threshold.value);
+    this.compressor.setParameterValue(CompressorParameters.KNEE, this._knee.value);
+    this.compressor.setParameterValue(CompressorParameters.RATIO, this._ratio.value);
+    this.compressor.setParameterValue(CompressorParameters.ATTACK, this._attack.value);
+    this.compressor.setParameterValue(CompressorParameters.RELEASE, this._release.value);
+
+    this.compressor.dspProcess(this.inputs, this.outputs, this.blockSize);
+  }
+}
 
 module.exports = DynamicsCompressorNode;
