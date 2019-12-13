@@ -214,6 +214,7 @@ context.encodeAudioData(audioData, { type: "mp3" }).then((arrayBuffer) => {
 - `ChannelMergerNode`
 - `ChannelSplitterNode`
 - `DelayNode` (noisy..)
+- `DynamicsProcessorNode`
 - `GainNode`
 - `IIRFIlterNode`
 - `OscillatorNode` (use wave-table synthesis, not use periodic wave)
