@@ -1,5 +1,7 @@
 "use strict";
 
+const { flushDenormalFloatToZero } = require('../../utils');
+
 class BiquadFilterKernel {
   constructor() {
     this.coefficients = [ 0, 0, 0, 0, 0 ];
@@ -85,10 +87,6 @@ class BiquadFilterKernel {
     this._y2 = flushDenormalFloatToZero(y2);
     this.coefficients = coefficients;
   }
-}
-
-function flushDenormalFloatToZero(f) {
-  return (Math.abs(f) < 1.175494e-38) ? 0.0 : f;
 }
 
 module.exports = BiquadFilterKernel;

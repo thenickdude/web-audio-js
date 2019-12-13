@@ -1,15 +1,15 @@
 "use strict";
 
-function zeros(size) {
-  return new Float32Array(size);
+function zeros(size, constructor = Float32Array) {
+  return new constructor(size);
 }
 
-function full(size, value) {
-  return new Float32Array(size).fill(value);
+function full(size, value, constructor = Float32Array) {
+  return new constructor(size).fill(value);
 }
 
-function random_sample(size) {
-  return new Float32Array(size).map(Math.random);
+function random_sample(size, constructor = Float32Array) {
+  return new constructor(size).map(Math.random);
 }
 
 module.exports = { zeros, full, random_sample };
