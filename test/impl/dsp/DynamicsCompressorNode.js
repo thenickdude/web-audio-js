@@ -53,7 +53,7 @@ describe("impl/dsp/DynamicsCompressor", () => {
 
     const out1 = channelData[0].slice(0, length);
     const out2 = channelData[1].slice(0, length);
-    for (let i = 0; i < out2.length; i++) {
+    for (let i = 0; i < out1.length; i++) {
       const a1 = out1[i];
       const a2 = out2[i];
       const b = DynamicsCompressorData[i];
