@@ -201,7 +201,7 @@ class DynamicsCompressorKernel {
     releaseZone3,
     releaseZone4
   ) {
-    assert(this.preDelayBuffers === numberOfChannels);
+    assert(this.preDelayBuffers.length === numberOfChannels);
 
     const sampleRate = this.sampleRate;
 
