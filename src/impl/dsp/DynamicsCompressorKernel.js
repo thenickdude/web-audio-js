@@ -1,5 +1,9 @@
 "use strict";
 
+// Port from Chromium
+// https://chromium.googlesource.com/chromium/blink/+/master/Source/platform/audio/DynamicsCompressorKernel.cpp
+
+const assert = require('assert');
 const { toDecibel, toLinear, flushDenormalFloatToZero } = require("../../utils");
 
 const DEFAULT_PRE_DELAY_FRAMES = 256;
@@ -197,9 +201,7 @@ class DynamicsCompressorKernel {
     releaseZone3,
     releaseZone4
   ) {
-    if (this.preDelayBuffers.length !== numberOfChannels) {
-      console.error('Mismatch in number of channels and predelay buffers');
-    }
+    assert(this.preDelayBuffers === numberOfChannels);
 
     const sampleRate = this.sampleRate;
 

@@ -1,5 +1,9 @@
 "use strict";
 
+// Port from Chromium
+// https://chromium.googlesource.com/chromium/blink/+/master/Source/platform/audio/DynamicsCompressor.cpp
+
+const assert = require("assert");
 const nmap = require("nmap");
 const DynamicsCompressorKernel = require("./DynamicsCompressorKernel");
 
@@ -90,9 +94,7 @@ class DynamicsCompressor {
     const numberOfChannels = destinatonBus.getNumberOfChannels();
     const numberOfSourceChannels = sourceBus.getNumberOfChannels();
 
-    if (numberOfChannels !== this.numberOfChannels || numberOfSourceChannels === 0) {
-      console.error('Invalid channel setup');
-    }
+    assert(numberOfChannels === this.numberOfChannels && numberOfChannels > 0);
 
     if (numberOfChannels !== this.numberOfChannels || numberOfSourceChannels === 0) {
       destinatonBus.zeros();
@@ -113,7 +115,7 @@ class DynamicsCompressor {
       }
       default: {
         // FIXME : support other number of channels.
-        console.error('Invalid number of channels');
+        assert(false);
         destinatonBus.zeros();
         return;
       }
