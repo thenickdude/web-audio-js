@@ -1,7 +1,7 @@
 {
-  "name": "web-audio-engine",
+  "name": "@descript/web-audio-engine",
   "description": "Pure JS implementation of the Web Audio API",
-  "version": "0.13.4",
+  "version": "0.14.0",
   "author": "Nao Yonamine <mohayonao@gmail.com>",
   "bugs": {
     "url": "https://github.com/mohayonao/web-audio-engine/issues"
@@ -40,7 +40,7 @@
     "build",
     "lib"
   ],
-  "homepage": "https://github.com/mohayonao/web-audio-engine/",
+  "homepage": "https://github.com/descriptinc/web-audio-engine/",
   "keywords": [
     "web audio api"
   ],
@@ -48,7 +48,7 @@
   "main": "lib/index.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/mohayonao/web-audio-engine.git"
+    "url": "https://github.com/descriptinc/web-audio-engine.git"
   },
   "scripts": {
     "build": "npm-run-all build:*",
