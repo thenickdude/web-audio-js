@@ -16,10 +16,10 @@ class AudioNodeOutput {
    * @param {boolean}   opts.enabled
    */
   constructor(opts) {
-    let node = opts.node;
-    let index = opts.index;
-    let numberOfChannels = opts.numberOfChannels;
-    let enabled = opts.enabled;
+    const node = opts.node;
+    const index = opts.index;
+    const numberOfChannels = opts.numberOfChannels;
+    const enabled = opts.enabled;
 
     this.node = node;
     this.index = index|0;

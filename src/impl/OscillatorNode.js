@@ -26,9 +26,9 @@ class OscillatorNode extends AudioScheduledSourceNode {
    * @param {number}       opts.detune
    */
   constructor(context, opts = {}) {
-    let type = defaults(opts.type, DEFAULT_TYPE);
-    let frequency = defaults(opts.frequency, DEFAULT_FREQUENCY);
-    let detune = defaults(opts.detune, DEFAULT_DETUNE);
+    const type = defaults(opts.type, DEFAULT_TYPE);
+    const frequency = defaults(opts.frequency, DEFAULT_FREQUENCY);
+    const detune = defaults(opts.detune, DEFAULT_DETUNE);
 
     super(context, opts);
 

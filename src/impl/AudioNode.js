@@ -30,15 +30,15 @@ class AudioNode extends EventTarget {
    * @param {string}       config.channelCountMode
    */
   constructor(context, opts = {}, config = {}) {
-    let inputs = defaults(config.inputs, []);
-    let outputs = defaults(config.outputs, []);
-    let channelCount = defaults(config.channelCount, 1);
-    let channelCountMode = defaults(config.channelCountMode, MAX);
-    let channelInterpretation = SPEAKERS;
-    let allowedMinChannelCount = defaults(config.allowedMinChannelCount, MIN_NUMBER_OF_CHANNELS);
-    let allowedMaxChannelCount = defaults(config.allowedMaxChannelCount, MAX_NUMBER_OF_CHANNELS);
-    let allowedChannelCountMode = defaults(config.allowedChannelCountMode, [ MAX, CLAMPED_MAX, EXPLICIT ]);
-    let allowedChannelInterpretation = defaults(config.allowedChannelInterpretation, [ DISCRETE, SPEAKERS ]);
+    const inputs = defaults(config.inputs, []);
+    const outputs = defaults(config.outputs, []);
+    const channelCount = defaults(config.channelCount, 1);
+    const channelCountMode = defaults(config.channelCountMode, MAX);
+    const channelInterpretation = SPEAKERS;
+    const allowedMinChannelCount = defaults(config.allowedMinChannelCount, MIN_NUMBER_OF_CHANNELS);
+    const allowedMaxChannelCount = defaults(config.allowedMaxChannelCount, MAX_NUMBER_OF_CHANNELS);
+    const allowedChannelCountMode = defaults(config.allowedChannelCountMode, [ MAX, CLAMPED_MAX, EXPLICIT ]);
+    const allowedChannelInterpretation = defaults(config.allowedChannelInterpretation, [ DISCRETE, SPEAKERS ]);
 
     super();
 

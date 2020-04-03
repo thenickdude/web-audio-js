@@ -17,9 +17,9 @@ class WebAudioContext extends BaseAudioContext {
    * @param {number}       opts.bufferSize
    */
   constructor(opts = {}) {
-    let destination = opts.destination || opts.context.destination;
-    let context = destination.context;
-    let sampleRate = context.sampleRate;
+    const destination = opts.destination || opts.context.destination;
+    const context = destination.context;
+    const sampleRate = context.sampleRate;
     let blockSize = defaults(opts.blockSize, config.blockSize);
     let numberOfChannels = defaults(opts.numberOfChannels, config.numberOfChannels);
     let bufferSize = defaults(opts.bufferSize, 1024);

@@ -1,4 +1,4 @@
-"use stirct";
+"use strict";
 
 /**
  * @param {number} value

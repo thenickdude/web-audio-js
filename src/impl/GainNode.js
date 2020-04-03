@@ -15,7 +15,7 @@ class GainNode extends AudioNode {
    * @param {number}       opts.gain
    */
   constructor(context, opts = {}) {
-    let gain = defaults(opts.gain, DEFAULT_GAIN);
+    const gain = defaults(opts.gain, DEFAULT_GAIN);
 
     super(context, opts, {
       inputs: [ 1 ],

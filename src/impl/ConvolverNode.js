@@ -16,7 +16,7 @@ class ConvolverNode extends AudioNode {
    * @param {boolean}      opts.disableNormalization
    */
   constructor(context, opts = {}) {
-    let disableNormalization = defaults(opts.disableNormalization, DEFAULT_DISABLE_NORMALIZATION);
+    const disableNormalization = defaults(opts.disableNormalization, DEFAULT_DISABLE_NORMALIZATION);
 
     super(context, opts, {
       inputs: [ 1 ],

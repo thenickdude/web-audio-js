@@ -15,7 +15,7 @@ class ConstantSourceNode extends AudioScheduledSourceNode {
    * @param {number}       opts.offset
    */
   constructor(context, opts = {}) {
-    let offset = defaults(opts.offset, DEFAULT_OFFSET);
+    const offset = defaults(opts.offset, DEFAULT_OFFSET);
 
     super(context, opts, {
       inputs: [ 1 ],

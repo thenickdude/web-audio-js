@@ -14,7 +14,7 @@ class StereoPannerNode extends BasePannerNode {
    * @param {number}       opts.pan
    */
   constructor(context, opts = {}) {
-    let pan = defaults(opts.pan, DEFAULT_PAN);
+    const pan = defaults(opts.pan, DEFAULT_PAN);
 
     super(context, opts);
 

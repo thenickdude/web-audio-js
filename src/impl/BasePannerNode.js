@@ -31,14 +31,14 @@ class BasePannerNode extends AudioNode {
    * @param {number}       opts.coneOuterGain
    */
   constructor(context, opts = {}) {
-    let panningModel = defaults(opts.panningModel, DEFAULT_PANNING_MODEL);
-    let distanceModel = defaults(opts.distanceModel, DEFAULT_DISTANCE_MODEL);
-    let refDistance = defaults(opts.refDistance, DEFAULT_REF_DISTANCE);
-    let maxDistance = defaults(opts.maxDistance, DEFAULT_MAX_DISTANCE);
-    let rolloffFactor = defaults(opts.rolloffFactor, DEFAULT_ROLLOFF_FACTOR);
-    let coneInnerAngle = defaults(opts.coneInnerAngle, DEFAULT_CONE_INNER_ANGLE);
-    let coneOuterAngle = defaults(opts.coneOuterAngle, DEFAULT_CONE_OUTER_ANGLE);
-    let coneOuterGain = defaults(opts.coneOuterGain, DEFAULT_CONE_OUTER_GAIN);
+    const panningModel = defaults(opts.panningModel, DEFAULT_PANNING_MODEL);
+    const distanceModel = defaults(opts.distanceModel, DEFAULT_DISTANCE_MODEL);
+    const refDistance = defaults(opts.refDistance, DEFAULT_REF_DISTANCE);
+    const maxDistance = defaults(opts.maxDistance, DEFAULT_MAX_DISTANCE);
+    const rolloffFactor = defaults(opts.rolloffFactor, DEFAULT_ROLLOFF_FACTOR);
+    const coneInnerAngle = defaults(opts.coneInnerAngle, DEFAULT_CONE_INNER_ANGLE);
+    const coneOuterAngle = defaults(opts.coneOuterAngle, DEFAULT_CONE_OUTER_ANGLE);
+    const coneOuterGain = defaults(opts.coneOuterGain, DEFAULT_CONE_OUTER_GAIN);
 
     super(context, opts, {
       inputs: [ 1 ],

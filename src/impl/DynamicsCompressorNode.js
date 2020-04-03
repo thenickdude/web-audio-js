@@ -23,11 +23,11 @@ class DynamicsCompressorNode extends AudioNode {
    * @param {number}       opts.release
    */
   constructor(context, opts = {}) {
-    let threshold = defaults(opts.threshold, DEFAULT_THRESHOLD);
-    let knee = defaults(opts.knee, DEFAULT_KNEE);
-    let ratio = defaults(opts.ratio, DEFAULT_RATIO);
-    let attack = defaults(opts.attack, DEFAULT_ATTACK);
-    let release = defaults(opts.release, DEFAULT_RELEASE);
+    const threshold = defaults(opts.threshold, DEFAULT_THRESHOLD);
+    const knee = defaults(opts.knee, DEFAULT_KNEE);
+    const ratio = defaults(opts.ratio, DEFAULT_RATIO);
+    const attack = defaults(opts.attack, DEFAULT_ATTACK);
+    const release = defaults(opts.release, DEFAULT_RELEASE);
 
     super(context, opts, {
       inputs: [ 1 ],

@@ -25,11 +25,11 @@ class AudioBufferSourceNode extends AudioScheduledSourceNode {
    * @param {number}       opts.loopEnd
    */
   constructor(context, opts = {}) {
-    let playbackRate = defaults(opts.playbackRate, DEFAULT_PLAYBACK_RATE);
-    let detune = defaults(opts.detune, DEFAULT_DETUNE);
-    let loop = defaults(opts.loop, DEFAULT_LOOP);
-    let loopStart = defaults(opts.loopStart, DEFAULT_LOOP_START);
-    let loopEnd = defaults(opts.loopEnd, DEFAULT_LOOP_END);
+    const playbackRate = defaults(opts.playbackRate, DEFAULT_PLAYBACK_RATE);
+    const detune = defaults(opts.detune, DEFAULT_DETUNE);
+    const loop = defaults(opts.loop, DEFAULT_LOOP);
+    const loopStart = defaults(opts.loopStart, DEFAULT_LOOP_START);
+    const loopEnd = defaults(opts.loopEnd, DEFAULT_LOOP_END);
 
     super(context, opts);
 

@@ -27,8 +27,8 @@ class AudioParam {
    * @param {number}       opts.defaultValue
    */
   constructor(context, opts = {}) {
-    let rate = defaults(opts.rate, CONTROL_RATE);
-    let defaultValue = defaults(opts.defaultValue, 0);
+    const rate = defaults(opts.rate, CONTROL_RATE);
+    const defaultValue = defaults(opts.defaultValue, 0);
 
     this.context = context;
     this.blockSize = context.blockSize;

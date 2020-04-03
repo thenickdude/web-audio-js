@@ -18,8 +18,8 @@ class WaveShaperNode extends AudioNode {
    * @param {string}       opts.overSample
    */
   constructor(context, opts = {}) {
-    let curve = defaults(opts.curve, DEFAULT_CURVE);
-    let overSample = defaults(opts.overSample, DEFAULT_OVERSAMPLE);
+    const curve = defaults(opts.curve, DEFAULT_CURVE);
+    const overSample = defaults(opts.overSample, DEFAULT_OVERSAMPLE);
 
     super(context, opts, {
       inputs: [ 1 ],

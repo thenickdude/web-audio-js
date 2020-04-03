@@ -13,9 +13,9 @@ class PeriodicWave {
    * @param {boolean}      opts.constraints
    */
   constructor(context, opts = {}) {
-    let real = opts.real;
-    let imag = opts.imag;
-    let constraints = opts.constraints;
+    const real = opts.real;
+    const imag = opts.imag;
+    const constraints = opts.constraints;
 
     this.context = context;
     this._real = real;

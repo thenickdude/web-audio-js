@@ -23,10 +23,10 @@ class AnalyserNode extends AudioNode {
    * @param {number}       opts.smoothingTimeConstant
    */
   constructor(context, opts = {}) {
-    let fftSize = defaults(opts.fftSize, DEFAULT_FFT_SIZE);
-    let minDecibels = defaults(opts.minDecibels, DEFAULT_MIN_DECIBELS);
-    let maxDecibels = defaults(opts.maxDecibels, DEFAULT_MAX_DECIBELS);
-    let smoothingTimeConstant = defaults(opts.smoothingTimeConstant, DEFAULT_SMOOTHING_TIME_CONSTANT);
+    const fftSize = defaults(opts.fftSize, DEFAULT_FFT_SIZE);
+    const minDecibels = defaults(opts.minDecibels, DEFAULT_MIN_DECIBELS);
+    const maxDecibels = defaults(opts.maxDecibels, DEFAULT_MAX_DECIBELS);
+    const smoothingTimeConstant = defaults(opts.smoothingTimeConstant, DEFAULT_SMOOTHING_TIME_CONSTANT);
 
     super(context, opts, {
       inputs: [ 1 ],

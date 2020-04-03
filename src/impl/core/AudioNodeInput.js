@@ -21,11 +21,11 @@ class AudioNodeInput {
    * @param {string}    opts.channelCountMode
    */
   constructor(opts) {
-    let node = opts.node;
-    let index = opts.index;
-    let numberOfChannels = opts.numberOfChannels;
-    let channelCount = opts.channelCount;
-    let channelCountMode = opts.channelCountMode;
+    const node = opts.node;
+    const index = opts.index;
+    const numberOfChannels = opts.numberOfChannels;
+    const channelCount = opts.channelCount;
+    const channelCountMode = opts.channelCountMode;
 
     this.node = node;
     this.index = index|0;

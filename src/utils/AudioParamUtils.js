@@ -52,7 +52,7 @@ function computeValueAtTime(timeline, time, defaultValue) {
 }
 
 function getLinearRampToValueAtTime(t, v0, v1, t0, t1) {
-  var a;
+  let a;
 
   if (t <= t0) {
     return v0;
@@ -67,7 +67,7 @@ function getLinearRampToValueAtTime(t, v0, v1, t0, t1) {
 }
 
 function getExponentialRampToValueAtTime(t, v0, v1, t0, t1) {
-  var a;
+  let a;
 
   if (t <= t0) {
     return v0;
@@ -89,8 +89,8 @@ function getTargetValueAtTime(t, v0, v1, t0, timeConstant) {
 }
 
 function getValueCurveAtTime(t, curve, t0, duration) {
-  var x, ix, i0, i1;
-  var y0, y1, a;
+  let x, ix, i0, i1;
+  let y0, y1, a;
 
   x = (t - t0) / duration;
   ix = x * (curve.length - 1);
