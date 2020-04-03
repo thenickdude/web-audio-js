@@ -66,7 +66,7 @@
     "prepublish": "npm-run-all clean lint test build",
     "preversion": "npm-run-all clean lint test",
     "test": "jest --passWithNoTests",
-    "travis": "npm-run-all lint test",
+    "test-ci": "jest --coverage --passWithNoTests",
     "version": "npm run build && git add -A build"
   },
   "jest": {
