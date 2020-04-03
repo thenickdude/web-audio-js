@@ -63,7 +63,7 @@
     "cover": "BABEL_ENV=cover nyc --reporter text --reporter html npm test",
     "lint": "eslint src test",
     "postversion": "git push && git push --tags && npm run clean",
-    "prepublish": "npm-run-all clean lint test build",
+    "prepublishOnly": "npm-run-all clean lint test build",
     "preversion": "npm-run-all clean lint test",
     "test": "jest --passWithNoTests",
     "test-ci": "jest --coverage --passWithNoTests",
