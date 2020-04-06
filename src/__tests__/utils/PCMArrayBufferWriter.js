@@ -1,6 +1,5 @@
 'use strict';
 
-
 import assert from 'assert';
 import PCMArrayBufferWriter from '../../utils/PCMArrayBufferWriter';
 

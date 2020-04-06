@@ -1,16 +1,14 @@
 'use strict';
 
-
-import assert from 'assert';
 import sinon from 'sinon';
-import decoder from '../decoder';
-import DecoderUtils from '../utils/DecoderUtils';
+import * as decoder from '../decoder';
+import * as DecoderUtils from '../utils/DecoderUtils';
 import AudioBuffer from '../api/AudioBuffer';
 
 describe('decoder', () => {
   let defaultWavDecoder, DecoderUtils$decode;
 
-  before(() => {
+  beforeAll(() => {
     defaultWavDecoder = decoder.get('wav');
     DecoderUtils$decode = DecoderUtils.decode;
     DecoderUtils.decode = sinon.spy(DecoderUtils.decode);
@@ -19,7 +17,7 @@ describe('decoder', () => {
     decoder.set('wav', defaultWavDecoder);
     DecoderUtils.decode.reset();
   });
-  after(() => {
+  afterAll(() => {
     DecoderUtils.decode = DecoderUtils$decode;
   });
 
@@ -67,7 +65,9 @@ describe('decoder', () => {
       expect(decodeFn.callCount).toBe(1);
       expect(decodeFn.calledWith(audioData, opts)).toBeTruthy();
       expect(DecoderUtils.decode.callCount).toBe(1);
-      expect(DecoderUtils.decode.calledWith(decodeFn, audioData, opts)).toBeTruthy();
+      expect(
+        DecoderUtils.decode.calledWith(decodeFn, audioData, opts),
+      ).toBeTruthy();
       expect(audioBuffer instanceof AudioBuffer).toBeTruthy();
       expect(audioBuffer.numberOfChannels).toBe(2);
       expect(audioBuffer.length).toBe(16);

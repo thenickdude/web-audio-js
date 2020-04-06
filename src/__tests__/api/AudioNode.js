@@ -1,6 +1,5 @@
 'use strict';
 
-
 import assert from 'assert';
 import sinon from 'sinon';
 import AudioContext from '../../api/BaseAudioContext';
@@ -67,7 +66,9 @@ describe('api/AudioNode', () => {
 
       target.channelCountMode = channelCountMode2;
       expect(target._impl.setChannelCountMode.callCount).toBe(1);
-      expect(target._impl.setChannelCountMode.args[0][0]).toBe(channelCountMode2);
+      expect(target._impl.setChannelCountMode.args[0][0]).toBe(
+        channelCountMode2,
+      );
     });
 
     it('.channelInterpretation=', () => {

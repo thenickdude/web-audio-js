@@ -1,8 +1,7 @@
 'use strict';
 
-
 import assert from 'assert';
-import np from '../../helpers/np';
+import * as np from '../../../__tests_helpers/np';
 import AudioContext from '../../../api/BaseAudioContext';
 
 const channelData = [new Float32Array(16), new Float32Array(16)];

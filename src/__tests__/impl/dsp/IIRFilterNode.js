@@ -1,6 +1,5 @@
 'use strict';
 
-
 import assert from 'assert';
 import AudioContext from '../../../impl/AudioContext';
 import IIRFilterNode from '../../../impl/IIRFilterNode';
@@ -36,7 +35,9 @@ describe('impl/dsp/IIRFilterNode', () => {
         -1.2853729724884033,
       ]);
 
-      expect(magResponse.every((mag, i) => closeTo(mag, magExpected[i], 1e-6))).toBeTruthy();
+      expect(
+        magResponse.every((mag, i) => closeTo(mag, magExpected[i], 1e-6)),
+      ).toBeTruthy();
       assert(
         phaseResponse.every((phase, i) =>
           closeTo(phase, phaseExpected[i], 1e-6),

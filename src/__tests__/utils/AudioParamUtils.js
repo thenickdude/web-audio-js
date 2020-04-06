@@ -1,8 +1,7 @@
 'use strict';
 
-
 import assert from 'assert';
-import AudioParamUtils from '../../utils/AudioParamUtils';
+import * as AudioParamUtils from '../../utils/AudioParamUtils';
 import {
   EXPONENTIAL_RAMP_TO_VALUE_AT_TIME,
   LINEAR_RAMP_TO_VALUE_AT_TIME,

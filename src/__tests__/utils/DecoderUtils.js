@@ -1,9 +1,8 @@
 'use strict';
 
-
 import assert from 'assert';
 import sinon from 'sinon';
-import DecoderUtils from '../../utils/DecoderUtils';
+import * as DecoderUtils from '../../utils/DecoderUtils';
 
 describe('utils/DecoderUtils.decode(decodeFn: function, audioData: arrayBuffer, opts?: object): Promise<AudioData>', () => {
   it('should return promise and resolve - without resampling', () => {

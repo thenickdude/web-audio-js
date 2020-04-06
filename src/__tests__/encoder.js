@@ -1,15 +1,14 @@
 'use strict';
 
-
 import assert from 'assert';
 import sinon from 'sinon';
-import encoder from '../encoder';
-import EncoderUtils from '../utils/EncoderUtils';
+import * as encoder from '../encoder';
+import * as EncoderUtils from '../utils/EncoderUtils';
 
 describe('encoder', () => {
   let defaultWavEncoder, EncoderUtils$encode;
 
-  before(() => {
+  beforeAll(() => {
     defaultWavEncoder = encoder.get('wav');
     EncoderUtils$encode = EncoderUtils.encode;
     EncoderUtils.encode = sinon.spy(EncoderUtils.encode);
@@ -18,7 +17,7 @@ describe('encoder', () => {
     encoder.set('wav', defaultWavEncoder);
     EncoderUtils.encode.reset();
   });
-  after(() => {
+  afterAll(() => {
     EncoderUtils.encode = EncoderUtils$encode;
   });
 
@@ -52,7 +51,9 @@ describe('encoder', () => {
       expect(encodeFn.callCount).toBe(1);
       expect(encodeFn.calledWith(audioData, opts)).toBeTruthy();
       expect(EncoderUtils.encode.callCount).toBe(1);
-      expect(EncoderUtils.encode.calledWith(encodeFn, audioData, opts)).toBeTruthy();
+      expect(
+        EncoderUtils.encode.calledWith(encodeFn, audioData, opts),
+      ).toBeTruthy();
       expect(arrayBuffer instanceof ArrayBuffer).toBeTruthy();
     });
   });

@@ -1,6 +1,5 @@
 'use strict';
 
-
 import assert from 'assert';
 import toPowerOfTwo from '../../../utils/utils/toPowerOfTwo';
 

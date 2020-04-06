@@ -1,6 +1,5 @@
 'use strict';
 
-
 import assert from 'assert';
 import toValidSampleRate from '../../../utils/utils/toValidSampleRate';
 

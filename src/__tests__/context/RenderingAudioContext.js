@@ -1,6 +1,5 @@
 'use strict';
 
-
 import assert from 'assert';
 import RenderingAudioContext from '../../context/RenderingAudioContext';
 
@@ -37,10 +36,10 @@ describe('RenderingAudioContext', () => {
     expect(context.currentTime).toBe(0);
 
     context.processTo('00:00:10.000');
-    expect(context.currentTime | (0).toBe(10));
+    expect(context.currentTime | 0).toBe(10);
 
     context.processTo('00:00:15.000');
-    expect(context.currentTime | (0).toBe(15));
+    expect(context.currentTime | 0).toBe(15);
   });
 
   it('should export AudioData', () => {
@@ -51,7 +50,7 @@ describe('RenderingAudioContext', () => {
     const audioData = context.exportAsAudioData();
 
     expect(audioData.numberOfChannels).toBe(2);
-    expect((audioData.length / audioData.sampleRate) | (0).toBe(10));
+    expect((audioData.length / audioData.sampleRate) | 0).toBe(10);
     expect(audioData.sampleRate).toBe(44100);
   });
 

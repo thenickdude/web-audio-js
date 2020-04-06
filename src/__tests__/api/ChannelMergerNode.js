@@ -1,8 +1,7 @@
 'use strict';
 
-
 import assert from 'assert';
-import api from '../../api';
+import * as api from '../../api';
 import AudioContext from '../../api/BaseAudioContext';
 
 describe('api/ChannelMergerNode', () => {

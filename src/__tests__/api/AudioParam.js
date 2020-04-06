@@ -1,6 +1,5 @@
 'use strict';
 
-
 import assert from 'assert';
 import sinon from 'sinon';
 import AudioContext from '../../api/BaseAudioContext';
@@ -76,7 +75,9 @@ describe('api/AudioParam', () => {
       target.exponentialRampToValueAtTime(value, endTime);
       expect(target._impl.exponentialRampToValueAtTime.callCount).toBe(1);
       expect(target._impl.exponentialRampToValueAtTime.args[0][0]).toBe(value);
-      expect(target._impl.exponentialRampToValueAtTime.args[0][1]).toBe(endTime);
+      expect(target._impl.exponentialRampToValueAtTime.args[0][1]).toBe(
+        endTime,
+      );
     });
 
     it('.setTargetAtTime(target, startTime, timeConstant)', () => {

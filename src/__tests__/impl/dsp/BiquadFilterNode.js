@@ -1,6 +1,5 @@
 'use strict';
 
-
 import assert from 'assert';
 import AudioContext from '../../../impl/AudioContext';
 import BiquadFilterNode from '../../../impl/BiquadFilterNode';
@@ -36,7 +35,9 @@ describe('impl/dsp/BiquadFilterNode', () => {
         -2.8548853397369385,
       ]);
 
-      expect(magResponse.every((mag, i) => closeTo(mag, magExpected[i], 1e-6))).toBeTruthy();
+      expect(
+        magResponse.every((mag, i) => closeTo(mag, magExpected[i], 1e-6)),
+      ).toBeTruthy();
       assert(
         phaseResponse.every((phase, i) =>
           closeTo(phase, phaseExpected[i], 1e-6),
@@ -69,7 +70,9 @@ describe('impl/dsp/BiquadFilterNode', () => {
         0.28670740127563477,
       ]);
 
-      expect(magResponse.every((mag, i) => closeTo(mag, magExpected[i], 1e-6))).toBeTruthy();
+      expect(
+        magResponse.every((mag, i) => closeTo(mag, magExpected[i], 1e-6)),
+      ).toBeTruthy();
       assert(
         phaseResponse.every((phase, i) =>
           closeTo(phase, phaseExpected[i], 1e-6),

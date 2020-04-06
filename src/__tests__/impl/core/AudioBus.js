@@ -1,14 +1,10 @@
 'use strict';
 
-
 import assert from 'assert';
-import np from '../../helpers/np';
+import * as np from '../../../__tests_helpers/np';
 import AudioBus from '../../../impl/core/AudioBus';
 import AudioData from '../../../impl/core/AudioData';
-import {
-  DISCRETE,
-  SPEAKERS,
-} from '../../../constants/ChannelInterpretation';
+import { DISCRETE, SPEAKERS } from '../../../constants/ChannelInterpretation';
 
 describe('impl/core/AudioBus', () => {
   it('constructor(numberOfChannels, length, sampleRate)', () => {
@@ -112,7 +108,7 @@ describe('impl/core/AudioBus', () => {
       bus1.zeros();
       bus2.copyFrom(bus1);
       assert.deepEqual(bus2.getChannelData()[0], np.zeros(128));
-      expect(bus2.isSilent, true).toBeTruthy();
+      expect(bus2.isSilent).toBeTruthy();
     });
 
     it('.copyFromWithOffset(bus, offset)', () => {

@@ -1,6 +1,5 @@
 'use strict';
 
-
 import assert from 'assert';
 import sinon from 'sinon';
 import AudioContext from '../../../impl/AudioContext';
@@ -10,7 +9,7 @@ const contextOpts = { sampleRate: 8000, blockSize: 16 };
 describe('impl/dsp/AudioContext', () => {
   let context, destination;
 
-  before(() => {
+  beforeAll(() => {
     context = new AudioContext(contextOpts);
     destination = context.getDestination();
 

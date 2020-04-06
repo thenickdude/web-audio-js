@@ -1,8 +1,7 @@
 'use strict';
 
-
 import assert from 'assert';
-import np from '../../helpers/np';
+import * as np from '../../../__tests_helpers/np';
 import AudioContext from '../../../impl/AudioContext';
 import AnalyserNode from '../../../impl/AnalyserNode';
 import OscillatorNode from '../../../impl/OscillatorNode';

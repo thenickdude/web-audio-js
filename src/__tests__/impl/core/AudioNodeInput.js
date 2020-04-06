@@ -1,6 +1,5 @@
 'use strict';
 
-
 import assert from 'assert';
 import AudioNodeInput from '../../../impl/core/AudioNodeInput';
 import AudioBus from '../../../impl/core/AudioBus';
@@ -12,10 +11,7 @@ import {
   MAX,
 } from '../../../constants/ChannelCountMode';
 
-import {
-  DISCRETE,
-  SPEAKERS,
-} from '../../../constants/ChannelInterpretation';
+import { DISCRETE, SPEAKERS } from '../../../constants/ChannelInterpretation';
 
 describe('impl/core/AudioNodeInput', () => {
   let context;

@@ -1,6 +1,5 @@
 'use strict';
 
-
 import assert from 'assert';
 import defineProp from '../../../utils/utils/defineProp';
 

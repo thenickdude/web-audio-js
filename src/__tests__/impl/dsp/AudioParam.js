@@ -1,9 +1,8 @@
 'use strict';
 
-
 import assert from 'assert';
-import np from '../../helpers/np';
-import paramTester from '../../helpers/paramTester';
+import * as np from '../../../__tests_helpers/np';
+import * as paramTester from '../../../__tests_helpers/paramTester';
 import AudioContext from '../../../impl/AudioContext';
 import AudioNode from '../../../impl/AudioNode';
 import GainNode from '../../../impl/GainNode';

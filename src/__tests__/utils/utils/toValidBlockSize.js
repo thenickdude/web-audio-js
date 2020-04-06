@@ -1,7 +1,5 @@
 'use strict';
 
-
-import assert from 'assert';
 import toValidBlockSize from '../../../utils/utils/toValidBlockSize';
 
 describe('utils/toValidBlockSize()', () => {

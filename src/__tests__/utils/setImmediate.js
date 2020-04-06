@@ -1,6 +1,5 @@
 'use strict';
 
-
 import setImmediate from '../../utils/setImmediate';
 
 describe('utils/setImmediate(fn)', () => {

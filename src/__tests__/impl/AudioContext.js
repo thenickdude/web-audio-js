@@ -1,6 +1,5 @@
 'use strict';
 
-
 import assert from 'assert';
 import sinon from 'sinon';
 import AudioContext from '../../impl/AudioContext';
@@ -20,7 +19,9 @@ describe('impl/AudioContext', () => {
     it('.destination', () => {
       const context = new AudioContext(contextOpts);
 
-      expect(context.getDestination() instanceof AudioDestinationNode).toBeTruthy();
+      expect(
+        context.getDestination() instanceof AudioDestinationNode,
+      ).toBeTruthy();
     });
 
     it('.sampleRate', () => {
@@ -62,7 +63,7 @@ describe('impl/AudioContext', () => {
   describe('state change', () => {
     let context, stateChangeSpy;
 
-    before(() => {
+    beforeAll(() => {
       context = new AudioContext(contextOpts);
       stateChangeSpy = sinon.spy();
 

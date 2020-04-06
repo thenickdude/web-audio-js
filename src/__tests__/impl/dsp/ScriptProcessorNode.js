@@ -1,9 +1,8 @@
 'use strict';
 
-
 import assert from 'assert';
 import sinon from 'sinon';
-import np from '../../helpers/np';
+import * as np from '../../../__tests_helpers/np';
 import AudioContext from '../../../impl/AudioContext';
 import ScriptProcessorNode from '../../../impl/ScriptProcessorNode';
 import AudioNode from '../../../impl/AudioNode';
@@ -20,7 +19,7 @@ describe('impl/dsp/ScriptProcessorNode', () => {
   let node1, node2, onaudioprocess;
   let noise1, noise2, noise3;
 
-  before(() => {
+  beforeAll(() => {
     context.resume();
 
     node1 = new AudioNode(context, {}, { inputs: [], outputs: [2] });

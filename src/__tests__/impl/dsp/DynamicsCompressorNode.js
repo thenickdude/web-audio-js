@@ -1,10 +1,9 @@
 'use strict';
 
-
 import assert from 'assert';
 import AudioContext from '../../../api/BaseAudioContext';
 import DynamicsCompressorNode from '../../../api/DynamicsCompressorNode';
-import DynamicsCompressorData from './DynamicsCompressorData';
+import DynamicsCompressorData from '../../../__tests_helpers/DynamicsCompressorData';
 
 describe('impl/dsp/DynamicsCompressor', () => {
   it('works', () => {

@@ -12,4 +12,4 @@ function random_sample(size, constructor = Float32Array) {
   return new constructor(size).map(Math.random);
 }
 
-export default { zeros, full, random_sample };
+export { zeros, full, random_sample };

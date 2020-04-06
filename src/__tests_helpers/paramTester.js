@@ -1,8 +1,8 @@
 'use strict';
 
 import assert from 'assert';
-import AudioParam from '../../impl/AudioParam';
-import { AUDIO_RATE } from '../../constants/AudioParamRate';
+import AudioParam from '../impl/AudioParam';
+import { AUDIO_RATE } from '../constants/AudioParamRate';
 
 function makeTests(context, expectedValues, sched1, sched2) {
   it('works', () => {
@@ -110,10 +110,12 @@ function deepCloseTo(a, b, delta) {
   expect(a.length).toBe(b.length);
 
   for (let i = 0, imax = a.length; i < imax; i++) {
-    expect(closeTo(a[i], b[i], delta), `a[${i}]=${a[i]}, b[${i}]=${b[i]}`).toBeTruthy();
+    expect(
+      closeTo(a[i], b[i], delta) /*, `a[${i}]=${a[i]}, b[${i}]=${b[i]}`*/,
+    ).toBeTruthy();
   }
 
   return true;
 }
 
-export default { makeTests, toValues };
+export { makeTests, toValues };

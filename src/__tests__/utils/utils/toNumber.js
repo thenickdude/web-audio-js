@@ -1,6 +1,5 @@
 'use strict';
 
-
 import assert from 'assert';
 import toNumber from '../../../utils/utils/toNumber';
 

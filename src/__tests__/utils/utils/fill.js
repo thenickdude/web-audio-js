@@ -1,6 +1,5 @@
 'use strict';
 
-
 import assert from 'assert';
 import fill from '../../../utils/utils/fill';
 

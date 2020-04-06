@@ -65,7 +65,7 @@
     "postversion": "git push && git push --tags && npm run clean",
     "prepublishOnly": "npm-run-all clean lint src/__tests__ build",
     "preversion": "npm-run-all clean lint src/__tests__",
-    "test": "jest",
+    "test": "jest --watch",
     "test-ci": "jest --coverage",
     "version": "npm run build && git add -A build"
   },

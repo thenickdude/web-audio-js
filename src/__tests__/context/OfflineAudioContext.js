@@ -1,6 +1,5 @@
 'use strict';
 
-
 import assert from 'assert';
 import OfflineAudioContext from '../../context/OfflineAudioContext';
 import AudioBuffer from '../../api/AudioBuffer';

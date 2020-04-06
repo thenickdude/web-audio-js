@@ -1,13 +1,9 @@
 'use strict';
 
-
 import assert from 'assert';
-import np from '../../helpers/np';
+import * as np from '../../../__tests_helpers/np';
 import AudioBus from '../../../impl/core/AudioBus';
-import {
-  DISCRETE,
-  SPEAKERS,
-} from '../../../constants/ChannelInterpretation';
+import { DISCRETE, SPEAKERS } from '../../../constants/ChannelInterpretation';
 
 describe('impl/core/AudioBus - mixing', () => {
   function mixBy() {
