@@ -1,14 +1,14 @@
-"use strict";
+'use strict';
 
-require("run-with-mocha");
+require('run-with-mocha');
 
-const assert = require("assert");
-const sinon = require("sinon");
-const api = require("../../src/api");
-const AudioContext = require("../../src/api/BaseAudioContext");
+const assert = require('assert');
+const sinon = require('sinon');
+const api = require('../../src/api');
+const AudioContext = require('../../src/api/BaseAudioContext');
 
-describe("api/IIRFilterNode", () => {
-  it("context.createIIRFilter(feedforward, feedback)", () => {
+describe('api/IIRFilterNode', () => {
+  it('context.createIIRFilter(feedforward, feedback)', () => {
     const context = new AudioContext();
     const feedforward = new Float32Array(4);
     const feedback = new Float32Array(4);
@@ -17,8 +17,8 @@ describe("api/IIRFilterNode", () => {
     assert(target instanceof api.IIRFilterNode);
   });
 
-  describe("methods", () => {
-    it(".getFrequencyResponse(frequencyHz, magResponse, phaseResponse)", () => {
+  describe('methods', () => {
+    it('.getFrequencyResponse(frequencyHz, magResponse, phaseResponse)', () => {
       const context = new AudioContext();
       const feedforward = new Float32Array(4);
       const feedback = new Float32Array(4);

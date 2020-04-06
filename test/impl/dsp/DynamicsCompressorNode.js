@@ -1,18 +1,22 @@
-"use strict";
+'use strict';
 
-require("run-with-mocha");
+require('run-with-mocha');
 
-const assert = require("assert");
-const AudioContext = require("../../../src/api/BaseAudioContext");
-const DynamicsCompressorNode = require("../../../src/api/DynamicsCompressorNode");
+const assert = require('assert');
+const AudioContext = require('../../../src/api/BaseAudioContext');
+const DynamicsCompressorNode = require('../../../src/api/DynamicsCompressorNode');
 const DynamicsCompressorData = require('./DynamicsCompressorData');
 
-describe("impl/dsp/DynamicsCompressor", () => {
-  it("works", () => {
+describe('impl/dsp/DynamicsCompressor', () => {
+  it('works', () => {
     const sampleRate = 44100;
     const length = 44100;
     const blockSize = 1024;
-    const context = new AudioContext({ sampleRate, blockSize, numberOfChannels: 1 });
+    const context = new AudioContext({
+      sampleRate,
+      blockSize,
+      numberOfChannels: 1,
+    });
     const node = new DynamicsCompressorNode(context);
 
     // Testing the "Classic Voiceover" preset
@@ -43,7 +47,7 @@ describe("impl/dsp/DynamicsCompressor", () => {
     node.connect(context.destination);
     const iterations = Math.ceil(length / blockSize);
     const iterLength = iterations * blockSize;
-    const channelData = [ new Float32Array(iterLength) ];
+    const channelData = [new Float32Array(iterLength)];
     bufSrc.start();
     context.resume();
 

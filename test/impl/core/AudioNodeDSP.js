@@ -1,22 +1,22 @@
-"use strict";
+'use strict';
 
-require("run-with-mocha");
+require('run-with-mocha');
 
-const assert = require("assert");
-const np = require("../../helpers/np");
-const AudioContext = require("../../../src/impl/AudioContext");
-const AudioNode = require("../../../src/impl/AudioNode");
+const assert = require('assert');
+const np = require('../../helpers/np');
+const AudioContext = require('../../../src/impl/AudioContext');
+const AudioNode = require('../../../src/impl/AudioNode');
 
-describe("impl/core/AudioNode - DSP", () => {
+describe('impl/core/AudioNode - DSP', () => {
   let context;
 
   beforeEach(() => {
     context = new AudioContext({ sampleRate: 8000, blockSize: 16 });
   });
 
-  it("pull from the single connection", () => {
-    const node1 = new AudioNode(context, {}, { inputs: [ 1 ], outputs: [ 1 ] });
-    const node2 = new AudioNode(context, {}, { inputs: [ 1 ], outputs: [ 1 ] });
+  it('pull from the single connection', () => {
+    const node1 = new AudioNode(context, {}, { inputs: [1], outputs: [1] });
+    const node2 = new AudioNode(context, {}, { inputs: [1], outputs: [1] });
     const noise1 = np.random_sample(16);
     const noise2 = np.random_sample(16);
 
@@ -40,10 +40,10 @@ describe("impl/core/AudioNode - DSP", () => {
     assert.deepEqual(actual, expected);
   });
 
-  it("pull from some connections", () => {
-    const node1 = new AudioNode(context, {}, { inputs: [ 1 ], outputs: [ 1 ] });
-    const node2 = new AudioNode(context, {}, { inputs: [ 1 ], outputs: [ 1 ] });
-    const node3 = new AudioNode(context, {}, { inputs: [ 1 ], outputs: [ 1 ] });
+  it('pull from some connections', () => {
+    const node1 = new AudioNode(context, {}, { inputs: [1], outputs: [1] });
+    const node2 = new AudioNode(context, {}, { inputs: [1], outputs: [1] });
+    const node3 = new AudioNode(context, {}, { inputs: [1], outputs: [1] });
     const noise1 = np.random_sample(16);
     const noise2 = np.random_sample(16);
     const noise3 = np.random_sample(16);

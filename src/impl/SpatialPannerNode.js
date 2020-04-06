@@ -1,8 +1,8 @@
-"use strict";
+'use strict';
 
-const BasePannerNode = require("./BasePannerNode");
-const SpatialPannerNodeDSP = require("./dsp/SpatialPannerNode");
-const { AUDIO_RATE } = require("../constants/AudioParamRate");
+const BasePannerNode = require('./BasePannerNode');
+const SpatialPannerNodeDSP = require('./dsp/SpatialPannerNode');
+const { AUDIO_RATE } = require('../constants/AudioParamRate');
 
 class SpatialPannerNode extends BasePannerNode {
   /**

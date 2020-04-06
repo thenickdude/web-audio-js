@@ -1,17 +1,21 @@
-"use strict";
+'use strict';
 
-const AudioNodeInput = require("./core/AudioNodeInput");
-const AudioBus = require("./core/AudioBus");
-const AudioParamDSP = require("./dsp/AudioParam");
-const { defaults } = require("../utils");
-const { toNumber } = require("../utils");
-const { EXPLICIT } = require("../constants/ChannelCountMode");
-const { CONTROL_RATE } = require("../constants/AudioParamRate");
-const { SET_VALUE_AT_TIME } = require("../constants/AudioParamEvent");
-const { LINEAR_RAMP_TO_VALUE_AT_TIME } = require("../constants/AudioParamEvent");
-const { EXPONENTIAL_RAMP_TO_VALUE_AT_TIME } = require("../constants/AudioParamEvent");
-const { SET_TARGET_AT_TIME } = require("../constants/AudioParamEvent");
-const { SET_VALUE_CURVE_AT_TIME } = require("../constants/AudioParamEvent");
+const AudioNodeInput = require('./core/AudioNodeInput');
+const AudioBus = require('./core/AudioBus');
+const AudioParamDSP = require('./dsp/AudioParam');
+const { defaults } = require('../utils');
+const { toNumber } = require('../utils');
+const { EXPLICIT } = require('../constants/ChannelCountMode');
+const { CONTROL_RATE } = require('../constants/AudioParamRate');
+const { SET_VALUE_AT_TIME } = require('../constants/AudioParamEvent');
+const {
+  LINEAR_RAMP_TO_VALUE_AT_TIME,
+} = require('../constants/AudioParamEvent');
+const {
+  EXPONENTIAL_RAMP_TO_VALUE_AT_TIME,
+} = require('../constants/AudioParamEvent');
+const { SET_TARGET_AT_TIME } = require('../constants/AudioParamEvent');
+const { SET_VALUE_CURVE_AT_TIME } = require('../constants/AudioParamEvent');
 
 /**
  * @prop {AudioContext}      context
@@ -39,8 +43,8 @@ class AudioParam {
         index: 0,
         numberOfChannels: 1,
         channelCount: 1,
-        channelCountMode: EXPLICIT
-      })
+        channelCountMode: EXPLICIT,
+      }),
     ];
     this.outputBus = new AudioBus(1, this.blockSize, this.sampleRate);
 
@@ -85,11 +89,11 @@ class AudioParam {
     const eventItem = {
       type: SET_VALUE_AT_TIME,
       time: startTime,
-      args: [ value, startTime ],
+      args: [value, startTime],
       startFrame: Math.round(startTime * this.sampleRate),
       endFrame: Infinity,
       startValue: value,
-      endValue: value
+      endValue: value,
     };
     const index = this.insertEvent(eventItem);
     const prevEventItem = this._timeline[index - 1];
@@ -97,20 +101,20 @@ class AudioParam {
 
     if (prevEventItem) {
       switch (prevEventItem.type) {
-      case SET_VALUE_AT_TIME:
-      case SET_TARGET_AT_TIME:
-        prevEventItem.endFrame = eventItem.startFrame;
-        break;
+        case SET_VALUE_AT_TIME:
+        case SET_TARGET_AT_TIME:
+          prevEventItem.endFrame = eventItem.startFrame;
+          break;
       }
     }
 
     if (nextEventItem) {
       switch (nextEventItem.type) {
-      case LINEAR_RAMP_TO_VALUE_AT_TIME:
-      case EXPONENTIAL_RAMP_TO_VALUE_AT_TIME:
-        nextEventItem.startFrame = eventItem.startFrame;
-        nextEventItem.startValue = eventItem.startValue;
-        break;
+        case LINEAR_RAMP_TO_VALUE_AT_TIME:
+        case EXPONENTIAL_RAMP_TO_VALUE_AT_TIME:
+          nextEventItem.startFrame = eventItem.startFrame;
+          nextEventItem.startValue = eventItem.startValue;
+          break;
       }
       eventItem.endFrame = nextEventItem.startFrame;
     }
@@ -132,11 +136,11 @@ class AudioParam {
     const eventItem = {
       type: LINEAR_RAMP_TO_VALUE_AT_TIME,
       time: endTime,
-      args: [ value, endTime ],
+      args: [value, endTime],
       startFrame: 0,
       endFrame: Math.round(endTime * this.sampleRate),
       startValue: this._defaultValue,
-      endValue: value
+      endValue: value,
     };
     const index = this.insertEvent(eventItem);
     const prevEventItem = this._timeline[index - 1];
@@ -144,28 +148,28 @@ class AudioParam {
 
     if (prevEventItem) {
       switch (prevEventItem.type) {
-      case SET_VALUE_AT_TIME:
-      case SET_TARGET_AT_TIME:
-        eventItem.startFrame = prevEventItem.startFrame;
-        eventItem.startValue = prevEventItem.startValue;
-        prevEventItem.endFrame = eventItem.startFrame;
-        break;
-      case LINEAR_RAMP_TO_VALUE_AT_TIME:
-      case EXPONENTIAL_RAMP_TO_VALUE_AT_TIME:
-      case SET_VALUE_CURVE_AT_TIME:
-        eventItem.startFrame = prevEventItem.endFrame;
-        eventItem.startValue = prevEventItem.endValue;
-        break;
+        case SET_VALUE_AT_TIME:
+        case SET_TARGET_AT_TIME:
+          eventItem.startFrame = prevEventItem.startFrame;
+          eventItem.startValue = prevEventItem.startValue;
+          prevEventItem.endFrame = eventItem.startFrame;
+          break;
+        case LINEAR_RAMP_TO_VALUE_AT_TIME:
+        case EXPONENTIAL_RAMP_TO_VALUE_AT_TIME:
+        case SET_VALUE_CURVE_AT_TIME:
+          eventItem.startFrame = prevEventItem.endFrame;
+          eventItem.startValue = prevEventItem.endValue;
+          break;
       }
     }
 
     if (nextEventItem) {
       switch (nextEventItem.type) {
-      case LINEAR_RAMP_TO_VALUE_AT_TIME:
-      case EXPONENTIAL_RAMP_TO_VALUE_AT_TIME:
-        nextEventItem.startFrame = eventItem.endFrame;
-        nextEventItem.startValue = eventItem.endValue;
-        break;
+        case LINEAR_RAMP_TO_VALUE_AT_TIME:
+        case EXPONENTIAL_RAMP_TO_VALUE_AT_TIME:
+          nextEventItem.startFrame = eventItem.endFrame;
+          nextEventItem.startValue = eventItem.endValue;
+          break;
       }
     }
 
@@ -186,11 +190,11 @@ class AudioParam {
     const eventItem = {
       type: EXPONENTIAL_RAMP_TO_VALUE_AT_TIME,
       time: endTime,
-      args: [ value, endTime ],
+      args: [value, endTime],
       startFrame: 0,
       endFrame: Math.round(endTime * this.sampleRate),
       startValue: Math.max(1e-6, this._defaultValue),
-      endValue: value
+      endValue: value,
     };
     const index = this.insertEvent(eventItem);
     const prevEventItem = this._timeline[index - 1];
@@ -198,28 +202,28 @@ class AudioParam {
 
     if (prevEventItem) {
       switch (prevEventItem.type) {
-      case SET_VALUE_AT_TIME:
-      case SET_TARGET_AT_TIME:
-        eventItem.startFrame = prevEventItem.startFrame;
-        eventItem.startValue = prevEventItem.startValue;
-        prevEventItem.endFrame = eventItem.startFrame;
-        break;
-      case LINEAR_RAMP_TO_VALUE_AT_TIME:
-      case EXPONENTIAL_RAMP_TO_VALUE_AT_TIME:
-      case SET_VALUE_CURVE_AT_TIME:
-        eventItem.startFrame = prevEventItem.endFrame;
-        eventItem.startValue = prevEventItem.endValue;
-        break;
+        case SET_VALUE_AT_TIME:
+        case SET_TARGET_AT_TIME:
+          eventItem.startFrame = prevEventItem.startFrame;
+          eventItem.startValue = prevEventItem.startValue;
+          prevEventItem.endFrame = eventItem.startFrame;
+          break;
+        case LINEAR_RAMP_TO_VALUE_AT_TIME:
+        case EXPONENTIAL_RAMP_TO_VALUE_AT_TIME:
+        case SET_VALUE_CURVE_AT_TIME:
+          eventItem.startFrame = prevEventItem.endFrame;
+          eventItem.startValue = prevEventItem.endValue;
+          break;
       }
     }
 
     if (nextEventItem) {
       switch (nextEventItem.type) {
-      case LINEAR_RAMP_TO_VALUE_AT_TIME:
-      case EXPONENTIAL_RAMP_TO_VALUE_AT_TIME:
-        nextEventItem.startFrame = eventItem.endFrame;
-        nextEventItem.startValue = eventItem.endValue;
-        break;
+        case LINEAR_RAMP_TO_VALUE_AT_TIME:
+        case EXPONENTIAL_RAMP_TO_VALUE_AT_TIME:
+          nextEventItem.startFrame = eventItem.endFrame;
+          nextEventItem.startValue = eventItem.endValue;
+          break;
       }
     }
 
@@ -242,11 +246,11 @@ class AudioParam {
     const eventItem = {
       type: SET_TARGET_AT_TIME,
       time: startTime,
-      args: [ target, startTime, timeConstant ],
+      args: [target, startTime, timeConstant],
       startFrame: Math.round(startTime * this.sampleRate),
       endFrame: Infinity,
       startValue: 0,
-      endValue: target
+      endValue: target,
     };
     const index = this.insertEvent(eventItem);
     const prevEventItem = this._timeline[index - 1];
@@ -254,29 +258,29 @@ class AudioParam {
 
     if (prevEventItem) {
       switch (prevEventItem.type) {
-      case SET_VALUE_AT_TIME:
-        eventItem.startValue = prevEventItem.endValue;
-        prevEventItem.endFrame = eventItem.startFrame;
-        break;
-      case SET_TARGET_AT_TIME:
-        eventItem.startValue = 0;
-        prevEventItem.endFrame = eventItem.startFrame;
-        break;
-      case LINEAR_RAMP_TO_VALUE_AT_TIME:
-      case EXPONENTIAL_RAMP_TO_VALUE_AT_TIME:
-      case SET_VALUE_CURVE_AT_TIME:
-        eventItem.startValue = prevEventItem.endValue;
-        break;
+        case SET_VALUE_AT_TIME:
+          eventItem.startValue = prevEventItem.endValue;
+          prevEventItem.endFrame = eventItem.startFrame;
+          break;
+        case SET_TARGET_AT_TIME:
+          eventItem.startValue = 0;
+          prevEventItem.endFrame = eventItem.startFrame;
+          break;
+        case LINEAR_RAMP_TO_VALUE_AT_TIME:
+        case EXPONENTIAL_RAMP_TO_VALUE_AT_TIME:
+        case SET_VALUE_CURVE_AT_TIME:
+          eventItem.startValue = prevEventItem.endValue;
+          break;
       }
     }
 
     if (nextEventItem) {
       switch (nextEventItem.type) {
-      case LINEAR_RAMP_TO_VALUE_AT_TIME:
-      case EXPONENTIAL_RAMP_TO_VALUE_AT_TIME:
-        nextEventItem.startFrame = eventItem.startFrame;
-        nextEventItem.startValue = eventItem.startValue;
-        break;
+        case LINEAR_RAMP_TO_VALUE_AT_TIME:
+        case EXPONENTIAL_RAMP_TO_VALUE_AT_TIME:
+          nextEventItem.startFrame = eventItem.startFrame;
+          nextEventItem.startValue = eventItem.startValue;
+          break;
       }
       eventItem.endFrame = nextEventItem.startFrame;
     }
@@ -303,11 +307,11 @@ class AudioParam {
     const eventItem = {
       type: SET_VALUE_CURVE_AT_TIME,
       time: startTime,
-      args: [ values, startTime, duration ],
+      args: [values, startTime, duration],
       startFrame: Math.round(startTime * this.sampleRate),
       endFrame: Math.round((startTime + duration) * this.sampleRate),
       startValue: values[0],
-      endValue: values[values.length - 1]
+      endValue: values[values.length - 1],
     };
     const index = this.insertEvent(eventItem);
     const prevEventItem = this._timeline[index - 1];
@@ -315,20 +319,20 @@ class AudioParam {
 
     if (prevEventItem) {
       switch (prevEventItem.type) {
-      case SET_VALUE_AT_TIME:
-      case SET_TARGET_AT_TIME:
-        prevEventItem.endFrame = eventItem.startFrame;
-        break;
+        case SET_VALUE_AT_TIME:
+        case SET_TARGET_AT_TIME:
+          prevEventItem.endFrame = eventItem.startFrame;
+          break;
       }
     }
 
     if (nextEventItem) {
       switch (nextEventItem.type) {
-      case LINEAR_RAMP_TO_VALUE_AT_TIME:
-      case EXPONENTIAL_RAMP_TO_VALUE_AT_TIME:
-        nextEventItem.startFrame = eventItem.startFrame;
-        nextEventItem.startValue = eventItem.endValue;
-        break;
+        case LINEAR_RAMP_TO_VALUE_AT_TIME:
+        case EXPONENTIAL_RAMP_TO_VALUE_AT_TIME:
+          nextEventItem.startFrame = eventItem.startFrame;
+          nextEventItem.startValue = eventItem.endValue;
+          break;
       }
     }
 
@@ -344,17 +348,19 @@ class AudioParam {
   cancelScheduledValues(startTime) {
     startTime = Math.max(0, toNumber(startTime));
 
-    this._timeline = this._timeline.filter(eventItem => eventItem.time < startTime);
+    this._timeline = this._timeline.filter(
+      (eventItem) => eventItem.time < startTime,
+    );
 
     const index = this._timeline.length - 1;
     const lastEventItem = this._timeline[index];
 
     if (lastEventItem) {
       switch (lastEventItem.type) {
-      case SET_VALUE_AT_TIME:
-      case SET_TARGET_AT_TIME:
-        lastEventItem.endFrame = Infinity;
-        break;
+        case SET_VALUE_AT_TIME:
+        case SET_TARGET_AT_TIME:
+          lastEventItem.endFrame = Infinity;
+          break;
       }
     }
 
@@ -428,7 +434,10 @@ class AudioParam {
     let replace = 0;
 
     while (pos < timeline.length) {
-      if (timeline[pos].time === time && timeline[pos].type === eventItem.type) {
+      if (
+        timeline[pos].time === time &&
+        timeline[pos].type === eventItem.type
+      ) {
         replace = 1;
         break;
       }
@@ -440,7 +449,7 @@ class AudioParam {
 
     timeline.splice(pos, replace, eventItem);
 
-    return pos
+    return pos;
   }
 }
 

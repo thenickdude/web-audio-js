@@ -1,9 +1,13 @@
-"use strict";
+'use strict';
 
-const config = require("../config");
-const BaseAudioContext = require("../api/BaseAudioContext");
-const { defaults, defineProp } = require("../utils");
-const { toValidBlockSize, toValidNumberOfChannels, toPowerOfTwo } = require("../utils");
+const config = require('../config');
+const BaseAudioContext = require('../api/BaseAudioContext');
+const { defaults, defineProp } = require('../utils');
+const {
+  toValidBlockSize,
+  toValidNumberOfChannels,
+  toPowerOfTwo,
+} = require('../utils');
 
 const DSPAlgorithm = [];
 
@@ -21,7 +25,10 @@ class WebAudioContext extends BaseAudioContext {
     const context = destination.context;
     const sampleRate = context.sampleRate;
     let blockSize = defaults(opts.blockSize, config.blockSize);
-    let numberOfChannels = defaults(opts.numberOfChannels, config.numberOfChannels);
+    let numberOfChannels = defaults(
+      opts.numberOfChannels,
+      config.numberOfChannels,
+    );
     let bufferSize = defaults(opts.bufferSize, 1024);
 
     blockSize = toValidBlockSize(blockSize);
@@ -31,14 +38,22 @@ class WebAudioContext extends BaseAudioContext {
 
     super({ sampleRate, blockSize, numberOfChannels });
 
-    const processor = context.createScriptProcessor(bufferSize, 0, numberOfChannels);
+    const processor = context.createScriptProcessor(
+      bufferSize,
+      0,
+      numberOfChannels,
+    );
     const dspProcess = DSPAlgorithm[numberOfChannels] || DSPAlgorithm[0];
 
-    processor.onaudioprocess = dspProcess(this._impl, numberOfChannels, bufferSize);
+    processor.onaudioprocess = dspProcess(
+      this._impl,
+      numberOfChannels,
+      bufferSize,
+    );
 
-    defineProp(this, "_originalContext", context);
-    defineProp(this, "_destination", destination);
-    defineProp(this, "_processor", processor);
+    defineProp(this, '_originalContext', context);
+    defineProp(this, '_destination', destination);
+    defineProp(this, '_processor', processor);
   }
 
   get originalContext() {
@@ -100,7 +115,7 @@ DSPAlgorithm[1] = (impl, numberOfChannels, bufferSize) => {
   const iterations = bufferSize / blockSize;
 
   return (e) => {
-    const channelData = [ e.outputBuffer.getChannelData(0) ];
+    const channelData = [e.outputBuffer.getChannelData(0)];
 
     for (let i = 0; i < iterations; i++) {
       impl.process(channelData, i * blockSize);
@@ -114,7 +129,10 @@ DSPAlgorithm[2] = (impl, numberOfChannels, bufferSize) => {
 
   return (e) => {
     const outputBuffer = e.outputBuffer;
-    const channelData = [ outputBuffer.getChannelData(0), outputBuffer.getChannelData(1) ]
+    const channelData = [
+      outputBuffer.getChannelData(0),
+      outputBuffer.getChannelData(1),
+    ];
 
     for (let i = 0; i < iterations; i++) {
       impl.process(channelData, i * blockSize);

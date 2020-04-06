@@ -1,10 +1,10 @@
-"use strict";
+'use strict';
 
 const ChannelMergerNodeDSP = {
   dspProcess() {
     const outputBus = this.outputs[0].bus;
-    const inputBuses = this.inputs.map(input => input.bus);
-    const allSilent = inputBuses.every(inputBus => inputBus.isSilent);
+    const inputBuses = this.inputs.map((input) => input.bus);
+    const allSilent = inputBuses.every((inputBus) => inputBus.isSilent);
 
     outputBus.zeros();
 
@@ -15,7 +15,7 @@ const ChannelMergerNodeDSP = {
         outputChannelData[i].set(inputBuses[i].getChannelData()[0]);
       }
     }
-  }
+  },
 };
 
 module.exports = ChannelMergerNodeDSP;

@@ -1,8 +1,8 @@
-"use strict";
+'use strict';
 
-const clamp = require("./clamp");
-const toPowerOfTwo = require("./toPowerOfTwo");
-const { MIN_BLOCK_SIZE, MAX_BLOCK_SIZE } = require("../../constants");
+const clamp = require('./clamp');
+const toPowerOfTwo = require('./toPowerOfTwo');
+const { MIN_BLOCK_SIZE, MAX_BLOCK_SIZE } = require('../../constants');
 
 /**
  * @param {number} value

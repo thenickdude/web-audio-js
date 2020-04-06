@@ -1,14 +1,14 @@
-"use strict";
+'use strict';
 
-require("run-with-mocha");
+require('run-with-mocha');
 
-const assert = require("assert");
-const sinon = require("sinon");
-const AudioContext = require("../../src/api/BaseAudioContext");
+const assert = require('assert');
+const sinon = require('sinon');
+const AudioContext = require('../../src/api/BaseAudioContext');
 
-describe("api/AudioParam", () => {
-  describe("attributes", () => {
-    it(".value=", () => {
+describe('api/AudioParam', () => {
+  describe('attributes', () => {
+    it('.value=', () => {
       const context = new AudioContext();
       const target = context.createGain().gain;
       const value1 = 1;
@@ -25,7 +25,7 @@ describe("api/AudioParam", () => {
       assert(target._impl.setValue.args[0][0] === value2);
     });
 
-    it(".defaultValue", () => {
+    it('.defaultValue', () => {
       const context = new AudioContext();
       const target = context.createGain().gain;
       const defaultValue = 1;
@@ -37,8 +37,8 @@ describe("api/AudioParam", () => {
     });
   });
 
-  describe("methods", () => {
-    it(".setValueAtTime(value, startTime)", () => {
+  describe('methods', () => {
+    it('.setValueAtTime(value, startTime)', () => {
       const context = new AudioContext();
       const target = context.createGain().gain;
       const value = 0;
@@ -52,7 +52,7 @@ describe("api/AudioParam", () => {
       assert(target._impl.setValueAtTime.args[0][1] === startTime);
     });
 
-    it(".linearRampToValueAtTime(value, endTime)", () => {
+    it('.linearRampToValueAtTime(value, endTime)', () => {
       const context = new AudioContext();
       const target = context.createGain().gain;
       const value = 0;
@@ -66,7 +66,7 @@ describe("api/AudioParam", () => {
       assert(target._impl.linearRampToValueAtTime.args[0][1] === endTime);
     });
 
-    it(".exponentialRampToValueAtTime(value, endTime)", () => {
+    it('.exponentialRampToValueAtTime(value, endTime)', () => {
       const context = new AudioContext();
       const target = context.createGain().gain;
       const value = 0;
@@ -80,7 +80,7 @@ describe("api/AudioParam", () => {
       assert(target._impl.exponentialRampToValueAtTime.args[0][1] === endTime);
     });
 
-    it(".setTargetAtTime(target, startTime, timeConstant)", () => {
+    it('.setTargetAtTime(target, startTime, timeConstant)', () => {
       const context = new AudioContext();
       const target = context.createGain().gain;
       const targetValue = 0;
@@ -96,7 +96,7 @@ describe("api/AudioParam", () => {
       assert(target._impl.setTargetAtTime.args[0][2] === timeConstant);
     });
 
-    it(".setValueCurveAtTime(values, startTime, duration)", () => {
+    it('.setValueCurveAtTime(values, startTime, duration)', () => {
       const context = new AudioContext();
       const target = context.createGain().gain;
       const values = new Float32Array(128);
@@ -112,7 +112,7 @@ describe("api/AudioParam", () => {
       assert(target._impl.setValueCurveAtTime.args[0][2] === duration);
     });
 
-    it(".cancelScheduledValues(startTime)", () => {
+    it('.cancelScheduledValues(startTime)', () => {
       const context = new AudioContext();
       const target = context.createGain().gain;
       const startTime = 0.5;

@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 module.exports = {
   MIN_SAMPLERATE: 3000,

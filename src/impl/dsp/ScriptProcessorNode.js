@@ -1,7 +1,7 @@
-"use strict";
+'use strict';
 
-const AudioBuffer = require("../AudioBuffer");
-const { fill } = require("../../utils");
+const AudioBuffer = require('../AudioBuffer');
+const { fill } = require('../../utils');
 
 const ScriptProcessorNodeDSP = {
   dspInit() {
@@ -15,14 +15,18 @@ const ScriptProcessorNodeDSP = {
     const numberOfInputChannels = this.inputs[0].getNumberOfChannels();
     const numberOfOutputChannels = this.outputs[0].getNumberOfChannels();
     const inputBuffer = new AudioBuffer({
-      numberOfChannels: numberOfInputChannels, length: this._bufferSize, sampleRate: this.sampleRate
+      numberOfChannels: numberOfInputChannels,
+      length: this._bufferSize,
+      sampleRate: this.sampleRate,
     });
     const outputBuffer = new AudioBuffer({
-      numberOfChannels: numberOfOutputChannels, length: this._bufferSize, sampleRate: this.sampleRate
+      numberOfChannels: numberOfOutputChannels,
+      length: this._bufferSize,
+      sampleRate: this.sampleRate,
     });
 
     eventItem.inputBuffer._impl = inputBuffer;
-    eventItem.outputBuffer._impl = outputBuffer
+    eventItem.outputBuffer._impl = outputBuffer;
 
     this._inputChannelData = inputBuffer.audioData.channelData;
     this._outputChannelData = outputBuffer.audioData.channelData;
@@ -64,7 +68,7 @@ const ScriptProcessorNodeDSP = {
       });
       this._writeIndex = 0;
     }
-  }
+  },
 };
 
 module.exports = ScriptProcessorNodeDSP;

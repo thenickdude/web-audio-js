@@ -1,15 +1,15 @@
-"use strict";
+'use strict';
 
-require("run-with-mocha");
+require('run-with-mocha');
 
-const assert = require("assert");
-const sinon = require("sinon");
-const api = require("../../src/api");
-const AudioContext = require("../../src/api/BaseAudioContext");
-const AudioParam = require("../../src/api/AudioParam");
+const assert = require('assert');
+const sinon = require('sinon');
+const api = require('../../src/api');
+const AudioContext = require('../../src/api/BaseAudioContext');
+const AudioParam = require('../../src/api/AudioParam');
 
-describe("api/AudioBufferSourceNode", () => {
-  it("context.createBufferSource()", () => {
+describe('api/AudioBufferSourceNode', () => {
+  it('context.createBufferSource()', () => {
     const context = new AudioContext();
     const target = context.createBufferSource();
 
@@ -17,8 +17,8 @@ describe("api/AudioBufferSourceNode", () => {
     assert(target instanceof api.AudioScheduledSourceNode);
   });
 
-  describe("attributes", () => {
-    it(".buffer=", () => {
+  describe('attributes', () => {
+    it('.buffer=', () => {
       const context = new AudioContext();
       const target = context.createBufferSource();
       const buffer = context.createBuffer(1, 16, 8000);
@@ -31,7 +31,7 @@ describe("api/AudioBufferSourceNode", () => {
       assert(target._impl.setBuffer.args[0][0] === buffer);
     });
 
-    it(".playbackRate", () => {
+    it('.playbackRate', () => {
       const context = new AudioContext();
       const target = context.createBufferSource();
 
@@ -39,7 +39,7 @@ describe("api/AudioBufferSourceNode", () => {
       assert(target.playbackRate === target._impl.$playbackRate);
     });
 
-    it(".detune", () => {
+    it('.detune', () => {
       const context = new AudioContext();
       const target = context.createBufferSource();
 
@@ -47,7 +47,7 @@ describe("api/AudioBufferSourceNode", () => {
       assert(target.detune === target._impl.$detune);
     });
 
-    it(".loop=", () => {
+    it('.loop=', () => {
       const context = new AudioContext();
       const target = context.createBufferSource();
       const loop1 = false;
@@ -64,7 +64,7 @@ describe("api/AudioBufferSourceNode", () => {
       assert(target._impl.setLoop.args[0][0] === loop2);
     });
 
-    it(".loopStart=", () => {
+    it('.loopStart=', () => {
       const context = new AudioContext();
       const target = context.createBufferSource();
       const loopStart1 = 0;
@@ -81,7 +81,7 @@ describe("api/AudioBufferSourceNode", () => {
       assert(target._impl.setLoopStart.args[0][0] === loopStart2);
     });
 
-    it(".loopEnd=", () => {
+    it('.loopEnd=', () => {
       const context = new AudioContext();
       const target = context.createBufferSource();
       const loopEnd1 = 0;
@@ -98,17 +98,17 @@ describe("api/AudioBufferSourceNode", () => {
       assert(target._impl.setLoopEnd.args[0][0] === loopEnd2);
     });
 
-    it(".onended=", () => {
+    it('.onended=', () => {
       const context = new AudioContext();
       const target = context.createBufferSource();
       const callback1 = sinon.spy();
       const callback2 = sinon.spy();
       const callback3 = sinon.spy();
-      const event = { type: "ended" };
+      const event = { type: 'ended' };
 
       target.onended = callback1;
       target.onended = callback2;
-      target.addEventListener("ended", callback3);
+      target.addEventListener('ended', callback3);
       target._impl.dispatchEvent(event);
 
       assert(target.onended === callback2);
@@ -120,8 +120,8 @@ describe("api/AudioBufferSourceNode", () => {
     });
   });
 
-  describe("methods", () => {
-    it(".start(when, offset, duration)", () => {
+  describe('methods', () => {
+    it('.start(when, offset, duration)', () => {
       const context = new AudioContext();
       const target = context.createBufferSource();
       const when = 0;
@@ -137,7 +137,7 @@ describe("api/AudioBufferSourceNode", () => {
       assert(target._impl.start.args[0][2] === duration);
     });
 
-    it(".stop(when)", () => {
+    it('.stop(when)', () => {
       const context = new AudioContext();
       const target = context.createBufferSource();
       const when = 0;

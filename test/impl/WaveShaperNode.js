@@ -1,40 +1,40 @@
-"use strict";
+'use strict';
 
-require("run-with-mocha");
+require('run-with-mocha');
 
-const assert = require("assert");
-const AudioContext = require("../../src/impl/AudioContext");
-const WaveShaperNode = require("../../src/impl/WaveShaperNode");
-const AudioNode = require("../../src/impl/AudioNode");
+const assert = require('assert');
+const AudioContext = require('../../src/impl/AudioContext');
+const WaveShaperNode = require('../../src/impl/WaveShaperNode');
+const AudioNode = require('../../src/impl/AudioNode');
 
-describe("impl/WaveShaperNode", () => {
+describe('impl/WaveShaperNode', () => {
   let context;
 
   beforeEach(() => {
     context = new AudioContext({ sampleRate: 8000, blockSize: 32 });
   });
 
-  it("constructor", () => {
+  it('constructor', () => {
     const node = new WaveShaperNode(context);
 
     assert(node instanceof WaveShaperNode);
     assert(node instanceof AudioNode);
   });
 
-  describe("attributes", () => {
-    it(".numberOfInputs", () => {
+  describe('attributes', () => {
+    it('.numberOfInputs', () => {
       const node = new WaveShaperNode(context);
 
       assert(node.getNumberOfInputs() === 1);
     });
 
-    it(".numberOfOutputs", () => {
+    it('.numberOfOutputs', () => {
       const node = new WaveShaperNode(context);
 
       assert(node.getNumberOfOutputs() === 1);
     });
 
-    it(".curve=", () => {
+    it('.curve=', () => {
       const node = new WaveShaperNode(context);
       const curve = new Float32Array(128);
 
@@ -44,25 +44,23 @@ describe("impl/WaveShaperNode", () => {
       assert(node.getCurve() === curve);
     });
 
-    it(".oversample=", () => {
+    it('.oversample=', () => {
       const node = new WaveShaperNode(context);
 
-      assert(node.getOversample() === "none");
+      assert(node.getOversample() === 'none');
 
-      [
-        "none", "2x", "4x"
-      ].forEach((oversample) => {
+      ['none', '2x', '4x'].forEach((oversample) => {
         node.setOversample(oversample);
         assert(node.getOversample() === oversample);
       });
     });
   });
 
-  describe("channel configuration", () => {
-    it("should synchronize with the input", () => {
-      const node1 = new AudioNode(context, {}, { outputs: [ 4 ] });
+  describe('channel configuration', () => {
+    it('should synchronize with the input', () => {
+      const node1 = new AudioNode(context, {}, { outputs: [4] });
       const node2 = new WaveShaperNode(context);
-      const node3 = new AudioNode(context, {}, { inputs: [ 1 ] });
+      const node3 = new AudioNode(context, {}, { inputs: [1] });
 
       node1.outputs[0].enable();
       node2.outputs[0].enable();

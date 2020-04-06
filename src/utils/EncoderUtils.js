@@ -1,6 +1,6 @@
-"use strict";
+'use strict';
 
-const AudioDataUtils = require("./AudioDataUtils");
+const AudioDataUtils = require('./AudioDataUtils');
 
 /**
  * @param {function}  encodeFn

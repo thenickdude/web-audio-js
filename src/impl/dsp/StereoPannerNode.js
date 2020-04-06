@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 const StereoPannerNodeDSP = {
   dspProcess() {
@@ -13,9 +13,19 @@ const StereoPannerNodeDSP = {
     const panParam = this._pan;
 
     if (panParam.hasSampleAccurateValues()) {
-      this.dspSampleAccurateValues(inputBus, outputBus, panParam.getSampleAccurateValues(), this.blockSize);
+      this.dspSampleAccurateValues(
+        inputBus,
+        outputBus,
+        panParam.getSampleAccurateValues(),
+        this.blockSize,
+      );
     } else {
-      this.dspStaticValue(inputBus, outputBus, panParam.getValue(), this.blockSize);
+      this.dspStaticValue(
+        inputBus,
+        outputBus,
+        panParam.getValue(),
+        this.blockSize,
+      );
     }
   },
 
@@ -28,7 +38,7 @@ const StereoPannerNodeDSP = {
 
       for (let i = 0; i < blockSize; i++) {
         const panValue = Math.max(-1, Math.min(panValues[i], +1));
-        const panRadian = (panValue * 0.5 + 0.5) * 0.5 * Math.PI
+        const panRadian = (panValue * 0.5 + 0.5) * 0.5 * Math.PI;
         const gainL = Math.cos(panRadian);
         const gainR = Math.sin(panRadian);
 
@@ -40,7 +50,8 @@ const StereoPannerNodeDSP = {
 
       for (let i = 0; i < blockSize; i++) {
         const panValue = Math.max(-1, Math.min(panValues[i], +1));
-        const panRadian = (panValue <= 0 ? panValue + 1: panValue) * 0.5 * Math.PI
+        const panRadian =
+          (panValue <= 0 ? panValue + 1 : panValue) * 0.5 * Math.PI;
         const gainL = Math.cos(panRadian);
         const gainR = Math.sin(panRadian);
 
@@ -63,7 +74,7 @@ const StereoPannerNodeDSP = {
 
     if (numberOfChannels === 1) {
       const input = inputBus.getChannelData()[0];
-      const panRadian = (panValue * 0.5 + 0.5) * 0.5 * Math.PI
+      const panRadian = (panValue * 0.5 + 0.5) * 0.5 * Math.PI;
       const gainL = Math.cos(panRadian);
       const gainR = Math.sin(panRadian);
 
@@ -73,7 +84,8 @@ const StereoPannerNodeDSP = {
       }
     } else {
       const inputs = inputBus.getChannelData();
-      const panRadian = (panValue <= 0 ? panValue + 1: panValue) * 0.5 * Math.PI
+      const panRadian =
+        (panValue <= 0 ? panValue + 1 : panValue) * 0.5 * Math.PI;
       const gainL = Math.cos(panRadian);
       const gainR = Math.sin(panRadian);
 
@@ -89,7 +101,7 @@ const StereoPannerNodeDSP = {
         }
       }
     }
-  }
+  },
 };
 
 module.exports = StereoPannerNodeDSP;

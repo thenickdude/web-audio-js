@@ -1,45 +1,45 @@
-"use strict";
+'use strict';
 
-require("run-with-mocha");
+require('run-with-mocha');
 
-const assert = require("assert");
-const AudioContext = require("../../src/impl/AudioContext");
-const ChannelSplitterNode = require("../../src/impl/ChannelSplitterNode");
-const AudioNode = require("../../src/impl/AudioNode");
+const assert = require('assert');
+const AudioContext = require('../../src/impl/AudioContext');
+const ChannelSplitterNode = require('../../src/impl/ChannelSplitterNode');
+const AudioNode = require('../../src/impl/AudioNode');
 
-describe("impl/ChannelSplitterNode", () => {
+describe('impl/ChannelSplitterNode', () => {
   let context;
 
   beforeEach(() => {
     context = new AudioContext({ sampleRate: 8000, blockSize: 32 });
   });
 
-  it("constructor", () => {
+  it('constructor', () => {
     const node = new ChannelSplitterNode(context, { numberOfOutputs: 6 });
 
     assert(node instanceof ChannelSplitterNode);
     assert(node instanceof AudioNode);
   });
 
-  describe("attributes", () => {
-    it(".numberOfInputs", () => {
+  describe('attributes', () => {
+    it('.numberOfInputs', () => {
       const node = new ChannelSplitterNode(context, { numberOfOutputs: 6 });
 
       assert(node.getNumberOfInputs() === 1);
     });
 
-    it(".numberOfOutputs", () => {
+    it('.numberOfOutputs', () => {
       const node = new ChannelSplitterNode(context, { numberOfOutputs: 6 });
 
       assert(node.getNumberOfOutputs() === 6);
     });
   });
 
-  describe("channel configuration", () => {
-    it("should be kept by the initial configuration", () => {
-      const node1 = new AudioNode(context, {}, { outputs: [ 4 ] });
+  describe('channel configuration', () => {
+    it('should be kept by the initial configuration', () => {
+      const node1 = new AudioNode(context, {}, { outputs: [4] });
       const node2 = new ChannelSplitterNode(context, { numberOfOutputs: 6 });
-      const node3 = new AudioNode(context, {}, { inputs: [ 1 ] });
+      const node3 = new AudioNode(context, {}, { inputs: [1] });
 
       node1.outputs[0].enable();
       node2.outputs[0].enable();

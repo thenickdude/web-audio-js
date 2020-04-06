@@ -1,22 +1,22 @@
-"use strict";
+'use strict';
 
-require("run-with-mocha");
+require('run-with-mocha');
 
-const assert = require("assert");
-const sinon = require("sinon");
-const api = require("../../src/api");
-const AudioContext = require("../../src/api/BaseAudioContext");
+const assert = require('assert');
+const sinon = require('sinon');
+const api = require('../../src/api');
+const AudioContext = require('../../src/api/BaseAudioContext');
 
-describe("api/AudioBuffer", () => {
-  it("context.createBuffer(numberOfChannels, length, sampleRate)", () => {
+describe('api/AudioBuffer', () => {
+  it('context.createBuffer(numberOfChannels, length, sampleRate)', () => {
     const context = new AudioContext();
     const target = context.createBuffer(1, 16, 8000);
 
     assert(target instanceof api.AudioBuffer);
   });
 
-  describe("attributes", () => {
-    it(".sampleRate", () => {
+  describe('attributes', () => {
+    it('.sampleRate', () => {
       const context = new AudioContext();
       const target = context.createBuffer(1, 16, 8000);
       const sampleRate = 8000;
@@ -27,7 +27,7 @@ describe("api/AudioBuffer", () => {
       assert(target._impl.getSampleRate.callCount === 1);
     });
 
-    it(".length", () => {
+    it('.length', () => {
       const context = new AudioContext();
       const target = context.createBuffer(1, 16, 8000);
       const length = 16;
@@ -38,7 +38,7 @@ describe("api/AudioBuffer", () => {
       assert(target._impl.getLength.callCount === 1);
     });
 
-    it(".duration", () => {
+    it('.duration', () => {
       const context = new AudioContext();
       const target = context.createBuffer(1, 16, 8000);
       const duration = 16 / 8000;
@@ -49,7 +49,7 @@ describe("api/AudioBuffer", () => {
       assert(target._impl.getDuration.callCount === 1);
     });
 
-    it(".numberOfChannels", () => {
+    it('.numberOfChannels', () => {
       const context = new AudioContext();
       const target = context.createBuffer(1, 16, 8000);
       const numberOfChannels = 1;
@@ -61,8 +61,8 @@ describe("api/AudioBuffer", () => {
     });
   });
 
-  describe("methods", () => {
-    it(".getChannelData(channel)", () => {
+  describe('methods', () => {
+    it('.getChannelData(channel)', () => {
       const context = new AudioContext();
       const target = context.createBuffer(1, 16, 8000);
       const channel = 0;
@@ -74,7 +74,7 @@ describe("api/AudioBuffer", () => {
       assert(target._impl.getChannelData.args[0][0] === channel);
     });
 
-    it(".copyFromChannel(destination, channelNumber, startInChannel)", () => {
+    it('.copyFromChannel(destination, channelNumber, startInChannel)', () => {
       const context = new AudioContext();
       const target = context.createBuffer(1, 16, 8000);
       const destination = new Float32Array(128);
@@ -90,7 +90,7 @@ describe("api/AudioBuffer", () => {
       assert(target._impl.copyFromChannel.args[0][2] === startInChannel);
     });
 
-    it(".copyToChannel(source, channelNumber, startInChannel)", () => {
+    it('.copyToChannel(source, channelNumber, startInChannel)', () => {
       const context = new AudioContext();
       const target = context.createBuffer(1, 16, 8000);
       const source = new Float32Array(128);

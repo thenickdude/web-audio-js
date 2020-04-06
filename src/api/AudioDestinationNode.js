@@ -1,6 +1,6 @@
-"use strict";
+'use strict';
 
-const AudioNode = require("./AudioNode");
+const AudioNode = require('./AudioNode');
 
 class AudioDestinationNode extends AudioNode {
   constructor(context, impl) {

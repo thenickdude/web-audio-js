@@ -1,6 +1,6 @@
-"use strict";
+'use strict';
 
 module.exports = {
-  SPEAKERS: "speakers",
-  DISCRETE: "discrete",
+  SPEAKERS: 'speakers',
+  DISCRETE: 'discrete',
 };

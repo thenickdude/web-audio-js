@@ -1,9 +1,9 @@
-"use strict";
+'use strict';
 
-const fft = require("fourier-transform");
-const blackman = require("scijs-window-functions/blackman");
-const AudioBus = require("../core/AudioBus");
-const { toDecibel, normalize } = require("../../utils");
+const fft = require('fourier-transform');
+const blackman = require('scijs-window-functions/blackman');
+const AudioBus = require('../core/AudioBus');
+const { toDecibel, normalize } = require('../../utils');
 
 const MAX_FFT_SIZE = 32768;
 
@@ -26,34 +26,34 @@ const AnalyserNodeDSP = {
     this._blackmanTable = blackmanTable;
   },
   dspGetFloatFrequencyData(array) {
-      const fftSize = this._fftSize;
-      const blackmanTable = this._blackmanTable;
-      const previousSmooth = this._previousSmooth;
-      const waveform = new Float32Array(fftSize);
-      const length = Math.min(array.length, fftSize / 2);
-      const s = this._smoothingTimeConstant;
+    const fftSize = this._fftSize;
+    const blackmanTable = this._blackmanTable;
+    const previousSmooth = this._previousSmooth;
+    const waveform = new Float32Array(fftSize);
+    const length = Math.min(array.length, fftSize / 2);
+    const s = this._smoothingTimeConstant;
 
-      // 1. down-mix
-      this.dspGetFloatTimeDomainData(waveform);
+    // 1. down-mix
+    this.dspGetFloatTimeDomainData(waveform);
 
-      // 2. Apply Blackman window
-      for (let i = 0; i < fftSize; i++) {
-        waveform[i] = (waveform[i] * blackmanTable[i]) || 0;
-      }
+    // 2. Apply Blackman window
+    for (let i = 0; i < fftSize; i++) {
+      waveform[i] = waveform[i] * blackmanTable[i] || 0;
+    }
 
-      // 3. FFT
-      const spectrum = fft(waveform);
+    // 3. FFT
+    const spectrum = fft(waveform);
 
-      // re-size to frequencyBinCount, then do more processing
-      for (let i = 0; i < length; i++) {
-        const v0 = spectrum[i];
-        // 4. Smooth over data
-        previousSmooth[i] = (s * previousSmooth[i]) + ((1 - s) * v0);
-        // 5. Convert to dB
-        const v1 = toDecibel(previousSmooth[i]);
-        // store in array
-        array[i] = Number.isFinite(v1) ? v1 : 0;
-      }
+    // re-size to frequencyBinCount, then do more processing
+    for (let i = 0; i < length; i++) {
+      const v0 = spectrum[i];
+      // 4. Smooth over data
+      previousSmooth[i] = s * previousSmooth[i] + (1 - s) * v0;
+      // 5. Convert to dB
+      const v1 = toDecibel(previousSmooth[i]);
+      // store in array
+      array[i] = Number.isFinite(v1) ? v1 : 0;
+    }
   },
   dspGetByteFrequencyData(array) {
     const length = Math.min(array.length, this._fftSize / 2);
@@ -80,7 +80,8 @@ const AnalyserNodeDSP = {
   dspGetFloatTimeDomainData(array) {
     const audioData = this._audioData;
     const fftSize = this._fftSize;
-    const i0 = (this._analyserBusOffset - fftSize + MAX_FFT_SIZE) % MAX_FFT_SIZE;
+    const i0 =
+      (this._analyserBusOffset - fftSize + MAX_FFT_SIZE) % MAX_FFT_SIZE;
     const i1 = Math.min(i0 + fftSize, MAX_FFT_SIZE);
     const copied = i1 - i0;
 
@@ -109,7 +110,7 @@ const AnalyserNodeDSP = {
     if (MAX_FFT_SIZE <= this._analyserBusOffset) {
       this._analyserBusOffset = 0;
     }
-  }
+  },
 };
 
 module.exports = AnalyserNodeDSP;

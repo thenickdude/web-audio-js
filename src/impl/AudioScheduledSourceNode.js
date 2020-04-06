@@ -1,8 +1,13 @@
-"use strict";
+'use strict';
 
-const AudioSourceNode = require("./AudioSourceNode");
-const { toNumber } = require("../utils");
-const { UNSCHEDULED, SCHEDULED, PLAYING, FINISHED } = require("../constants/PlaybackState");
+const AudioSourceNode = require('./AudioSourceNode');
+const { toNumber } = require('../utils');
+const {
+  UNSCHEDULED,
+  SCHEDULED,
+  PLAYING,
+  FINISHED,
+} = require('../constants/PlaybackState');
 
 class AudioScheduledSourceNode extends AudioSourceNode {
   /**

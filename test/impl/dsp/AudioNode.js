@@ -1,16 +1,16 @@
-"use strict";
+'use strict';
 
-require("run-with-mocha");
+require('run-with-mocha');
 
-const assert = require("assert");
-const sinon = require("sinon");
-const AudioContext = require("../../../src/impl/AudioContext");
-const GainNode = require("../../../src/impl/GainNode");
+const assert = require('assert');
+const sinon = require('sinon');
+const AudioContext = require('../../../src/impl/AudioContext');
+const GainNode = require('../../../src/impl/GainNode');
 
 const context = new AudioContext({ sampleRate: 8000, blockSize: 16 });
 
-describe("impl/dsp/AudioNode", () => {
-  it("propagation", () => {
+describe('impl/dsp/AudioNode', () => {
+  it('propagation', () => {
     const node1 = new GainNode(context);
     const node2 = new GainNode(context);
     const node3 = new GainNode(context);
@@ -29,7 +29,7 @@ describe("impl/dsp/AudioNode", () => {
     assert(param.dspProcess.callCount === 1);
   });
 
-  it("feedback loop", () => {
+  it('feedback loop', () => {
     const node1 = new GainNode(context);
     const node2 = new GainNode(context);
     const node3 = new GainNode(context);

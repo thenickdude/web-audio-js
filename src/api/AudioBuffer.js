@@ -1,11 +1,11 @@
-"use strict";
+'use strict';
 
-const impl = require("../impl");
-const { defineProp } = require("../utils");
+const impl = require('../impl');
+const { defineProp } = require('../utils');
 
 class AudioBuffer {
   constructor(opts) {
-    defineProp(this, "_impl", new impl.AudioBuffer(opts));
+    defineProp(this, '_impl', new impl.AudioBuffer(opts));
   }
 
   get sampleRate() {

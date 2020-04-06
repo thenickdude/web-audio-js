@@ -1,40 +1,40 @@
-"use strict";
+'use strict';
 
-require("run-with-mocha");
+require('run-with-mocha');
 
-const assert = require("assert");
-const AudioContext = require("../../src/impl/AudioContext");
-const BasePannerNode = require("../../src/impl/BasePannerNode");
-const AudioNode = require("../../src/impl/AudioNode");
+const assert = require('assert');
+const AudioContext = require('../../src/impl/AudioContext');
+const BasePannerNode = require('../../src/impl/BasePannerNode');
+const AudioNode = require('../../src/impl/AudioNode');
 
-describe("impl/BasePannerNode", () => {
+describe('impl/BasePannerNode', () => {
   let context;
 
   beforeEach(() => {
     context = new AudioContext({ sampleRate: 8000, blockSize: 32 });
   });
 
-  it("constructor", () => {
+  it('constructor', () => {
     const node = new BasePannerNode(context);
 
     assert(node instanceof BasePannerNode);
     assert(node instanceof AudioNode);
   });
 
-  describe("attributes", () => {
-    it(".numberOfInputs", () => {
+  describe('attributes', () => {
+    it('.numberOfInputs', () => {
       const node = new BasePannerNode(context);
 
       assert(node.getNumberOfInputs() === 1);
     });
 
-    it(".numberOfOutputs", () => {
+    it('.numberOfOutputs', () => {
       const node = new BasePannerNode(context);
 
       assert(node.getNumberOfOutputs() === 1);
     });
 
-    it(".channelCount=", () => {
+    it('.channelCount=', () => {
       const node = new BasePannerNode(context);
 
       assert(node.getChannelCount() === 2);
@@ -43,42 +43,38 @@ describe("impl/BasePannerNode", () => {
       assert(node.getChannelCount() === 1);
     });
 
-    it(".channelCountMode=", () => {
+    it('.channelCountMode=', () => {
       const node = new BasePannerNode(context);
 
-      assert(node.getChannelCountMode() === "clamped-max");
+      assert(node.getChannelCountMode() === 'clamped-max');
 
-      node.setChannelCountMode("explicit");
-      assert(node.getChannelCountMode() === "explicit");
+      node.setChannelCountMode('explicit');
+      assert(node.getChannelCountMode() === 'explicit');
     });
 
-    it(".panningModel=", () => {
+    it('.panningModel=', () => {
       const node = new BasePannerNode(context);
 
-      assert(node.getPanningModel() === "equalpower");
+      assert(node.getPanningModel() === 'equalpower');
 
-      [
-        "equalpower", "HRTF"
-      ].forEach((panningModel) => {
+      ['equalpower', 'HRTF'].forEach((panningModel) => {
         node.setPanningModel(panningModel);
         assert(node.getPanningModel() === panningModel);
       });
-  });
+    });
 
-    it(".distanceModel=", () => {
+    it('.distanceModel=', () => {
       const node = new BasePannerNode(context);
 
-      assert(node.getDistanceModel() === "inverse");
+      assert(node.getDistanceModel() === 'inverse');
 
-      [
-        "inverse", "linear", "exponential"
-      ].forEach((distanceModel) => {
+      ['inverse', 'linear', 'exponential'].forEach((distanceModel) => {
         node.setDistanceModel(distanceModel);
         assert(node.getDistanceModel() === distanceModel);
       });
     });
 
-    it(".refDistance=", () => {
+    it('.refDistance=', () => {
       const node = new BasePannerNode(context);
 
       assert(node.getRefDistance() === 1);
@@ -87,7 +83,7 @@ describe("impl/BasePannerNode", () => {
       assert(node.getRefDistance() === 2);
     });
 
-    it(".maxDistance=", () => {
+    it('.maxDistance=', () => {
       const node = new BasePannerNode(context);
 
       assert(node.getMaxDistance() === 10000);
@@ -96,7 +92,7 @@ describe("impl/BasePannerNode", () => {
       assert(node.getMaxDistance() === 20000);
     });
 
-    it(".rolloffFactor=", () => {
+    it('.rolloffFactor=', () => {
       const node = new BasePannerNode(context);
 
       assert(node.getRolloffFactor() === 1);
@@ -105,7 +101,7 @@ describe("impl/BasePannerNode", () => {
       assert(node.getRolloffFactor() === 0.8);
     });
 
-    it(".coneInnerAngle=", () => {
+    it('.coneInnerAngle=', () => {
       const node = new BasePannerNode(context);
 
       assert(node.getConeInnerAngle() === 360);
@@ -114,7 +110,7 @@ describe("impl/BasePannerNode", () => {
       assert(node.getConeInnerAngle() === 270);
     });
 
-    it(".coneOuterAngle=", () => {
+    it('.coneOuterAngle=', () => {
       const node = new BasePannerNode(context);
 
       assert(node.getConeOuterAngle() === 360);
@@ -123,7 +119,7 @@ describe("impl/BasePannerNode", () => {
       assert(node.getConeOuterAngle() === 270);
     });
 
-    it(".coneOuterGain=", () => {
+    it('.coneOuterGain=', () => {
       const node = new BasePannerNode(context);
 
       assert(node.getConeOuterGain() === 0);
@@ -133,11 +129,11 @@ describe("impl/BasePannerNode", () => {
     });
   });
 
-  describe("channel configuration", () => {
-    it("should be always 2ch", () => {
-      const node1 = new AudioNode(context, {}, { outputs: [ 4 ] });
+  describe('channel configuration', () => {
+    it('should be always 2ch', () => {
+      const node1 = new AudioNode(context, {}, { outputs: [4] });
       const node2 = new BasePannerNode(context);
-      const node3 = new AudioNode(context, {}, { inputs: [ 1 ] });
+      const node3 = new AudioNode(context, {}, { inputs: [1] });
 
       node1.outputs[0].enable();
       node2.outputs[0].enable();

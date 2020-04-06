@@ -1,12 +1,15 @@
-"use strict";
+'use strict';
 
-const assert = require("assert");
-const AudioParam = require("../../src/impl/AudioParam");
-const { AUDIO_RATE } = require("../../src/constants/AudioParamRate");
+const assert = require('assert');
+const AudioParam = require('../../src/impl/AudioParam');
+const { AUDIO_RATE } = require('../../src/constants/AudioParamRate');
 
 function makeTests(context, expectedValues, sched1, sched2) {
-  it("works", () => {
-    const param = new AudioParam(context, { rate: AUDIO_RATE, defaultValue: 0 });
+  it('works', () => {
+    const param = new AudioParam(context, {
+      rate: AUDIO_RATE,
+      defaultValue: 0,
+    });
 
     sched1(param);
 
@@ -23,8 +26,11 @@ function makeTests(context, expectedValues, sched1, sched2) {
     }
   });
 
-  it("works partially", () => {
-    const param = new AudioParam(context, { rate: AUDIO_RATE, defaultValue: 0 });
+  it('works partially', () => {
+    const param = new AudioParam(context, {
+      rate: AUDIO_RATE,
+      defaultValue: 0,
+    });
 
     sched1(param);
 
@@ -41,8 +47,11 @@ function makeTests(context, expectedValues, sched1, sched2) {
     }
   });
 
-  it("works with dynamic insertion", () => {
-    const param = new AudioParam(context, { rate: AUDIO_RATE, defaultValue: 0 });
+  it('works with dynamic insertion', () => {
+    const param = new AudioParam(context, {
+      rate: AUDIO_RATE,
+      defaultValue: 0,
+    });
 
     sched1(param);
 
@@ -64,16 +73,16 @@ function makeTests(context, expectedValues, sched1, sched2) {
 }
 
 function toValues(str) {
-  str = str.replace(/^\s*\|/gm, "").trimRight();
+  str = str.replace(/^\s*\|/gm, '').trimRight();
 
-  const lines = str.split("\n");
+  const lines = str.split('\n');
   const length = lines.reduce((a, b) => Math.max(a, b.length), 0);
   const result = new Float32Array(length);
 
   lines.forEach((line, i) => {
-    const value = 1 - (i / (lines.length - 1));
+    const value = 1 - i / (lines.length - 1);
 
-    findIndexes(line, "*").forEach((i) => {
+    findIndexes(line, '*').forEach((i) => {
       result[i] = value;
     });
   });
@@ -93,7 +102,7 @@ function findIndexes(str, ch) {
   return result;
 }
 
-function closeTo(a, b ,delta) {
+function closeTo(a, b, delta) {
   return Math.abs(a - b) <= delta;
 }
 

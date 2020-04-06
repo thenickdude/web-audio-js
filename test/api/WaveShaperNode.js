@@ -1,22 +1,22 @@
-"use strict";
+'use strict';
 
-require("run-with-mocha");
+require('run-with-mocha');
 
-const assert = require("assert");
-const sinon = require("sinon");
-const api = require("../../src/api");
-const AudioContext = require("../../src/api/BaseAudioContext");
+const assert = require('assert');
+const sinon = require('sinon');
+const api = require('../../src/api');
+const AudioContext = require('../../src/api/BaseAudioContext');
 
-describe("api/WaveShaperNode", () => {
-  it("context.createWaveShaper()", () => {
+describe('api/WaveShaperNode', () => {
+  it('context.createWaveShaper()', () => {
     const context = new AudioContext();
     const target = context.createWaveShaper();
 
     assert(target instanceof api.WaveShaperNode);
   });
 
-  describe("atrributes", () => {
-    it(".curve=", () => {
+  describe('atrributes', () => {
+    it('.curve=', () => {
       const context = new AudioContext();
       const target = context.createWaveShaper();
       const curve1 = null;
@@ -33,11 +33,11 @@ describe("api/WaveShaperNode", () => {
       assert(target._impl.setCurve.args[0][0] === curve2);
     });
 
-    it(".oversample=", () => {
+    it('.oversample=', () => {
       const context = new AudioContext();
       const target = context.createWaveShaper();
-      const oversample1 = "none";
-      const oversample2 = "2x";
+      const oversample1 = 'none';
+      const oversample2 = '2x';
 
       target._impl.getOversample = sinon.spy(() => oversample1);
       target._impl.setOversample = sinon.spy();

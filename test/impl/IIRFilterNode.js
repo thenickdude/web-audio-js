@@ -1,60 +1,60 @@
-"use strict";
+'use strict';
 
-require("run-with-mocha");
+require('run-with-mocha');
 
-const assert = require("assert");
-const AudioContext = require("../../src/impl/AudioContext");
-const IIRFilterNode = require("../../src/impl/IIRFilterNode");
-const AudioNode = require("../../src/impl/AudioNode");
+const assert = require('assert');
+const AudioContext = require('../../src/impl/AudioContext');
+const IIRFilterNode = require('../../src/impl/IIRFilterNode');
+const AudioNode = require('../../src/impl/AudioNode');
 
 const feedforward = new Float32Array(8);
 const feedback = new Float32Array(8);
 
-describe("impl/IIRFilterNode", () => {
+describe('impl/IIRFilterNode', () => {
   let context;
 
   beforeEach(() => {
     context = new AudioContext({ sampleRate: 8000, blockSize: 32 });
   });
 
-  it("constructor", () => {
+  it('constructor', () => {
     const node = new IIRFilterNode(context, { feedforward, feedback });
 
     assert(node instanceof IIRFilterNode);
     assert(node instanceof AudioNode);
   });
 
-  describe("attributes", () => {
-    it(".numberOfInputs", () => {
+  describe('attributes', () => {
+    it('.numberOfInputs', () => {
       const node = new IIRFilterNode(context, { feedforward, feedback });
 
       assert(node.getNumberOfInputs() === 1);
     });
 
-    it(".numberOfOutputs", () => {
+    it('.numberOfOutputs', () => {
       const node = new IIRFilterNode(context, { feedforward, feedback });
 
       assert(node.getNumberOfOutputs() === 1);
     });
 
-    it(".feedforward", () => {
+    it('.feedforward', () => {
       const node = new IIRFilterNode(context, { feedforward, feedback });
 
       assert(node.getFeedforward() === feedforward);
     });
 
-    it(".feedback", () => {
+    it('.feedback', () => {
       const node = new IIRFilterNode(context, { feedforward, feedback });
 
       assert(node.getFeedback() === feedback);
     });
   });
 
-  describe("channel configuration", () => {
-    it("should synchronize with the input", () => {
-      const node1 = new AudioNode(context, {}, { outputs: [ 4 ] });
+  describe('channel configuration', () => {
+    it('should synchronize with the input', () => {
+      const node1 = new AudioNode(context, {}, { outputs: [4] });
       const node2 = new IIRFilterNode(context, { feedforward, feedback });
-      const node3 = new AudioNode(context, {}, { inputs: [ 1 ] });
+      const node3 = new AudioNode(context, {}, { inputs: [1] });
 
       node1.outputs[0].enable();
       node2.outputs[0].enable();
@@ -91,7 +91,7 @@ describe("impl/IIRFilterNode", () => {
     });
   });
 
-  describe("response data", () => {
-    it.skip("works", () => {});
+  describe('response data', () => {
+    it.skip('works', () => {});
   });
 });

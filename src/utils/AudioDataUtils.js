@@ -1,6 +1,6 @@
-"use strict";
+'use strict';
 
-const nmap = require("nmap");
+const nmap = require('nmap');
 
 /**
  * @param {*} data
@@ -16,7 +16,7 @@ function isAudioData(data) {
   if (!Array.isArray(data.channelData)) {
     return false;
   }
-  if (!data.channelData.every(data => data instanceof Float32Array)) {
+  if (!data.channelData.every((data) => data instanceof Float32Array)) {
     return false;
   }
   return true;
@@ -38,7 +38,9 @@ function toAudioData(data) {
   if (isAudioBuffer(data)) {
     const numberOfChannels = data.numberOfChannels;
     const sampleRate = data.sampleRate;
-    const channelData = nmap(numberOfChannels, (_, ch) => data.getChannelData(ch));
+    const channelData = nmap(numberOfChannels, (_, ch) =>
+      data.getChannelData(ch),
+    );
     const length = numberOfChannels ? channelData[0].length : 0;
 
     return { numberOfChannels, length, sampleRate, channelData };
@@ -54,13 +56,13 @@ function isAudioBuffer(data) {
   if (!data) {
     return false;
   }
-  if (typeof data.numberOfChannels !== "number") {
+  if (typeof data.numberOfChannels !== 'number') {
     return false;
   }
-  if (typeof data.sampleRate !== "number") {
+  if (typeof data.sampleRate !== 'number') {
     return false;
   }
-  if (typeof data.getChannelData !== "function") {
+  if (typeof data.getChannelData !== 'function') {
     return false;
   }
   return true;

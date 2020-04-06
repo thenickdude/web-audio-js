@@ -1,7 +1,7 @@
-"use strict";
+'use strict';
 
-const WavEncoder = require("wav-encoder");
-const EncoderUtils = require("./utils/EncoderUtils");
+const WavEncoder = require('wav-encoder');
+const EncoderUtils = require('./utils/EncoderUtils');
 
 const encoders = {};
 
@@ -19,7 +19,7 @@ function get(type) {
  */
 function set(type, fn) {
   /* istanbul ignore else */
-  if (typeof fn === "function") {
+  if (typeof fn === 'function') {
     encoders[type] = fn;
   }
 }
@@ -30,18 +30,18 @@ function set(type, fn) {
  * @return {Promise<ArrayBuffer>}
  */
 function encode(audioData, /* istanbul ignore next */ opts = {}) {
-  const type = opts.type || "wav";
+  const type = opts.type || 'wav';
   const encodeFn = encoders[type];
 
-  if (typeof encodeFn !== "function") {
+  if (typeof encodeFn !== 'function') {
     return Promise.reject(
-      new TypeError(`Encoder does not support the audio format: ${ type }`)
+      new TypeError(`Encoder does not support the audio format: ${type}`),
     );
   }
 
   return EncoderUtils.encode(encodeFn, audioData, opts);
 }
 
-set("wav", WavEncoder.encode);
+set('wav', WavEncoder.encode);
 
 module.exports = { get, set, encode };

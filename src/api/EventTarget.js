@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 class EventTarget {
   addEventListener(type, listener) {

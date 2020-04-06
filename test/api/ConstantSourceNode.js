@@ -1,14 +1,14 @@
-"use strict";
+'use strict';
 
-require("run-with-mocha");
+require('run-with-mocha');
 
-const assert = require("assert");
-const api = require("../../src/api");
-const AudioContext = require("../../src/api/BaseAudioContext");
-const AudioParam = require("../../src/api/AudioParam");
+const assert = require('assert');
+const api = require('../../src/api');
+const AudioContext = require('../../src/api/BaseAudioContext');
+const AudioParam = require('../../src/api/AudioParam');
 
-describe("api/ConstantSourceNode", () => {
-  it("context.createConstantSource()", () => {
+describe('api/ConstantSourceNode', () => {
+  it('context.createConstantSource()', () => {
     const context = new AudioContext();
     const target = context.createConstantSource();
 
@@ -16,8 +16,8 @@ describe("api/ConstantSourceNode", () => {
     assert(target instanceof api.AudioScheduledSourceNode);
   });
 
-  describe("attributes", () => {
-    it(".offset=", () => {
+  describe('attributes', () => {
+    it('.offset=', () => {
       const context = new AudioContext();
       const target = context.createConstantSource();
 

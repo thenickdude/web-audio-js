@@ -1,61 +1,61 @@
-"use strict";
+'use strict';
 
-require("run-with-mocha");
+require('run-with-mocha');
 
-const assert = require("assert");
-const AudioContext = require("../../src/impl/AudioContext");
-const DelayNode = require("../../src/impl/DelayNode");
-const AudioParam = require("../../src/impl/AudioParam");
-const AudioNode = require("../../src/impl/AudioNode");
+const assert = require('assert');
+const AudioContext = require('../../src/impl/AudioContext');
+const DelayNode = require('../../src/impl/DelayNode');
+const AudioParam = require('../../src/impl/AudioParam');
+const AudioNode = require('../../src/impl/AudioNode');
 
 const maxDelayTime = 1;
 
-describe("impl/DelayNode", () => {
+describe('impl/DelayNode', () => {
   let context;
 
   beforeEach(() => {
     context = new AudioContext({ sampleRate: 8000, blockSize: 32 });
   });
 
-  it("constructor", () => {
+  it('constructor', () => {
     const node = new DelayNode(context, { maxDelayTime });
 
     assert(node instanceof DelayNode);
     assert(node instanceof AudioNode);
   });
 
-  describe("attributes", () => {
-    it(".numberOfInputs", () => {
+  describe('attributes', () => {
+    it('.numberOfInputs', () => {
       const node = new DelayNode(context, { maxDelayTime });
 
       assert(node.getNumberOfInputs() === 1);
     });
 
-    it(".numberOfOutputs", () => {
+    it('.numberOfOutputs', () => {
       const node = new DelayNode(context, { maxDelayTime });
 
       assert(node.getNumberOfOutputs() === 1);
     });
 
-    it(".delayTime", () => {
+    it('.delayTime', () => {
       const node = new DelayNode(context, { maxDelayTime });
 
       assert(node.getDelayTime() instanceof AudioParam);
       assert(node.getDelayTime().getValue() === 0);
     });
 
-    it(".maxDelayTime", () => {
+    it('.maxDelayTime', () => {
       const node = new DelayNode(context, { maxDelayTime });
 
       assert(node.getMaxDelayTime() === 1);
     });
   });
 
-  describe("channel configuration", () => {
-    it("should synchronize with the input", () => {
-      const node1 = new AudioNode(context, {}, { outputs: [ 4 ] });
+  describe('channel configuration', () => {
+    it('should synchronize with the input', () => {
+      const node1 = new AudioNode(context, {}, { outputs: [4] });
       const node2 = new DelayNode(context, { maxDelayTime });
-      const node3 = new AudioNode(context, {}, { inputs: [ 1 ] });
+      const node3 = new AudioNode(context, {}, { inputs: [1] });
 
       node1.outputs[0].enable();
       node2.outputs[0].enable();

@@ -1,6 +1,6 @@
-"use strict";
+'use strict';
 
-const AudioBus = require("./AudioBus");
+const AudioBus = require('./AudioBus');
 
 /**
  * @prop {AudioNode} node
@@ -22,7 +22,7 @@ class AudioNodeOutput {
     const enabled = opts.enabled;
 
     this.node = node;
-    this.index = index|0;
+    this.index = index | 0;
     this.bus = new AudioBus(numberOfChannels, node.blockSize, node.sampleRate);
     this.inputs = [];
     this._enabled = !!enabled;
@@ -96,7 +96,7 @@ class AudioNodeOutput {
    * @param {number}               index
    */
   connect(destination, input) {
-    const target = destination.inputs[input|0];
+    const target = destination.inputs[input | 0];
 
     if (this.inputs.indexOf(target) === -1) {
       this.inputs.push(target);
@@ -109,9 +109,11 @@ class AudioNodeOutput {
    */
   disconnect(...args) {
     const isTargetToDisconnect =
-      args.length === 1 ? target => target.node === args[0] :
-      args.length === 2 ? target => target.node === args[0] && target.index === args[1] :
-      () => true;
+      args.length === 1
+        ? (target) => target.node === args[0]
+        : args.length === 2
+        ? (target) => target.node === args[0] && target.index === args[1]
+        : () => true;
 
     for (let i = this.inputs.length - 1; i >= 0; i--) {
       const target = this.inputs[i];
@@ -127,7 +129,7 @@ class AudioNodeOutput {
    * @return {boolean}
    */
   isConnectedTo(node) {
-    return this.inputs.some(target => target.node === node);
+    return this.inputs.some((target) => target.node === node);
   }
 
   /**

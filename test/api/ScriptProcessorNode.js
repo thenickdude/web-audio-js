@@ -1,22 +1,22 @@
-"use strict";
+'use strict';
 
-require("run-with-mocha");
+require('run-with-mocha');
 
-const assert = require("assert");
-const sinon = require("sinon");
-const api = require("../../src/api");
-const AudioContext = require("../../src/api/BaseAudioContext");
+const assert = require('assert');
+const sinon = require('sinon');
+const api = require('../../src/api');
+const AudioContext = require('../../src/api/BaseAudioContext');
 
-describe("api/ScriptProcessorNode", () => {
-  it("context.createScriptProcessor(bufferSize, numberOfInputChannels, numberOfOutputChannels)", () => {
+describe('api/ScriptProcessorNode', () => {
+  it('context.createScriptProcessor(bufferSize, numberOfInputChannels, numberOfOutputChannels)', () => {
     const context = new AudioContext();
     const target = context.createScriptProcessor(256, 1, 1);
 
     assert(target instanceof api.ScriptProcessorNode);
   });
 
-  describe("attributes", () => {
-    it(".bufferSize", () => {
+  describe('attributes', () => {
+    it('.bufferSize', () => {
       const context = new AudioContext();
       const target = context.createScriptProcessor(256, 1, 1);
       const bufferSize = 256;
@@ -27,17 +27,17 @@ describe("api/ScriptProcessorNode", () => {
       assert(target._impl.getBufferSize.callCount === 1);
     });
 
-    it(".onaudioprocess=", () => {
+    it('.onaudioprocess=', () => {
       const context = new AudioContext();
       const target = context.createScriptProcessor(256, 1, 1);
       const callback1 = sinon.spy();
       const callback2 = sinon.spy();
       const callback3 = sinon.spy();
-      const event = { type: "audioprocess" };
+      const event = { type: 'audioprocess' };
 
       target.onaudioprocess = callback1;
       target.onaudioprocess = callback2;
-      target.addEventListener("audioprocess", callback3);
+      target.addEventListener('audioprocess', callback3);
       target._impl.dispatchEvent(event);
 
       assert(target.onaudioprocess === callback2);

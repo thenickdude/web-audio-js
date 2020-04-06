@@ -1,11 +1,11 @@
-"use strict";
+'use strict';
 
-require("run-with-mocha");
+require('run-with-mocha');
 
-const setImmediate = require("../../src/utils/setImmediate");
+const setImmediate = require('../../src/utils/setImmediate');
 
-describe("utils/setImmediate(fn)", () => {
-  it("works", (done) => {
-     setImmediate(done);
+describe('utils/setImmediate(fn)', () => {
+  it('works', (done) => {
+    setImmediate(done);
   });
 });

@@ -1,12 +1,12 @@
-"use strict";
+'use strict';
 
-require("run-with-mocha");
+require('run-with-mocha');
 
-const assert = require("assert");
-const np = require("../../helpers/np");
-const AudioContext = require("../../../src/impl/AudioContext");
-const AnalyserNode = require("../../../src/impl/AnalyserNode");
-const OscillatorNode = require("../../../src/impl/OscillatorNode");
+const assert = require('assert');
+const np = require('../../helpers/np');
+const AudioContext = require('../../../src/impl/AudioContext');
+const AnalyserNode = require('../../../src/impl/AnalyserNode');
+const OscillatorNode = require('../../../src/impl/OscillatorNode');
 
 const context = new AudioContext({ sampleRate: 8000, blockSize: 32 });
 
@@ -16,7 +16,7 @@ let analyser;
 let channel;
 let channels;
 
-describe("impl/AnalyserNode", () => {
+describe('impl/AnalyserNode', () => {
   beforeEach(() => {
     channel = new Float32Array(context.blockSize);
     channels = [channel];
@@ -40,7 +40,7 @@ describe("impl/AnalyserNode", () => {
     oscillator.disconnect(analyser);
   });
 
-  it("should get time domain data (float)", () => {
+  it('should get time domain data (float)', () => {
     const waveform = new Float32Array(channel.length);
 
     analyser.getFloatTimeDomainData(waveform);
@@ -52,7 +52,7 @@ describe("impl/AnalyserNode", () => {
     assert.deepEqual(waveform, channel);
   });
 
-  it("should get time domain data (byte)", () => {
+  it('should get time domain data (byte)', () => {
     const waveform = new Uint8Array(channel.length);
 
     analyser.getByteTimeDomainData(waveform);
@@ -61,15 +61,46 @@ describe("impl/AnalyserNode", () => {
     context.process(channels, 0);
     analyser.getByteTimeDomainData(waveform);
 
-    assert.deepEqual([...waveform], [
-      128, 171, 209, 237, 253, 253, 239, 212,
-      174, 132,  88,  49,  20,   3,   1,  14,
-      40,   77, 119, 163, 202, 233, 251, 254,
-      243, 218, 182, 139,  96,  56,  24,   5,
-    ]);
+    assert.deepEqual(
+      [...waveform],
+      [
+        128,
+        171,
+        209,
+        237,
+        253,
+        253,
+        239,
+        212,
+        174,
+        132,
+        88,
+        49,
+        20,
+        3,
+        1,
+        14,
+        40,
+        77,
+        119,
+        163,
+        202,
+        233,
+        251,
+        254,
+        243,
+        218,
+        182,
+        139,
+        96,
+        56,
+        24,
+        5,
+      ],
+    );
   });
 
-  it("should get frequency data (float)", () => {
+  it('should get frequency data (float)', () => {
     const spectrum = new Float32Array(channel.length);
 
     analyser.getFloatFrequencyData(spectrum);
@@ -84,7 +115,7 @@ describe("impl/AnalyserNode", () => {
     assert(spectrum[15] === -114.25790405273438);
   });
 
-  it("should get frequency data (byte)", () => {
+  it('should get frequency data (byte)', () => {
     const spectrum = new Uint8Array(channel.length);
 
     analyser.getByteFrequencyData(spectrum);

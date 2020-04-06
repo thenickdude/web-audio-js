@@ -1,14 +1,14 @@
-"use strict";
+'use strict';
 
-require("run-with-mocha");
+require('run-with-mocha');
 
-const assert = require("assert");
-const sinon = require("sinon");
-const AudioContext = require("../../../src/impl/AudioContext");
+const assert = require('assert');
+const sinon = require('sinon');
+const AudioContext = require('../../../src/impl/AudioContext');
 
 const contextOpts = { sampleRate: 8000, blockSize: 16 };
 
-describe("impl/dsp/AudioContext", () => {
+describe('impl/dsp/AudioContext', () => {
   let context, destination;
 
   before(() => {
@@ -18,8 +18,8 @@ describe("impl/dsp/AudioContext", () => {
     context.resume();
   });
 
-  it("1: time advances", () => {
-    const channelData = [new Float32Array(16), new Float32Array(16) ];
+  it('1: time advances', () => {
+    const channelData = [new Float32Array(16), new Float32Array(16)];
 
     assert(context.getCurrentTime() === 0);
     destination.process = sinon.spy();
@@ -31,8 +31,8 @@ describe("impl/dsp/AudioContext", () => {
     assert(context.getCurrentTime() === 16 / 8000);
   });
 
-  it("2: do post process and reserve pre process (for next process)", () => {
-    const channelData = [ new Float32Array(16), new Float32Array(16) ];
+  it('2: do post process and reserve pre process (for next process)', () => {
+    const channelData = [new Float32Array(16), new Float32Array(16)];
     const immediateSpy = sinon.spy();
 
     assert(context.getCurrentTime() === 16 / 8000);

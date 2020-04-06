@@ -1,22 +1,22 @@
-"use strict";
+'use strict';
 
-require("run-with-mocha");
+require('run-with-mocha');
 
-const assert = require("assert");
-const sinon = require("sinon");
-const api = require("../../src/api");
-const AudioContext = require("../../src/api/BaseAudioContext");
+const assert = require('assert');
+const sinon = require('sinon');
+const api = require('../../src/api');
+const AudioContext = require('../../src/api/BaseAudioContext');
 
-describe("api/AudioListener", () => {
-  it("context.listener", () => {
+describe('api/AudioListener', () => {
+  it('context.listener', () => {
     const context = new AudioContext();
     const target = context.listener;
 
     assert(target instanceof api.AudioListener);
   });
 
-  describe("methods", () => {
-    it(".setPosition(x, y, z)", () => {
+  describe('methods', () => {
+    it('.setPosition(x, y, z)', () => {
       const context = new AudioContext();
       const target = context.listener;
       const x = 0;
@@ -32,7 +32,7 @@ describe("api/AudioListener", () => {
       assert(target._impl.setPosition.args[0][2] === z);
     });
 
-    it(".setOrientation(x, y, z, xUp, yUp, zUp)", () => {
+    it('.setOrientation(x, y, z, xUp, yUp, zUp)', () => {
       const context = new AudioContext();
       const target = context.listener;
       const x = 0;

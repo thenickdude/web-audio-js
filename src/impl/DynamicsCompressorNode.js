@@ -1,10 +1,13 @@
-"use strict";
+'use strict';
 
-const AudioNode = require("./AudioNode");
-const { DynamicsCompressor, CompressorParameters } = require("./dsp/DynamicsCompressor");
-const { defaults } = require("../utils");
-const { EXPLICIT } = require("../constants/ChannelCountMode");
-const { CONTROL_RATE } = require("../constants/AudioParamRate");
+const AudioNode = require('./AudioNode');
+const {
+  DynamicsCompressor,
+  CompressorParameters,
+} = require('./dsp/DynamicsCompressor');
+const { defaults } = require('../utils');
+const { EXPLICIT } = require('../constants/ChannelCountMode');
+const { CONTROL_RATE } = require('../constants/AudioParamRate');
 
 const DEFAULT_THRESHOLD = -24;
 const DEFAULT_KNEE = 30;
@@ -30,10 +33,10 @@ class DynamicsCompressorNode extends AudioNode {
     const release = defaults(opts.release, DEFAULT_RELEASE);
 
     super(context, opts, {
-      inputs: [ 1 ],
-      outputs: [ 2 ],
+      inputs: [1],
+      outputs: [2],
       channelCount: 2,
-      channelCountMode: EXPLICIT
+      channelCountMode: EXPLICIT,
     });
 
     this._threshold = this.addParam(CONTROL_RATE, threshold);
@@ -42,7 +45,10 @@ class DynamicsCompressorNode extends AudioNode {
     this._attack = this.addParam(CONTROL_RATE, attack);
     this._release = this.addParam(CONTROL_RATE, release);
 
-    this.compressor = new DynamicsCompressor(this.sampleRate, this.outputs[0].getNumberOfChannels());
+    this.compressor = new DynamicsCompressor(
+      this.sampleRate,
+      this.outputs[0].getNumberOfChannels(),
+    );
   }
 
   /**
@@ -94,11 +100,26 @@ class DynamicsCompressorNode extends AudioNode {
   dspProcess() {
     super.dspProcess();
 
-    this.compressor.setParameterValue(CompressorParameters.THRESHOLD, this._threshold.getValue());
-    this.compressor.setParameterValue(CompressorParameters.KNEE, this._knee.getValue());
-    this.compressor.setParameterValue(CompressorParameters.RATIO, this._ratio.getValue());
-    this.compressor.setParameterValue(CompressorParameters.ATTACK, this._attack.getValue());
-    this.compressor.setParameterValue(CompressorParameters.RELEASE, this._release.getValue());
+    this.compressor.setParameterValue(
+      CompressorParameters.THRESHOLD,
+      this._threshold.getValue(),
+    );
+    this.compressor.setParameterValue(
+      CompressorParameters.KNEE,
+      this._knee.getValue(),
+    );
+    this.compressor.setParameterValue(
+      CompressorParameters.RATIO,
+      this._ratio.getValue(),
+    );
+    this.compressor.setParameterValue(
+      CompressorParameters.ATTACK,
+      this._attack.getValue(),
+    );
+    this.compressor.setParameterValue(
+      CompressorParameters.RELEASE,
+      this._release.getValue(),
+    );
 
     this.compressor.dspProcess(this.inputs, this.outputs, this.blockSize);
   }

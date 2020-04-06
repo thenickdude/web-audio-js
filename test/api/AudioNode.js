@@ -1,21 +1,21 @@
-"use strict";
+'use strict';
 
-require("run-with-mocha");
+require('run-with-mocha');
 
-const assert = require("assert");
-const sinon = require("sinon");
-const AudioContext = require("../../src/api/BaseAudioContext");
+const assert = require('assert');
+const sinon = require('sinon');
+const AudioContext = require('../../src/api/BaseAudioContext');
 
-describe("api/AudioNode", () => {
-  it(".context", () => {
+describe('api/AudioNode', () => {
+  it('.context', () => {
     const context = new AudioContext();
     const target = context.createGain();
 
     assert(target.context === context);
   });
 
-  describe("attributes", () => {
-    it(".numberOfInputs", () => {
+  describe('attributes', () => {
+    it('.numberOfInputs', () => {
       const context = new AudioContext();
       const target = context.createGain();
       const numberOfInputs = 1;
@@ -26,7 +26,7 @@ describe("api/AudioNode", () => {
       assert(target._impl.getNumberOfInputs.callCount === 1);
     });
 
-    it(".numberOfOutputs", () => {
+    it('.numberOfOutputs', () => {
       const context = new AudioContext();
       const target = context.createGain();
       const numberOfOutputs = 1;
@@ -37,7 +37,7 @@ describe("api/AudioNode", () => {
       assert(target._impl.getNumberOfOutputs.callCount === 1);
     });
 
-    it(".channelCount=", () => {
+    it('.channelCount=', () => {
       const context = new AudioContext();
       const target = context.createGain();
       const channelCount1 = 1;
@@ -54,11 +54,11 @@ describe("api/AudioNode", () => {
       assert(target._impl.setChannelCount.args[0][0] === channelCount2);
     });
 
-    it(".channelCountMode=", () => {
+    it('.channelCountMode=', () => {
       const context = new AudioContext();
       const target = context.createGain();
-      const channelCountMode1 = "max";
-      const channelCountMode2 = "explicit";
+      const channelCountMode1 = 'max';
+      const channelCountMode2 = 'explicit';
 
       target._impl.getChannelCountMode = sinon.spy(() => channelCountMode1);
       target._impl.setChannelCountMode = sinon.spy();
@@ -71,13 +71,15 @@ describe("api/AudioNode", () => {
       assert(target._impl.setChannelCountMode.args[0][0] === channelCountMode2);
     });
 
-    it(".channelInterpretation=", () => {
+    it('.channelInterpretation=', () => {
       const context = new AudioContext();
       const target = context.createGain();
-      const channelInterpretation1 = "max";
-      const channelInterpretation2 = "explicit";
+      const channelInterpretation1 = 'max';
+      const channelInterpretation2 = 'explicit';
 
-      target._impl.getChannelInterpretation = sinon.spy(() => channelInterpretation1);
+      target._impl.getChannelInterpretation = sinon.spy(
+        () => channelInterpretation1,
+      );
       target._impl.setChannelInterpretation = sinon.spy();
 
       assert(target.channelInterpretation === channelInterpretation1);
@@ -85,12 +87,15 @@ describe("api/AudioNode", () => {
 
       target.channelInterpretation = channelInterpretation2;
       assert(target._impl.setChannelInterpretation.callCount === 1);
-      assert(target._impl.setChannelInterpretation.args[0][0] === channelInterpretation2);
+      assert(
+        target._impl.setChannelInterpretation.args[0][0] ===
+          channelInterpretation2,
+      );
     });
   });
 
-  describe("methods", () => {
-    it(".connect(destination: AudioNode, output, input)", () => {
+  describe('methods', () => {
+    it('.connect(destination: AudioNode, output, input)', () => {
       const context = new AudioContext();
       const target = context.createGain();
       const destination = context.createGain();
@@ -108,7 +113,7 @@ describe("api/AudioNode", () => {
       assert(target._impl.connect.args[0][2] === input);
     });
 
-    it(".connect(destination: AudioParam, output)", () => {
+    it('.connect(destination: AudioParam, output)', () => {
       const context = new AudioContext();
       const target = context.createGain();
       const destination = context.createGain().gain;
@@ -124,7 +129,7 @@ describe("api/AudioNode", () => {
       assert(target._impl.connect.args[0][1] === output);
     });
 
-    it(".disconnect(...args)", () => {
+    it('.disconnect(...args)', () => {
       const context = new AudioContext();
       const target = context.createGain();
       const output = 0;

@@ -1,17 +1,17 @@
-"use strict";
+'use strict';
 
-require("run-with-mocha");
+require('run-with-mocha');
 
-const assert = require("assert");
-const sinon = require("sinon");
-const AudioContext = require("../../src/api/BaseAudioContext");
+const assert = require('assert');
+const sinon = require('sinon');
+const AudioContext = require('../../src/api/BaseAudioContext');
 
-describe("api/EventTarget", () => {
-  describe("methods", () => {
-    it(".addEventListener(type, listener)", () => {
+describe('api/EventTarget', () => {
+  describe('methods', () => {
+    it('.addEventListener(type, listener)', () => {
       const context = new AudioContext();
       const target = context.createOscillator();
-      const type = "ended";
+      const type = 'ended';
       const listener = () => {};
 
       target._impl.addEventListener = sinon.spy();
@@ -22,10 +22,10 @@ describe("api/EventTarget", () => {
       assert(target._impl.addEventListener.args[0][1] === listener);
     });
 
-    it(".removeEventListener()", () => {
+    it('.removeEventListener()', () => {
       const context = new AudioContext();
       const target = context.createOscillator();
-      const type = "ended";
+      const type = 'ended';
       const listener = sinon.spy();
 
       target._impl.removeEventListener = sinon.spy();

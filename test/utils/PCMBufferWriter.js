@@ -1,13 +1,13 @@
-"use strict";
+'use strict';
 
-require("run-with-mocha");
+require('run-with-mocha');
 
-const assert = require("assert");
-const PCMBufferWriter = require("../../src/utils/PCMBufferWriter");
+const assert = require('assert');
+const PCMBufferWriter = require('../../src/utils/PCMBufferWriter');
 
-describe("utils/PCMBufferWriter", () => {
-  describe("constructor", () => {
-    it("works", () => {
+describe('utils/PCMBufferWriter', () => {
+  describe('constructor', () => {
+    it('works', () => {
       const buffer = new Buffer(16);
       const writer = new PCMBufferWriter(buffer);
 
@@ -15,8 +15,8 @@ describe("utils/PCMBufferWriter", () => {
     });
   });
 
-  describe(".pcm8(value)", () => {
-    it("works", () => {
+  describe('.pcm8(value)', () => {
+    it('works', () => {
       const buffer = new Buffer(16);
       const writer = new PCMBufferWriter(buffer);
 
@@ -25,14 +25,31 @@ describe("utils/PCMBufferWriter", () => {
       }
 
       const actual = Uint8Array.from(buffer);
-      const expected = new Uint8Array([ 0, 8, 16, 24, 32, 40, 48, 56, 64, 72, 80, 88, 96, 104, 112, 120 ]);
+      const expected = new Uint8Array([
+        0,
+        8,
+        16,
+        24,
+        32,
+        40,
+        48,
+        56,
+        64,
+        72,
+        80,
+        88,
+        96,
+        104,
+        112,
+        120,
+      ]);
 
       assert.deepEqual(actual, expected);
     });
   });
 
-  describe(".pcm16(value)", () => {
-    it("works", () => {
+  describe('.pcm16(value)', () => {
+    it('works', () => {
       const buffer = new Buffer(16);
       const writer = new PCMBufferWriter(buffer);
 
@@ -41,14 +58,23 @@ describe("utils/PCMBufferWriter", () => {
       }
 
       const actual = new Uint16Array(Uint8Array.from(buffer).buffer);
-      const expected = new Uint16Array([ 32768, 40960, 49152, 57344, 0, 8191, 16383, 24575 ]);
+      const expected = new Uint16Array([
+        32768,
+        40960,
+        49152,
+        57344,
+        0,
+        8191,
+        16383,
+        24575,
+      ]);
 
       assert.deepEqual(actual, expected);
     });
   });
 
-  describe(".pcm32(value)", () => {
-    it("works", () => {
+  describe('.pcm32(value)', () => {
+    it('works', () => {
       const buffer = new Buffer(16);
       const writer = new PCMBufferWriter(buffer);
 
@@ -57,14 +83,14 @@ describe("utils/PCMBufferWriter", () => {
       }
 
       const actual = new Uint32Array(Uint8Array.from(buffer).buffer);
-      const expected = new Uint32Array([ 2147483648, 3221225472, 0, 1073741823 ]);
+      const expected = new Uint32Array([2147483648, 3221225472, 0, 1073741823]);
 
       assert.deepEqual(actual, expected);
     });
   });
 
-  describe(".pcm32f(value)", () => {
-    it("works", () => {
+  describe('.pcm32f(value)', () => {
+    it('works', () => {
       const buffer = new Buffer(16);
       const writer = new PCMBufferWriter(buffer);
 
@@ -73,7 +99,7 @@ describe("utils/PCMBufferWriter", () => {
       }
 
       const actual = new Float32Array(Uint8Array.from(buffer).buffer);
-      const expected = new Float32Array([ -1, -0.5, 0, 0.5 ]);
+      const expected = new Float32Array([-1, -0.5, 0, 0.5]);
 
       assert.deepEqual(actual, expected);
     });

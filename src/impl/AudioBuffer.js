@@ -1,7 +1,11 @@
-"use strict";
+'use strict';
 
-const AudioData = require("./core/AudioData");
-const { toValidNumberOfChannels, toNumber, toValidSampleRate } = require("../utils");
+const AudioData = require('./core/AudioData');
+const {
+  toValidNumberOfChannels,
+  toNumber,
+  toValidSampleRate,
+} = require('../utils');
 
 /**
  * @prop {AudioData} audioData
@@ -57,7 +61,7 @@ class AudioBuffer {
    * @return {Float32Array}
    */
   getChannelData(channel) {
-    return this.audioData.channelData[channel|0];
+    return this.audioData.channelData[channel | 0];
   }
 
   /**
@@ -66,11 +70,13 @@ class AudioBuffer {
    * @param {number}       startInChannel
    */
   copyFromChannel(destination, channelNumber, startInChannel) {
-    const source = this.audioData.channelData[channelNumber|0];
+    const source = this.audioData.channelData[channelNumber | 0];
 
-    startInChannel = startInChannel|0;
+    startInChannel = startInChannel | 0;
 
-    destination.set(source.subarray(startInChannel, startInChannel + destination.length));
+    destination.set(
+      source.subarray(startInChannel, startInChannel + destination.length),
+    );
   }
 
   /**
@@ -79,9 +85,9 @@ class AudioBuffer {
    * @param {number}       startInChannel
    */
   copyToChannel(source, channelNumber, startInChannel) {
-    const destination = this.audioData.channelData[channelNumber|0];
+    const destination = this.audioData.channelData[channelNumber | 0];
 
-    startInChannel = startInChannel|0;
+    startInChannel = startInChannel | 0;
 
     destination.set(source, startInChannel);
   }

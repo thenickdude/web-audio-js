@@ -1,15 +1,15 @@
-"use strict";
+'use strict';
 
-require("run-with-mocha");
+require('run-with-mocha');
 
-const assert = require("assert");
-const sinon = require("sinon");
-const api = require("../../src/api");
-const AudioContext = require("../../src/api/BaseAudioContext");
-const AudioParam = require("../../src/api/AudioParam");
+const assert = require('assert');
+const sinon = require('sinon');
+const api = require('../../src/api');
+const AudioContext = require('../../src/api/BaseAudioContext');
+const AudioParam = require('../../src/api/AudioParam');
 
-describe("api/OscillatorNode", () => {
-  it("context.createOscillator()", () => {
+describe('api/OscillatorNode', () => {
+  it('context.createOscillator()', () => {
     const context = new AudioContext();
     const target = context.createOscillator();
 
@@ -17,12 +17,12 @@ describe("api/OscillatorNode", () => {
     assert(target instanceof api.AudioScheduledSourceNode);
   });
 
-  describe("attributes", () => {
-    it(".type=", () => {
+  describe('attributes', () => {
+    it('.type=', () => {
       const context = new AudioContext();
       const target = context.createOscillator();
-      const type1 = "sine"
-      const type2 = "sawtooth";
+      const type1 = 'sine';
+      const type2 = 'sawtooth';
 
       target._impl.getType = sinon.spy(() => type1);
       target._impl.setType = sinon.spy();
@@ -35,7 +35,7 @@ describe("api/OscillatorNode", () => {
       assert(target._impl.setType.args[0][0] === type2);
     });
 
-    it(".frequency", () => {
+    it('.frequency', () => {
       const context = new AudioContext();
       const target = context.createOscillator();
 
@@ -43,7 +43,7 @@ describe("api/OscillatorNode", () => {
       assert(target.frequency === target._impl.$frequency);
     });
 
-    it(".detune", () => {
+    it('.detune', () => {
       const context = new AudioContext();
       const target = context.createOscillator();
 
@@ -51,17 +51,17 @@ describe("api/OscillatorNode", () => {
       assert(target.detune === target._impl.$detune);
     });
 
-    it(".onended=", () => {
+    it('.onended=', () => {
       const context = new AudioContext();
       const target = context.createOscillator();
       const callback1 = sinon.spy();
       const callback2 = sinon.spy();
       const callback3 = sinon.spy();
-      const event = { type: "ended" };
+      const event = { type: 'ended' };
 
       target.onended = callback1;
       target.onended = callback2;
-      target.addEventListener("ended", callback3);
+      target.addEventListener('ended', callback3);
       target._impl.dispatchEvent(event);
 
       assert(target.onended === callback2);
@@ -73,8 +73,8 @@ describe("api/OscillatorNode", () => {
     });
   });
 
-  describe("methods", () => {
-    it(".start(when)", () => {
+  describe('methods', () => {
+    it('.start(when)', () => {
       const context = new AudioContext();
       const target = context.createOscillator();
       const when = 0;
@@ -86,7 +86,7 @@ describe("api/OscillatorNode", () => {
       assert(target._impl.start.args[0][0] === when);
     });
 
-    it(".stop(when)", () => {
+    it('.stop(when)', () => {
       const context = new AudioContext();
       const target = context.createOscillator();
       const when = 0;
@@ -98,7 +98,7 @@ describe("api/OscillatorNode", () => {
       assert(target._impl.stop.args[0][0] === when);
     });
 
-    it(".setPeriodicWave(periodicWave)", () => {
+    it('.setPeriodicWave(periodicWave)', () => {
       const context = new AudioContext();
       const target = context.createOscillator();
       const real = new Float32Array(16);

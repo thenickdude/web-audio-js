@@ -1,6 +1,6 @@
-"use strict";
+'use strict';
 
-const clamp = require("./clamp");
+const clamp = require('./clamp');
 
 /**
  * normalize - returns a number between 0 - 1

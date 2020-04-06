@@ -1,9 +1,9 @@
-"use strict";
+'use strict';
 
-const BasePannerNode = require("./BasePannerNode");
-const StereoPannerNodeDSP = require("./dsp/StereoPannerNode");
-const { defaults } = require("../utils");
-const { AUDIO_RATE } = require("../constants/AudioParamRate");
+const BasePannerNode = require('./BasePannerNode');
+const StereoPannerNodeDSP = require('./dsp/StereoPannerNode');
+const { defaults } = require('../utils');
+const { AUDIO_RATE } = require('../constants/AudioParamRate');
 
 const DEFAULT_PAN = 0;
 

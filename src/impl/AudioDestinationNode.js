@@ -1,8 +1,8 @@
-"use strict";
+'use strict';
 
-const AudioNode = require("./AudioNode");
-const { toValidNumberOfChannels } = require("../utils");
-const { EXPLICIT } = require("../constants/ChannelCountMode");
+const AudioNode = require('./AudioNode');
+const { toValidNumberOfChannels } = require('../utils');
+const { EXPLICIT } = require('../constants/ChannelCountMode');
 
 /**
  * @prop {AudioNodeOutput} output
@@ -20,14 +20,14 @@ class AudioDestinationNode extends AudioNode {
     numberOfChannels = toValidNumberOfChannels(numberOfChannels);
 
     super(context, opts, {
-      inputs: [ numberOfChannels ],
+      inputs: [numberOfChannels],
       outputs: [],
       channelCount: numberOfChannels,
       channelCountMode: EXPLICIT,
-      allowedMaxChannelCount: numberOfChannels
+      allowedMaxChannelCount: numberOfChannels,
     });
 
-    this._numberOfChannels = numberOfChannels|0;
+    this._numberOfChannels = numberOfChannels | 0;
     this._destinationChannelData = this.inputs[0].bus.getChannelData();
   }
 

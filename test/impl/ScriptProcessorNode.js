@@ -1,55 +1,77 @@
-"use strict";
+'use strict';
 
-require("run-with-mocha");
+require('run-with-mocha');
 
-const assert = require("assert");
-const AudioContext = require("../../src/impl/AudioContext");
-const ScriptProcessorNode = require("../../src/impl/ScriptProcessorNode");
-const AudioNode = require("../../src/impl/AudioNode");
-const { EXPLICIT } = require("../../src/constants/ChannelCountMode");
+const assert = require('assert');
+const AudioContext = require('../../src/impl/AudioContext');
+const ScriptProcessorNode = require('../../src/impl/ScriptProcessorNode');
+const AudioNode = require('../../src/impl/AudioNode');
+const { EXPLICIT } = require('../../src/constants/ChannelCountMode');
 
-const bufferSize = 256, numberOfInputChannels = 1, numberOfOutputChannels = 2;
+const bufferSize = 256,
+  numberOfInputChannels = 1,
+  numberOfOutputChannels = 2;
 
-describe("impl/ScriptProcessorNode", () => {
+describe('impl/ScriptProcessorNode', () => {
   let context;
 
   beforeEach(() => {
     context = new AudioContext({ sampleRate: 8000, blockSize: 32 });
   });
 
-  it("constructor", () => {
-    const node = new ScriptProcessorNode(context, { bufferSize, numberOfInputChannels, numberOfOutputChannels });
+  it('constructor', () => {
+    const node = new ScriptProcessorNode(context, {
+      bufferSize,
+      numberOfInputChannels,
+      numberOfOutputChannels,
+    });
 
     assert(node instanceof ScriptProcessorNode);
     assert(node instanceof AudioNode);
   });
 
-  describe("attributes", () => {
-    it(".numberOfInputs", () => {
-      const node = new ScriptProcessorNode(context, { bufferSize, numberOfInputChannels, numberOfOutputChannels });
+  describe('attributes', () => {
+    it('.numberOfInputs', () => {
+      const node = new ScriptProcessorNode(context, {
+        bufferSize,
+        numberOfInputChannels,
+        numberOfOutputChannels,
+      });
 
       assert(node.getNumberOfInputs() === 1);
     });
 
-    it(".numberOfOutputs", () => {
-      const node = new ScriptProcessorNode(context, { bufferSize, numberOfInputChannels, numberOfOutputChannels });
+    it('.numberOfOutputs', () => {
+      const node = new ScriptProcessorNode(context, {
+        bufferSize,
+        numberOfInputChannels,
+        numberOfOutputChannels,
+      });
 
       assert(node.getNumberOfOutputs() === 1);
     });
 
-    it(".channelCountMode=", () => {
-      const node = new ScriptProcessorNode(context, { bufferSize, numberOfInputChannels, numberOfOutputChannels });
+    it('.channelCountMode=', () => {
+      const node = new ScriptProcessorNode(context, {
+        bufferSize,
+        numberOfInputChannels,
+        numberOfOutputChannels,
+      });
 
-      assert(node.getChannelCountMode() === "explicit");
+      assert(node.getChannelCountMode() === 'explicit');
       assert(node.inputs[0].getChannelCountMode() === EXPLICIT);
 
-      node.setChannelCountMode("max");
-      assert(node.getChannelCountMode() === "explicit");
+      node.setChannelCountMode('max');
+      assert(node.getChannelCountMode() === 'explicit');
       assert(node.inputs[0].getChannelCountMode() === EXPLICIT);
     });
 
-    it(".channelCount=", () => {
-      const node = new ScriptProcessorNode(context, { bufferSize, numberOfInputChannels, numberOfOutputChannels });
+    it('.channelCount=', () => {
+      const node = new ScriptProcessorNode(context, {
+        bufferSize,
+        numberOfInputChannels,
+        numberOfOutputChannels,
+      });
 
       assert(node.getChannelCount() === 1);
 
@@ -57,18 +79,26 @@ describe("impl/ScriptProcessorNode", () => {
       assert(node.getChannelCount() === 1);
     });
 
-    it(".bufferSize", () => {
-      const node = new ScriptProcessorNode(context, { bufferSize, numberOfInputChannels, numberOfOutputChannels });
+    it('.bufferSize', () => {
+      const node = new ScriptProcessorNode(context, {
+        bufferSize,
+        numberOfInputChannels,
+        numberOfOutputChannels,
+      });
 
       assert(node.getBufferSize() === bufferSize);
     });
   });
 
-  describe("channel configuration", () => {
-    it("should be kept by the initial configuration", () => {
-      const node1 = new AudioNode(context, {}, { outputs: [ 4 ] });
-      const node2 = new ScriptProcessorNode(context, { bufferSize, numberOfInputChannels, numberOfOutputChannels });
-      const node3 = new AudioNode(context, {}, { inputs: [ 1 ] });
+  describe('channel configuration', () => {
+    it('should be kept by the initial configuration', () => {
+      const node1 = new AudioNode(context, {}, { outputs: [4] });
+      const node2 = new ScriptProcessorNode(context, {
+        bufferSize,
+        numberOfInputChannels,
+        numberOfOutputChannels,
+      });
+      const node3 = new AudioNode(context, {}, { inputs: [1] });
 
       node1.outputs[0].enable();
       node2.outputs[0].enable();

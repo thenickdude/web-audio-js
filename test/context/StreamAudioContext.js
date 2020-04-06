@@ -1,32 +1,44 @@
-"use strict";
+'use strict';
 
-require("run-with-mocha");
+require('run-with-mocha');
 
-const assert = require("assert");
-const sinon = require("sinon");
-const events = require("events");
-const StreamAudioContext = require("../../src/context/StreamAudioContext");
+const assert = require('assert');
+const sinon = require('sinon');
+const events = require('events');
+const StreamAudioContext = require('../../src/context/StreamAudioContext');
 
-describe("StreamAudioContext", () => {
-  describe("constructor", () => {
-    it("works", () => {
+describe('StreamAudioContext', () => {
+  describe('constructor', () => {
+    it('works', () => {
       const context = new StreamAudioContext();
 
       assert(context instanceof StreamAudioContext);
-      assert.doesNotThrow(() => { context._stream.write(); });
+      assert.doesNotThrow(() => {
+        context._stream.write();
+      });
     });
 
-    it("with options", () => {
-      const context = new StreamAudioContext({ sampleRate: 8000, numberOfChannels: 1, blockSize: 16, bitDepth: 8 });
+    it('with options', () => {
+      const context = new StreamAudioContext({
+        sampleRate: 8000,
+        numberOfChannels: 1,
+        blockSize: 16,
+        bitDepth: 8,
+      });
 
       assert(context.numberOfChannels === 1);
       assert(context.blockSize === 16);
-      assert.deepEqual(context.format, { sampleRate: 8000, channels: 1, bitDepth: 8, float: false });
+      assert.deepEqual(context.format, {
+        sampleRate: 8000,
+        channels: 1,
+        bitDepth: 8,
+        float: false,
+      });
     });
   });
 
-  describe("rendering", () => {
-    it("basic", (done) => {
+  describe('rendering', () => {
+    it('basic', (done) => {
       const context = new StreamAudioContext();
       const streamOut = new events.EventEmitter();
       const write1 = sinon.spy((buffer) => {
@@ -44,7 +56,7 @@ describe("StreamAudioContext", () => {
       context.resume();
     });
 
-    it("suspend", (done) => {
+    it('suspend', (done) => {
       const context = new StreamAudioContext();
       const streamOut = new events.EventEmitter();
       const write1 = sinon.spy((buffer) => {

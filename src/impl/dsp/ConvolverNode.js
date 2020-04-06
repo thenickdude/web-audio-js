@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 const ConvolverNodeDSP = {
   dspProcess() {
@@ -6,7 +6,7 @@ const ConvolverNodeDSP = {
 
     outputBus.zeros();
     outputBus.sumFrom(this.inputs[0].bus);
-  }
+  },
 };
 
 module.exports = ConvolverNodeDSP;

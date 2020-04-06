@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 const ChannelSplitterNodeDSP = {
   dspProcess() {
@@ -22,7 +22,7 @@ const ChannelSplitterNodeDSP = {
         }
       }
     }
-  }
+  },
 };
 
 module.exports = ChannelSplitterNodeDSP;

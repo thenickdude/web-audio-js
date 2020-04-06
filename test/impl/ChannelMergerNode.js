@@ -1,40 +1,40 @@
-"use strict";
+'use strict';
 
-require("run-with-mocha");
+require('run-with-mocha');
 
-const assert = require("assert");
-const AudioContext = require("../../src/impl/AudioContext");
-const ChannelMergerNode = require("../../src/impl/ChannelMergerNode");
-const AudioNode = require("../../src/impl/AudioNode");
+const assert = require('assert');
+const AudioContext = require('../../src/impl/AudioContext');
+const ChannelMergerNode = require('../../src/impl/ChannelMergerNode');
+const AudioNode = require('../../src/impl/AudioNode');
 
-describe("impl/ChannelMergerNode", () => {
+describe('impl/ChannelMergerNode', () => {
   let context;
 
   beforeEach(() => {
     context = new AudioContext({ sampleRate: 8000, blockSize: 32 });
   });
 
-  it("constructor", () => {
+  it('constructor', () => {
     const node = new ChannelMergerNode(context, { numberOfInputs: 6 });
 
     assert(node instanceof ChannelMergerNode);
     assert(node instanceof AudioNode);
   });
 
-  describe("attributes", () => {
-    it(".numberOfInputs", () => {
+  describe('attributes', () => {
+    it('.numberOfInputs', () => {
       const node = new ChannelMergerNode(context, { numberOfInputs: 6 });
 
       assert(node.getNumberOfInputs() === 6);
     });
 
-    it(".numberOfOutputs", () => {
+    it('.numberOfOutputs', () => {
       const node = new ChannelMergerNode(context, { numberOfInputs: 6 });
 
       assert(node.getNumberOfOutputs() === 1);
     });
 
-    it(".channelCount=", () => {
+    it('.channelCount=', () => {
       const node = new ChannelMergerNode(context, { numberOfInputs: 6 });
 
       assert(node.getChannelCount() === 1);
@@ -43,31 +43,31 @@ describe("impl/ChannelMergerNode", () => {
       assert(node.getChannelCount() === 1);
     });
 
-    it(".channelCountMode=", () => {
+    it('.channelCountMode=', () => {
       const node = new ChannelMergerNode(context, { numberOfInputs: 2 });
 
-      assert(node.getChannelCountMode() === "explicit");
+      assert(node.getChannelCountMode() === 'explicit');
 
-      node.setChannelCountMode("max");
-      assert(node.getChannelCountMode() === "explicit");
+      node.setChannelCountMode('max');
+      assert(node.getChannelCountMode() === 'explicit');
     });
 
-    it(".channelInterpretation=", () => {
+    it('.channelInterpretation=', () => {
       const node = new ChannelMergerNode(context, { numberOfInputs: 2 });
 
-      assert(node.getChannelInterpretation() === "speakers");
+      assert(node.getChannelInterpretation() === 'speakers');
 
-      node.setChannelInterpretation("discrete");
+      node.setChannelInterpretation('discrete');
 
-      assert(node.getChannelInterpretation() === "discrete");
+      assert(node.getChannelInterpretation() === 'discrete');
     });
   });
 
-  describe("channel configuration", () => {
-    it("should be kept by the initial configuration", () => {
-      const node1 = new AudioNode(context, {}, { outputs: [ 4 ] });
+  describe('channel configuration', () => {
+    it('should be kept by the initial configuration', () => {
+      const node1 = new AudioNode(context, {}, { outputs: [4] });
       const node2 = new ChannelMergerNode(context, { numberOfInputs: 6 });
-      const node3 = new AudioNode(context, {}, { inputs: [ 1 ] });
+      const node3 = new AudioNode(context, {}, { inputs: [1] });
 
       node1.outputs[0].enable();
       node2.outputs[0].enable();
@@ -114,10 +114,10 @@ describe("impl/ChannelMergerNode", () => {
     });
   });
 
-  describe("enable/disable", () => {
-    it("always enabled", () => {
-      const node1 = new AudioNode(context, {}, { outputs: [ 1 ] });
-      const node2 = new AudioNode(context, {}, { outputs: [ 1 ] });
+  describe('enable/disable', () => {
+    it('always enabled', () => {
+      const node1 = new AudioNode(context, {}, { outputs: [1] });
+      const node2 = new AudioNode(context, {}, { outputs: [1] });
       const node3 = new ChannelMergerNode(context, { numberOfInputs: 4 });
 
       node1.connect(node3, 0, 0);

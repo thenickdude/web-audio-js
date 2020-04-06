@@ -1,6 +1,6 @@
-"use strict";
+'use strict';
 
-const events = require("events");
+const events = require('events');
 
 class EventTarget {
   constructor() {
@@ -13,7 +13,7 @@ class EventTarget {
    */
   addEventListener(type, listener) {
     /* istanbul ignore else */
-    if (typeof listener === "function") {
+    if (typeof listener === 'function') {
       this._emitter.addListener(type, listener);
     }
   }
@@ -24,7 +24,7 @@ class EventTarget {
    */
   removeEventListener(type, listener) {
     /* istanbul ignore else */
-    if (typeof listener === "function") {
+    if (typeof listener === 'function') {
       this._emitter.removeListener(type, listener);
     }
   }

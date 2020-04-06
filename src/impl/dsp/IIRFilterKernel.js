@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 class IIRFilterKernel {
   constructor(feedforward, feedback) {
@@ -46,7 +46,7 @@ function toCoefficient(filter, a0) {
 }
 
 function flushDenormalFloatToZero(f) {
-  return (Math.abs(f) < 1.175494e-38) ? 0.0 : f;
+  return Math.abs(f) < 1.175494e-38 ? 0.0 : f;
 }
 
 module.exports = IIRFilterKernel;

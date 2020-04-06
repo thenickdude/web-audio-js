@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 const WAVE_TABLE_LENGTH = 8192;
 
@@ -39,7 +39,7 @@ const PeriodicWaveDSP = {
     this._waveTable = waveTable;
 
     return waveTable;
-  }
+  },
 };
 
 module.exports = PeriodicWaveDSP;

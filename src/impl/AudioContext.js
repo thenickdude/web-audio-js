@@ -1,13 +1,21 @@
-"use strict";
+'use strict';
 
-const assert = require("assert");
-const config = require("../config");
-const EventTarget = require("./EventTarget");
-const AudioDestinationNode = require("./AudioDestinationNode");
-const AudioListener = require("./AudioListener");
-const { defaults, fillRange } = require("../utils");
-const { toValidSampleRate, toValidBlockSize, toValidNumberOfChannels } = require("../utils");
-const { RUNNING, SUSPENDED, CLOSED } = require("../constants/AudioContextState");
+const assert = require('assert');
+const config = require('../config');
+const EventTarget = require('./EventTarget');
+const AudioDestinationNode = require('./AudioDestinationNode');
+const AudioListener = require('./AudioListener');
+const { defaults, fillRange } = require('../utils');
+const {
+  toValidSampleRate,
+  toValidBlockSize,
+  toValidNumberOfChannels,
+} = require('../utils');
+const {
+  RUNNING,
+  SUSPENDED,
+  CLOSED,
+} = require('../constants/AudioContextState');
 
 /**
  * @prop {number} sampleRate
@@ -28,15 +36,18 @@ class AudioContext extends EventTarget {
 
     let sampleRate = defaults(opts.sampleRate, config.sampleRate);
     let blockSize = defaults(opts.blockSize, config.blockSize);
-    let numberOfChannels = defaults(opts.channels || opts.numberOfChannels, config.numberOfChannels);
+    let numberOfChannels = defaults(
+      opts.channels || opts.numberOfChannels,
+      config.numberOfChannels,
+    );
 
     sampleRate = toValidSampleRate(sampleRate);
     blockSize = toValidBlockSize(blockSize);
     numberOfChannels = toValidNumberOfChannels(numberOfChannels);
 
-    this.sampleRate = sampleRate|0;
-    this.blockSize = blockSize|0;
-    this.numberOfChannels = numberOfChannels|0;
+    this.sampleRate = sampleRate | 0;
+    this.blockSize = blockSize | 0;
+    this.numberOfChannels = numberOfChannels | 0;
     this.currentTime = 0;
     this.currentSampleFrame = 0;
     this.state = SUSPENDED;
@@ -119,7 +130,7 @@ class AudioContext extends EventTarget {
   changeState(state) {
     this.state = state;
     return new Promise((resolve) => {
-      this.dispatchEvent({ type: "statechange" });
+      this.dispatchEvent({ type: 'statechange' });
       resolve();
     });
   }
@@ -136,10 +147,12 @@ class AudioContext extends EventTarget {
    * @param {function} task
    */
   sched(time, task) {
-    const schedSampleFrame = (Math.floor((time * this.sampleRate) / this.blockSize) * this.blockSize)|0;
+    const schedSampleFrame =
+      (Math.floor((time * this.sampleRate) / this.blockSize) * this.blockSize) |
+      0;
 
     if (!this._sched[schedSampleFrame]) {
-      this._sched[schedSampleFrame] = [ task ];
+      this._sched[schedSampleFrame] = [task];
     } else {
       this._sched[schedSampleFrame].push(task);
     }
@@ -149,9 +162,9 @@ class AudioContext extends EventTarget {
    * @param {function} task
    */
   addPostProcess(task) {
-    assert(typeof task === "function");
+    assert(typeof task === 'function');
     if (this._callbacksForPostProcess === null) {
-      this._callbacksForPostProcess = [ task ];
+      this._callbacksForPostProcess = [task];
     } else {
       this._callbacksForPostProcess.push(task);
     }
@@ -173,7 +186,7 @@ class AudioContext extends EventTarget {
       }
     } else {
       const sched = this._sched;
-      const currentSampleFrame = this.currentSampleFrame|0;
+      const currentSampleFrame = this.currentSampleFrame | 0;
 
       if (sched[currentSampleFrame]) {
         const tasks = sched[currentSampleFrame];
@@ -209,7 +222,9 @@ class AudioContext extends EventTarget {
     this.currentTime = 0;
     this.currentSampleFrame = 0;
     this.state = SUSPENDED;
-    this._destination = new AudioDestinationNode(this, { numberOfChannels: this.numberOfChannels });
+    this._destination = new AudioDestinationNode(this, {
+      numberOfChannels: this.numberOfChannels,
+    });
     this._listener = new AudioListener(this);
     this._sched = [];
     this._callbacksForPostProcess = null;

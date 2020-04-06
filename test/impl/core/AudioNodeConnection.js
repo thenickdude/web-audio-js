@@ -1,21 +1,21 @@
-"use strict";
+'use strict';
 
-require("run-with-mocha");
+require('run-with-mocha');
 
-const assert = require("assert");
-const AudioContext = require("../../../src/impl/AudioContext");
-const AudioNode = require("../../../src/impl/AudioNode");
+const assert = require('assert');
+const AudioContext = require('../../../src/impl/AudioContext');
+const AudioNode = require('../../../src/impl/AudioNode');
 
-describe("impl/core/AudioNode - Connection", () => {
+describe('impl/core/AudioNode - Connection', () => {
   let context;
 
   beforeEach(() => {
     context = new AudioContext({ sampleRate: 8000, blockSize: 16 });
   });
 
-  it("connect()", () => {
-    const node1 = new AudioNode(context, {}, { outputs: [ 1 ] });
-    const node2 = new AudioNode(context, {}, { inputs: [ 1 ] });
+  it('connect()', () => {
+    const node1 = new AudioNode(context, {}, { outputs: [1] });
+    const node2 = new AudioNode(context, {}, { inputs: [1] });
 
     // +-------+
     // | node1 |
@@ -31,10 +31,10 @@ describe("impl/core/AudioNode - Connection", () => {
     assert(node2.inputs[0].isConnectedFrom(node1) === true);
   });
 
-  it("disconnect()", () => {
-    const node1 = new AudioNode(context, {}, { outputs: [ 1 ] });
-    const node2 = new AudioNode(context, {}, { inputs: [ 1 ] });
-    const node3 = new AudioNode(context, {}, { inputs: [ 1 ] });
+  it('disconnect()', () => {
+    const node1 = new AudioNode(context, {}, { outputs: [1] });
+    const node2 = new AudioNode(context, {}, { inputs: [1] });
+    const node3 = new AudioNode(context, {}, { inputs: [1] });
 
     //       +-------+
     //       | node1 |
@@ -61,11 +61,10 @@ describe("impl/core/AudioNode - Connection", () => {
     assert(node2.inputs[0].isConnectedFrom(node1) === false);
   });
 
-
-  it("disconnect(output)", () => {
-    const node1 = new AudioNode(context, {}, { outputs: [ 1, 1 ] });
-    const node2 = new AudioNode(context, {}, { inputs: [ 1 ] });
-    const node3 = new AudioNode(context, {}, { inputs: [ 1 ] });
+  it('disconnect(output)', () => {
+    const node1 = new AudioNode(context, {}, { outputs: [1, 1] });
+    const node2 = new AudioNode(context, {}, { inputs: [1] });
+    const node3 = new AudioNode(context, {}, { inputs: [1] });
 
     //       +-------+
     //       | node1 |
@@ -114,10 +113,10 @@ describe("impl/core/AudioNode - Connection", () => {
     assert(node3.inputs[0].isConnectedFrom(node1) === false);
   });
 
-  it("disconnect(destination)", () => {
-    const node1 = new AudioNode(context, {}, { outputs: [ 1 ] });
-    const node2 = new AudioNode(context, {}, { inputs: [ 1 ] });
-    const node3 = new AudioNode(context, {}, { inputs: [ 1 ] });
+  it('disconnect(destination)', () => {
+    const node1 = new AudioNode(context, {}, { outputs: [1] });
+    const node2 = new AudioNode(context, {}, { inputs: [1] });
+    const node3 = new AudioNode(context, {}, { inputs: [1] });
 
     //       +-------+
     //       | node1 |
@@ -161,7 +160,7 @@ describe("impl/core/AudioNode - Connection", () => {
     assert(node3.inputs[0].isConnectedFrom(node1) === false);
   });
 
-  it("disconnect(destination, output)", () => {
+  it('disconnect(destination, output)', () => {
     //       +-------+
     //       | node1 |
     //       +-------+
@@ -171,9 +170,9 @@ describe("impl/core/AudioNode - Connection", () => {
     // +-------+   +-------+
     // | node2 |   | node3 |
     // +-------+   +-------+
-    const node1 = new AudioNode(context, {}, { outputs: [ 1, 1 ] });
-    const node2 = new AudioNode(context, {}, { inputs: [ 1 ] });
-    const node3 = new AudioNode(context, {}, { inputs: [ 1 ] });
+    const node1 = new AudioNode(context, {}, { outputs: [1, 1] });
+    const node2 = new AudioNode(context, {}, { inputs: [1] });
+    const node3 = new AudioNode(context, {}, { inputs: [1] });
 
     node1.outputs[0].enable();
     node1.outputs[1].enable();
@@ -199,11 +198,11 @@ describe("impl/core/AudioNode - Connection", () => {
     assert(node3.inputs[0].isConnectedFrom(node1) === false);
   });
 
-  it("enabled/disabled propagation", () => {
-    const node1 = new AudioNode(context, {}, { outputs: [ 1 ] });
-    const node2 = new AudioNode(context, {}, { inputs: [ 1 ], outputs: [ 1 ] });
-    const node3 = new AudioNode(context, {}, { outputs: [ 1 ] });
-    const node4 = new AudioNode(context, {}, { inputs: [ 1 ] });
+  it('enabled/disabled propagation', () => {
+    const node1 = new AudioNode(context, {}, { outputs: [1] });
+    const node2 = new AudioNode(context, {}, { inputs: [1], outputs: [1] });
+    const node3 = new AudioNode(context, {}, { outputs: [1] });
+    const node4 = new AudioNode(context, {}, { inputs: [1] });
 
     // +-------+
     // | node1 |
@@ -308,8 +307,8 @@ describe("impl/core/AudioNode - Connection", () => {
     assert(node4.inputs[0].isEnabled() === false);
   });
 
-  it("misc", () => {
-    const node = new AudioNode(context, {}, { inputs: [ 1 ], outputs: [ 1 ] });
+  it('misc', () => {
+    const node = new AudioNode(context, {}, { inputs: [1], outputs: [1] });
 
     assert(node.inputs[0].isConnectedFrom() === false);
     assert(node.outputs[0].isConnectedTo() === false);

@@ -1,15 +1,18 @@
-"use strict";
+'use strict';
 
-const impl = require("../impl");
-const AudioScheduledSourceNode = require("./AudioScheduledSourceNode");
-const AudioParam = require("./AudioParam");
+const impl = require('../impl');
+const AudioScheduledSourceNode = require('./AudioScheduledSourceNode');
+const AudioParam = require('./AudioParam');
 
 class AudioBufferSourceNode extends AudioScheduledSourceNode {
   constructor(context, opts) {
     super(context);
 
     this._impl = new impl.AudioBufferSourceNode(context._impl, opts);
-    this._impl.$playbackRate = new AudioParam(context, this._impl.getPlaybackRate());
+    this._impl.$playbackRate = new AudioParam(
+      context,
+      this._impl.getPlaybackRate(),
+    );
     this._impl.$detune = new AudioParam(context, this._impl.getDetune());
     this._impl.$buffer = null;
     this._impl.$onended = null;

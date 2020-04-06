@@ -1,27 +1,27 @@
-"use strict";
+'use strict';
 
-require("run-with-mocha");
+require('run-with-mocha');
 
-const assert = require("assert");
-const sinon = require("sinon");
-const api = require("../../src/api");
-const AudioContext = require("../../src/api/BaseAudioContext");
-const AudioParam = require("../../src/api/AudioParam");
+const assert = require('assert');
+const sinon = require('sinon');
+const api = require('../../src/api');
+const AudioContext = require('../../src/api/BaseAudioContext');
+const AudioParam = require('../../src/api/AudioParam');
 
-describe("api/SpatialPannerNode", () => {
-  it("context.createSpatialPanner()", () => {
+describe('api/SpatialPannerNode', () => {
+  it('context.createSpatialPanner()', () => {
     const context = new AudioContext();
     const target = context.createSpatialPanner();
 
     assert(target instanceof api.SpatialPannerNode);
   });
 
-  describe("attributes", () => {
-    it(".panningModel=", () => {
+  describe('attributes', () => {
+    it('.panningModel=', () => {
       const context = new AudioContext();
       const target = context.createSpatialPanner();
-      const panningModel1 = "equalpower";
-      const panningModel2 = "HRTF";
+      const panningModel1 = 'equalpower';
+      const panningModel2 = 'HRTF';
 
       target._impl.getPanningModel = sinon.spy(() => panningModel1);
       target._impl.setPanningModel = sinon.spy();
@@ -34,7 +34,7 @@ describe("api/SpatialPannerNode", () => {
       assert(target._impl.setPanningModel.args[0][0] === panningModel2);
     });
 
-    it(".positionX", () => {
+    it('.positionX', () => {
       const context = new AudioContext();
       const target = context.createSpatialPanner();
 
@@ -42,7 +42,7 @@ describe("api/SpatialPannerNode", () => {
       assert(target.positionX === target._impl.$positionX);
     });
 
-    it(".positionY", () => {
+    it('.positionY', () => {
       const context = new AudioContext();
       const target = context.createSpatialPanner();
 
@@ -50,7 +50,7 @@ describe("api/SpatialPannerNode", () => {
       assert(target.positionY === target._impl.$positionY);
     });
 
-    it(".positionZ", () => {
+    it('.positionZ', () => {
       const context = new AudioContext();
       const target = context.createSpatialPanner();
 
@@ -58,7 +58,7 @@ describe("api/SpatialPannerNode", () => {
       assert(target.positionZ === target._impl.$positionZ);
     });
 
-    it(".orientationX", () => {
+    it('.orientationX', () => {
       const context = new AudioContext();
       const target = context.createSpatialPanner();
 
@@ -66,7 +66,7 @@ describe("api/SpatialPannerNode", () => {
       assert(target.orientationX === target._impl.$orientationX);
     });
 
-    it(".orientationY", () => {
+    it('.orientationY', () => {
       const context = new AudioContext();
       const target = context.createSpatialPanner();
 
@@ -74,7 +74,7 @@ describe("api/SpatialPannerNode", () => {
       assert(target.orientationY === target._impl.$orientationY);
     });
 
-    it(".orientationZ", () => {
+    it('.orientationZ', () => {
       const context = new AudioContext();
       const target = context.createSpatialPanner();
 
@@ -82,11 +82,11 @@ describe("api/SpatialPannerNode", () => {
       assert(target.orientationZ === target._impl.$orientationZ);
     });
 
-    it(".distanceModel=", () => {
+    it('.distanceModel=', () => {
       const context = new AudioContext();
       const target = context.createSpatialPanner();
-      const distanceModel1 = "inverse";
-      const distanceModel2 = "linear";
+      const distanceModel1 = 'inverse';
+      const distanceModel2 = 'linear';
 
       target._impl.getDistanceModel = sinon.spy(() => distanceModel1);
       target._impl.setDistanceModel = sinon.spy();
@@ -99,7 +99,7 @@ describe("api/SpatialPannerNode", () => {
       assert(target._impl.setDistanceModel.args[0][0] === distanceModel2);
     });
 
-    it(".refDistance=", () => {
+    it('.refDistance=', () => {
       const context = new AudioContext();
       const target = context.createSpatialPanner();
       const refDistance1 = 1;
@@ -116,7 +116,7 @@ describe("api/SpatialPannerNode", () => {
       assert(target._impl.setRefDistance.args[0][0] === refDistance2);
     });
 
-    it(".maxDistance=", () => {
+    it('.maxDistance=', () => {
       const context = new AudioContext();
       const target = context.createSpatialPanner();
       const maxDistance1 = 10000;
@@ -133,7 +133,7 @@ describe("api/SpatialPannerNode", () => {
       assert(target._impl.setMaxDistance.args[0][0] === maxDistance2);
     });
 
-    it(".rolloffFactor=", () => {
+    it('.rolloffFactor=', () => {
       const context = new AudioContext();
       const target = context.createSpatialPanner();
       const rolloffFactor1 = 1;
@@ -150,7 +150,7 @@ describe("api/SpatialPannerNode", () => {
       assert(target._impl.setRolloffFactor.args[0][0] === rolloffFactor2);
     });
 
-    it(".coneInnerAngle=", () => {
+    it('.coneInnerAngle=', () => {
       const context = new AudioContext();
       const target = context.createSpatialPanner();
       const coneInnerAngle1 = 360;
@@ -167,7 +167,7 @@ describe("api/SpatialPannerNode", () => {
       assert(target._impl.setConeInnerAngle.args[0][0] === coneInnerAngle2);
     });
 
-    it(".coneOuterAngle=", () => {
+    it('.coneOuterAngle=', () => {
       const context = new AudioContext();
       const target = context.createSpatialPanner();
       const coneOuterAngle1 = 360;
@@ -184,7 +184,7 @@ describe("api/SpatialPannerNode", () => {
       assert(target._impl.setConeOuterAngle.args[0][0] === coneOuterAngle2);
     });
 
-    it(".coneOuterGain=", () => {
+    it('.coneOuterGain=', () => {
       const context = new AudioContext();
       const target = context.createSpatialPanner();
       const coneOuterGain1 = 0;

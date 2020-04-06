@@ -1,58 +1,62 @@
-"use strict";
+'use strict';
 
-require("run-with-mocha");
+require('run-with-mocha');
 
-const assert = require("assert");
-const np = require("../helpers/np");
-const AudioBuffer = require("../../src/impl/AudioBuffer");
-const AudioData = require("../../src/impl/core/AudioData");
+const assert = require('assert');
+const np = require('../helpers/np');
+const AudioBuffer = require('../../src/impl/AudioBuffer');
+const AudioData = require('../../src/impl/core/AudioData');
 
-const numberOfChannels = 2, length = 32, sampleRate = 8000;
+const numberOfChannels = 2,
+  length = 32,
+  sampleRate = 8000;
 
-describe("impl/AudioBuffer", () => {
-  it("constructor", () => {
+describe('impl/AudioBuffer', () => {
+  it('constructor', () => {
     const node = new AudioBuffer({ numberOfChannels, length, sampleRate });
 
     assert(node instanceof AudioBuffer);
   });
 
-  describe("attributes", () => {
-    it(".numberOfChannels", () => {
+  describe('attributes', () => {
+    it('.numberOfChannels', () => {
       const node = new AudioBuffer({ numberOfChannels, length, sampleRate });
 
       assert(node.getNumberOfChannels() === numberOfChannels);
     });
 
-    it(".length", () => {
+    it('.length', () => {
       const node = new AudioBuffer({ numberOfChannels, length, sampleRate });
 
       assert(node.getLength() === length);
     });
 
-    it(".sampleRate", () => {
+    it('.sampleRate', () => {
       const node = new AudioBuffer({ numberOfChannels, length, sampleRate });
 
       assert(node.getSampleRate() === sampleRate);
     });
 
-    it(".duration", () => {
+    it('.duration', () => {
       const node = new AudioBuffer({ numberOfChannels, length, sampleRate });
 
       assert(node.getDuration() === length / sampleRate);
     });
 
-    it(".audioData", () => {
+    it('.audioData', () => {
       const buffer = new AudioBuffer({ numberOfChannels, length, sampleRate });
 
       assert(buffer.audioData instanceof AudioData);
       assert(buffer.audioData.sampleRate === buffer.getSampleRate());
       assert(buffer.audioData.length === buffer.getLength());
-      assert(buffer.audioData.numberOfChannels === buffer.getNumberOfChannels());
+      assert(
+        buffer.audioData.numberOfChannels === buffer.getNumberOfChannels(),
+      );
     });
   });
 
-  describe("methods", () => {
-    it(".copyFromChannel(destination, channelNumber, startInChannel)", () => {
+  describe('methods', () => {
+    it('.copyFromChannel(destination, channelNumber, startInChannel)', () => {
       const buffer = new AudioBuffer({ numberOfChannels, length, sampleRate });
       const destination = new Float32Array(8);
 
@@ -63,7 +67,7 @@ describe("impl/AudioBuffer", () => {
       assert.deepEqual(destination, buffer.getChannelData(1).subarray(4, 12));
     });
 
-    it(".copyToChannel(source, channelNumber, startInChannel)", () => {
+    it('.copyToChannel(source, channelNumber, startInChannel)', () => {
       const buffer = new AudioBuffer({ numberOfChannels, length, sampleRate });
       const source = np.random_sample(8);
 

@@ -1,19 +1,19 @@
-"use strict";
+'use strict';
 
-require("run-with-mocha");
+require('run-with-mocha');
 
-const assert = require("assert");
-const np = require("../../helpers/np");
-const AudioContext = require("../../../src/impl/AudioContext");
-const ChannelSplitterNode = require("../../../src/impl/ChannelSplitterNode");
-const AudioNode = require("../../../src/impl/AudioNode");
+const assert = require('assert');
+const np = require('../../helpers/np');
+const AudioContext = require('../../../src/impl/AudioContext');
+const ChannelSplitterNode = require('../../../src/impl/ChannelSplitterNode');
+const AudioNode = require('../../../src/impl/AudioNode');
 
 const context = new AudioContext({ sampleRate: 8000, blockSize: 16 });
-const channelData = [ new Float32Array(16), new Float32Array(16) ];
+const channelData = [new Float32Array(16), new Float32Array(16)];
 
-describe("impl/dsp/ChannelSplitterNode", () => {
-  it("works", () => {
-    const node1 = new AudioNode(context, {}, { outputs: [ 4 ] });
+describe('impl/dsp/ChannelSplitterNode', () => {
+  it('works', () => {
+    const node1 = new AudioNode(context, {}, { outputs: [4] });
     const node2 = new ChannelSplitterNode(context, { numberOfOutputs: 6 });
     const noise1 = np.random_sample(16);
     const noise2 = np.random_sample(16);
@@ -22,7 +22,7 @@ describe("impl/dsp/ChannelSplitterNode", () => {
     node1.connect(node2);
     node2.connect(context.getDestination());
     node1.enableOutputsIfNecessary();
-    [ 0, 1, 2, 3, 4, 5 ].forEach((ch) => {
+    [0, 1, 2, 3, 4, 5].forEach((ch) => {
       node2.outputs[ch].bus.getMutableData()[0].set(np.random_sample(16));
     });
     node1.outputs[0].bus.getMutableData()[0].set(noise1);
@@ -32,8 +32,12 @@ describe("impl/dsp/ChannelSplitterNode", () => {
 
     context.process(channelData, 0);
 
-    const actual = [ 0, 1, 2, 3, 4, 5 ].map(ch => node2.outputs[ch].bus.getChannelData()[0]);
-    const isSilent = [ 0, 1, 2, 3, 4, 5 ].map(ch => node2.outputs[ch].bus.isSilent);
+    const actual = [0, 1, 2, 3, 4, 5].map(
+      (ch) => node2.outputs[ch].bus.getChannelData()[0],
+    );
+    const isSilent = [0, 1, 2, 3, 4, 5].map(
+      (ch) => node2.outputs[ch].bus.isSilent,
+    );
 
     assert(isSilent[0] === false);
     assert(isSilent[1] === false);
@@ -49,22 +53,26 @@ describe("impl/dsp/ChannelSplitterNode", () => {
     assert.deepEqual(actual[5], np.zeros(16));
   });
 
-  it("works - silent", () => {
-    const node1 = new AudioNode(context, {}, { outputs: [ 4 ] });
+  it('works - silent', () => {
+    const node1 = new AudioNode(context, {}, { outputs: [4] });
     const node2 = new ChannelSplitterNode(context, { numberOfOutputs: 6 });
 
     context.resume();
     node1.connect(node2);
     node2.connect(context.getDestination());
     node1.enableOutputsIfNecessary();
-    [ 0, 1, 2, 3, 4, 5 ].forEach((ch) => {
+    [0, 1, 2, 3, 4, 5].forEach((ch) => {
       node2.outputs[ch].bus.getMutableData()[0].set(np.random_sample(16));
     });
 
     context.process(channelData, 0);
 
-    const actual = [ 0, 1, 2, 3, 4, 5 ].map(ch => node2.outputs[ch].bus.getChannelData()[0]);
-    const isSilent = [ 0, 1, 2, 3, 4, 5 ].map(ch => node2.outputs[ch].bus.isSilent);
+    const actual = [0, 1, 2, 3, 4, 5].map(
+      (ch) => node2.outputs[ch].bus.getChannelData()[0],
+    );
+    const isSilent = [0, 1, 2, 3, 4, 5].map(
+      (ch) => node2.outputs[ch].bus.isSilent,
+    );
 
     assert(isSilent[0] === true);
     assert(isSilent[1] === true);

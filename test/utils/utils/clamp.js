@@ -1,12 +1,12 @@
-"use strict";
+'use strict';
 
-require("run-with-mocha");
+require('run-with-mocha');
 
-const assert = require("assert");
-const clamp = require("../../../src/utils/utils/clamp");
+const assert = require('assert');
+const clamp = require('../../../src/utils/utils/clamp');
 
-describe("utils/clamp(value, minValue, maxValue)", () => {
-  it("return clamped value in the range [minValue, maxValue]", () => {
+describe('utils/clamp(value, minValue, maxValue)', () => {
+  it('return clamped value in the range [minValue, maxValue]', () => {
     assert(clamp(0, 2, 4) === 2);
     assert(clamp(1, 2, 4) === 2);
     assert(clamp(2, 2, 4) === 2);

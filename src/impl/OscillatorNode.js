@@ -1,17 +1,21 @@
-"use strict";
+'use strict';
 
-const AudioScheduledSourceNode = require("./AudioScheduledSourceNode");
-const PeriodicWave = require("./PeriodicWave");
-const OscillatorNodeDSP = require("./dsp/OscillatorNode");
-const { defaults } = require("../utils");
-const { toImpl } = require("../utils");
-const { AUDIO_RATE } = require("../constants/AudioParamRate");
-const { SINE, SAWTOOTH, TRIANGLE, SQUARE, CUSTOM } = require("../constants/OscillatorType");
+const AudioScheduledSourceNode = require('./AudioScheduledSourceNode');
+const PeriodicWave = require('./PeriodicWave');
+const OscillatorNodeDSP = require('./dsp/OscillatorNode');
+const { defaults } = require('../utils');
+const { toImpl } = require('../utils');
+const { AUDIO_RATE } = require('../constants/AudioParamRate');
+const {
+  SINE,
+  SAWTOOTH,
+  TRIANGLE,
+  SQUARE,
+  CUSTOM,
+} = require('../constants/OscillatorType');
 
 const DefaultPeriodicWaves = {};
-const allowedOscillatorTypes = [
-  SINE, SAWTOOTH, TRIANGLE, SQUARE
-];
+const allowedOscillatorTypes = [SINE, SAWTOOTH, TRIANGLE, SQUARE];
 
 const DEFAULT_TYPE = SINE;
 const DEFAULT_FREQUENCY = 440;
@@ -100,12 +104,15 @@ class OscillatorNode extends AudioScheduledSourceNode {
    * @return {PeriodicWave}
    */
   buildPeriodicWave(type) {
-    const sampleRate = this.context.sampleRate
-    const key = type + ":" + sampleRate;
+    const sampleRate = this.context.sampleRate;
+    const key = type + ':' + sampleRate;
 
     /* istanbul ignore else */
     if (!DefaultPeriodicWaves[key]) {
-      const periodicWave = new PeriodicWave({ sampleRate }, { constraints: false });
+      const periodicWave = new PeriodicWave(
+        { sampleRate },
+        { constraints: false },
+      );
 
       periodicWave.generateBasicWaveform(type);
 

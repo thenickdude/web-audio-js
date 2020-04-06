@@ -1,10 +1,14 @@
-"use strict";
+'use strict';
 
-const { SET_VALUE_AT_TIME } = require("../constants/AudioParamEvent");
-const { LINEAR_RAMP_TO_VALUE_AT_TIME } = require("../constants/AudioParamEvent");
-const { EXPONENTIAL_RAMP_TO_VALUE_AT_TIME } = require("../constants/AudioParamEvent");
-const { SET_TARGET_AT_TIME } = require("../constants/AudioParamEvent");
-const { SET_VALUE_CURVE_AT_TIME } = require("../constants/AudioParamEvent");
+const { SET_VALUE_AT_TIME } = require('../constants/AudioParamEvent');
+const {
+  LINEAR_RAMP_TO_VALUE_AT_TIME,
+} = require('../constants/AudioParamEvent');
+const {
+  EXPONENTIAL_RAMP_TO_VALUE_AT_TIME,
+} = require('../constants/AudioParamEvent');
+const { SET_TARGET_AT_TIME } = require('../constants/AudioParamEvent');
+const { SET_VALUE_CURVE_AT_TIME } = require('../constants/AudioParamEvent');
 
 /**
  * @param {object[]} timeline
@@ -24,26 +28,44 @@ function computeValueAtTime(timeline, time, defaultValue) {
     }
 
     switch (e0.type) {
-    case SET_VALUE_AT_TIME:
-    case LINEAR_RAMP_TO_VALUE_AT_TIME:
-    case EXPONENTIAL_RAMP_TO_VALUE_AT_TIME:
-      value = e0.args[0];
-      break;
-    case SET_TARGET_AT_TIME:
-      value = getTargetValueAtTime(t0, value, e0.args[0], e0.args[1], e0.args[2]);
-      break;
-    case SET_VALUE_CURVE_AT_TIME:
-      value = getValueCurveAtTime(t0, e0.args[0], e0.args[1], e0.args[2]);
-      break;
+      case SET_VALUE_AT_TIME:
+      case LINEAR_RAMP_TO_VALUE_AT_TIME:
+      case EXPONENTIAL_RAMP_TO_VALUE_AT_TIME:
+        value = e0.args[0];
+        break;
+      case SET_TARGET_AT_TIME:
+        value = getTargetValueAtTime(
+          t0,
+          value,
+          e0.args[0],
+          e0.args[1],
+          e0.args[2],
+        );
+        break;
+      case SET_VALUE_CURVE_AT_TIME:
+        value = getValueCurveAtTime(t0, e0.args[0], e0.args[1], e0.args[2]);
+        break;
     }
     if (e1) {
       switch (e1.type) {
-      case LINEAR_RAMP_TO_VALUE_AT_TIME:
-        value = getLinearRampToValueAtTime(t0, value, e1.args[0], e0.time, e1.args[1]);
-        break;
-      case EXPONENTIAL_RAMP_TO_VALUE_AT_TIME:
-        value = getExponentialRampToValueAtTime(t0, value, e1.args[0], e0.time, e1.args[1]);
-        break;
+        case LINEAR_RAMP_TO_VALUE_AT_TIME:
+          value = getLinearRampToValueAtTime(
+            t0,
+            value,
+            e1.args[0],
+            e0.time,
+            e1.args[1],
+          );
+          break;
+        case EXPONENTIAL_RAMP_TO_VALUE_AT_TIME:
+          value = getExponentialRampToValueAtTime(
+            t0,
+            value,
+            e1.args[0],
+            e0.time,
+            e1.args[1],
+          );
+          break;
       }
     }
   }
@@ -94,7 +116,7 @@ function getValueCurveAtTime(t, curve, t0, duration) {
 
   x = (t - t0) / duration;
   ix = x * (curve.length - 1);
-  i0 = ix|0;
+  i0 = ix | 0;
   i1 = i0 + 1;
 
   if (curve.length <= i1) {
@@ -108,4 +130,10 @@ function getValueCurveAtTime(t, curve, t0, duration) {
   return y0 + a * (y1 - y0);
 }
 
-module.exports = { computeValueAtTime, getLinearRampToValueAtTime, getExponentialRampToValueAtTime, getTargetValueAtTime, getValueCurveAtTime };
+module.exports = {
+  computeValueAtTime,
+  getLinearRampToValueAtTime,
+  getExponentialRampToValueAtTime,
+  getTargetValueAtTime,
+  getValueCurveAtTime,
+};

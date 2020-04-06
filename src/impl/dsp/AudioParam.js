@@ -1,13 +1,17 @@
-"use strict";
+'use strict';
 
-const assert = require("assert");
-const AudioParamUtils = require("../../utils/AudioParamUtils");
-const { fill } = require("../../utils");
-const { SET_VALUE_AT_TIME } = require("../../constants/AudioParamEvent");
-const { LINEAR_RAMP_TO_VALUE_AT_TIME } = require("../../constants/AudioParamEvent");
-const { EXPONENTIAL_RAMP_TO_VALUE_AT_TIME } = require("../../constants/AudioParamEvent");
-const { SET_TARGET_AT_TIME } = require("../../constants/AudioParamEvent");
-const { SET_VALUE_CURVE_AT_TIME } = require("../../constants/AudioParamEvent");
+const assert = require('assert');
+const AudioParamUtils = require('../../utils/AudioParamUtils');
+const { fill } = require('../../utils');
+const { SET_VALUE_AT_TIME } = require('../../constants/AudioParamEvent');
+const {
+  LINEAR_RAMP_TO_VALUE_AT_TIME,
+} = require('../../constants/AudioParamEvent');
+const {
+  EXPONENTIAL_RAMP_TO_VALUE_AT_TIME,
+} = require('../../constants/AudioParamEvent');
+const { SET_TARGET_AT_TIME } = require('../../constants/AudioParamEvent');
+const { SET_VALUE_CURVE_AT_TIME } = require('../../constants/AudioParamEvent');
 
 const AudioParamDSP = {
   dspInit() {
@@ -30,21 +34,21 @@ const AudioParamDSP = {
     const algorithm = hasEvents * 2 + hasInput;
 
     switch (algorithm) {
-    case 0:
-      // events: x / input: x
-      return this.dspStaticValue();
-    case 1:
-      // events: x / input: o
-      return this.dspInputAndOffset(inputBus);
-    case 2:
-      // events: o / input: x
-      return this.dspEvents();
-    case 3:
-      // events: o / input: o
-      return this.dspEventsAndInput(inputBus);
-    default:
-      /* istanbul ignore next */
-      assert(!"NOT REACHED");
+      case 0:
+        // events: x / input: x
+        return this.dspStaticValue();
+      case 1:
+        // events: x / input: o
+        return this.dspInputAndOffset(inputBus);
+      case 2:
+        // events: o / input: x
+        return this.dspEvents();
+      case 3:
+        // events: o / input: o
+        return this.dspEventsAndInput(inputBus);
+      default:
+        /* istanbul ignore next */
+        assert(!'NOT REACHED');
     }
   },
 
@@ -143,7 +147,11 @@ const AudioParamDSP = {
       //                                   |       firstEventStartFrame
       //                                   quantumStartFrame
       //                                   <------> fill value with in range
-      for (let i = 0, imax = firstEventStartFrame - quantumStartFrame; i < imax; i++) {
+      for (
+        let i = 0, imax = firstEventStartFrame - quantumStartFrame;
+        i < imax;
+        i++
+      ) {
         output[writeIndex++] = value;
       }
       this._currentEventIndex = 0;
@@ -151,15 +159,23 @@ const AudioParamDSP = {
 
     this._hasSampleAccurateValues = true;
 
-    let remainSamples = this._quantumStartFrame === quantumStartFrame ? this._remainSamples : 0;
+    let remainSamples =
+      this._quantumStartFrame === quantumStartFrame ? this._remainSamples : 0;
     let schedParams = this._schedParams;
 
     // if new event exists, should recalculate remainSamples
-    if (remainSamples === Infinity && this._currentEventIndex + 1 !== timeline.length) {
-      remainSamples = timeline[this._currentEventIndex + 1].startFrame - quantumStartFrame;
+    if (
+      remainSamples === Infinity &&
+      this._currentEventIndex + 1 !== timeline.length
+    ) {
+      remainSamples =
+        timeline[this._currentEventIndex + 1].startFrame - quantumStartFrame;
     }
 
-    while (writeIndex < blockSize && this._currentEventIndex < timeline.length) {
+    while (
+      writeIndex < blockSize &&
+      this._currentEventIndex < timeline.length
+    ) {
       const eventItem = timeline[this._currentEventIndex];
       const startFrame = eventItem.startFrame;
       const endFrame = eventItem.endFrame;
@@ -184,65 +200,79 @@ const AudioParamDSP = {
         const processedSamples = Math.max(0, quantumStartFrame - startFrame);
 
         switch (eventItem.type) {
-        case SET_VALUE_AT_TIME:
-          {
-            value = eventItem.startValue;
-            schedParams = { type: SET_VALUE_AT_TIME };
-          }
-        break;
-        case LINEAR_RAMP_TO_VALUE_AT_TIME:
-          {
-            const valueRange = eventItem.endValue - eventItem.startValue;
-            const frameRange = eventItem.endFrame - eventItem.startFrame;
-            const grow = valueRange / frameRange;
-
-            if (grow) {
-              value = eventItem.startValue + processedSamples * grow;
-              schedParams = { type: LINEAR_RAMP_TO_VALUE_AT_TIME, grow };
-            } else {
+          case SET_VALUE_AT_TIME:
+            {
               value = eventItem.startValue;
               schedParams = { type: SET_VALUE_AT_TIME };
             }
-          }
-          break;
-        case EXPONENTIAL_RAMP_TO_VALUE_AT_TIME:
-          {
-            const valueRatio = eventItem.endValue / eventItem.startValue;
-            const frameRange = eventItem.endFrame - eventItem.startFrame;
-            const grow = Math.pow(valueRatio, 1 / frameRange);
+            break;
+          case LINEAR_RAMP_TO_VALUE_AT_TIME:
+            {
+              const valueRange = eventItem.endValue - eventItem.startValue;
+              const frameRange = eventItem.endFrame - eventItem.startFrame;
+              const grow = valueRange / frameRange;
 
-            if (grow) {
-              value = eventItem.startValue * Math.pow(grow, processedSamples);
-              schedParams = { type: EXPONENTIAL_RAMP_TO_VALUE_AT_TIME, grow };
-            } else {
-              value = eventItem.startValue;
-              schedParams = { type: SET_VALUE_AT_TIME };
+              if (grow) {
+                value = eventItem.startValue + processedSamples * grow;
+                schedParams = { type: LINEAR_RAMP_TO_VALUE_AT_TIME, grow };
+              } else {
+                value = eventItem.startValue;
+                schedParams = { type: SET_VALUE_AT_TIME };
+              }
             }
-          }
-          break;
-        case SET_TARGET_AT_TIME:
-          {
-            const target = Math.fround(eventItem.args[0]);
-            const timeConstant = eventItem.args[2];
-            const discreteTimeConstant = 1 - Math.exp(-1 / (sampleRate * timeConstant));
-            const time = (quantumStartFrame + writeIndex) / sampleRate;
+            break;
+          case EXPONENTIAL_RAMP_TO_VALUE_AT_TIME:
+            {
+              const valueRatio = eventItem.endValue / eventItem.startValue;
+              const frameRange = eventItem.endFrame - eventItem.startFrame;
+              const grow = Math.pow(valueRatio, 1 / frameRange);
 
-            value = AudioParamUtils.computeValueAtTime(timeline, time, this._userValue);
-
-            if (discreteTimeConstant !== 1) {
-              schedParams = { type: SET_TARGET_AT_TIME, target, discreteTimeConstant };
-            } else {
-              schedParams = { type: SET_VALUE_AT_TIME };
+              if (grow) {
+                value = eventItem.startValue * Math.pow(grow, processedSamples);
+                schedParams = { type: EXPONENTIAL_RAMP_TO_VALUE_AT_TIME, grow };
+              } else {
+                value = eventItem.startValue;
+                schedParams = { type: SET_VALUE_AT_TIME };
+              }
             }
-          }
-          break;
-        case SET_VALUE_CURVE_AT_TIME:
-          {
-            const curve = eventItem.args[0];
+            break;
+          case SET_TARGET_AT_TIME:
+            {
+              const target = Math.fround(eventItem.args[0]);
+              const timeConstant = eventItem.args[2];
+              const discreteTimeConstant =
+                1 - Math.exp(-1 / (sampleRate * timeConstant));
+              const time = (quantumStartFrame + writeIndex) / sampleRate;
 
-            schedParams = { type: SET_VALUE_CURVE_AT_TIME, curve, startFrame, endFrame };
-          }
-          break;
+              value = AudioParamUtils.computeValueAtTime(
+                timeline,
+                time,
+                this._userValue,
+              );
+
+              if (discreteTimeConstant !== 1) {
+                schedParams = {
+                  type: SET_TARGET_AT_TIME,
+                  target,
+                  discreteTimeConstant,
+                };
+              } else {
+                schedParams = { type: SET_VALUE_AT_TIME };
+              }
+            }
+            break;
+          case SET_VALUE_CURVE_AT_TIME:
+            {
+              const curve = eventItem.args[0];
+
+              schedParams = {
+                type: SET_VALUE_CURVE_AT_TIME,
+                curve,
+                startFrame,
+                endFrame,
+              };
+            }
+            break;
         }
 
         remainSamples = endFrame - startFrame - processedSamples;
@@ -251,58 +281,60 @@ const AudioParamDSP = {
       const fillFrames = Math.min(blockSize - writeIndex, remainSamples);
 
       switch (schedParams.type) {
-      case SET_VALUE_AT_TIME:
-        {
-          for (let i = 0; i < fillFrames; i++) {
-            output[writeIndex++] = value;
+        case SET_VALUE_AT_TIME:
+          {
+            for (let i = 0; i < fillFrames; i++) {
+              output[writeIndex++] = value;
+            }
           }
-        }
-        break;
-      case LINEAR_RAMP_TO_VALUE_AT_TIME:
-        {
-          for (let i = 0; i < fillFrames; i++) {
-            output[writeIndex++] = value;
-            value += schedParams.grow;
+          break;
+        case LINEAR_RAMP_TO_VALUE_AT_TIME:
+          {
+            for (let i = 0; i < fillFrames; i++) {
+              output[writeIndex++] = value;
+              value += schedParams.grow;
+            }
           }
-        }
-        break;
-      case EXPONENTIAL_RAMP_TO_VALUE_AT_TIME:
-        {
-          for (let i = 0; i < fillFrames; i++) {
-            output[writeIndex++] = value;
-            value *= schedParams.grow;
+          break;
+        case EXPONENTIAL_RAMP_TO_VALUE_AT_TIME:
+          {
+            for (let i = 0; i < fillFrames; i++) {
+              output[writeIndex++] = value;
+              value *= schedParams.grow;
+            }
           }
-        }
-        break;
-      case SET_TARGET_AT_TIME:
-        {
-          for (let i = 0; i < fillFrames; i++) {
-            output[writeIndex++] = value;
-            value += (schedParams.target - value) * schedParams.discreteTimeConstant;
+          break;
+        case SET_TARGET_AT_TIME:
+          {
+            for (let i = 0; i < fillFrames; i++) {
+              output[writeIndex++] = value;
+              value +=
+                (schedParams.target - value) * schedParams.discreteTimeConstant;
+            }
           }
-        }
-        break;
-      case SET_VALUE_CURVE_AT_TIME:
-        {
-          const curve = schedParams.curve;
-          const schedRange = schedParams.endFrame - schedParams.startFrame;
-          const schedStartFrame = schedParams.startFrame;
+          break;
+        case SET_VALUE_CURVE_AT_TIME:
+          {
+            const curve = schedParams.curve;
+            const schedRange = schedParams.endFrame - schedParams.startFrame;
+            const schedStartFrame = schedParams.startFrame;
 
-          for (let i = 0; i < fillFrames; i++) {
-            const xx = (quantumStartFrame + writeIndex - schedStartFrame) / schedRange;
-            const ix = xx * (curve.length - 1);
-            const i0 = ix | 0;
-            const i1 = i0 + 1;
+            for (let i = 0; i < fillFrames; i++) {
+              const xx =
+                (quantumStartFrame + writeIndex - schedStartFrame) / schedRange;
+              const ix = xx * (curve.length - 1);
+              const i0 = ix | 0;
+              const i1 = i0 + 1;
 
-            value = curve[i0] + (ix % 1) * (curve[i1] - curve[i0]);
-            output[writeIndex++] = value;
-          }
+              value = curve[i0] + (ix % 1) * (curve[i1] - curve[i0]);
+              output[writeIndex++] = value;
+            }
 
-          if (remainSamples === fillFrames) {
-            value = curve[curve.length - 1];
+            if (remainSamples === fillFrames) {
+              value = curve[curve.length - 1];
+            }
           }
-        }
-        break;
+          break;
       }
 
       remainSamples -= fillFrames;
@@ -320,7 +352,7 @@ const AudioParamDSP = {
     this._schedParams = schedParams;
     this._remainSamples = remainSamples;
     this._quantumStartFrame = quantumEndFrame;
-  }
+  },
 };
 
 module.exports = AudioParamDSP;

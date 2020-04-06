@@ -1,7 +1,7 @@
-"use strict";
+'use strict';
 
-const impl = require("../impl");
-const AudioNode = require("./AudioNode");
+const impl = require('../impl');
+const AudioNode = require('./AudioNode');
 
 class AnalyserNode extends AudioNode {
   constructor(context, opts) {

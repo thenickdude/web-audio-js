@@ -1,9 +1,9 @@
-"use strict";
+'use strict';
 
-const assert = require("assert");
-const AudioData = require("./AudioData");
-const { fill } = require("../../utils");
-const { DISCRETE } = require("../../constants/ChannelInterpretation");
+const assert = require('assert');
+const AudioData = require('./AudioData');
+const { fill } = require('../../utils');
+const { DISCRETE } = require('../../constants/ChannelInterpretation');
 
 const DSPAlgorithm = {};
 
@@ -48,7 +48,11 @@ class AudioBus {
    * @param {number} numberOfChannels
    */
   setNumberOfChannels(numberOfChannels) {
-    const audioBus = new AudioBus(numberOfChannels, this.getLength(), this.getSampleRate());
+    const audioBus = new AudioBus(
+      numberOfChannels,
+      this.getLength(),
+      this.getSampleRate(),
+    );
 
     audioBus.channelInterpretation = this.channelInterpretation;
     audioBus.sumFrom(this);
@@ -109,7 +113,9 @@ class AudioBus {
     const numberOfChannels = destination.length;
 
     assert(audioBus instanceof AudioBus);
-    assert(audioBus.audioData.numberOfChannels === this.audioData.numberOfChannels);
+    assert(
+      audioBus.audioData.numberOfChannels === this.audioData.numberOfChannels,
+    );
     assert(audioBus.audioData.length === this.audioData.length);
 
     for (let ch = 0; ch < numberOfChannels; ch++) {
@@ -129,9 +135,11 @@ class AudioBus {
     const numberOfChannels = destination.length;
 
     assert(audioBus instanceof AudioBus);
-    assert(audioBus.audioData.numberOfChannels === this.audioData.numberOfChannels);
+    assert(
+      audioBus.audioData.numberOfChannels === this.audioData.numberOfChannels,
+    );
 
-    offset = offset|0;
+    offset = offset | 0;
 
     for (let ch = 0; ch < numberOfChannels; ch++) {
       destination[ch].set(source[ch], offset);
@@ -169,10 +177,12 @@ class AudioBus {
       return;
     }
 
-    offset = offset|0;
+    offset = offset | 0;
 
     const source = audioBus.audioData.channelData;
-    const destination = this.audioData.channelData.map(data => data.subarray(offset))
+    const destination = this.audioData.channelData.map((data) =>
+      data.subarray(offset),
+    );
 
     this._sumFrom(source, destination, audioBus.getLength());
   }
@@ -342,7 +352,10 @@ DSPAlgorithm[1006001] = (source, destination, length) => {
   const inputSR = source[5];
 
   for (let i = 0; i < length; i++) {
-    output[i] += 0.7071 * (inputL[i] + inputR[i]) + inputC[i] + 0.5 * (inputSL[i] + inputSR[i]);
+    output[i] +=
+      0.7071 * (inputL[i] + inputR[i]) +
+      inputC[i] +
+      0.5 * (inputSL[i] + inputSR[i]);
   }
 };
 

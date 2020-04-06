@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 /**
  * @param {number|string} str
@@ -9,10 +9,10 @@ function toAudioTime(str) {
     return Math.max(0, +str);
   }
 
-  const matched = ("" + str).match(/^(?:(\d\d+):)?(\d\d?):(\d\d?(?:\.\d+)?)$/);
+  const matched = ('' + str).match(/^(?:(\d\d+):)?(\d\d?):(\d\d?(?:\.\d+)?)$/);
 
   if (matched) {
-    const hours = +matched[1]|0;
+    const hours = +matched[1] | 0;
     const minutes = +matched[2];
     const seconds = +matched[3];
 

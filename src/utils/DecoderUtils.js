@@ -1,7 +1,7 @@
-"use strict";
+'use strict';
 
-const nmap = require("nmap");
-const AudioDataUtils = require("./AudioDataUtils");
+const nmap = require('nmap');
+const AudioDataUtils = require('./AudioDataUtils');
 
 /**
  * @param {function}    decodeFn
@@ -13,12 +13,12 @@ function decode(decodeFn, audioData, /* istanbul ignore next */ opts = {}) {
   return new Promise((resolve, reject) => {
     return decodeFn(audioData, opts).then((result) => {
       if (AudioDataUtils.isAudioData(result)) {
-        if (typeof opts.sampleRate === "number") {
+        if (typeof opts.sampleRate === 'number') {
           result = resample(result, opts.sampleRate);
         }
         return resolve(result);
       }
-      return reject(new TypeError("Failed to decode audio data"));
+      return reject(new TypeError('Failed to decode audio data'));
     }, reject);
   });
 }

@@ -1,12 +1,12 @@
-"use strict";
+'use strict';
 
-const AudioScheduledSourceNode = require("./AudioScheduledSourceNode");
-const AudioBuffer = require("./AudioBuffer");
-const AudioBufferSourceNodeDSP = require("./dsp/AudioBufferSourceNode");
-const { defaults } = require("../utils");
-const { toImpl, toNumber } = require("../utils");
-const { CONTROL_RATE } = require("../constants/AudioParamRate");
-const { FINISHED } = require("../constants/PlaybackState");
+const AudioScheduledSourceNode = require('./AudioScheduledSourceNode');
+const AudioBuffer = require('./AudioBuffer');
+const AudioBufferSourceNodeDSP = require('./dsp/AudioBufferSourceNode');
+const { defaults } = require('../utils');
+const { toImpl, toNumber } = require('../utils');
+const { CONTROL_RATE } = require('../constants/AudioParamRate');
+const { FINISHED } = require('../constants/PlaybackState');
 
 const DEFAULT_PLAYBACK_RATE = 1;
 const DEFAULT_DETUNE = 0;
@@ -174,7 +174,9 @@ class AudioBufferSourceNode extends AudioScheduledSourceNode {
 
     if (duration !== Infinity) {
       this._duration = duration;
-      this._stopFrame = Math.round((this._startTime + duration) * this.sampleRate);
+      this._stopFrame = Math.round(
+        (this._startTime + duration) * this.sampleRate,
+      );
     }
 
     this.context.sched(when, () => {

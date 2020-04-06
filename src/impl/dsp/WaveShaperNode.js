@@ -1,6 +1,6 @@
-"use strict";
+'use strict';
 
-const assert = require("assert");
+const assert = require('assert');
 
 const WaveShaperNodeDSP = {
   dspInit() {
@@ -22,18 +22,18 @@ const WaveShaperNodeDSP = {
     assert(numberOfChannels === this._kernels.length);
 
     switch (numberOfChannels) {
-    case 0:
-      this.dspProcess = this.dspProcess0;
-      break;
-    case 1:
-      this.dspProcess = this.dspProcess1;
-      break;
-    case 2:
-      this.dspProcess = this.dspProcess2;
-      break;
-    default:
-      this.dspProcess = this.dspProcessN;
-      break;
+      case 0:
+        this.dspProcess = this.dspProcess0;
+        break;
+      case 1:
+        this.dspProcess = this.dspProcess1;
+        break;
+      case 2:
+        this.dspProcess = this.dspProcess2;
+        break;
+      default:
+        this.dspProcess = this.dspProcessN;
+        break;
     }
   },
 
@@ -76,7 +76,7 @@ const WaveShaperNodeDSP = {
     for (let i = 0, imax = kernels.length; i < imax; i++) {
       kernels[i].process(inputs[i], outputs[i], curve, blockSize);
     }
-  }
+  },
 };
 
 class WaveShaperKernel {
@@ -84,7 +84,7 @@ class WaveShaperKernel {
     for (let i = 0; i < inNumSamples; i++) {
       const x = (Math.max(-1, Math.min(input[i], 1)) + 1) * 0.5;
       const ix = x * (curve.length - 1);
-      const i0 = ix|0;
+      const i0 = ix | 0;
       const i1 = i0 + 1;
 
       if (curve.length <= i1) {

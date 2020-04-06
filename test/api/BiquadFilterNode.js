@@ -1,27 +1,27 @@
-"use strict";
+'use strict';
 
-require("run-with-mocha");
+require('run-with-mocha');
 
-const assert = require("assert");
-const sinon = require("sinon");
-const api = require("../../src/api");
-const AudioContext = require("../../src/api/BaseAudioContext");
-const AudioParam = require("../../src/api/AudioParam");
+const assert = require('assert');
+const sinon = require('sinon');
+const api = require('../../src/api');
+const AudioContext = require('../../src/api/BaseAudioContext');
+const AudioParam = require('../../src/api/AudioParam');
 
-describe("api/BiquadFilterNode", () => {
-  it("context.createBiquadFilter()", () => {
+describe('api/BiquadFilterNode', () => {
+  it('context.createBiquadFilter()', () => {
     const context = new AudioContext();
     const target = context.createBiquadFilter();
 
     assert(target instanceof api.BiquadFilterNode);
   });
 
-  describe("attributes", () => {
-    it(".type=", () => {
+  describe('attributes', () => {
+    it('.type=', () => {
       const context = new AudioContext();
       const target = context.createBiquadFilter();
-      const type1 = "lowpass"
-      const type2 = "highpass";
+      const type1 = 'lowpass';
+      const type2 = 'highpass';
 
       target._impl.getType = sinon.spy(() => type1);
       target._impl.setType = sinon.spy();
@@ -34,7 +34,7 @@ describe("api/BiquadFilterNode", () => {
       assert(target._impl.setType.args[0][0] === type2);
     });
 
-    it(".frequency", () => {
+    it('.frequency', () => {
       const context = new AudioContext();
       const target = context.createBiquadFilter();
 
@@ -42,7 +42,7 @@ describe("api/BiquadFilterNode", () => {
       assert(target.frequency === target._impl.$frequency);
     });
 
-    it(".detune", () => {
+    it('.detune', () => {
       const context = new AudioContext();
       const target = context.createBiquadFilter();
 
@@ -50,7 +50,7 @@ describe("api/BiquadFilterNode", () => {
       assert(target.detune === target._impl.$detune);
     });
 
-    it(".Q", () => {
+    it('.Q', () => {
       const context = new AudioContext();
       const target = context.createBiquadFilter();
 
@@ -58,7 +58,7 @@ describe("api/BiquadFilterNode", () => {
       assert(target.Q === target._impl.$Q);
     });
 
-    it(".gain", () => {
+    it('.gain', () => {
       const context = new AudioContext();
       const target = context.createBiquadFilter();
 
@@ -67,8 +67,8 @@ describe("api/BiquadFilterNode", () => {
     });
   });
 
-  describe("methods", () => {
-    it(".getFrequencyResponse(frequencyHz, magResponse, phaseResponse)", () => {
+  describe('methods', () => {
+    it('.getFrequencyResponse(frequencyHz, magResponse, phaseResponse)', () => {
       const context = new AudioContext();
       const target = context.createBiquadFilter();
       const frequencyHz = new Float32Array(128);

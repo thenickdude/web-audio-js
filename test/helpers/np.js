@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 function zeros(size, constructor = Float32Array) {
   return new constructor(size);

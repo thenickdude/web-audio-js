@@ -1,22 +1,22 @@
-"use strict";
+'use strict';
 
-require("run-with-mocha");
+require('run-with-mocha');
 
-const assert = require("assert");
-const sinon = require("sinon");
-const api = require("../../src/api");
-const AudioContext = require("../../src/api/BaseAudioContext");
+const assert = require('assert');
+const sinon = require('sinon');
+const api = require('../../src/api');
+const AudioContext = require('../../src/api/BaseAudioContext');
 
-describe("api/ConvolverNode", () => {
-  it("context.createConvolver()", () => {
+describe('api/ConvolverNode', () => {
+  it('context.createConvolver()', () => {
     const context = new AudioContext();
     const target = context.createConvolver();
 
     assert(target instanceof api.ConvolverNode);
   });
 
-  describe("attributes", () => {
-    it(".buffer=", () => {
+  describe('attributes', () => {
+    it('.buffer=', () => {
       const context = new AudioContext();
       const target = context.createConvolver();
       const buffer = context.createBuffer(1, 16, 8000);
@@ -29,7 +29,7 @@ describe("api/ConvolverNode", () => {
       assert(target._impl.setBuffer.args[0][0] === buffer);
     });
 
-    it(".normalize=", () => {
+    it('.normalize=', () => {
       const context = new AudioContext();
       const target = context.createConvolver();
       const normalize1 = true;

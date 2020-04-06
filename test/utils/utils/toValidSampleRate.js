@@ -1,12 +1,12 @@
-"use strict";
+'use strict';
 
-require("run-with-mocha");
+require('run-with-mocha');
 
-const assert = require("assert");
-const toValidSampleRate = require("../../../src/utils/utils/toValidSampleRate");
+const assert = require('assert');
+const toValidSampleRate = require('../../../src/utils/utils/toValidSampleRate');
 
-describe("utils/toValidSampleRate()", () => {
-  it("return valid sampleRate", () => {
+describe('utils/toValidSampleRate()', () => {
+  it('return valid sampleRate', () => {
     assert(toValidSampleRate(0) === 3000);
     assert(toValidSampleRate(5512.5) === 5512);
     assert(toValidSampleRate(44100) === 44100);

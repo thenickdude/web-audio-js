@@ -1,10 +1,10 @@
-"use strict";
+'use strict';
 
 const { flushDenormalFloatToZero } = require('../../utils');
 
 class BiquadFilterKernel {
   constructor() {
-    this.coefficients = [ 0, 0, 0, 0, 0 ];
+    this.coefficients = [0, 0, 0, 0, 0];
     this._x1 = 0;
     this._x2 = 0;
     this._y1 = 0;
@@ -27,7 +27,7 @@ class BiquadFilterKernel {
 
     for (let i = 0; i < inNumSamples; i++) {
       x0 = input[i];
-      y0 = (b0 * x0) + (b1 * x1) + (b2 * x2) - (a1 * y1) - (a2 * y2);
+      y0 = b0 * x0 + b1 * x1 + b2 * x2 - a1 * y1 - a2 * y2;
 
       x2 = x1;
       x1 = x0;
@@ -65,7 +65,7 @@ class BiquadFilterKernel {
 
     for (let i = 0; i < inNumSamples; i++) {
       x0 = input[i];
-      y0 = (b0 * x0) + (b1 * x1) + (b2 * x2) - (a1 * y1) - (a2 * y2);
+      y0 = b0 * x0 + b1 * x1 + b2 * x2 - a1 * y1 - a2 * y2;
 
       x2 = x1;
       x1 = x0;

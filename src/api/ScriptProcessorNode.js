@@ -1,8 +1,8 @@
-"use strict";
+'use strict';
 
-const impl = require("../impl");
-const AudioNode = require("./AudioNode");
-const AudioBuffer = require("./AudioBuffer");
+const impl = require('../impl');
+const AudioNode = require('./AudioNode');
+const AudioBuffer = require('./AudioBuffer');
 
 class ScriptProcessorNode extends AudioNode {
   constructor(context, opts) {
@@ -11,11 +11,11 @@ class ScriptProcessorNode extends AudioNode {
     this._impl = new impl.ScriptProcessorNode(context._impl, opts);
     this._impl.$onaudioprocess = null;
     this._impl.setEventItem({
-      type: "audioprocess",
+      type: 'audioprocess',
       playbackTime: 0,
       inputBuffer: new AudioBuffer(),
-      outputBuffer: new AudioBuffer()
-    })
+      outputBuffer: new AudioBuffer(),
+    });
   }
 
   get bufferSize() {
@@ -27,7 +27,11 @@ class ScriptProcessorNode extends AudioNode {
   }
 
   set onaudioprocess(callback) {
-    this._impl.replaceEventListener("audioprocess", this._impl.$onaudioprocess, callback);
+    this._impl.replaceEventListener(
+      'audioprocess',
+      this._impl.$onaudioprocess,
+      callback,
+    );
     this._impl.$onaudioprocess = callback;
   }
 }

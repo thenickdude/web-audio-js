@@ -1,38 +1,41 @@
-"use strict";
+'use strict';
 
-const impl = require("../impl");
-const EventTarget = require("./EventTarget");
-const AudioDestinationNode = require("./AudioDestinationNode");
-const AudioListener = require("./AudioListener");
-const AudioBuffer = require("./AudioBuffer");
-const AudioBufferSourceNode = require("./AudioBufferSourceNode");
-const ScriptProcessorNode = require("./ScriptProcessorNode");
-const AnalyserNode = require("./AnalyserNode");
-const GainNode = require("./GainNode");
-const DelayNode = require("./DelayNode");
-const BiquadFilterNode = require("./BiquadFilterNode");
-const IIRFilterNode = require("./IIRFilterNode");
-const WaveShaperNode = require("./WaveShaperNode");
-const PannerNode = require("./PannerNode");
-const SpatialPannerNode = require("./SpatialPannerNode");
-const StereoPannerNode = require("./StereoPannerNode");
-const ConvolverNode = require("./ConvolverNode");
-const ConstantSourceNode = require("./ConstantSourceNode");
-const ChannelSplitterNode = require("./ChannelSplitterNode");
-const ChannelMergerNode = require("./ChannelMergerNode");
-const DynamicsCompressorNode = require("./DynamicsCompressorNode");
-const OscillatorNode = require("./OscillatorNode");
-const PeriodicWave = require("./PeriodicWave");
-const decoder = require("../decoder");
-const { defineProp } = require("../utils");
+const impl = require('../impl');
+const EventTarget = require('./EventTarget');
+const AudioDestinationNode = require('./AudioDestinationNode');
+const AudioListener = require('./AudioListener');
+const AudioBuffer = require('./AudioBuffer');
+const AudioBufferSourceNode = require('./AudioBufferSourceNode');
+const ScriptProcessorNode = require('./ScriptProcessorNode');
+const AnalyserNode = require('./AnalyserNode');
+const GainNode = require('./GainNode');
+const DelayNode = require('./DelayNode');
+const BiquadFilterNode = require('./BiquadFilterNode');
+const IIRFilterNode = require('./IIRFilterNode');
+const WaveShaperNode = require('./WaveShaperNode');
+const PannerNode = require('./PannerNode');
+const SpatialPannerNode = require('./SpatialPannerNode');
+const StereoPannerNode = require('./StereoPannerNode');
+const ConvolverNode = require('./ConvolverNode');
+const ConstantSourceNode = require('./ConstantSourceNode');
+const ChannelSplitterNode = require('./ChannelSplitterNode');
+const ChannelMergerNode = require('./ChannelMergerNode');
+const DynamicsCompressorNode = require('./DynamicsCompressorNode');
+const OscillatorNode = require('./OscillatorNode');
+const PeriodicWave = require('./PeriodicWave');
+const decoder = require('../decoder');
+const { defineProp } = require('../utils');
 
 class BaseAudioContext extends EventTarget {
   constructor(opts) {
     super();
 
-    defineProp(this, "_impl", new impl.AudioContext(opts));
+    defineProp(this, '_impl', new impl.AudioContext(opts));
 
-    this._impl.$destination = new AudioDestinationNode(this, this._impl.getDestination());
+    this._impl.$destination = new AudioDestinationNode(
+      this,
+      this._impl.getDestination(),
+    );
     this._impl.$listener = new AudioListener(this, this._impl.getListener());
     this._impl.$onstatechange = null;
   }
@@ -74,7 +77,11 @@ class BaseAudioContext extends EventTarget {
   }
 
   set onstatechange(callback) {
-    this._impl.replaceEventListener("statechange", this._impl.$onstatechange, callback);
+    this._impl.replaceEventListener(
+      'statechange',
+      this._impl.$onstatechange,
+      callback,
+    );
     this._impl.$onstatechange = callback;
   }
 
@@ -98,8 +105,16 @@ class BaseAudioContext extends EventTarget {
     return new ConstantSourceNode(this);
   }
 
-  createScriptProcessor(bufferSize, numberOfInputChannels, numberOfOutputChannels) {
-    return new ScriptProcessorNode(this, { bufferSize, numberOfInputChannels, numberOfOutputChannels });
+  createScriptProcessor(
+    bufferSize,
+    numberOfInputChannels,
+    numberOfOutputChannels,
+  ) {
+    return new ScriptProcessorNode(this, {
+      bufferSize,
+      numberOfInputChannels,
+      numberOfOutputChannels,
+    });
   }
 
   createAnalyser() {

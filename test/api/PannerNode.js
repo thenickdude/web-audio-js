@@ -1,26 +1,26 @@
-"use strict";
+'use strict';
 
-require("run-with-mocha");
+require('run-with-mocha');
 
-const assert = require("assert");
-const sinon = require("sinon");
-const api = require("../../src/api");
-const AudioContext = require("../../src/api/BaseAudioContext");
+const assert = require('assert');
+const sinon = require('sinon');
+const api = require('../../src/api');
+const AudioContext = require('../../src/api/BaseAudioContext');
 
-describe("api/PannerNode", () => {
-  it("context.createPanner()", () => {
+describe('api/PannerNode', () => {
+  it('context.createPanner()', () => {
     const context = new AudioContext();
     const target = context.createPanner();
 
     assert(target instanceof api.PannerNode);
   });
 
-  describe("attributes", () => {
-    it(".panningModel=", () => {
+  describe('attributes', () => {
+    it('.panningModel=', () => {
       const context = new AudioContext();
       const target = context.createPanner();
-      const panningModel1 = "equalpower";
-      const panningModel2 = "HRTF";
+      const panningModel1 = 'equalpower';
+      const panningModel2 = 'HRTF';
 
       target._impl.getPanningModel = sinon.spy(() => panningModel1);
       target._impl.setPanningModel = sinon.spy();
@@ -33,11 +33,11 @@ describe("api/PannerNode", () => {
       assert(target._impl.setPanningModel.args[0][0] === panningModel2);
     });
 
-    it(".distanceModel=", () => {
+    it('.distanceModel=', () => {
       const context = new AudioContext();
       const target = context.createPanner();
-      const distanceModel1 = "inverse";
-      const distanceModel2 = "linear";
+      const distanceModel1 = 'inverse';
+      const distanceModel2 = 'linear';
 
       target._impl.getDistanceModel = sinon.spy(() => distanceModel1);
       target._impl.setDistanceModel = sinon.spy();
@@ -50,7 +50,7 @@ describe("api/PannerNode", () => {
       assert(target._impl.setDistanceModel.args[0][0] === distanceModel2);
     });
 
-    it(".refDistance=", () => {
+    it('.refDistance=', () => {
       const context = new AudioContext();
       const target = context.createPanner();
       const refDistance1 = 1;
@@ -67,7 +67,7 @@ describe("api/PannerNode", () => {
       assert(target._impl.setRefDistance.args[0][0] === refDistance2);
     });
 
-    it(".maxDistance=", () => {
+    it('.maxDistance=', () => {
       const context = new AudioContext();
       const target = context.createPanner();
       const maxDistance1 = 10000;
@@ -84,7 +84,7 @@ describe("api/PannerNode", () => {
       assert(target._impl.setMaxDistance.args[0][0] === maxDistance2);
     });
 
-    it(".rolloffFactor=", () => {
+    it('.rolloffFactor=', () => {
       const context = new AudioContext();
       const target = context.createPanner();
       const rolloffFactor1 = 1;
@@ -101,7 +101,7 @@ describe("api/PannerNode", () => {
       assert(target._impl.setRolloffFactor.args[0][0] === rolloffFactor2);
     });
 
-    it(".coneInnerAngle=", () => {
+    it('.coneInnerAngle=', () => {
       const context = new AudioContext();
       const target = context.createPanner();
       const coneInnerAngle1 = 360;
@@ -118,7 +118,7 @@ describe("api/PannerNode", () => {
       assert(target._impl.setConeInnerAngle.args[0][0] === coneInnerAngle2);
     });
 
-    it(".coneOuterAngle=", () => {
+    it('.coneOuterAngle=', () => {
       const context = new AudioContext();
       const target = context.createPanner();
       const coneOuterAngle1 = 360;
@@ -135,7 +135,7 @@ describe("api/PannerNode", () => {
       assert(target._impl.setConeOuterAngle.args[0][0] === coneOuterAngle2);
     });
 
-    it(".coneOuterGain=", () => {
+    it('.coneOuterGain=', () => {
       const context = new AudioContext();
       const target = context.createPanner();
       const coneOuterGain1 = 0;
@@ -153,8 +153,8 @@ describe("api/PannerNode", () => {
     });
   });
 
-  describe("methods", () => {
-    it(".setPosition(x, y, z)", () => {
+  describe('methods', () => {
+    it('.setPosition(x, y, z)', () => {
       const context = new AudioContext();
       const target = context.createPanner();
       const x = 0;
@@ -170,7 +170,7 @@ describe("api/PannerNode", () => {
       assert(target._impl.setPosition.args[0][2] === z);
     });
 
-    it(".setOrientation(x, y, z)", () => {
+    it('.setOrientation(x, y, z)', () => {
       const context = new AudioContext();
       const target = context.createPanner();
       const x = 0;
@@ -186,7 +186,7 @@ describe("api/PannerNode", () => {
       assert(target._impl.setOrientation.args[0][2] === z);
     });
 
-    it(".setVelocity(x, y, z)", () => {
+    it('.setVelocity(x, y, z)', () => {
       const context = new AudioContext();
       const target = context.createPanner();
       const x = 0;

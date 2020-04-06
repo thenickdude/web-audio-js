@@ -1,21 +1,28 @@
-"use strict";
+'use strict';
 
-const AudioNode = require("./AudioNode");
-const BiquadFilterNodeDSP = require("./dsp/BiquadFilterNode");
-const { defaults } = require("../utils");
-const { MAX } = require("../constants/ChannelCountMode");
-const { CONTROL_RATE } = require("../constants/AudioParamRate");
-const { LOWPASS } = require("../constants/BiquadFilterType");
-const { HIGHPASS } = require("../constants/BiquadFilterType");
-const { BANDPASS } = require("../constants/BiquadFilterType");
-const { LOWSHELF } = require("../constants/BiquadFilterType");
-const { HIGHSHELF } = require("../constants/BiquadFilterType");
-const { PEAKING } = require("../constants/BiquadFilterType");
-const { NOTCH } = require("../constants/BiquadFilterType");
-const { ALLPASS } = require("../constants/BiquadFilterType");
+const AudioNode = require('./AudioNode');
+const BiquadFilterNodeDSP = require('./dsp/BiquadFilterNode');
+const { defaults } = require('../utils');
+const { MAX } = require('../constants/ChannelCountMode');
+const { CONTROL_RATE } = require('../constants/AudioParamRate');
+const { LOWPASS } = require('../constants/BiquadFilterType');
+const { HIGHPASS } = require('../constants/BiquadFilterType');
+const { BANDPASS } = require('../constants/BiquadFilterType');
+const { LOWSHELF } = require('../constants/BiquadFilterType');
+const { HIGHSHELF } = require('../constants/BiquadFilterType');
+const { PEAKING } = require('../constants/BiquadFilterType');
+const { NOTCH } = require('../constants/BiquadFilterType');
+const { ALLPASS } = require('../constants/BiquadFilterType');
 
 const allowedBiquadFilterTypes = [
-  LOWPASS, HIGHPASS, BANDPASS, LOWSHELF, HIGHSHELF, PEAKING, NOTCH, ALLPASS
+  LOWPASS,
+  HIGHPASS,
+  BANDPASS,
+  LOWSHELF,
+  HIGHSHELF,
+  PEAKING,
+  NOTCH,
+  ALLPASS,
 ];
 
 const DEFAULT_TYPE = LOWPASS;
@@ -42,10 +49,10 @@ class BiquadFilterNode extends AudioNode {
     const gain = defaults(opts.gain, DEFAULT_GAIN);
 
     super(context, opts, {
-      inputs: [ 1 ],
-      outputs: [ 1 ],
+      inputs: [1],
+      outputs: [1],
       channelCount: 2,
-      channelCountMode: MAX
+      channelCountMode: MAX,
     });
 
     this._type = type;

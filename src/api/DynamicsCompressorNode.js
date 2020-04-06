@@ -1,8 +1,8 @@
-"use strict";
+'use strict';
 
-const impl = require("../impl");
-const AudioNode = require("./AudioNode");
-const AudioParam = require("./AudioParam");
+const impl = require('../impl');
+const AudioNode = require('./AudioNode');
+const AudioParam = require('./AudioParam');
 
 class DynamicsCompressorNode extends AudioNode {
   constructor(context, opts) {

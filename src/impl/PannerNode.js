@@ -1,7 +1,7 @@
-"use strict";
+'use strict';
 
-const BasePannerNode = require("./BasePannerNode");
-const PannerNodeDSP = require("./dsp/PannerNode");
+const BasePannerNode = require('./BasePannerNode');
+const PannerNodeDSP = require('./dsp/PannerNode');
 
 class PannerNode extends BasePannerNode {
   /**
@@ -18,7 +18,7 @@ class PannerNode extends BasePannerNode {
    */
   /* istanbul ignore next */
   setPosition() {
-    throw new TypeError("NOT YET IMPLEMENTED");
+    throw new TypeError('NOT YET IMPLEMENTED');
   }
 
   /**
@@ -28,7 +28,7 @@ class PannerNode extends BasePannerNode {
    */
   /* istanbul ignore next */
   setOrientation() {
-    throw new TypeError("NOT YET IMPLEMENTED");
+    throw new TypeError('NOT YET IMPLEMENTED');
   }
 
   /**
@@ -38,7 +38,7 @@ class PannerNode extends BasePannerNode {
    */
   /* istanbul ignore next */
   setVelocity() {
-    throw new TypeError("NOT YET IMPLEMENTED");
+    throw new TypeError('NOT YET IMPLEMENTED');
   }
 }
 

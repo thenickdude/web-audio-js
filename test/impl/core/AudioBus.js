@@ -1,22 +1,25 @@
-"use strict";
+'use strict';
 
-require("run-with-mocha");
+require('run-with-mocha');
 
-const assert = require("assert");
-const np = require("../../helpers/np");
-const AudioBus = require("../../../src/impl/core/AudioBus");
-const AudioData = require("../../../src/impl/core/AudioData");
-const { DISCRETE, SPEAKERS } = require("../../../src/constants/ChannelInterpretation");
+const assert = require('assert');
+const np = require('../../helpers/np');
+const AudioBus = require('../../../src/impl/core/AudioBus');
+const AudioData = require('../../../src/impl/core/AudioData');
+const {
+  DISCRETE,
+  SPEAKERS,
+} = require('../../../src/constants/ChannelInterpretation');
 
-describe("impl/core/AudioBus", () => {
-  it("constructor(numberOfChannels, length, sampleRate)", () => {
+describe('impl/core/AudioBus', () => {
+  it('constructor(numberOfChannels, length, sampleRate)', () => {
     const bus = new AudioBus(2, 128, 44100);
 
     assert(bus instanceof AudioBus);
   });
 
-  describe("attributes", () => {
-    it(".channelInterpretation=", () => {
+  describe('attributes', () => {
+    it('.channelInterpretation=', () => {
       const bus = new AudioBus(2, 128, 44100);
 
       assert(bus.getChannelInterpretation() === DISCRETE);
@@ -25,7 +28,7 @@ describe("impl/core/AudioBus", () => {
       assert(bus.getChannelInterpretation() === SPEAKERS);
     });
 
-    it(".numberOfChannels=", () => {
+    it('.numberOfChannels=', () => {
       const bus = new AudioBus(2, 128, 44100);
 
       assert(bus.getNumberOfChannels() === 2);
@@ -34,19 +37,19 @@ describe("impl/core/AudioBus", () => {
       assert(bus.getNumberOfChannels() === 4);
     });
 
-    it(".length", () => {
+    it('.length', () => {
       const bus = new AudioBus(2, 128, 44100);
 
       assert(bus.getLength() === 128);
     });
 
-    it(".sampleRate", () => {
+    it('.sampleRate', () => {
       const bus = new AudioBus(2, 128, 44100);
 
       assert(bus.getSampleRate() === 44100);
     });
 
-    it(".audioData", () => {
+    it('.audioData', () => {
       const bus = new AudioBus(2, 128, 44100);
       const data = bus.audioData;
 
@@ -54,8 +57,8 @@ describe("impl/core/AudioBus", () => {
     });
   });
 
-  describe("methods", () => {
-    it(".getChannelData()", () => {
+  describe('methods', () => {
+    it('.getChannelData()', () => {
       const bus = new AudioBus(2, 128, 44100);
       const channelData = bus.getChannelData();
 
@@ -63,7 +66,7 @@ describe("impl/core/AudioBus", () => {
       assert(channelData === bus.getChannelData());
     });
 
-    it(".getMutableData()", () => {
+    it('.getMutableData()', () => {
       const bus = new AudioBus(2, 128, 44100);
       const mutableData = bus.getMutableData();
 
@@ -71,7 +74,7 @@ describe("impl/core/AudioBus", () => {
       assert(mutableData === bus.getChannelData());
     });
 
-    it(".zeros()", () => {
+    it('.zeros()', () => {
       const bus = new AudioBus(2, 128, 44100);
 
       bus.getMutableData()[0].set(np.random_sample(128));
@@ -84,9 +87,9 @@ describe("impl/core/AudioBus", () => {
       assert(bus.isSilent === true);
     });
 
-    it(".copyFrom(bus)", () => {
+    it('.copyFrom(bus)', () => {
       const bus1 = new AudioBus(1, 128, 44100);
-      const bus2 = new AudioBus(1, 128, 44100)
+      const bus2 = new AudioBus(1, 128, 44100);
       const noise1 = np.random_sample(128);
       const noise2 = np.random_sample(128);
 
@@ -98,9 +101,9 @@ describe("impl/core/AudioBus", () => {
       assert(bus2.isSilent === false);
     });
 
-    it(".copyFrom(silentBus)", () => {
+    it('.copyFrom(silentBus)', () => {
       const bus1 = new AudioBus(1, 128, 44100);
-      const bus2 = new AudioBus(1, 128, 44100)
+      const bus2 = new AudioBus(1, 128, 44100);
       const noise1 = np.random_sample(128);
       const noise2 = np.random_sample(128);
 
@@ -113,9 +116,9 @@ describe("impl/core/AudioBus", () => {
       assert(bus2.isSilent, true);
     });
 
-    it(".copyFromWithOffset(bus, offset)", () => {
+    it('.copyFromWithOffset(bus, offset)', () => {
       const bus1 = new AudioBus(1, 128, 44100);
-      const bus2 = new AudioBus(1, 128, 44100)
+      const bus2 = new AudioBus(1, 128, 44100);
       const bus3 = new AudioBus(1, 256, 44100);
       const noise1 = np.random_sample(128);
       const noise2 = np.random_sample(128);

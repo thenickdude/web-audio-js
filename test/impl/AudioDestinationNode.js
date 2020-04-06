@@ -1,46 +1,46 @@
-"use strict";
+'use strict';
 
-require("run-with-mocha");
+require('run-with-mocha');
 
-const assert = require("assert");
-const AudioContext = require("../../src/impl/AudioContext");
-const AudioDestinationNode = require("../../src/impl/AudioDestinationNode");
-const AudioNode = require("../../src/impl/AudioNode");
+const assert = require('assert');
+const AudioContext = require('../../src/impl/AudioContext');
+const AudioDestinationNode = require('../../src/impl/AudioDestinationNode');
+const AudioNode = require('../../src/impl/AudioNode');
 
-describe("impl/AudioDestinationNode", () => {
+describe('impl/AudioDestinationNode', () => {
   let context;
 
   beforeEach(() => {
     context = new AudioContext({ sampleRate: 8000, blockSize: 32 });
   });
 
-  it("constructor", () => {
+  it('constructor', () => {
     const node = new AudioDestinationNode(context, { numberOfChannels: 2 });
 
     assert(node instanceof AudioDestinationNode);
     assert(node instanceof AudioNode);
   });
 
-  describe("attributes", () => {
-    it(".numberOfInputs", () => {
+  describe('attributes', () => {
+    it('.numberOfInputs', () => {
       const node = new AudioDestinationNode(context, { numberOfChannels: 2 });
 
       assert(node.getNumberOfInputs() === 1);
     });
 
-    it(".numberOfOutputs", () => {
+    it('.numberOfOutputs', () => {
       const node = new AudioDestinationNode(context, { numberOfChannels: 2 });
 
       assert(node.getNumberOfOutputs() === 0);
     });
 
-    it(".maxChannelCount", () => {
+    it('.maxChannelCount', () => {
       const node = new AudioDestinationNode(context, { numberOfChannels: 2 });
 
       assert(node.getMaxChannelCount() === 2);
     });
 
-    it(".channelCount=", () => {
+    it('.channelCount=', () => {
       const node = new AudioDestinationNode(context, { numberOfChannels: 2 });
 
       node.setChannelCount(0);
@@ -57,9 +57,9 @@ describe("impl/AudioDestinationNode", () => {
     });
   });
 
-  describe("channel configuration", () => {
-    it("should synchronize with the input, but clamped by max channel count", () => {
-      const node1 = new AudioNode(context, {}, { outputs: [ 4 ] });
+  describe('channel configuration', () => {
+    it('should synchronize with the input, but clamped by max channel count', () => {
+      const node1 = new AudioNode(context, {}, { outputs: [4] });
       const node2 = new AudioDestinationNode(context, { numberOfChannels: 2 });
 
       node1.outputs[0].enable();

@@ -1,40 +1,40 @@
-"use strict";
+'use strict';
 
-require("run-with-mocha");
+require('run-with-mocha');
 
-const assert = require("assert");
-const AudioContext = require("../../src/impl/AudioContext");
-const AnalyserNode = require("../../src/impl/AnalyserNode");
-const AudioNode = require("../../src/impl/AudioNode");
+const assert = require('assert');
+const AudioContext = require('../../src/impl/AudioContext');
+const AnalyserNode = require('../../src/impl/AnalyserNode');
+const AudioNode = require('../../src/impl/AudioNode');
 
-describe("impl/AnalyserNode", () => {
+describe('impl/AnalyserNode', () => {
   let context;
 
   beforeEach(() => {
     context = new AudioContext({ sampleRate: 8000, blockSize: 32 });
   });
 
-  it("constructor", () => {
+  it('constructor', () => {
     const node = new AnalyserNode(context);
 
     assert(node instanceof AudioNode);
     assert(node instanceof AnalyserNode);
   });
 
-  describe("attributes", () => {
-    it(".numberOfInputs", () => {
+  describe('attributes', () => {
+    it('.numberOfInputs', () => {
       const node = new AnalyserNode(context);
 
       assert(node.getNumberOfInputs() === 1);
     });
 
-    it(".numberOfOutputs", () => {
+    it('.numberOfOutputs', () => {
       const node = new AnalyserNode(context);
 
       assert(node.getNumberOfOutputs() === 1);
     });
 
-    it(".fftSize=", () => {
+    it('.fftSize=', () => {
       const node = new AnalyserNode(context);
 
       assert(node.getFftSize() === 2048);
@@ -43,7 +43,7 @@ describe("impl/AnalyserNode", () => {
       assert(node.getFftSize() === 512);
     });
 
-    it(".frequencyBinCount", () => {
+    it('.frequencyBinCount', () => {
       const node = new AnalyserNode(context);
 
       assert(node.getFrequencyBinCount() === 1024);
@@ -52,7 +52,7 @@ describe("impl/AnalyserNode", () => {
       assert(node.getFrequencyBinCount() === 256);
     });
 
-    it(".minDecibels=", () => {
+    it('.minDecibels=', () => {
       const node = new AnalyserNode(context);
 
       assert(node.getMinDecibels() === -100);
@@ -61,7 +61,7 @@ describe("impl/AnalyserNode", () => {
       assert(node.getMinDecibels() === -120);
     });
 
-    it(".maxDecibels=", () => {
+    it('.maxDecibels=', () => {
       const node = new AnalyserNode(context);
 
       assert(node.getMaxDecibels() === -30);
@@ -70,7 +70,7 @@ describe("impl/AnalyserNode", () => {
       assert(node.getMaxDecibels() === -20);
     });
 
-    it(".smoothingTimeConstant=", () => {
+    it('.smoothingTimeConstant=', () => {
       const node = new AnalyserNode(context);
 
       assert(node.getSmoothingTimeConstant() === 0.8);
@@ -78,13 +78,13 @@ describe("impl/AnalyserNode", () => {
       node.setSmoothingTimeConstant(0.6);
       assert(node.getSmoothingTimeConstant() === 0.6);
     });
-  })
+  });
 
-  describe("channel configuration", () => {
-    it("should synchronize with the input", () => {
-      const node1 = new AudioNode(context, {}, { outputs: [ 4 ] });
+  describe('channel configuration', () => {
+    it('should synchronize with the input', () => {
+      const node1 = new AudioNode(context, {}, { outputs: [4] });
       const node2 = new AnalyserNode(context);
-      const node3 = new AudioNode(context, {}, { inputs: [ 1 ] });
+      const node3 = new AudioNode(context, {}, { inputs: [1] });
 
       node1.outputs[0].enable();
       node2.outputs[0].enable();

@@ -1,38 +1,38 @@
-"use strict";
+'use strict';
 
-require("run-with-mocha");
+require('run-with-mocha');
 
-const assert = require("assert");
-const np = require("../../helpers/np");
-const AudioData = require("../../../src/impl/core/AudioData");
+const assert = require('assert');
+const np = require('../../helpers/np');
+const AudioData = require('../../../src/impl/core/AudioData');
 
-describe("impl/core/AudioData", () => {
-  it("constructor(numberOfChannels, length, sampleRate)", () => {
+describe('impl/core/AudioData', () => {
+  it('constructor(numberOfChannels, length, sampleRate)', () => {
     const data = new AudioData(2, 128, 44100);
 
     assert(data instanceof AudioData);
   });
 
-  describe("attributes", () => {
-    it(".numberOfChannels", () => {
+  describe('attributes', () => {
+    it('.numberOfChannels', () => {
       const data = new AudioData(2, 128, 44100);
 
       assert(data.numberOfChannels === 2);
     });
 
-    it(".length", () => {
+    it('.length', () => {
       const data = new AudioData(2, 128, 44100);
 
       assert(data.length === 128);
     });
 
-    it(".sampleRate", () => {
+    it('.sampleRate', () => {
       const data = new AudioData(2, 128, 44100);
 
       assert(data.sampleRate === 44100);
     });
 
-    it(".channelData", () => {
+    it('.channelData', () => {
       const data = new AudioData(2, 128, 44100);
 
       assert(data.channelData.length === 2);

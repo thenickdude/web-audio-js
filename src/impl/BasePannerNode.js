@@ -1,15 +1,15 @@
-"use strict";
+'use strict';
 
-const AudioNode = require("./AudioNode");
-const { defaults } = require("../utils");
-const { toNumber } = require("../utils");
-const { CLAMPED_MAX, EXPLICIT } = require("../constants/ChannelCountMode");
+const AudioNode = require('./AudioNode');
+const { defaults } = require('../utils');
+const { toNumber } = require('../utils');
+const { CLAMPED_MAX, EXPLICIT } = require('../constants/ChannelCountMode');
 
-const PanningModelTypes = [ "equalpower", "HRTF" ];
-const DistanceModelTypes = [ "linear", "inverse", "exponential" ];
+const PanningModelTypes = ['equalpower', 'HRTF'];
+const DistanceModelTypes = ['linear', 'inverse', 'exponential'];
 
-const DEFAULT_PANNING_MODEL = "equalpower";
-const DEFAULT_DISTANCE_MODEL = "inverse";
+const DEFAULT_PANNING_MODEL = 'equalpower';
+const DEFAULT_DISTANCE_MODEL = 'inverse';
 const DEFAULT_REF_DISTANCE = 1;
 const DEFAULT_MAX_DISTANCE = 10000;
 const DEFAULT_ROLLOFF_FACTOR = 1;
@@ -36,17 +36,23 @@ class BasePannerNode extends AudioNode {
     const refDistance = defaults(opts.refDistance, DEFAULT_REF_DISTANCE);
     const maxDistance = defaults(opts.maxDistance, DEFAULT_MAX_DISTANCE);
     const rolloffFactor = defaults(opts.rolloffFactor, DEFAULT_ROLLOFF_FACTOR);
-    const coneInnerAngle = defaults(opts.coneInnerAngle, DEFAULT_CONE_INNER_ANGLE);
-    const coneOuterAngle = defaults(opts.coneOuterAngle, DEFAULT_CONE_OUTER_ANGLE);
+    const coneInnerAngle = defaults(
+      opts.coneInnerAngle,
+      DEFAULT_CONE_INNER_ANGLE,
+    );
+    const coneOuterAngle = defaults(
+      opts.coneOuterAngle,
+      DEFAULT_CONE_OUTER_ANGLE,
+    );
     const coneOuterGain = defaults(opts.coneOuterGain, DEFAULT_CONE_OUTER_GAIN);
 
     super(context, opts, {
-      inputs: [ 1 ],
-      outputs: [ 2 ],
+      inputs: [1],
+      outputs: [2],
       channelCount: 2,
       channelCountMode: CLAMPED_MAX,
       allowedMaxChannelCount: 2,
-      allowedChannelCountMode: [ CLAMPED_MAX, EXPLICIT ]
+      allowedChannelCountMode: [CLAMPED_MAX, EXPLICIT],
     });
 
     this._panningModel = panningModel;

@@ -1,8 +1,8 @@
-"use strict";
+'use strict';
 
-const impl = require("../impl");
-const AudioScheduledSourceNode = require("./AudioScheduledSourceNode");
-const AudioParam = require("./AudioParam");
+const impl = require('../impl');
+const AudioScheduledSourceNode = require('./AudioScheduledSourceNode');
+const AudioParam = require('./AudioParam');
 
 class ConstantSourceNode extends AudioScheduledSourceNode {
   constructor(context, opts) {

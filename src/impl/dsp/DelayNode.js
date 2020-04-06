@@ -1,6 +1,6 @@
-"use strict";
+'use strict';
 
-const assert = require("assert");
+const assert = require('assert');
 
 const DelayNodeDSP = {
   dspInit(maxDelayTime) {
@@ -10,7 +10,11 @@ const DelayNodeDSP = {
   },
 
   dspComputeDelayBufferLength(delayTime) {
-    return Math.ceil(delayTime * this.sampleRate / this.blockSize) * this.blockSize + this.blockSize;
+    return (
+      Math.ceil((delayTime * this.sampleRate) / this.blockSize) *
+        this.blockSize +
+      this.blockSize
+    );
   },
 
   dspUpdateKernel(numberOfChannels) {
@@ -25,15 +29,15 @@ const DelayNodeDSP = {
     assert(numberOfChannels === this._kernels.length);
 
     switch (numberOfChannels) {
-    case 1:
-      this.dspProcess = this.dspProcess1;
-      break;
-    case 2:
-      this.dspProcess = this.dspProcess2;
-      break;
-    default:
-      this.dspProcess = this.dspProcessN;
-      break;
+      case 1:
+        this.dspProcess = this.dspProcess1;
+        break;
+      case 2:
+        this.dspProcess = this.dspProcess2;
+        break;
+      default:
+        this.dspProcess = this.dspProcessN;
+        break;
     }
   },
 
@@ -45,11 +49,27 @@ const DelayNodeDSP = {
     const kernel = this._kernels[0];
 
     if (this._delayTime.hasSampleAccurateValues()) {
-      kernel.computeAccurateDelayIndices(delayIndices, this._delayTime.getSampleAccurateValues());
-      kernel.processWithAccurateDelayIndices(inputs[0], outputs[0], delayIndices, blockSize);
+      kernel.computeAccurateDelayIndices(
+        delayIndices,
+        this._delayTime.getSampleAccurateValues(),
+      );
+      kernel.processWithAccurateDelayIndices(
+        inputs[0],
+        outputs[0],
+        delayIndices,
+        blockSize,
+      );
     } else {
-      kernel.computeStaticDelayIndices(delayIndices, this._delayTime.getValue());
-      kernel.processWithStaticDelayIndices(inputs[0], outputs[0], delayIndices, blockSize);
+      kernel.computeStaticDelayIndices(
+        delayIndices,
+        this._delayTime.getValue(),
+      );
+      kernel.processWithStaticDelayIndices(
+        inputs[0],
+        outputs[0],
+        delayIndices,
+        blockSize,
+      );
     }
   },
 
@@ -61,13 +81,39 @@ const DelayNodeDSP = {
     const kernels = this._kernels;
 
     if (this._delayTime.hasSampleAccurateValues()) {
-      kernels[0].computeAccurateDelayIndices(delayIndices, this._delayTime.getSampleAccurateValues());
-      kernels[0].processWithAccurateDelayIndices(inputs[0], outputs[0], delayIndices, blockSize);
-      kernels[1].processWithAccurateDelayIndices(inputs[1], outputs[1], delayIndices, blockSize);
+      kernels[0].computeAccurateDelayIndices(
+        delayIndices,
+        this._delayTime.getSampleAccurateValues(),
+      );
+      kernels[0].processWithAccurateDelayIndices(
+        inputs[0],
+        outputs[0],
+        delayIndices,
+        blockSize,
+      );
+      kernels[1].processWithAccurateDelayIndices(
+        inputs[1],
+        outputs[1],
+        delayIndices,
+        blockSize,
+      );
     } else {
-      kernels[0].computeStaticDelayIndices(delayIndices, this._delayTime.getValue());
-      kernels[0].processWithStaticDelayIndices(inputs[0], outputs[0], delayIndices, blockSize);
-      kernels[1].processWithStaticDelayIndices(inputs[1], outputs[1], delayIndices, blockSize);
+      kernels[0].computeStaticDelayIndices(
+        delayIndices,
+        this._delayTime.getValue(),
+      );
+      kernels[0].processWithStaticDelayIndices(
+        inputs[0],
+        outputs[0],
+        delayIndices,
+        blockSize,
+      );
+      kernels[1].processWithStaticDelayIndices(
+        inputs[1],
+        outputs[1],
+        delayIndices,
+        blockSize,
+      );
     }
   },
 
@@ -79,19 +125,35 @@ const DelayNodeDSP = {
     const kernels = this._kernels;
 
     if (this._delayTime.hasSampleAccurateValues()) {
-      kernels[0].computeAccurateDelayIndices(delayIndices, this._delayTime.getSampleAccurateValues());
+      kernels[0].computeAccurateDelayIndices(
+        delayIndices,
+        this._delayTime.getSampleAccurateValues(),
+      );
 
       for (let i = 0, imax = kernels.length; i < imax; i++) {
-        kernels[i].processWithAccurateDelayIndices(inputs[i], outputs[i], delayIndices, blockSize);
+        kernels[i].processWithAccurateDelayIndices(
+          inputs[i],
+          outputs[i],
+          delayIndices,
+          blockSize,
+        );
       }
     } else {
-      kernels[0].computeStaticDelayIndices(delayIndices, this._delayTime.getValue());
+      kernels[0].computeStaticDelayIndices(
+        delayIndices,
+        this._delayTime.getValue(),
+      );
 
       for (let i = 0, imax = kernels.length; i < imax; i++) {
-        kernels[i].processWithStaticDelayIndices(inputs[i], outputs[i], delayIndices, blockSize);
+        kernels[i].processWithStaticDelayIndices(
+          inputs[i],
+          outputs[i],
+          delayIndices,
+          blockSize,
+        );
       }
     }
-  }
+  },
 };
 
 class DelayKernel {
@@ -136,7 +198,7 @@ class DelayKernel {
     for (let i = 0, imax = delayIndices.length; i < imax; i++) {
       const delayTime = Math.max(0, Math.min(delayTimes[i], maxDelayTime));
 
-      let delayIndex = (virtualReadIndex + i) - delayTime * sampleRate;
+      let delayIndex = virtualReadIndex + i - delayTime * sampleRate;
 
       if (delayIndex < 0) {
         delayIndex += delayBufferLength;
@@ -162,7 +224,7 @@ class DelayKernel {
       }
     } else {
       for (let i = 0; i < inNumSamples; i++) {
-        const i0 = delayIndices[i]|0;
+        const i0 = delayIndices[i] | 0;
         const i1 = (i0 + 1) % delayBufferLength;
 
         output[i] = delayBuffer[i0] + ia * (delayBuffer[i1] - delayBuffer[i0]);
@@ -184,7 +246,7 @@ class DelayKernel {
 
     for (let i = 0; i < inNumSamples; i++) {
       const ix = delayIndices[i];
-      const i0 = ix|0;
+      const i0 = ix | 0;
       const ia = ix % 1;
 
       if (ia === 0) {

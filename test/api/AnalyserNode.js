@@ -1,22 +1,22 @@
-"use strict";
+'use strict';
 
-require("run-with-mocha");
+require('run-with-mocha');
 
-const assert = require("assert");
-const sinon = require("sinon");
-const api = require("../../src/api");
-const AudioContext = require("../../src/api/BaseAudioContext");
+const assert = require('assert');
+const sinon = require('sinon');
+const api = require('../../src/api');
+const AudioContext = require('../../src/api/BaseAudioContext');
 
-describe("api/AnalyserNode", () => {
-  it("context.createAnalyser()", () => {
+describe('api/AnalyserNode', () => {
+  it('context.createAnalyser()', () => {
     const context = new AudioContext();
     const target = context.createAnalyser();
 
     assert(target instanceof api.AnalyserNode);
   });
 
-  describe("attributes", () => {
-    it(".fftSize=", () => {
+  describe('attributes', () => {
+    it('.fftSize=', () => {
       const context = new AudioContext();
       const target = context.createAnalyser();
       const fftSize1 = 1024;
@@ -33,7 +33,7 @@ describe("api/AnalyserNode", () => {
       assert(target._impl.setFftSize.args[0][0] === fftSize2);
     });
 
-    it(".frequencyBinCount", () => {
+    it('.frequencyBinCount', () => {
       const context = new AudioContext();
       const target = context.createAnalyser();
       const frequencyBinCount = 512;
@@ -44,7 +44,7 @@ describe("api/AnalyserNode", () => {
       assert(target._impl.getFrequencyBinCount.callCount === 1);
     });
 
-    it(".minDecibels=", () => {
+    it('.minDecibels=', () => {
       const context = new AudioContext();
       const target = context.createAnalyser();
       const minDecibels1 = -30;
@@ -61,7 +61,7 @@ describe("api/AnalyserNode", () => {
       assert(target._impl.setMinDecibels.args[0][0] === minDecibels2);
     });
 
-    it(".maxDecibels=", () => {
+    it('.maxDecibels=', () => {
       const context = new AudioContext();
       const target = context.createAnalyser();
       const maxDecibels1 = -100;
@@ -78,13 +78,15 @@ describe("api/AnalyserNode", () => {
       assert(target._impl.setMaxDecibels.args[0][0] === maxDecibels2);
     });
 
-    it(".smoothingTimeConstant=", () => {
+    it('.smoothingTimeConstant=', () => {
       const context = new AudioContext();
       const target = context.createAnalyser();
       const smoothingTimeConstant1 = 0.8;
       const smoothingTimeConstant2 = 0.6;
 
-      target._impl.getSmoothingTimeConstant = sinon.spy(() => smoothingTimeConstant1);
+      target._impl.getSmoothingTimeConstant = sinon.spy(
+        () => smoothingTimeConstant1,
+      );
       target._impl.setSmoothingTimeConstant = sinon.spy();
 
       assert(target.smoothingTimeConstant === smoothingTimeConstant1);
@@ -92,12 +94,15 @@ describe("api/AnalyserNode", () => {
 
       target.smoothingTimeConstant = smoothingTimeConstant2;
       assert(target._impl.setSmoothingTimeConstant.callCount === 1);
-      assert(target._impl.setSmoothingTimeConstant.args[0][0] === smoothingTimeConstant2);
+      assert(
+        target._impl.setSmoothingTimeConstant.args[0][0] ===
+          smoothingTimeConstant2,
+      );
     });
   });
 
-  describe("methods", () => {
-    it(".getFloatFrequencyData(array)", () => {
+  describe('methods', () => {
+    it('.getFloatFrequencyData(array)', () => {
       const context = new AudioContext();
       const target = context.createAnalyser();
       const array = new Float32Array(128);
@@ -109,7 +114,7 @@ describe("api/AnalyserNode", () => {
       assert(target._impl.getFloatFrequencyData.args[0][0] === array);
     });
 
-    it(".getByteFrequencyData(array)", () => {
+    it('.getByteFrequencyData(array)', () => {
       const context = new AudioContext();
       const target = context.createAnalyser();
       const array = new Uint8Array(128);
@@ -121,7 +126,7 @@ describe("api/AnalyserNode", () => {
       assert(target._impl.getByteFrequencyData.args[0][0] === array);
     });
 
-    it(".getFloatTimeDomainData(array)", () => {
+    it('.getFloatTimeDomainData(array)', () => {
       const context = new AudioContext();
       const target = context.createAnalyser();
       const array = new Float32Array(128);
@@ -133,7 +138,7 @@ describe("api/AnalyserNode", () => {
       assert(target._impl.getFloatTimeDomainData.args[0][0] === array);
     });
 
-    it(".getByteTimeDomainData(array)", () => {
+    it('.getByteTimeDomainData(array)', () => {
       const context = new AudioContext();
       const target = context.createAnalyser();
       const array = new Uint8Array(128);

@@ -1,7 +1,7 @@
-"use strict";
+'use strict';
 
 module.exports = {
-  MAX: "max",
-  CLAMPED_MAX: "clamped-max",
-  EXPLICIT: "explicit",
+  MAX: 'max',
+  CLAMPED_MAX: 'clamped-max',
+  EXPLICIT: 'explicit',
 };

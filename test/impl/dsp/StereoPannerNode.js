@@ -1,15 +1,15 @@
-"use strict";
+'use strict';
 
-require("run-with-mocha");
+require('run-with-mocha');
 
-const assert = require("assert");
-const np = require("../../helpers/np");
-const AudioContext = require("../../../src/api/BaseAudioContext");
+const assert = require('assert');
+const np = require('../../helpers/np');
+const AudioContext = require('../../../src/api/BaseAudioContext');
 
-const channelData = [ new Float32Array(16), new Float32Array(16) ];
+const channelData = [new Float32Array(16), new Float32Array(16)];
 
-describe("impl/dsp/StereoPannerNode", () => {
-  it("mono", () => {
+describe('impl/dsp/StereoPannerNode', () => {
+  it('mono', () => {
     const audioContext = new AudioContext({ sampleRate: 8000, blockSize: 16 });
     const noise0 = np.random_sample(16);
     const buffer = audioContext.createBuffer(1, 16, 8000);
@@ -18,7 +18,7 @@ describe("impl/dsp/StereoPannerNode", () => {
 
     audioContext.resume();
 
-    buffer.getChannelData(0).set(noise0)
+    buffer.getChannelData(0).set(noise0);
 
     bufSrc.buffer = buffer;
     bufSrc.loop = true;
@@ -41,17 +41,17 @@ describe("impl/dsp/StereoPannerNode", () => {
     assert(actualR.every(expectedR));
   });
 
-  it("mono with scheduled param", () => {
+  it('mono with scheduled param', () => {
     const audioContext = new AudioContext({ sampleRate: 8000, blockSize: 16 });
     const noise0 = np.random_sample(16);
     const buffer = audioContext.createBuffer(1, 16, 8000);
     const bufSrc = audioContext.createBufferSource();
     const panner = audioContext.createStereoPanner();
-    const channelData = [ new Float32Array(16), new Float32Array(16) ];
+    const channelData = [new Float32Array(16), new Float32Array(16)];
 
     audioContext.resume();
 
-    buffer.getChannelData(0).set(noise0)
+    buffer.getChannelData(0).set(noise0);
 
     bufSrc.buffer = buffer;
     bufSrc.loop = true;
@@ -75,19 +75,19 @@ describe("impl/dsp/StereoPannerNode", () => {
     assert(actualR.every(expectedR));
   });
 
-  it("stereo", () => {
+  it('stereo', () => {
     const audioContext = new AudioContext({ sampleRate: 8000, blockSize: 16 });
     const noise0 = np.random_sample(16).fill(-0.25);
     const noise1 = np.random_sample(16).fill(0.25);
     const buffer = audioContext.createBuffer(2, 16, 8000);
     const bufSrc = audioContext.createBufferSource();
     const panner = audioContext.createStereoPanner();
-    const channelData = [ new Float32Array(16), new Float32Array(16) ];
+    const channelData = [new Float32Array(16), new Float32Array(16)];
 
     audioContext.resume();
 
-    buffer.getChannelData(0).set(noise0)
-    buffer.getChannelData(1).set(noise1)
+    buffer.getChannelData(0).set(noise0);
+    buffer.getChannelData(1).set(noise1);
 
     bufSrc.buffer = buffer;
     bufSrc.loop = true;
@@ -110,14 +110,14 @@ describe("impl/dsp/StereoPannerNode", () => {
     assert(actualR.every(expectedR));
   });
 
-  it("stereo with scheduled param", () => {
+  it('stereo with scheduled param', () => {
     const audioContext = new AudioContext({ sampleRate: 8000, blockSize: 16 });
     const noise0 = np.random_sample(16);
     const noise1 = np.random_sample(16);
     const buffer = audioContext.createBuffer(2, 16, 8000);
     const bufSrc = audioContext.createBufferSource();
     const panner = audioContext.createStereoPanner();
-    const channelData = [ new Float32Array(16), new Float32Array(16) ];
+    const channelData = [new Float32Array(16), new Float32Array(16)];
 
     audioContext.resume();
 

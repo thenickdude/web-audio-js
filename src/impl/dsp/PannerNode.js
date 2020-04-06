@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 const PannerNodeDSP = {
   dspProcess() {
@@ -6,7 +6,7 @@ const PannerNodeDSP = {
 
     outputBus.zeros();
     outputBus.sumFrom(this.inputs[0].bus);
-  }
+  },
 };
 
 module.exports = PannerNodeDSP;
