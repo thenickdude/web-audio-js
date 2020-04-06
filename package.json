@@ -61,24 +61,16 @@
     "build:to5": "tsc",
     "clean": "rm -rf lib coverage .nyc_output npm-debug.log",
     "cover": "BABEL_ENV=cover nyc --reporter text --reporter html npm test",
-    "lint": "eslint src test",
+    "lint": "eslint src src/__tests__",
     "postversion": "git push && git push --tags && npm run clean",
-    "prepublishOnly": "npm-run-all clean lint test build",
-    "preversion": "npm-run-all clean lint test",
-    "test": "jest --passWithNoTests",
-    "test-ci": "jest --coverage --passWithNoTests",
+    "prepublishOnly": "npm-run-all clean lint src/__tests__ build",
+    "preversion": "npm-run-all clean lint src/__tests__",
+    "test": "jest",
+    "test-ci": "jest --coverage",
     "version": "npm run build && git add -A build"
   },
   "jest": {
-    "preset": "ts-jest",
-    "testEnvironment": "node",
-    "testMatch": ["test/**/*.js"],
-    "globals": {
-      "ts-jest": {
-        "diagnostics": {
-          "warnOnly": true
-        }
-      }
-    }
+    "preset": "ts-jest/presets/js-with-ts",
+    "testEnvironment": "node"
   }
 }
