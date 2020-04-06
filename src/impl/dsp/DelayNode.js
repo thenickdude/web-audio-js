@@ -1,6 +1,6 @@
 'use strict';
 
-const assert = require('assert');
+import assert from 'assert';
 
 const DelayNodeDSP = {
   dspInit(maxDelayTime) {
@@ -266,4 +266,4 @@ class DelayKernel {
   }
 }
 
-module.exports = DelayNodeDSP;
+export default DelayNodeDSP;

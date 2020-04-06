@@ -1,21 +1,18 @@
 'use strict';
 
-const nmap = require('nmap');
-const AudioDataUtils = require('../utils/AudioDataUtils');
-const BaseAudioContext = require('../api/BaseAudioContext');
-const AudioBuffer = require('../api/AudioBuffer');
-const setImmediate = require('../utils/setImmediate');
-const { defineProp } = require('../utils');
-const {
+import nmap from 'nmap';
+import * as AudioDataUtils from '../utils/AudioDataUtils';
+import BaseAudioContext from '../api/BaseAudioContext';
+import AudioBuffer from '../api/AudioBuffer';
+import setImmediate from '../utils/setImmediate';
+import {
+  defineProp,
+  toNumber,
   toValidNumberOfChannels,
   toValidSampleRate,
-  toNumber,
-} = require('../utils');
-const {
-  RUNNING,
-  SUSPENDED,
-  CLOSED,
-} = require('../constants/AudioContextState');
+} from '../utils';
+
+import { CLOSED, RUNNING, SUSPENDED } from '../constants/AudioContextState';
 
 class OfflineAudioContext extends BaseAudioContext {
   /**
@@ -246,4 +243,4 @@ function render(impl) {
   setImmediate(loop);
 }
 
-module.exports = OfflineAudioContext;
+export default OfflineAudioContext;

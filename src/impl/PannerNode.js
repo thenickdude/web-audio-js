@@ -1,7 +1,7 @@
 'use strict';
 
-const BasePannerNode = require('./BasePannerNode');
-const PannerNodeDSP = require('./dsp/PannerNode');
+import BasePannerNode from './BasePannerNode';
+import PannerNodeDSP from './dsp/PannerNode';
 
 class PannerNode extends BasePannerNode {
   /**
@@ -44,4 +44,4 @@ class PannerNode extends BasePannerNode {
 
 Object.assign(PannerNode.prototype, PannerNodeDSP);
 
-module.exports = PannerNode;
+export default PannerNode;

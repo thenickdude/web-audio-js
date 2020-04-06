@@ -1,8 +1,8 @@
 'use strict';
 
-const impl = require('../impl');
-const AudioNode = require('./AudioNode');
-const AudioBuffer = require('./AudioBuffer');
+import * as impl from '../impl';
+import AudioNode from './AudioNode';
+import AudioBuffer from './AudioBuffer';
 
 class ScriptProcessorNode extends AudioNode {
   constructor(context, opts) {
@@ -36,4 +36,4 @@ class ScriptProcessorNode extends AudioNode {
   }
 }
 
-module.exports = ScriptProcessorNode;
+export default ScriptProcessorNode;

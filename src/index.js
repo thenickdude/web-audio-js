@@ -5,10 +5,10 @@ import StreamAudioContext from './context/StreamAudioContext';
 import RenderingAudioContext from './context/RenderingAudioContext';
 import WebAudioContext from './context/WebAudioContext';
 import RawPcmAudioContext from './context/RawPcmAudioContext';
-import api from './api';
-import impl from './impl';
-import decoder from './decoder';
-import encoder from './encoder';
+import * as api from './api';
+import * as impl from './impl';
+import * as decoder from './decoder';
+import * as encoder from './encoder';
 
 export {
   OfflineAudioContext,

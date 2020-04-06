@@ -1,8 +1,8 @@
 'use strict';
 
-const impl = require('../impl');
-const AudioNode = require('./AudioNode');
-const AudioParam = require('./AudioParam');
+import * as impl from '../impl';
+import AudioNode from './AudioNode';
+import AudioParam from './AudioParam';
 
 class SpatialPannerNode extends AudioNode {
   constructor(context, opts) {
@@ -115,4 +115,4 @@ class SpatialPannerNode extends AudioNode {
   }
 }
 
-module.exports = SpatialPannerNode;
+export default SpatialPannerNode;

@@ -32,4 +32,4 @@ class AudioListener {
   }
 }
 
-module.exports = AudioListener;
+export default AudioListener;

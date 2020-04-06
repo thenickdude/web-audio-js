@@ -1,22 +1,21 @@
 'use strict';
 
-const nmap = require('nmap');
-const config = require('../config');
-const BaseAudioContext = require('../api/BaseAudioContext');
-const PCMEncoder = require('../utils/PCMEncoder');
-const setImmediate = require('../utils/setImmediate');
-const { defaults, defineProp } = require('../utils');
-const {
-  toValidSampleRate,
+import nmap from 'nmap';
+import config from '../config';
+import BaseAudioContext from '../api/BaseAudioContext';
+import PCMEncoder from '../utils/PCMEncoder';
+import setImmediate from '../utils/setImmediate';
+import {
+  defaults,
+  defineProp,
+  toValidBitDepth,
   toValidBlockSize,
   toValidNumberOfChannels,
-  toValidBitDepth,
-} = require('../utils');
-const {
-  RUNNING,
-  SUSPENDED,
-  CLOSED,
-} = require('../constants/AudioContextState');
+  toValidSampleRate,
+} from '../utils';
+
+import { CLOSED, RUNNING, SUSPENDED } from '../constants/AudioContextState';
+
 const noopWriter = { write: () => true };
 
 class StreamAudioContext extends BaseAudioContext {
@@ -172,4 +171,4 @@ class StreamAudioContext extends BaseAudioContext {
   }
 }
 
-module.exports = StreamAudioContext;
+export default StreamAudioContext;

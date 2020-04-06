@@ -1,14 +1,12 @@
 'use strict';
 
-const { SET_VALUE_AT_TIME } = require('../constants/AudioParamEvent');
-const {
-  LINEAR_RAMP_TO_VALUE_AT_TIME,
-} = require('../constants/AudioParamEvent');
-const {
+import {
   EXPONENTIAL_RAMP_TO_VALUE_AT_TIME,
-} = require('../constants/AudioParamEvent');
-const { SET_TARGET_AT_TIME } = require('../constants/AudioParamEvent');
-const { SET_VALUE_CURVE_AT_TIME } = require('../constants/AudioParamEvent');
+  LINEAR_RAMP_TO_VALUE_AT_TIME,
+  SET_TARGET_AT_TIME,
+  SET_VALUE_AT_TIME,
+  SET_VALUE_CURVE_AT_TIME,
+} from '../constants/AudioParamEvent';
 
 /**
  * @param {object[]} timeline
@@ -130,7 +128,7 @@ function getValueCurveAtTime(t, curve, t0, duration) {
   return y0 + a * (y1 - y0);
 }
 
-module.exports = {
+export {
   computeValueAtTime,
   getLinearRampToValueAtTime,
   getExponentialRampToValueAtTime,

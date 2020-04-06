@@ -1,13 +1,14 @@
 'use strict';
 
-const config = require('../config');
-const BaseAudioContext = require('../api/BaseAudioContext');
-const { defaults, defineProp } = require('../utils');
-const {
+import config from '../config';
+import BaseAudioContext from '../api/BaseAudioContext';
+import {
+  defaults,
+  defineProp,
+  toPowerOfTwo,
   toValidBlockSize,
   toValidNumberOfChannels,
-  toPowerOfTwo,
-} = require('../utils');
+} from '../utils';
 
 const DSPAlgorithm = [];
 
@@ -140,4 +141,4 @@ DSPAlgorithm[2] = (impl, numberOfChannels, bufferSize) => {
   };
 };
 
-module.exports = WebAudioContext;
+export default WebAudioContext;

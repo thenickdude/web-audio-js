@@ -33,4 +33,4 @@ class PCMArrayBufferWriter {
   }
 }
 
-module.exports = PCMArrayBufferWriter;
+export default PCMArrayBufferWriter;

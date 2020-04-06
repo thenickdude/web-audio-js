@@ -1,10 +1,12 @@
 'use strict';
 
-const assert = require('assert');
-const AudioBus = require('./AudioBus');
-const { toValidNumberOfChannels } = require('../../utils');
-const { CLAMPED_MAX, EXPLICIT } = require('../../constants/ChannelCountMode');
-const { SPEAKERS } = require('../../constants/ChannelInterpretation');
+import assert from 'assert';
+import AudioBus from './AudioBus';
+import { toValidNumberOfChannels } from '../../utils';
+
+import { CLAMPED_MAX, EXPLICIT } from '../../constants/ChannelCountMode';
+
+import { SPEAKERS } from '../../constants/ChannelInterpretation';
 
 /**
  * @prop {AudioNode} node
@@ -289,4 +291,4 @@ function moveItem(target, source, destination) {
   return removeItem(target, source) && addItem(target, destination);
 }
 
-module.exports = AudioNodeInput;
+export default AudioNodeInput;

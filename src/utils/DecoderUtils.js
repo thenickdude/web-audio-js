@@ -1,7 +1,7 @@
 'use strict';
 
-const nmap = require('nmap');
-const AudioDataUtils = require('./AudioDataUtils');
+import nmap from 'nmap';
+import * as AudioDataUtils from './AudioDataUtils';
 
 /**
  * @param {function}    decodeFn
@@ -54,4 +54,4 @@ function resample(audioData, sampleRate) {
   return { numberOfChannels, length, sampleRate, channelData };
 }
 
-module.exports = { decode, resample };
+export { decode, resample };

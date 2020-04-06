@@ -1,10 +1,10 @@
 'use strict';
 
-const AudioNode = require('./AudioNode');
-const ChannelMergerNodeDSP = require('./dsp/ChannelMergerNode');
-const { defaults, fill } = require('../utils');
-const { toValidNumberOfChannels } = require('../utils');
-const { EXPLICIT } = require('../constants/ChannelCountMode');
+import AudioNode from './AudioNode';
+import ChannelMergerNodeDSP from './dsp/ChannelMergerNode';
+import { defaults, fill, toValidNumberOfChannels } from '../utils';
+
+import { EXPLICIT } from '../constants/ChannelCountMode';
 
 const DEFAULT_NUMBER_OF_INPUTS = 6;
 
@@ -52,4 +52,4 @@ class ChannelMergerNode extends AudioNode {
 
 Object.assign(ChannelMergerNode.prototype, ChannelMergerNodeDSP);
 
-module.exports = ChannelMergerNode;
+export default ChannelMergerNode;

@@ -1,14 +1,14 @@
 'use strict';
 
-const nmap = require('nmap');
-const PeriodicWaveDSP = require('./dsp/PeriodicWave');
-const {
-  SINE,
-  SAWTOOTH,
-  TRIANGLE,
-  SQUARE,
+import nmap from 'nmap';
+import PeriodicWaveDSP from './dsp/PeriodicWave';
+import {
   CUSTOM,
-} = require('../constants/OscillatorType');
+  SAWTOOTH,
+  SINE,
+  SQUARE,
+  TRIANGLE,
+} from '../constants/OscillatorType';
 
 class PeriodicWave {
   /**
@@ -123,4 +123,4 @@ class PeriodicWave {
 
 Object.assign(PeriodicWave.prototype, PeriodicWaveDSP);
 
-module.exports = PeriodicWave;
+export default PeriodicWave;

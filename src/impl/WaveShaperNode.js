@@ -1,9 +1,10 @@
 'use strict';
 
-const AudioNode = require('./AudioNode');
-const WaveShaperNodeDSP = require('./dsp/WaveShaperNode');
-const { defaults } = require('../utils');
-const { MAX } = require('../constants/ChannelCountMode');
+import AudioNode from './AudioNode';
+import WaveShaperNodeDSP from './dsp/WaveShaperNode';
+import { defaults } from '../utils';
+
+import { MAX } from '../constants/ChannelCountMode';
 
 const OverSampleTypes = ['none', '2x', '4x'];
 
@@ -81,4 +82,4 @@ class WaveShaperNode extends AudioNode {
 
 Object.assign(WaveShaperNode.prototype, WaveShaperNodeDSP);
 
-module.exports = WaveShaperNode;
+export default WaveShaperNode;

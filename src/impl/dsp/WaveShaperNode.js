@@ -1,6 +1,6 @@
 'use strict';
 
-const assert = require('assert');
+import assert from 'assert';
 
 const WaveShaperNodeDSP = {
   dspInit() {
@@ -96,4 +96,4 @@ class WaveShaperKernel {
   }
 }
 
-module.exports = WaveShaperNodeDSP;
+export default WaveShaperNodeDSP;

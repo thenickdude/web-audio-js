@@ -1,7 +1,7 @@
 'use strict';
 
-const impl = require('../impl');
-const AudioNode = require('./AudioNode');
+import * as impl from '../impl';
+import AudioNode from './AudioNode';
 
 class WaveShaperNode extends AudioNode {
   constructor(context, opts) {
@@ -27,4 +27,4 @@ class WaveShaperNode extends AudioNode {
   }
 }
 
-module.exports = WaveShaperNode;
+export default WaveShaperNode;

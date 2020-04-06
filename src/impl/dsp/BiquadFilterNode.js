@@ -1,9 +1,9 @@
 'use strict';
 
-const assert = require('assert');
-const BiquadCoeffs = require('biquad-coeffs-webaudio');
-const BiquadFilterKernel = require('./BiquadFilterKernel');
-const { getFilterResponse } = require('../../utils/FilterUtils');
+import assert from 'assert';
+import BiquadCoeffs from 'biquad-coeffs-webaudio';
+import BiquadFilterKernel from './BiquadFilterKernel';
+import { getFilterResponse } from '../../utils/FilterUtils';
 
 const BiquadFilterNodeDSP = {
   dspInit() {
@@ -186,4 +186,4 @@ const BiquadFilterNodeDSP = {
   },
 };
 
-module.exports = BiquadFilterNodeDSP;
+export default BiquadFilterNodeDSP;

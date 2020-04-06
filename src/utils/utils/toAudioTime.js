@@ -22,4 +22,4 @@ function toAudioTime(str) {
   return 0;
 }
 
-module.exports = toAudioTime;
+export default toAudioTime;

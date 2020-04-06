@@ -1,12 +1,13 @@
 'use strict';
 
-const AudioScheduledSourceNode = require('./AudioScheduledSourceNode');
-const AudioBuffer = require('./AudioBuffer');
-const AudioBufferSourceNodeDSP = require('./dsp/AudioBufferSourceNode');
-const { defaults } = require('../utils');
-const { toImpl, toNumber } = require('../utils');
-const { CONTROL_RATE } = require('../constants/AudioParamRate');
-const { FINISHED } = require('../constants/PlaybackState');
+import AudioScheduledSourceNode from './AudioScheduledSourceNode';
+import AudioBuffer from './AudioBuffer';
+import AudioBufferSourceNodeDSP from './dsp/AudioBufferSourceNode';
+import { defaults, toImpl, toNumber } from '../utils';
+
+import { CONTROL_RATE } from '../constants/AudioParamRate';
+
+import { FINISHED } from '../constants/PlaybackState';
 
 const DEFAULT_PLAYBACK_RATE = 1;
 const DEFAULT_DETUNE = 0;
@@ -188,4 +189,4 @@ class AudioBufferSourceNode extends AudioScheduledSourceNode {
 
 Object.assign(AudioBufferSourceNode.prototype, AudioBufferSourceNodeDSP);
 
-module.exports = AudioBufferSourceNode;
+export default AudioBufferSourceNode;

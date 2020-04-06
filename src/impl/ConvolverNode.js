@@ -1,11 +1,11 @@
 'use strict';
 
-const AudioNode = require('./AudioNode');
-const AudioBuffer = require('./AudioBuffer');
-const ConvolverNodeDSP = require('./dsp/ConvolverNode');
-const { defaults } = require('../utils');
-const { toImpl } = require('../utils');
-const { CLAMPED_MAX, EXPLICIT } = require('../constants/ChannelCountMode');
+import AudioNode from './AudioNode';
+import AudioBuffer from './AudioBuffer';
+import ConvolverNodeDSP from './dsp/ConvolverNode';
+import { defaults, toImpl } from '../utils';
+
+import { CLAMPED_MAX, EXPLICIT } from '../constants/ChannelCountMode';
 
 const DEFAULT_DISABLE_NORMALIZATION = false;
 
@@ -81,4 +81,4 @@ class ConvolverNode extends AudioNode {
 
 Object.assign(ConvolverNode.prototype, ConvolverNodeDSP);
 
-module.exports = ConvolverNode;
+export default ConvolverNode;

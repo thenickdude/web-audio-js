@@ -1,9 +1,10 @@
 'use strict';
 
-const AudioNode = require('./AudioNode');
-const IIRFilterNodeDSP = require('./dsp/IIRFilterNode');
-const { defaults } = require('../utils');
-const { MAX } = require('../constants/ChannelCountMode');
+import AudioNode from './AudioNode';
+import IIRFilterNodeDSP from './dsp/IIRFilterNode';
+import { defaults } from '../utils';
+
+import { MAX } from '../constants/ChannelCountMode';
 
 class IIRFilterNode extends AudioNode {
   /**
@@ -64,4 +65,4 @@ class IIRFilterNode extends AudioNode {
 
 Object.assign(IIRFilterNode.prototype, IIRFilterNodeDSP);
 
-module.exports = IIRFilterNode;
+export default IIRFilterNode;

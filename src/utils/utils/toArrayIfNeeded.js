@@ -8,4 +8,4 @@ function toArrayIfNeeded(value) {
   return Array.isArray(value) ? value : [value];
 }
 
-module.exports = toArrayIfNeeded;
+export default toArrayIfNeeded;

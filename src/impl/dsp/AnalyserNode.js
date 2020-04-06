@@ -1,9 +1,9 @@
 'use strict';
 
-const fft = require('fourier-transform');
-const blackman = require('scijs-window-functions/blackman');
-const AudioBus = require('../core/AudioBus');
-const { toDecibel, normalize } = require('../../utils');
+import fft from 'fourier-transform';
+import blackman from 'scijs-window-functions/blackman';
+import AudioBus from '../core/AudioBus';
+import { normalize, toDecibel } from '../../utils';
 
 const MAX_FFT_SIZE = 32768;
 
@@ -113,4 +113,4 @@ const AnalyserNodeDSP = {
   },
 };
 
-module.exports = AnalyserNodeDSP;
+export default AnalyserNodeDSP;

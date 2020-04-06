@@ -42,4 +42,4 @@ const PeriodicWaveDSP = {
   },
 };
 
-module.exports = PeriodicWaveDSP;
+export default PeriodicWaveDSP;

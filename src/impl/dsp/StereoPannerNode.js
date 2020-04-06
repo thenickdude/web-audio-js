@@ -104,4 +104,4 @@ const StereoPannerNodeDSP = {
   },
 };
 
-module.exports = StereoPannerNodeDSP;
+export default StereoPannerNodeDSP;

@@ -1,18 +1,23 @@
 'use strict';
 
-const AudioNode = require('./AudioNode');
-const BiquadFilterNodeDSP = require('./dsp/BiquadFilterNode');
-const { defaults } = require('../utils');
-const { MAX } = require('../constants/ChannelCountMode');
-const { CONTROL_RATE } = require('../constants/AudioParamRate');
-const { LOWPASS } = require('../constants/BiquadFilterType');
-const { HIGHPASS } = require('../constants/BiquadFilterType');
-const { BANDPASS } = require('../constants/BiquadFilterType');
-const { LOWSHELF } = require('../constants/BiquadFilterType');
-const { HIGHSHELF } = require('../constants/BiquadFilterType');
-const { PEAKING } = require('../constants/BiquadFilterType');
-const { NOTCH } = require('../constants/BiquadFilterType');
-const { ALLPASS } = require('../constants/BiquadFilterType');
+import AudioNode from './AudioNode';
+import BiquadFilterNodeDSP from './dsp/BiquadFilterNode';
+import { defaults } from '../utils';
+
+import { MAX } from '../constants/ChannelCountMode';
+
+import { CONTROL_RATE } from '../constants/AudioParamRate';
+
+import {
+  ALLPASS,
+  BANDPASS,
+  HIGHPASS,
+  HIGHSHELF,
+  LOWPASS,
+  LOWSHELF,
+  NOTCH,
+  PEAKING,
+} from '../constants/BiquadFilterType';
 
 const allowedBiquadFilterTypes = [
   LOWPASS,
@@ -137,4 +142,4 @@ class BiquadFilterNode extends AudioNode {
 
 Object.assign(BiquadFilterNode.prototype, BiquadFilterNodeDSP);
 
-module.exports = BiquadFilterNode;
+export default BiquadFilterNode;

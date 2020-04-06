@@ -1,7 +1,7 @@
 'use strict';
 
-const impl = require('../impl');
-const AudioNode = require('./AudioNode');
+import * as impl from '../impl';
+import AudioNode from './AudioNode';
 
 class IIRFilterNode extends AudioNode {
   constructor(context, opts) {
@@ -15,4 +15,4 @@ class IIRFilterNode extends AudioNode {
   }
 }
 
-module.exports = IIRFilterNode;
+export default IIRFilterNode;

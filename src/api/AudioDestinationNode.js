@@ -1,6 +1,6 @@
 'use strict';
 
-const AudioNode = require('./AudioNode');
+import AudioNode from './AudioNode';
 
 class AudioDestinationNode extends AudioNode {
   constructor(context, impl) {
@@ -14,4 +14,4 @@ class AudioDestinationNode extends AudioNode {
   }
 }
 
-module.exports = AudioDestinationNode;
+export default AudioDestinationNode;

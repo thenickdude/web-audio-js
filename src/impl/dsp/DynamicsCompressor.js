@@ -3,9 +3,9 @@
 // Port from Chromium
 // https://chromium.googlesource.com/chromium/blink/+/master/Source/platform/audio/DynamicsCompressor.cpp
 
-const assert = require('assert');
-const nmap = require('nmap');
-const DynamicsCompressorKernel = require('./DynamicsCompressorKernel');
+import assert from 'assert';
+import nmap from 'nmap';
+import DynamicsCompressorKernel from './DynamicsCompressorKernel';
 
 const THRESHOLD = 0;
 const KNEE = 1;

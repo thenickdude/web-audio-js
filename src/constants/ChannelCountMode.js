@@ -1,7 +1,5 @@
 'use strict';
 
-module.exports = {
-  MAX: 'max',
-  CLAMPED_MAX: 'clamped-max',
-  EXPLICIT: 'explicit',
-};
+export const MAX = 'max';
+export const CLAMPED_MAX = 'clamped-max';
+export const EXPLICIT = 'explicit';

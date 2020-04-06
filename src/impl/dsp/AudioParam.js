@@ -1,17 +1,16 @@
 'use strict';
 
-const assert = require('assert');
-const AudioParamUtils = require('../../utils/AudioParamUtils');
-const { fill } = require('../../utils');
-const { SET_VALUE_AT_TIME } = require('../../constants/AudioParamEvent');
-const {
-  LINEAR_RAMP_TO_VALUE_AT_TIME,
-} = require('../../constants/AudioParamEvent');
-const {
+import assert from 'assert';
+import * as AudioParamUtils from '../../utils/AudioParamUtils';
+import { fill } from '../../utils';
+
+import {
   EXPONENTIAL_RAMP_TO_VALUE_AT_TIME,
-} = require('../../constants/AudioParamEvent');
-const { SET_TARGET_AT_TIME } = require('../../constants/AudioParamEvent');
-const { SET_VALUE_CURVE_AT_TIME } = require('../../constants/AudioParamEvent');
+  LINEAR_RAMP_TO_VALUE_AT_TIME,
+  SET_TARGET_AT_TIME,
+  SET_VALUE_AT_TIME,
+  SET_VALUE_CURVE_AT_TIME,
+} from '../../constants/AudioParamEvent';
 
 const AudioParamDSP = {
   dspInit() {
@@ -355,4 +354,4 @@ const AudioParamDSP = {
   },
 };
 
-module.exports = AudioParamDSP;
+export default AudioParamDSP;

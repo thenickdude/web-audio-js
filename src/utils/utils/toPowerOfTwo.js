@@ -10,4 +10,4 @@ function toPowerOfTwo(value, round) {
   return 1 << round(Math.log(value) / Math.log(2));
 }
 
-module.exports = toPowerOfTwo;
+export default toPowerOfTwo;

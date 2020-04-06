@@ -1,11 +1,7 @@
 'use strict';
 
-const AudioData = require('./core/AudioData');
-const {
-  toValidNumberOfChannels,
-  toNumber,
-  toValidSampleRate,
-} = require('../utils');
+import AudioData from './core/AudioData';
+import { toNumber, toValidNumberOfChannels, toValidSampleRate } from '../utils';
 
 /**
  * @prop {AudioData} audioData
@@ -93,4 +89,4 @@ class AudioBuffer {
   }
 }
 
-module.exports = AudioBuffer;
+export default AudioBuffer;

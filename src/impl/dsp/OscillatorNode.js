@@ -1,6 +1,6 @@
 'use strict';
 
-const { SINE } = require('../../constants/OscillatorType');
+import { SINE } from '../../constants/OscillatorType';
 
 const OscillatorNodeDSP = {
   dspInit() {
@@ -147,4 +147,4 @@ const OscillatorNodeDSP = {
   },
 };
 
-module.exports = OscillatorNodeDSP;
+export default OscillatorNodeDSP;

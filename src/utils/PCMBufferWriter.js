@@ -33,4 +33,4 @@ class PCMBufferWriter {
   }
 }
 
-module.exports = PCMBufferWriter;
+export default PCMBufferWriter;

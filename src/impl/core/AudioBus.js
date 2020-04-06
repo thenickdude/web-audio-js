@@ -1,9 +1,10 @@
 'use strict';
 
-const assert = require('assert');
-const AudioData = require('./AudioData');
-const { fill } = require('../../utils');
-const { DISCRETE } = require('../../constants/ChannelInterpretation');
+import assert from 'assert';
+import AudioData from './AudioData';
+import { fill } from '../../utils';
+
+import { DISCRETE } from '../../constants/ChannelInterpretation';
 
 const DSPAlgorithm = {};
 
@@ -407,4 +408,4 @@ DSPAlgorithm[1006004] = (source, destination, length) => {
   }
 };
 
-module.exports = AudioBus;
+export default AudioBus;

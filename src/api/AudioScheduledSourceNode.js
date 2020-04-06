@@ -1,6 +1,6 @@
 'use strict';
 
-const AudioNode = require('./AudioNode');
+import AudioNode from './AudioNode';
 
 class AudioScheduledSourceNode extends AudioNode {
   get onended() {
@@ -21,4 +21,4 @@ class AudioScheduledSourceNode extends AudioNode {
   }
 }
 
-module.exports = AudioScheduledSourceNode;
+export default AudioScheduledSourceNode;

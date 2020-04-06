@@ -25,4 +25,4 @@ const ChannelSplitterNodeDSP = {
   },
 };
 
-module.exports = ChannelSplitterNodeDSP;
+export default ChannelSplitterNodeDSP;

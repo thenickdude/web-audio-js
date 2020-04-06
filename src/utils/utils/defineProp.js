@@ -14,4 +14,4 @@ function defineProp(target, name, value) {
   });
 }
 
-module.exports = defineProp;
+export default defineProp;

@@ -9,4 +9,4 @@ const PannerNodeDSP = {
   },
 };
 
-module.exports = PannerNodeDSP;
+export default PannerNodeDSP;

@@ -1,6 +1,6 @@
 'use strict';
 
-const nmap = require('nmap');
+import nmap from 'nmap';
 
 /**
  * AudioData is struct like AudioBuffer.
@@ -28,4 +28,4 @@ class AudioData {
   }
 }
 
-module.exports = AudioData;
+export default AudioData;

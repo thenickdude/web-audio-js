@@ -8,4 +8,4 @@ function toDecibel(value) {
   return 20 * Math.log10(value);
 }
 
-module.exports = toDecibel;
+export default toDecibel;

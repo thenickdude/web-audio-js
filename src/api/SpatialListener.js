@@ -1,7 +1,7 @@
 'use strict';
 
-const AudioParam = require('./AudioParam');
-const { defineProp } = require('../utils');
+import AudioParam from './AudioParam';
+import { defineProp } from '../utils';
 
 class SpatialListener {
   constructor(context, impl) {
@@ -56,4 +56,4 @@ class SpatialListener {
   }
 }
 
-module.exports = SpatialListener;
+export default SpatialListener;

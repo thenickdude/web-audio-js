@@ -1,6 +1,6 @@
 'use strict';
 
-const AudioBus = require('./AudioBus');
+import AudioBus from './AudioBus';
 
 /**
  * @prop {AudioNode} node
@@ -141,4 +141,4 @@ class AudioNodeOutput {
   }
 }
 
-module.exports = AudioNodeOutput;
+export default AudioNodeOutput;

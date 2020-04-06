@@ -1,8 +1,9 @@
 'use strict';
 
-const AudioNode = require('./AudioNode');
-const { toValidNumberOfChannels } = require('../utils');
-const { EXPLICIT } = require('../constants/ChannelCountMode');
+import AudioNode from './AudioNode';
+import { toValidNumberOfChannels } from '../utils';
+
+import { EXPLICIT } from '../constants/ChannelCountMode';
 
 /**
  * @prop {AudioNodeOutput} output
@@ -57,4 +58,4 @@ class AudioDestinationNode extends AudioNode {
   }
 }
 
-module.exports = AudioDestinationNode;
+export default AudioDestinationNode;

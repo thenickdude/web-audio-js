@@ -1,21 +1,21 @@
 'use strict';
 
-const AudioNodeInput = require('./core/AudioNodeInput');
-const AudioBus = require('./core/AudioBus');
-const AudioParamDSP = require('./dsp/AudioParam');
-const { defaults } = require('../utils');
-const { toNumber } = require('../utils');
-const { EXPLICIT } = require('../constants/ChannelCountMode');
-const { CONTROL_RATE } = require('../constants/AudioParamRate');
-const { SET_VALUE_AT_TIME } = require('../constants/AudioParamEvent');
-const {
-  LINEAR_RAMP_TO_VALUE_AT_TIME,
-} = require('../constants/AudioParamEvent');
-const {
+import AudioNodeInput from './core/AudioNodeInput';
+import AudioBus from './core/AudioBus';
+import AudioParamDSP from './dsp/AudioParam';
+import { defaults, toNumber } from '../utils';
+
+import { EXPLICIT } from '../constants/ChannelCountMode';
+
+import { CONTROL_RATE } from '../constants/AudioParamRate';
+
+import {
   EXPONENTIAL_RAMP_TO_VALUE_AT_TIME,
-} = require('../constants/AudioParamEvent');
-const { SET_TARGET_AT_TIME } = require('../constants/AudioParamEvent');
-const { SET_VALUE_CURVE_AT_TIME } = require('../constants/AudioParamEvent');
+  LINEAR_RAMP_TO_VALUE_AT_TIME,
+  SET_TARGET_AT_TIME,
+  SET_VALUE_AT_TIME,
+  SET_VALUE_CURVE_AT_TIME,
+} from '../constants/AudioParamEvent';
 
 /**
  * @prop {AudioContext}      context
@@ -455,4 +455,4 @@ class AudioParam {
 
 Object.assign(AudioParam.prototype, AudioParamDSP);
 
-module.exports = AudioParam;
+export default AudioParam;

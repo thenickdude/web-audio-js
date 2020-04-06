@@ -119,4 +119,4 @@ DSPAlgorithm[2002] = (inputs, outputs, gainValue, blockSize) => {
   }
 };
 
-module.exports = GainNodeDSP;
+export default GainNodeDSP;

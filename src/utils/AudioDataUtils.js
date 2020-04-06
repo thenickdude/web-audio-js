@@ -1,6 +1,6 @@
 'use strict';
 
-const nmap = require('nmap');
+import nmap from 'nmap';
 
 /**
  * @param {*} data
@@ -91,4 +91,4 @@ function toAudioBuffer(data, AudioBuffer) {
   return audioBuffer;
 }
 
-module.exports = { isAudioData, toAudioData, isAudioBuffer, toAudioBuffer };
+export { isAudioData, toAudioData, isAudioBuffer, toAudioBuffer };

@@ -1,8 +1,8 @@
 'use strict';
 
-const assert = require('assert');
-const IIRFilterKernel = require('./IIRFilterKernel');
-const { getFilterResponse } = require('../../utils/FilterUtils');
+import assert from 'assert';
+import IIRFilterKernel from './IIRFilterKernel';
+import { getFilterResponse } from '../../utils/FilterUtils';
 
 const IIRFilterNodeDSP = {
   dspInit() {
@@ -79,4 +79,4 @@ const IIRFilterNodeDSP = {
   },
 };
 
-module.exports = IIRFilterNodeDSP;
+export default IIRFilterNodeDSP;

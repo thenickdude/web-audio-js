@@ -1,13 +1,14 @@
 'use strict';
 
-const AudioSourceNode = require('./AudioSourceNode');
-const { toNumber } = require('../utils');
-const {
-  UNSCHEDULED,
-  SCHEDULED,
-  PLAYING,
+import AudioSourceNode from './AudioSourceNode';
+import { toNumber } from '../utils';
+
+import {
   FINISHED,
-} = require('../constants/PlaybackState');
+  PLAYING,
+  SCHEDULED,
+  UNSCHEDULED,
+} from '../constants/PlaybackState';
 
 class AudioScheduledSourceNode extends AudioSourceNode {
   /**
@@ -91,4 +92,4 @@ class AudioScheduledSourceNode extends AudioSourceNode {
   }
 }
 
-module.exports = AudioScheduledSourceNode;
+export default AudioScheduledSourceNode;

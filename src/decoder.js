@@ -1,10 +1,10 @@
 'use strict';
 
-const audioType = require('audio-type');
-const WavDecoder = require('wav-decoder');
-const DecoderUtils = require('./utils/DecoderUtils');
-const AudioDataUtils = require('./utils/AudioDataUtils');
-const AudioBuffer = require('./api/AudioBuffer');
+import audioType from 'audio-type';
+import WavDecoder from 'wav-decoder';
+import * as DecoderUtils from './utils/DecoderUtils';
+import * as AudioDataUtils from './utils/AudioDataUtils';
+import AudioBuffer from './api/AudioBuffer';
 
 const decoders = {};
 
@@ -58,4 +58,4 @@ function toAudioType(audioData) {
 
 set('wav', WavDecoder.decode);
 
-module.exports = { get, set, decode };
+export { get, set, decode };

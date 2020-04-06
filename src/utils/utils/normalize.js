@@ -1,6 +1,6 @@
 'use strict';
 
-const clamp = require('./clamp');
+import clamp from './clamp';
 
 /**
  * normalize - returns a number between 0 - 1
@@ -13,4 +13,4 @@ function normalize(value, minValue, maxValue) {
   return clamp(val, 0, 1);
 }
 
-module.exports = normalize;
+export default normalize;

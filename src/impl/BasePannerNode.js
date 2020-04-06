@@ -1,9 +1,9 @@
 'use strict';
 
-const AudioNode = require('./AudioNode');
-const { defaults } = require('../utils');
-const { toNumber } = require('../utils');
-const { CLAMPED_MAX, EXPLICIT } = require('../constants/ChannelCountMode');
+import AudioNode from './AudioNode';
+import { defaults, toNumber } from '../utils';
+
+import { CLAMPED_MAX, EXPLICIT } from '../constants/ChannelCountMode';
 
 const PanningModelTypes = ['equalpower', 'HRTF'];
 const DistanceModelTypes = ['linear', 'inverse', 'exponential'];
@@ -184,4 +184,4 @@ class BasePannerNode extends AudioNode {
   }
 }
 
-module.exports = BasePannerNode;
+export default BasePannerNode;

@@ -1,7 +1,7 @@
 'use strict';
 
-const assert = require('assert');
-const AudioNode = require('./AudioNode');
+import assert from 'assert';
+import AudioNode from './AudioNode';
 
 /* istanbul ignore next */
 class AudioSourceNode extends AudioNode {
@@ -24,4 +24,4 @@ class AudioSourceNode extends AudioNode {
   }
 }
 
-module.exports = AudioSourceNode;
+export default AudioSourceNode;

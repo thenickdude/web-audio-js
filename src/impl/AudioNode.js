@@ -1,17 +1,16 @@
 'use strict';
 
-const EventTarget = require('./EventTarget');
-const AudioNodeInput = require('./core/AudioNodeInput');
-const AudioNodeOutput = require('./core/AudioNodeOutput');
-const AudioParam = require('./AudioParam');
-const { defaults, clamp } = require('../utils');
-const { toNumber } = require('../utils');
-const {
-  MIN_NUMBER_OF_CHANNELS,
-  MAX_NUMBER_OF_CHANNELS,
-} = require('../constants');
-const { MAX, CLAMPED_MAX, EXPLICIT } = require('../constants/ChannelCountMode');
-const { DISCRETE, SPEAKERS } = require('../constants/ChannelInterpretation');
+import EventTarget from './EventTarget';
+import AudioNodeInput from './core/AudioNodeInput';
+import AudioNodeOutput from './core/AudioNodeOutput';
+import AudioParam from './AudioParam';
+import { clamp, defaults, toNumber } from '../utils';
+
+import { MAX_NUMBER_OF_CHANNELS, MIN_NUMBER_OF_CHANNELS } from '../constants';
+
+import { CLAMPED_MAX, EXPLICIT, MAX } from '../constants/ChannelCountMode';
+
+import { DISCRETE, SPEAKERS } from '../constants/ChannelInterpretation';
 
 /**
  * @prop {AudioContext}      context
@@ -390,4 +389,4 @@ class AudioNode extends EventTarget {
   dspProcess() {}
 }
 
-module.exports = AudioNode;
+export default AudioNode;

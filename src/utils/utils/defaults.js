@@ -8,4 +8,4 @@ function defaults(value, defaultValue) {
   return typeof value !== 'undefined' ? value : defaultValue;
 }
 
-module.exports = defaults;
+export default defaults;

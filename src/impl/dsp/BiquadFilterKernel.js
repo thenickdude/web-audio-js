@@ -1,6 +1,6 @@
 'use strict';
 
-const { flushDenormalFloatToZero } = require('../../utils');
+import { flushDenormalFloatToZero } from '../../utils';
 
 class BiquadFilterKernel {
   constructor() {
@@ -89,4 +89,4 @@ class BiquadFilterKernel {
   }
 }
 
-module.exports = BiquadFilterKernel;
+export default BiquadFilterKernel;

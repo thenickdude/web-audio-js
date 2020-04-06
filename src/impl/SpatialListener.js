@@ -1,7 +1,7 @@
 'use strict';
 
-const AudioParam = require('./AudioParam');
-const { AUDIO_RATE } = require('../constants/AudioParamRate');
+import AudioParam from './AudioParam';
+import { AUDIO_RATE } from '../constants/AudioParamRate';
 
 class SpatialListener {
   /**
@@ -102,4 +102,4 @@ class SpatialListener {
   }
 }
 
-module.exports = SpatialListener;
+export default SpatialListener;

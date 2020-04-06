@@ -18,4 +18,4 @@ const ChannelMergerNodeDSP = {
   },
 };
 
-module.exports = ChannelMergerNodeDSP;
+export default ChannelMergerNodeDSP;

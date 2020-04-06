@@ -121,4 +121,4 @@ const AudioBufferSourceNodeDSP = {
   },
 };
 
-module.exports = AudioBufferSourceNodeDSP;
+export default AudioBufferSourceNodeDSP;

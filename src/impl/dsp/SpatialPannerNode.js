@@ -9,4 +9,4 @@ const SpatialPannerNodeDSP = {
   },
 };
 
-module.exports = SpatialPannerNodeDSP;
+export default SpatialPannerNodeDSP;

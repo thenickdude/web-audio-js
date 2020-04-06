@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = {
+export default {
   sampleRate: 44100,
   numberOfChannels: 2,
   blockSize: 128,

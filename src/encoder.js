@@ -1,7 +1,7 @@
 'use strict';
 
-const WavEncoder = require('wav-encoder');
-const EncoderUtils = require('./utils/EncoderUtils');
+import WavEncoder from 'wav-encoder';
+import * as EncoderUtils from './utils/EncoderUtils';
 
 const encoders = {};
 
@@ -44,4 +44,4 @@ function encode(audioData, /* istanbul ignore next */ opts = {}) {
 
 set('wav', WavEncoder.encode);
 
-module.exports = { get, set, encode };
+export { get, set, encode };

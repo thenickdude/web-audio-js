@@ -1,10 +1,15 @@
 'use strict';
 
-const AudioNode = require('./AudioNode');
-const ScriptProcessorNodeDSP = require('./dsp/ScriptProcessorNode');
-const { defaults, clamp } = require('../utils');
-const { toPowerOfTwo, toValidNumberOfChannels } = require('../utils');
-const { EXPLICIT } = require('../constants/ChannelCountMode');
+import AudioNode from './AudioNode';
+import ScriptProcessorNodeDSP from './dsp/ScriptProcessorNode';
+import {
+  clamp,
+  defaults,
+  toPowerOfTwo,
+  toValidNumberOfChannels,
+} from '../utils';
+
+import { EXPLICIT } from '../constants/ChannelCountMode';
 
 const DEFAULT_BUFFER_SIZE = 1024;
 const DEFAULT_NUMBER_OF_INPUT_CHANNELS = 1;
@@ -76,4 +81,4 @@ class ScriptProcessorNode extends AudioNode {
 
 Object.assign(ScriptProcessorNode.prototype, ScriptProcessorNodeDSP);
 
-module.exports = ScriptProcessorNode;
+export default ScriptProcessorNode;

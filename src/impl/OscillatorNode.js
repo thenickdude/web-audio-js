@@ -1,18 +1,19 @@
 'use strict';
 
-const AudioScheduledSourceNode = require('./AudioScheduledSourceNode');
-const PeriodicWave = require('./PeriodicWave');
-const OscillatorNodeDSP = require('./dsp/OscillatorNode');
-const { defaults } = require('../utils');
-const { toImpl } = require('../utils');
-const { AUDIO_RATE } = require('../constants/AudioParamRate');
-const {
-  SINE,
-  SAWTOOTH,
-  TRIANGLE,
-  SQUARE,
+import AudioScheduledSourceNode from './AudioScheduledSourceNode';
+import PeriodicWave from './PeriodicWave';
+import OscillatorNodeDSP from './dsp/OscillatorNode';
+import { defaults, toImpl } from '../utils';
+
+import { AUDIO_RATE } from '../constants/AudioParamRate';
+
+import {
   CUSTOM,
-} = require('../constants/OscillatorType');
+  SAWTOOTH,
+  SINE,
+  SQUARE,
+  TRIANGLE,
+} from '../constants/OscillatorType';
 
 const DefaultPeriodicWaves = {};
 const allowedOscillatorTypes = [SINE, SAWTOOTH, TRIANGLE, SQUARE];
@@ -125,4 +126,4 @@ class OscillatorNode extends AudioScheduledSourceNode {
 
 Object.assign(OscillatorNode.prototype, OscillatorNodeDSP);
 
-module.exports = OscillatorNode;
+export default OscillatorNode;

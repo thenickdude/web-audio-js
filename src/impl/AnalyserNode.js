@@ -1,10 +1,10 @@
 'use strict';
 
-const AudioNode = require('./AudioNode');
-const AnalyserNodeDSP = require('./dsp/AnalyserNode');
-const { defaults, clamp } = require('../utils');
-const { toNumber, toPowerOfTwo } = require('../utils');
-const { MAX } = require('../constants/ChannelCountMode');
+import AudioNode from './AudioNode';
+import AnalyserNodeDSP from './dsp/AnalyserNode';
+import { clamp, defaults, toNumber, toPowerOfTwo } from '../utils';
+
+import { MAX } from '../constants/ChannelCountMode';
 
 const DEFAULT_FFT_SIZE = 2048;
 const DEFAULT_MIN_DECIBELS = -100;
@@ -160,4 +160,4 @@ class AnalyserNode extends AudioNode {
 
 Object.assign(AnalyserNode.prototype, AnalyserNodeDSP);
 
-module.exports = AnalyserNode;
+export default AnalyserNode;

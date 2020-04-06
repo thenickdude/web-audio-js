@@ -8,4 +8,4 @@ function toLinear(decibels) {
   return Math.pow(10, 0.05 * decibels);
 }
 
-module.exports = toLinear;
+export default toLinear;

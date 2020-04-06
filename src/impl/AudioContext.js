@@ -1,21 +1,19 @@
 'use strict';
 
-const assert = require('assert');
-const config = require('../config');
-const EventTarget = require('./EventTarget');
-const AudioDestinationNode = require('./AudioDestinationNode');
-const AudioListener = require('./AudioListener');
-const { defaults, fillRange } = require('../utils');
-const {
-  toValidSampleRate,
+import assert from 'assert';
+import config from '../config';
+import EventTarget from './EventTarget';
+import AudioDestinationNode from './AudioDestinationNode';
+import AudioListener from './AudioListener';
+import {
+  defaults,
+  fillRange,
   toValidBlockSize,
   toValidNumberOfChannels,
-} = require('../utils');
-const {
-  RUNNING,
-  SUSPENDED,
-  CLOSED,
-} = require('../constants/AudioContextState');
+  toValidSampleRate,
+} from '../utils';
+
+import { CLOSED, RUNNING, SUSPENDED } from '../constants/AudioContextState';
 
 /**
  * @prop {number} sampleRate
@@ -231,4 +229,4 @@ class AudioContext extends EventTarget {
   }
 }
 
-module.exports = AudioContext;
+export default AudioContext;

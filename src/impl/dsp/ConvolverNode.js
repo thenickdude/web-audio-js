@@ -9,4 +9,4 @@ const ConvolverNodeDSP = {
   },
 };
 
-module.exports = ConvolverNodeDSP;
+export default ConvolverNodeDSP;

@@ -1,7 +1,7 @@
 'use strict';
 
-const AudioBuffer = require('../AudioBuffer');
-const { fill } = require('../../utils');
+import AudioBuffer from '../AudioBuffer';
+import { fill } from '../../utils';
 
 const ScriptProcessorNodeDSP = {
   dspInit() {
@@ -71,4 +71,4 @@ const ScriptProcessorNodeDSP = {
   },
 };
 
-module.exports = ScriptProcessorNodeDSP;
+export default ScriptProcessorNodeDSP;

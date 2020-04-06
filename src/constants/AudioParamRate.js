@@ -1,6 +1,4 @@
 'use strict';
 
-module.exports = {
-  CONTROL_RATE: 'control',
-  AUDIO_RATE: 'audio',
-};
+export const CONTROL_RATE = 'control';
+export const AUDIO_RATE = 'audio';

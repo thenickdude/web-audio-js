@@ -1,13 +1,16 @@
 'use strict';
 
-const AudioNode = require('./AudioNode');
-const {
-  DynamicsCompressor,
+import AudioNode from './AudioNode';
+import {
   CompressorParameters,
-} = require('./dsp/DynamicsCompressor');
-const { defaults } = require('../utils');
-const { EXPLICIT } = require('../constants/ChannelCountMode');
-const { CONTROL_RATE } = require('../constants/AudioParamRate');
+  DynamicsCompressor,
+} from './dsp/DynamicsCompressor';
+
+import { defaults } from '../utils';
+
+import { EXPLICIT } from '../constants/ChannelCountMode';
+
+import { CONTROL_RATE } from '../constants/AudioParamRate';
 
 const DEFAULT_THRESHOLD = -24;
 const DEFAULT_KNEE = 30;
@@ -125,4 +128,4 @@ class DynamicsCompressorNode extends AudioNode {
   }
 }
 
-module.exports = DynamicsCompressorNode;
+export default DynamicsCompressorNode;

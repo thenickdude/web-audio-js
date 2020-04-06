@@ -30,4 +30,4 @@ function compute(values, fn, w0) {
   return result;
 }
 
-module.exports = { getFilterResponse };
+export { getFilterResponse };

@@ -19,4 +19,4 @@ function fillRange(list, value, start, end) {
   return list;
 }
 
-module.exports = fillRange;
+export default fillRange;

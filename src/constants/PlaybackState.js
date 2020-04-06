@@ -1,8 +1,6 @@
 'use strict';
 
-module.exports = {
-  UNSCHEDULED: 'unscheduled',
-  SCHEDULED: 'scheduled',
-  PLAYING: 'playing',
-  FINISHED: 'finished',
-};
+export const UNSCHEDULED = 'unscheduled';
+export const SCHEDULED = 'scheduled';
+export const PLAYING = 'playing';
+export const FINISHED = 'finished';

@@ -1,8 +1,9 @@
 'use strict';
 
+import PCMArrayBufferWriter from './PCMArrayBufferWriter';
+import PCMBufferWriter from './PCMBufferWriter';
+
 const Buffer = global.Buffer;
-const PCMArrayBufferWriter = require('./PCMArrayBufferWriter');
-const PCMBufferWriter = require('./PCMBufferWriter');
 const PCMWriter = getPCMWriter();
 const alloc = getAllocFunction();
 
@@ -96,4 +97,4 @@ function newArrayBuffer(size) {
   return new Uint8Array(size).buffer;
 }
 
-module.exports = { create };
+export default { create };

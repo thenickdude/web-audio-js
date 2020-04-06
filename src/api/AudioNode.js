@@ -1,7 +1,7 @@
 'use strict';
 
-const EventTarget = require('./EventTarget');
-const { defineProp } = require('../utils');
+import EventTarget from './EventTarget';
+import { defineProp } from '../utils';
 
 class AudioNode extends EventTarget {
   constructor(context) {
@@ -61,4 +61,4 @@ class AudioNode extends EventTarget {
   }
 }
 
-module.exports = AudioNode;
+export default AudioNode;

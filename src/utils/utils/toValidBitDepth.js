@@ -12,4 +12,4 @@ function toValidBitDepth(value) {
   return 16;
 }
 
-module.exports = toValidBitDepth;
+export default toValidBitDepth;

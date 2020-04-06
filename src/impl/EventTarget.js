@@ -1,6 +1,6 @@
 'use strict';
 
-const events = require('events');
+import events from 'events';
 
 class EventTarget {
   constructor() {
@@ -48,4 +48,4 @@ class EventTarget {
   }
 }
 
-module.exports = EventTarget;
+export default EventTarget;

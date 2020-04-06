@@ -1,17 +1,20 @@
 'use strict';
 
-const nmap = require('nmap');
-const config = require('../config');
-const BaseAudioContext = require('../api/BaseAudioContext');
-const PCMEncoder = require('../utils/PCMEncoder');
-const { defaults, defineProp } = require('../utils');
-const {
-  toValidSampleRate,
+import nmap from 'nmap';
+import config from '../config';
+import BaseAudioContext from '../api/BaseAudioContext';
+import PCMEncoder from '../utils/PCMEncoder';
+import {
+  defaults,
+  defineProp,
+  toValidBitDepth,
   toValidBlockSize,
   toValidNumberOfChannels,
-  toValidBitDepth,
-} = require('../utils');
-const { RUNNING, SUSPENDED } = require('../constants/AudioContextState');
+  toValidSampleRate,
+} from '../utils';
+
+import { RUNNING, SUSPENDED } from '../constants/AudioContextState';
+
 const noopWriter = { write: () => true };
 
 class RawPcmAudioContext extends BaseAudioContext {
@@ -101,4 +104,4 @@ class RawPcmAudioContext extends BaseAudioContext {
   }
 }
 
-module.exports = RawPcmAudioContext;
+export default RawPcmAudioContext;

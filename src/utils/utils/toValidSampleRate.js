@@ -1,8 +1,8 @@
 'use strict';
 
-const toNumber = require('./toNumber');
-const clamp = require('./clamp');
-const { MIN_SAMPLERATE, MAX_SAMPLERATE } = require('../../constants');
+import toNumber from './toNumber';
+import clamp from './clamp';
+import { MAX_SAMPLERATE, MIN_SAMPLERATE } from '../../constants';
 
 /**
  * @param {number} value
@@ -12,4 +12,4 @@ function toValidSampleRate(value) {
   return clamp(toNumber(value), MIN_SAMPLERATE, MAX_SAMPLERATE) | 0;
 }
 
-module.exports = toValidSampleRate;
+export default toValidSampleRate;

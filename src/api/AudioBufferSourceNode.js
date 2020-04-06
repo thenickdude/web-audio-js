@@ -1,8 +1,8 @@
 'use strict';
 
-const impl = require('../impl');
-const AudioScheduledSourceNode = require('./AudioScheduledSourceNode');
-const AudioParam = require('./AudioParam');
+import * as impl from '../impl';
+import AudioScheduledSourceNode from './AudioScheduledSourceNode';
+import AudioParam from './AudioParam';
 
 class AudioBufferSourceNode extends AudioScheduledSourceNode {
   constructor(context, opts) {
@@ -68,4 +68,4 @@ class AudioBufferSourceNode extends AudioScheduledSourceNode {
   }
 }
 
-module.exports = AudioBufferSourceNode;
+export default AudioBufferSourceNode;
