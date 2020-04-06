@@ -1,20 +1,24 @@
 // rollup.config.js
+import pkg from './package.json';
 import commonjs from '@rollup/plugin-commonjs';
 import resolve from '@rollup/plugin-node-resolve';
 import typescript from 'rollup-plugin-typescript2';
 
 export default {
   input: 'src',
-  plugins: [commonjs(), resolve(), typescript({ exclude: '**/*.test.ts' })],
-  preferBuiltins: false,
-  external: ['asset', 'events'],
+  plugins: [
+    commonjs(),
+    resolve({ preferBuiltins: true }),
+    typescript({ exclude: '**/*.test.ts' }),
+  ],
+  external: ['assert', 'events', ...Object.keys(pkg.dependencies)],
   output: [
     {
-      file: 'build/web-audio-engine.js',
+      file: pkg.main,
       format: 'cjs',
     },
     {
-      file: 'build/web-audio-engine.esm.js',
+      file: pkg.module,
       format: 'esm',
     },
   ],

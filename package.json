@@ -49,25 +49,21 @@
     "web audio api"
   ],
   "license": "MIT",
-  "main": "lib/index.js",
+  "main": "build/web-audio-js.js",
+  "module": "build/web-audio-js.esm.js",
   "types": "lib/index.d.ts",
   "repository": {
     "type": "git",
     "url": "https://github.com/descriptinc/web-audio-engine.git"
   },
   "scripts": {
-    "build": "npm-run-all build:*",
-    "build:browser": "rollup -c",
-    "build:to5": "tsc",
-    "clean": "rm -rf lib coverage .nyc_output npm-debug.log",
-    "cover": "BABEL_ENV=cover nyc --reporter text --reporter html npm test",
-    "lint": "eslint src src/__tests__",
-    "postversion": "git push && git push --tags && npm run clean",
-    "prepublishOnly": "npm-run-all clean lint src/__tests__ build",
-    "preversion": "npm-run-all clean lint src/__tests__",
+    "build": "rollup -c",
+    "clean": "rm -rf lib coverage build",
+    "lint": "eslint src",
+    "prepublishOnly": "npm-run-all clean lint test build",
+    "preversion": "npm-run-all clean lint test",
     "test": "jest --watch",
-    "test-ci": "jest --coverage",
-    "version": "npm run build && git add -A build"
+    "test-ci": "jest --coverage"
   },
   "jest": {
     "preset": "ts-jest/presets/js-with-ts",

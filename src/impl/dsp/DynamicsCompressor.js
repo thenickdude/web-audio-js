@@ -212,5 +212,4 @@ class DynamicsCompressor {
   }
 }
 
-exports.DynamicsCompressor = DynamicsCompressor;
-exports.CompressorParameters = CompressorParameters;
+export { DynamicsCompressor, CompressorParameters };
