@@ -6,6 +6,8 @@ import typescript from 'rollup-plugin-typescript2';
 export default {
   input: 'src',
   plugins: [commonjs(), resolve(), typescript({ exclude: '**/*.test.ts' })],
+  preferBuiltins: false,
+  external: ['asset', 'events'],
   output: [
     {
       file: 'build/web-audio-engine.js',

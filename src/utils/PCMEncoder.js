@@ -1,8 +1,8 @@
-"use strict";
+'use strict';
 
 const Buffer = global.Buffer;
-const PCMArrayBufferWriter = require("./PCMArrayBufferWriter");
-const PCMBufferWriter = require("./PCMBufferWriter");
+const PCMArrayBufferWriter = require('./PCMArrayBufferWriter');
+const PCMBufferWriter = require('./PCMBufferWriter');
 const PCMWriter = getPCMWriter();
 const alloc = getAllocFunction();
 
@@ -25,7 +25,7 @@ function create(length, format) {
         }
 
         return buffer;
-      }
+      },
     };
   }
 
@@ -43,23 +43,23 @@ function create(length, format) {
         }
 
         return buffer;
-      }
+      },
     };
   }
 
   return {
-    encode(channelData) {
-      const buffer = alloc(bufferLength);
+    encode(channelData, offset = 0, len = length) {
+      const buffer = alloc(numberOfChannels * len * bytes);
       const writer = new PCMWriter(buffer);
 
-      for (let i = 0, imax = length; i < imax; i++) {
+      for (let i = offset; i < len; i++) {
         for (let ch = 0; ch < numberOfChannels; ch++) {
           writer[methodName](channelData[ch][i]);
         }
       }
 
       return buffer;
-    }
+    },
   };
 }
 
@@ -71,9 +71,9 @@ function resolveBitDepth(bitDepth, float) {
 /* istanbul ignore next */
 function resolveWriteMethodName(bitDepth, float) {
   if (float) {
-    return "pcm32f";
+    return 'pcm32f';
   }
-  return "pcm" + bitDepth;
+  return 'pcm' + bitDepth;
 }
 
 /* istanbul ignore next */
