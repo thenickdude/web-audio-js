@@ -16,15 +16,21 @@ class AudioData {
    * @param {number} numberOfChannels
    * @param {number} length
    * @param {number} sampleRate
+   * @param {Float32Array[]} channelData
    */
-  constructor(numberOfChannels, length, sampleRate) {
+  constructor(
+    numberOfChannels,
+    length,
+    sampleRate,
+    channelData = nmap(
+      this.numberOfChannels,
+      () => new Float32Array(this.length),
+    ),
+  ) {
     this.numberOfChannels = numberOfChannels | 0;
     this.length = length | 0;
     this.sampleRate = sampleRate | 0;
-    this.channelData = nmap(
-      this.numberOfChannels,
-      () => new Float32Array(this.length),
-    );
+    this.channelData = channelData;
   }
 }
 

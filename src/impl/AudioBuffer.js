@@ -22,7 +22,10 @@ class AudioBuffer {
     length = Math.max(0, toNumber(length));
     sampleRate = toValidSampleRate(sampleRate);
 
-    this.audioData = new AudioData(numberOfChannels, length, sampleRate);
+    this.audioData =
+      opts instanceof AudioData
+        ? opts
+        : new AudioData(numberOfChannels, length, sampleRate);
   }
 
   /**

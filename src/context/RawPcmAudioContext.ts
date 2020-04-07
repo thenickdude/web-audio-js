@@ -13,6 +13,8 @@ import {
 import { RUNNING, SUSPENDED } from '../constants/AudioContextState';
 import { Encoder } from '../utils/Encoder';
 import AudioContext from '../impl/AudioContext';
+import AudioData from '../impl/core/AudioData';
+import AudioBuffer from '../api/AudioBuffer';
 import { Format } from '../utils/Format';
 import { nmap } from '../utils/nmap';
 
@@ -59,6 +61,16 @@ class RawPcmAudioContext extends BaseAudioContext {
       () => new Float32Array(this.bufferSize),
     );
     this._encoder = PCMEncoder.create(this.bufferSize, this.format);
+  }
+
+  createAudioBuffer(
+    length: number,
+    sampleRate: number,
+    channels: Float32Array[],
+  ) {
+    return new AudioBuffer(
+      new AudioData(channels.length, length, sampleRate, channels),
+    );
   }
 
   process(samples: number): ArrayBuffer {
