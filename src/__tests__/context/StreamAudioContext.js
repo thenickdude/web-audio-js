@@ -1,7 +1,7 @@
 'use strict';
 
 import assert from 'assert';
-import sinon from 'sinon';
+
 import events from 'events';
 import StreamAudioContext from '../../context/StreamAudioContext';
 
@@ -11,9 +11,7 @@ describe('StreamAudioContext', () => {
       const context = new StreamAudioContext();
 
       expect(context instanceof StreamAudioContext).toBeTruthy();
-      assert.doesNotThrow(() => {
-        context._stream.write();
-      });
+      context._stream.write();
     });
 
     it('with options', () => {
@@ -39,9 +37,9 @@ describe('StreamAudioContext', () => {
     it('basic', (done) => {
       const context = new StreamAudioContext();
       const streamOut = new events.EventEmitter();
-      const write1 = sinon.spy((buffer) => {
+      const write1 = jest.fn((buffer) => {
         expect(buffer instanceof Buffer).toBeTruthy();
-        if (write1.callCount >= 75) {
+        if (write1.mock.calls.length >= 75) {
           done();
           return false;
         }
@@ -57,9 +55,9 @@ describe('StreamAudioContext', () => {
     it('suspend', (done) => {
       const context = new StreamAudioContext();
       const streamOut = new events.EventEmitter();
-      const write1 = sinon.spy((buffer) => {
+      const write1 = jest.fn((buffer) => {
         expect(buffer instanceof Buffer).toBeTruthy();
-        if (write1.callCount === 10) {
+        if (write1.mock.calls.length === 10) {
           context.suspend().then(() => {
             streamOut.write = write2;
             context.resume();
@@ -67,10 +65,10 @@ describe('StreamAudioContext', () => {
         }
         return true;
       });
-      const write2 = sinon.spy((buffer) => {
+      const write2 = jest.fn((buffer) => {
         expect(buffer instanceof Buffer).toBeTruthy();
-        expect(write1.callCount).toBe(10);
-        if (write2.callCount >= 10) {
+        expect(write1).toHaveBeenCalledTimes(10);
+        if (write2.mock.calls.length >= 10) {
           context.close().then(done);
         }
         return true;

@@ -1,7 +1,7 @@
 'use strict';
 
 import assert from 'assert';
-import sinon from 'sinon';
+
 import AudioContext from '../../impl/AudioContext';
 import AudioBufferSourceNode from '../../impl/AudioBufferSourceNode';
 import AudioNode from '../../impl/AudioNode';
@@ -182,7 +182,7 @@ describe('impl/AudioBufferSourceNode', () => {
         length: 8000,
         sampleRate: 8000,
       });
-      const onended = sinon.spy();
+      const onended = jest.fn();
 
       node.setBuffer(buffer);
       node.setLoop(true);
@@ -229,7 +229,7 @@ describe('impl/AudioBufferSourceNode', () => {
       //                currentTime
       processTo(context, 3);
       expect(node.getPlaybackState()).toBe('playing');
-      expect(onended.callCount).toBe(0);
+      expect(onended).toHaveBeenCalledTimes(0);
 
       //           start     stop
       //           |--->|    |
@@ -239,12 +239,12 @@ describe('impl/AudioBufferSourceNode', () => {
       //                     currentTime
       processTo(context, 4);
       expect(node.getPlaybackState()).toBe('finished');
-      expect(onended.callCount).toBe(1);
+      expect(onended).toHaveBeenCalledTimes(1);
     });
 
     it('.start(when) without buffer', () => {
       const node = new AudioBufferSourceNode(context);
-      const onended = sinon.spy();
+      const onended = jest.fn();
 
       node.connect(context.getDestination());
       node.addEventListener('ended', onended);
@@ -265,7 +265,7 @@ describe('impl/AudioBufferSourceNode', () => {
       expect(node.getStartTime()).toBe(1);
       expect(node.getStopTime()).toBe(3);
       expect(node.getPlaybackState()).toBe('scheduled');
-      expect(onended.callCount).toBe(0);
+      expect(onended).toHaveBeenCalledTimes(0);
 
       //      start     stop
       //      |         |
@@ -274,7 +274,7 @@ describe('impl/AudioBufferSourceNode', () => {
       //      currentTime
       processTo(context, 1);
       expect(node.getPlaybackState()).toBe('playing');
-      expect(onended.callCount).toBe(0);
+      expect(onended).toHaveBeenCalledTimes(0);
 
       //      start     stop
       //      |         |
@@ -283,7 +283,7 @@ describe('impl/AudioBufferSourceNode', () => {
       //           currentTime
       processTo(context, 2);
       expect(node.getPlaybackState()).toBe('finished');
-      expect(onended.callCount).toBe(1);
+      expect(onended).toHaveBeenCalledTimes(1);
 
       //      start     stop
       //      |         |
@@ -292,7 +292,7 @@ describe('impl/AudioBufferSourceNode', () => {
       //                currentTime
       processTo(context, 3);
       expect(node.getPlaybackState()).toBe('finished');
-      expect(onended.callCount).toBe(1);
+      expect(onended).toHaveBeenCalledTimes(1);
     });
 
     it('.start(when) auto stop by buffer duration', () => {
@@ -302,7 +302,7 @@ describe('impl/AudioBufferSourceNode', () => {
         length: 8000,
         sampleRate: 8000,
       });
-      const onended = sinon.spy();
+      const onended = jest.fn();
 
       node.setBuffer(buffer);
       node.connect(context.getDestination());
@@ -353,7 +353,7 @@ describe('impl/AudioBufferSourceNode', () => {
       //                currentTime
       processTo(context, 3);
       expect(node.getPlaybackState()).toBe('finished');
-      expect(onended.callCount).toBe(1);
+      expect(onended).toHaveBeenCalledTimes(1);
 
       //           start     stop
       //           |         |
@@ -363,7 +363,7 @@ describe('impl/AudioBufferSourceNode', () => {
       //                     currentTime
       processTo(context, 4);
       expect(node.getPlaybackState()).toBe('finished');
-      expect(onended.callCount).toBe(1);
+      expect(onended).toHaveBeenCalledTimes(1);
     });
 
     it('.start(when, offset, duration) auto stop by buffer duration', () => {
@@ -373,7 +373,7 @@ describe('impl/AudioBufferSourceNode', () => {
         length: 8000,
         sampleRate: 8000,
       });
-      const onended = sinon.spy();
+      const onended = jest.fn();
 
       node.setBuffer(buffer);
       node.connect(context.getDestination());
@@ -419,7 +419,7 @@ describe('impl/AudioBufferSourceNode', () => {
       //                currentTime
       processTo(context, 3);
       expect(node.getPlaybackState()).toBe('finished');
-      expect(onended.callCount).toBe(1);
+      expect(onended).toHaveBeenCalledTimes(1);
 
       //           start     stop
       //           |--->|    |
@@ -429,7 +429,7 @@ describe('impl/AudioBufferSourceNode', () => {
       //                     currentTime
       processTo(context, 4);
       expect(node.getPlaybackState()).toBe('finished');
-      expect(onended.callCount).toBe(1);
+      expect(onended).toHaveBeenCalledTimes(1);
     });
 
     it('.stop(when)', () => {
@@ -439,7 +439,7 @@ describe('impl/AudioBufferSourceNode', () => {
         length: 8000,
         sampleRate: 8000,
       });
-      const onended = sinon.spy();
+      const onended = jest.fn();
 
       node.setBuffer(buffer);
       node.setLoop(true);
@@ -491,7 +491,7 @@ describe('impl/AudioBufferSourceNode', () => {
       //                currentTime
       processTo(context, 3);
       expect(node.getPlaybackState()).toBe('playing');
-      expect(onended.callCount).toBe(0);
+      expect(onended).toHaveBeenCalledTimes(0);
 
       //           start     stop
       //           |         |
@@ -501,7 +501,7 @@ describe('impl/AudioBufferSourceNode', () => {
       //                     currentTime
       processTo(context, 4);
       expect(node.getPlaybackState()).toBe('finished');
-      expect(onended.callCount).toBe(1);
+      expect(onended).toHaveBeenCalledTimes(1);
     });
   });
 

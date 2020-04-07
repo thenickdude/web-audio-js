@@ -30,6 +30,6 @@ describe('impl/dsp/ChannelMergerNode', () => {
     const actual = node3.outputs[0].bus.getChannelData();
     const expected = [noise1, noise2, np.zeros(16), np.zeros(16)];
 
-    assert.deepEqual(actual, expected);
+    expect(actual).toEqual(expected);
   });
 });

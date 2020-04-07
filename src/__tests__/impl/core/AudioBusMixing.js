@@ -42,12 +42,12 @@ describe('impl/core/AudioBus - mixing', () => {
 
     bus3.zeros();
 
-    assert.deepEqual(bus3.getChannelData()[0], np.zeros(128));
+    expect(bus3.getChannelData()[0]).toEqual(np.zeros(128));
     expect(bus3.isSilent).toBe(true);
 
     bus3.sumFrom(bus2);
 
-    assert.deepEqual(bus3.getChannelData()[0], np.zeros(128));
+    expect(bus3.getChannelData()[0]).toEqual(np.zeros(128));
     expect(bus3.isSilent).toBe(true);
   });
 

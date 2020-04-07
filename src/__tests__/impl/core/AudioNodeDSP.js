@@ -35,7 +35,7 @@ describe('impl/core/AudioNode - DSP', () => {
     const actual = node2.inputs[0].bus.getChannelData()[0];
     const expected = noise1;
 
-    assert.deepEqual(actual, expected);
+    expect(actual).toEqual(expected);
   });
 
   it('pull from some connections', () => {
@@ -68,6 +68,6 @@ describe('impl/core/AudioNode - DSP', () => {
     const actual = node3.inputs[0].bus.getChannelData()[0];
     const expected = noise1.map((_, i) => noise1[i] + noise2[i]);
 
-    assert.deepEqual(actual, expected);
+    expect(actual).toEqual(expected);
   });
 });

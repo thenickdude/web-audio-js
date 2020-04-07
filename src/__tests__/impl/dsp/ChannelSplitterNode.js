@@ -43,12 +43,12 @@ describe('impl/dsp/ChannelSplitterNode', () => {
     expect(isSilent[3]).toBe(false);
     expect(isSilent[4]).toBe(true);
     expect(isSilent[5]).toBe(true);
-    assert.deepEqual(actual[0], noise1);
-    assert.deepEqual(actual[1], noise2);
-    assert.deepEqual(actual[2], noise1);
-    assert.deepEqual(actual[3], noise2);
-    assert.deepEqual(actual[4], np.zeros(16));
-    assert.deepEqual(actual[5], np.zeros(16));
+    expect(actual[0]).toEqual(noise1);
+    expect(actual[1]).toEqual(noise2);
+    expect(actual[2]).toEqual(noise1);
+    expect(actual[3]).toEqual(noise2);
+    expect(actual[4]).toEqual(np.zeros(16));
+    expect(actual[5]).toEqual(np.zeros(16));
   });
 
   it('works - silent', () => {
@@ -78,11 +78,11 @@ describe('impl/dsp/ChannelSplitterNode', () => {
     expect(isSilent[3]).toBe(true);
     expect(isSilent[4]).toBe(true);
     expect(isSilent[5]).toBe(true);
-    assert.deepEqual(actual[0], np.zeros(16));
-    assert.deepEqual(actual[1], np.zeros(16));
-    assert.deepEqual(actual[2], np.zeros(16));
-    assert.deepEqual(actual[3], np.zeros(16));
-    assert.deepEqual(actual[4], np.zeros(16));
-    assert.deepEqual(actual[5], np.zeros(16));
+    expect(actual[0]).toEqual(np.zeros(16));
+    expect(actual[1]).toEqual(np.zeros(16));
+    expect(actual[2]).toEqual(np.zeros(16));
+    expect(actual[3]).toEqual(np.zeros(16));
+    expect(actual[4]).toEqual(np.zeros(16));
+    expect(actual[5]).toEqual(np.zeros(16));
   });
 });

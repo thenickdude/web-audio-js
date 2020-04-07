@@ -54,8 +54,8 @@ describe('utils/PCMEncoder', () => {
         -0.7,
       ]);
 
-      assert.deepEqual(actual1, expected1);
-      assert.deepEqual(actual2, expected2);
+      expect(actual1).toEqual(expected1);
+      expect(actual2).toEqual(expected2);
     });
   });
 
@@ -100,8 +100,8 @@ describe('utils/PCMEncoder', () => {
         -0.7,
       ]);
 
-      assert.deepEqual(actual1, expected1);
-      assert.deepEqual(actual2, expected2);
+      expect(actual1).toEqual(expected1);
+      expect(actual2).toEqual(expected2);
     });
   });
 
@@ -150,8 +150,8 @@ describe('utils/PCMEncoder', () => {
         -0.7,
       ]);
 
-      assert.deepEqual(actual1, expected1);
-      assert.deepEqual(actual2, expected2);
+      expect(actual1).toEqual(expected1);
+      expect(actual2).toEqual(expected2);
     });
   });
 });

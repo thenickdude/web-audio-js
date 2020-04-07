@@ -51,8 +51,8 @@ describe('impl/core/AudioNodeInput', () => {
     it('.outputs', () => {
       const node = new AudioNode(context, {}, { inputs: [1, 1] });
 
-      assert.deepEqual(node.inputs[0].outputs, []);
-      assert.deepEqual(node.inputs[1].outputs, []);
+      expect(node.inputs[0].outputs).toEqual([]);
+      expect(node.inputs[1].outputs).toEqual([]);
     });
 
     it('.channelCount=', () => {

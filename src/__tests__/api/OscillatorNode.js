@@ -1,7 +1,7 @@
 'use strict';
 
 import assert from 'assert';
-import sinon from 'sinon';
+
 import * as api from '../../api';
 import AudioContext from '../../api/BaseAudioContext';
 import AudioParam from '../../api/AudioParam';
@@ -22,15 +22,15 @@ describe('api/OscillatorNode', () => {
       const type1 = 'sine';
       const type2 = 'sawtooth';
 
-      target._impl.getType = sinon.spy(() => type1);
-      target._impl.setType = sinon.spy();
+      target._impl.getType = jest.fn(() => type1);
+      target._impl.setType = jest.fn();
 
       expect(target.type).toBe(type1);
-      expect(target._impl.getType.callCount).toBe(1);
+      expect(target._impl.getType).toHaveBeenCalledTimes(1);
 
       target.type = type2;
-      expect(target._impl.setType.callCount).toBe(1);
-      expect(target._impl.setType.args[0][0]).toBe(type2);
+      expect(target._impl.setType).toHaveBeenCalledTimes(1);
+      expect(target._impl.setType.mock.calls[0][0]).toBe(type2);
     });
 
     it('.frequency', () => {
@@ -52,9 +52,9 @@ describe('api/OscillatorNode', () => {
     it('.onended=', () => {
       const context = new AudioContext();
       const target = context.createOscillator();
-      const callback1 = sinon.spy();
-      const callback2 = sinon.spy();
-      const callback3 = sinon.spy();
+      const callback1 = jest.fn();
+      const callback2 = jest.fn();
+      const callback3 = jest.fn();
       const event = { type: 'ended' };
 
       target.onended = callback1;
@@ -63,11 +63,11 @@ describe('api/OscillatorNode', () => {
       target._impl.dispatchEvent(event);
 
       expect(target.onended).toBe(callback2);
-      expect(callback1.callCount).toBe(0);
-      expect(callback2.callCount).toBe(1);
-      expect(callback3.callCount).toBe(1);
-      expect(callback2.args[0][0]).toBe(event);
-      expect(callback3.args[0][0]).toBe(event);
+      expect(callback1).toHaveBeenCalledTimes(0);
+      expect(callback2).toHaveBeenCalledTimes(1);
+      expect(callback3).toHaveBeenCalledTimes(1);
+      expect(callback2.mock.calls[0][0]).toBe(event);
+      expect(callback3.mock.calls[0][0]).toBe(event);
     });
   });
 
@@ -77,11 +77,11 @@ describe('api/OscillatorNode', () => {
       const target = context.createOscillator();
       const when = 0;
 
-      target._impl.start = sinon.spy();
+      target._impl.start = jest.fn();
 
       target.start(when);
-      expect(target._impl.start.callCount).toBe(1);
-      expect(target._impl.start.args[0][0]).toBe(when);
+      expect(target._impl.start).toHaveBeenCalledTimes(1);
+      expect(target._impl.start.mock.calls[0][0]).toBe(when);
     });
 
     it('.stop(when)', () => {
@@ -89,11 +89,11 @@ describe('api/OscillatorNode', () => {
       const target = context.createOscillator();
       const when = 0;
 
-      target._impl.stop = sinon.spy();
+      target._impl.stop = jest.fn();
 
       target.stop(when);
-      expect(target._impl.stop.callCount).toBe(1);
-      expect(target._impl.stop.args[0][0]).toBe(when);
+      expect(target._impl.stop).toHaveBeenCalledTimes(1);
+      expect(target._impl.stop.mock.calls[0][0]).toBe(when);
     });
 
     it('.setPeriodicWave(periodicWave)', () => {
@@ -103,11 +103,11 @@ describe('api/OscillatorNode', () => {
       const imag = new Float32Array(16);
       const periodicWave = context.createPeriodicWave(real, imag);
 
-      target._impl.setPeriodicWave = sinon.spy();
+      target._impl.setPeriodicWave = jest.fn();
 
       target.setPeriodicWave(periodicWave);
-      expect(target._impl.setPeriodicWave.callCount).toBe(1);
-      expect(target._impl.setPeriodicWave.args[0][0]).toBe(periodicWave);
+      expect(target._impl.setPeriodicWave).toHaveBeenCalledTimes(1);
+      expect(target._impl.setPeriodicWave.mock.calls[0][0]).toBe(periodicWave);
     });
   });
 });

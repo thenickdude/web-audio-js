@@ -1,7 +1,7 @@
 'use strict';
 
 import assert from 'assert';
-import sinon from 'sinon';
+
 import * as api from '../../api';
 import AudioContext from '../../api/BaseAudioContext';
 
@@ -19,10 +19,10 @@ describe('api/AudioDestinationNode', () => {
       const target = context.destination;
       const maxChannelCount = 2;
 
-      target._impl.getMaxChannelCount = sinon.spy(() => maxChannelCount);
+      target._impl.getMaxChannelCount = jest.fn(() => maxChannelCount);
 
       expect(target.maxChannelCount).toBe(maxChannelCount);
-      expect(target._impl.getMaxChannelCount.callCount).toBe(1);
+      expect(target._impl.getMaxChannelCount).toHaveBeenCalledTimes(1);
     });
   });
 });

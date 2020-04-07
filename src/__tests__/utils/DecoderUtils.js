@@ -1,78 +1,64 @@
 'use strict';
 
-import assert from 'assert';
-import sinon from 'sinon';
 import * as DecoderUtils from '../../utils/DecoderUtils';
 
 describe('utils/DecoderUtils.decode(decodeFn: function, audioData: arrayBuffer, opts?: object): Promise<AudioData>', () => {
-  it('should return promise and resolve - without resampling', () => {
+  it('should return promise and resolve - without resampling', async () => {
     const source = new Uint8Array(128);
     const sampleRate = 44100;
     const channelData = [new Float32Array(128), new Float32Array(128)];
-    const decodeFn = sinon.spy(() => {
+    const decodeFn = jest.fn(() => {
       return Promise.resolve({ sampleRate, channelData });
     });
 
-    return DecoderUtils.decode(decodeFn, source).then((audioData) => {
-      expect(decodeFn.callCount).toBe(1);
-      expect(decodeFn.calledWith(source)).toBeTruthy();
-      expect(audioData.sampleRate).toBe(44100);
-      expect(audioData.channelData).toBe(channelData);
-    });
+    const audioData = await DecoderUtils.decode(decodeFn, source);
+    expect(decodeFn).toHaveBeenCalledTimes(1);
+    expect(decodeFn).toBeCalledWith(source);
+    expect(audioData.sampleRate).toBe(44100);
+    expect(audioData.channelData).toBe(channelData);
   });
 
-  it('should return promise and resolve - resampling', () => {
+  it('should return promise and resolve - resampling', async () => {
     const source = new Uint8Array(128);
     const sampleRate = 44100;
     const channelData = [new Float32Array(128), new Float32Array(128)];
-    const decodeFn = sinon.spy(() => {
+    const decodeFn = jest.fn(() => {
       return Promise.resolve({ sampleRate, channelData });
     });
 
-    return DecoderUtils.decode(decodeFn, source, { sampleRate: 22050 }).then(
-      (audioData) => {
-        expect(decodeFn.callCount).toBe(1);
-        expect(decodeFn.calledWith(source)).toBeTruthy();
-        expect(audioData.sampleRate).toBe(22050);
-        expect(audioData.length).toBe(channelData[0].length / 2);
-      },
-    );
+    const audioData = await DecoderUtils.decode(decodeFn, source, {
+      sampleRate: 22050,
+    });
+    expect(decodeFn).toHaveBeenCalledTimes(1);
+    expect(decodeFn).toBeCalledWith(source);
+    expect(audioData.sampleRate).toBe(22050);
+    expect(audioData.length).toBe(channelData[0].length / 2);
   });
 
-  it('should reject if provided invalid data', () => {
+  it('should reject if provided invalid data', async () => {
     const source = new Uint8Array(128);
-    const decodeFn = sinon.spy(() => {
+    const decodeFn = jest.fn(() => {
       return Promise.reject('ERROR!');
     });
 
-    return DecoderUtils.decode(decodeFn, source, { sampleRate: 44100 }).then(
-      () => {
-        throw new TypeError('NOT REACHED');
-      },
-      (e) => {
-        expect(decodeFn.callCount).toBe(1);
-        expect(decodeFn.calledWith(source)).toBeTruthy();
-        expect(e).toBe('ERROR!');
-      },
-    );
+    await expect(
+      DecoderUtils.decode(decodeFn, source, { sampleRate: 44100 }),
+    ).rejects.toBe('ERROR!');
+    expect(decodeFn).toHaveBeenCalledTimes(1);
+    expect(decodeFn).toBeCalledWith(source);
   });
 
-  it('should reject if invalid return', () => {
+  it('should reject if invalid return', async () => {
     const source = new Uint8Array(128);
-    const decodeFn = sinon.spy(() => {
+    const decodeFn = jest.fn(() => {
       return Promise.resolve(null);
     });
 
-    return DecoderUtils.decode(decodeFn, source, { sampleRate: 44100 }).then(
-      () => {
-        throw new TypeError('NOT REACHED');
-      },
-      (e) => {
-        expect(decodeFn.callCount).toBe(1);
-        expect(decodeFn.calledWith(source)).toBeTruthy();
-        expect(e instanceof TypeError).toBeTruthy();
-      },
-    );
+    await expect(
+      DecoderUtils.decode(decodeFn, source, { sampleRate: 44100 }),
+    ).rejects.toBeInstanceOf(TypeError);
+    expect(decodeFn).toHaveBeenCalledTimes(1);
+    expect(decodeFn).toBeCalledWith(source);
   });
 });
 

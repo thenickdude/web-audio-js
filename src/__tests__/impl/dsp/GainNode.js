@@ -34,7 +34,7 @@ describe('impl/GainNode', () => {
         const actual = node2.outputs[0].bus.getChannelData()[0];
         const expected = np.zeros(16);
 
-        assert.deepEqual(actual, expected);
+        expect(actual).toEqual(expected);
         expect(node2.outputs[0].bus.isSilent).toBe(true);
       });
 
@@ -48,7 +48,7 @@ describe('impl/GainNode', () => {
         const actual = node2.outputs[0].bus.getChannelData()[0];
         const expected = np.zeros(16);
 
-        assert.deepEqual(actual, expected);
+        expect(actual).toEqual(expected);
         expect(node2.outputs[0].bus.isSilent).toBe(true);
       });
 
@@ -62,7 +62,7 @@ describe('impl/GainNode', () => {
         const actual = node2.outputs[0].bus.getChannelData()[0];
         const expected = noise;
 
-        assert.deepEqual(actual, expected);
+        expect(actual).toEqual(expected);
         expect(node2.outputs[0].bus.isSilent).toBe(false);
       });
 
@@ -76,7 +76,7 @@ describe('impl/GainNode', () => {
         const actual = node2.outputs[0].bus.getChannelData()[0];
         const expected = noise.map((x) => x * 2);
 
-        assert.deepEqual(actual, expected);
+        expect(actual).toEqual(expected);
         expect(node2.outputs[0].bus.isSilent).toBe(false);
       });
     });
@@ -92,7 +92,7 @@ describe('impl/GainNode', () => {
         const actual = node2.outputs[0].bus.getChannelData()[0];
         const expected = noise.map((x, i) => x * (i / 16));
 
-        assert.deepEqual(actual, expected);
+        expect(actual).toEqual(expected);
         expect(node2.outputs[0].bus.isSilent).toBe(false);
       });
     });
@@ -122,8 +122,8 @@ describe('impl/GainNode', () => {
           const expectedL = np.zeros(16);
           const expectedR = np.zeros(16);
 
-          assert.deepEqual(actualL, expectedL);
-          assert.deepEqual(actualR, expectedR);
+          expect(actualL).toEqual(expectedL);
+          expect(actualR).toEqual(expectedR);
           expect(node2.outputs[0].bus.isSilent).toBe(true);
         });
 
@@ -141,8 +141,8 @@ describe('impl/GainNode', () => {
           const expectedL = np.zeros(16);
           const expectedR = np.zeros(16);
 
-          assert.deepEqual(actualL, expectedL);
-          assert.deepEqual(actualR, expectedR);
+          expect(actualL).toEqual(expectedL);
+          expect(actualR).toEqual(expectedR);
           expect(node2.outputs[0].bus.isSilent).toBe(true);
         });
 
@@ -160,8 +160,8 @@ describe('impl/GainNode', () => {
           const expectedL = noiseL;
           const expectedR = noiseR;
 
-          assert.deepEqual(actualL, expectedL);
-          assert.deepEqual(actualR, expectedR);
+          expect(actualL).toEqual(expectedL);
+          expect(actualR).toEqual(expectedR);
           expect(node2.outputs[0].bus.isSilent).toBe(false);
         });
 
@@ -179,8 +179,8 @@ describe('impl/GainNode', () => {
           const expectedL = noiseL.map((x) => x * 2);
           const expectedR = noiseR.map((x) => x * 2);
 
-          assert.deepEqual(actualL, expectedL);
-          assert.deepEqual(actualR, expectedR);
+          expect(actualL).toEqual(expectedL);
+          expect(actualR).toEqual(expectedR);
           expect(node2.outputs[0].bus.isSilent).toBe(false);
         });
       });
@@ -200,8 +200,8 @@ describe('impl/GainNode', () => {
           const expectedL = noiseL.map((x, i) => x * (i / 16));
           const expectedR = noiseR.map((x, i) => x * (i / 16));
 
-          assert.deepEqual(actualL, expectedL);
-          assert.deepEqual(actualR, expectedR);
+          expect(actualL).toEqual(expectedL);
+          expect(actualR).toEqual(expectedR);
           expect(node2.outputs[0].bus.isSilent).toBe(false);
         });
       });
@@ -244,10 +244,10 @@ describe('impl/GainNode', () => {
           const expectedSL = noiseSL.map((x) => x * 2);
           const expectedSR = noiseSR.map((x) => x * 2);
 
-          assert.deepEqual(actualL, expectedL);
-          assert.deepEqual(actualR, expectedR);
-          assert.deepEqual(actualSL, expectedSL);
-          assert.deepEqual(actualSR, expectedSR);
+          expect(actualL).toEqual(expectedL);
+          expect(actualR).toEqual(expectedR);
+          expect(actualSL).toEqual(expectedSL);
+          expect(actualSR).toEqual(expectedSR);
           expect(node2.outputs[0].bus.isSilent).toBe(false);
         });
       });
@@ -275,10 +275,10 @@ describe('impl/GainNode', () => {
           const expectedSL = noiseSL.map((x, i) => x * (i / 16));
           const expectedSR = noiseSR.map((x, i) => x * (i / 16));
 
-          assert.deepEqual(actualL, expectedL);
-          assert.deepEqual(actualR, expectedR);
-          assert.deepEqual(actualSL, expectedSL);
-          assert.deepEqual(actualSR, expectedSR);
+          expect(actualL).toEqual(expectedL);
+          expect(actualR).toEqual(expectedR);
+          expect(actualSL).toEqual(expectedSL);
+          expect(actualSR).toEqual(expectedSR);
           expect(node2.outputs[0].bus.isSilent).toBe(false);
         });
       });

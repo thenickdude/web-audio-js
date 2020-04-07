@@ -1,7 +1,7 @@
 'use strict';
 
 import assert from 'assert';
-import sinon from 'sinon';
+
 import AudioContext from '../../impl/AudioContext';
 import AudioNode from '../../impl/AudioNode';
 import EventTarget from '../../impl/EventTarget';
@@ -119,22 +119,22 @@ describe('impl/AudioNode', () => {
       const node = new AudioNode(context, {}, { outputs: [1] });
       const output = node.outputs[0];
 
-      output.enable = sinon.spy();
-      output.disable = sinon.spy();
+      output.enable = jest.fn();
+      output.disable = jest.fn();
 
       expect(node.isEnabled()).toBe(false);
 
       node.enableOutputsIfNecessary();
       expect(node.isEnabled()).toBe(true);
-      expect(output.enable.callCount).toBe(1);
-      expect(output.disable.callCount).toBe(0);
-      output.enable.reset();
-      output.disable.reset();
+      expect(output.enable).toHaveBeenCalledTimes(1);
+      expect(output.disable).toHaveBeenCalledTimes(0);
+      output.enable.mockClear();
+      output.disable.mockClear();
 
       node.enableOutputsIfNecessary();
       expect(node.isEnabled()).toBe(true);
-      expect(output.enable.callCount).toBe(0);
-      expect(output.disable.callCount).toBe(0);
+      expect(output.enable).toHaveBeenCalledTimes(0);
+      expect(output.disable).toHaveBeenCalledTimes(0);
     });
 
     it('.disableOutputsIfNecessary()', () => {
@@ -142,24 +142,24 @@ describe('impl/AudioNode', () => {
       const output = node.outputs[0];
 
       node.enableOutputsIfNecessary();
-      output.enable = sinon.spy();
-      output.disable = sinon.spy();
+      output.enable = jest.fn();
+      output.disable = jest.fn();
 
       expect(node.isEnabled()).toBe(true);
 
       node.disableOutputsIfNecessary();
       expect(node.isEnabled()).toBe(false);
-      expect(output.enable.callCount).toBe(0);
-      expect(output.disable.callCount).toBe(1);
-      output.enable.reset();
-      output.disable.reset();
+      expect(output.enable).toHaveBeenCalledTimes(0);
+      expect(output.disable).toHaveBeenCalledTimes(1);
+      output.enable.mockClear();
+      output.disable.mockClear();
 
       node.disableOutputsIfNecessary();
       expect(node.isEnabled()).toBe(false);
-      expect(output.enable.callCount).toBe(0);
-      expect(output.disable.callCount).toBe(0);
-      output.enable.reset();
-      output.disable.reset();
+      expect(output.enable).toHaveBeenCalledTimes(0);
+      expect(output.disable).toHaveBeenCalledTimes(0);
+      output.enable.mockClear();
+      output.disable.mockClear();
     });
   });
 });

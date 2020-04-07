@@ -1,7 +1,7 @@
 'use strict';
 
 import assert from 'assert';
-import sinon from 'sinon';
+
 import * as EncoderUtils from '../../utils/EncoderUtils';
 
 describe('utils/EncoderUtils.encode(encodeFn: function, audioData: AudioData, opts?: object): Promise<ArrayBuffer>', () => {
@@ -11,14 +11,14 @@ describe('utils/EncoderUtils.encode(encodeFn: function, audioData: AudioData, op
     const channelData = [new Float32Array(128), new Float32Array(128)];
     const audioData = { sampleRate, channelData };
     const opts = {};
-    const encodeFn = sinon.spy(() => {
+    const encodeFn = jest.fn(() => {
       return Promise.resolve(source.buffer);
     });
 
     return EncoderUtils.encode(encodeFn, audioData, opts).then(
       (arrayBuffer) => {
-        expect(encodeFn.callCount).toBe(1);
-        expect(encodeFn.calledWith(audioData, opts)).toBeTruthy();
+        expect(encodeFn).toHaveBeenCalledTimes(1);
+        expect(encodeFn).toBeCalledWith(audioData, opts);
         expect(arrayBuffer instanceof ArrayBuffer).toBeTruthy();
       },
     );
@@ -37,15 +37,15 @@ describe('utils/EncoderUtils.encode(encodeFn: function, audioData: AudioData, op
       },
     };
     const opts = {};
-    const encodeFn = sinon.spy(() => {
+    const encodeFn = jest.fn(() => {
       return Promise.resolve(source.buffer);
     });
 
     return EncoderUtils.encode(encodeFn, audioData, opts).then(
       (arrayBuffer) => {
-        expect(encodeFn.callCount).toBe(1);
+        expect(encodeFn).toHaveBeenCalledTimes(1);
 
-        const _audioData = encodeFn.args[0][0];
+        const _audioData = encodeFn.mock.calls[0][0];
 
         expect(_audioData.numberOfChannels).toBe(numberOfChannels);
         expect(_audioData.length).toBe(128);

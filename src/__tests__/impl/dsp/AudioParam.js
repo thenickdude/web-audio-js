@@ -38,7 +38,7 @@ describe('AudioParam', () => {
       const actual = param.getSampleAccurateValues();
 
       expect(param.hasSampleAccurateValues()).toBe(false);
-      assert.deepEqual(actual, expected);
+      expect(actual).toEqual(expected);
     });
   });
 
@@ -59,7 +59,7 @@ describe('AudioParam', () => {
       const actual = param.getSampleAccurateValues();
 
       expect(param.hasSampleAccurateValues()).toBe(true);
-      assert.deepEqual(actual, expected);
+      expect(actual).toEqual(expected);
     });
   });
 
@@ -76,7 +76,7 @@ describe('AudioParam', () => {
     const actual = param.getSampleAccurateValues();
 
     expect(param.hasSampleAccurateValues()).toBe(true);
-    assert.deepEqual(actual, expected);
+    expect(actual).toEqual(expected);
   });
 
   it('events and input', () => {
@@ -97,7 +97,7 @@ describe('AudioParam', () => {
     const actual = param.getSampleAccurateValues();
 
     expect(param.hasSampleAccurateValues()).toBe(true);
-    assert.deepEqual(actual, expected);
+    expect(actual).toEqual(expected);
   });
 });
 

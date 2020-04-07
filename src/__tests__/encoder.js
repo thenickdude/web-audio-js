@@ -1,7 +1,7 @@
 'use strict';
 
 import assert from 'assert';
-import sinon from 'sinon';
+
 import * as encoder from '../encoder';
 import * as EncoderUtils from '../utils/EncoderUtils';
 
@@ -11,11 +11,11 @@ describe('encoder', () => {
   beforeAll(() => {
     defaultWavEncoder = encoder.get('wav');
     EncoderUtils$encode = EncoderUtils.encode;
-    EncoderUtils.encode = sinon.spy(EncoderUtils.encode);
+    EncoderUtils.encode = jest.fn(EncoderUtils.encode);
   });
   afterEach(() => {
     encoder.set('wav', defaultWavEncoder);
-    EncoderUtils.encode.reset();
+    EncoderUtils.encode.mockClear();
   });
   afterAll(() => {
     EncoderUtils.encode = EncoderUtils$encode;
@@ -30,7 +30,7 @@ describe('encoder', () => {
   });
 
   it('.set(type: string, fn: function)', () => {
-    const encodeFn1 = sinon.spy();
+    const encodeFn1 = jest.fn();
 
     encoder.set('spy', encodeFn1);
 
@@ -40,7 +40,7 @@ describe('encoder', () => {
   it('.encode(audioData: object, opts?: object): Promise<ArrayBuffer>', () => {
     const channelData = [new Float32Array(16), new Float32Array(16)];
     const audioData = { sampleRate: 44100, channelData: channelData };
-    const encodeFn = sinon.spy(() => {
+    const encodeFn = jest.fn(() => {
       return Promise.resolve(new Uint8Array(64).buffer);
     });
     const opts = {};
@@ -48,12 +48,10 @@ describe('encoder', () => {
     encoder.set('wav', encodeFn);
 
     return encoder.encode(audioData, opts).then((arrayBuffer) => {
-      expect(encodeFn.callCount).toBe(1);
-      expect(encodeFn.calledWith(audioData, opts)).toBeTruthy();
-      expect(EncoderUtils.encode.callCount).toBe(1);
-      expect(
-        EncoderUtils.encode.calledWith(encodeFn, audioData, opts),
-      ).toBeTruthy();
+      expect(encodeFn).toHaveBeenCalledTimes(1);
+      expect(encodeFn).toBeCalledWith(audioData, opts);
+      expect(EncoderUtils.encode).toHaveBeenCalledTimes(1);
+      expect(EncoderUtils.encode).toBeCalledWith(encodeFn, audioData, opts);
       expect(arrayBuffer instanceof ArrayBuffer).toBeTruthy();
     });
   });

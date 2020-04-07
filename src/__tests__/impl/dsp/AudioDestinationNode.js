@@ -20,8 +20,8 @@ describe('impl/dsp/AudioDestinationNode', () => {
 
     node2.process(channelData, 0);
 
-    assert.deepEqual(channelData[0], np.zeros(16));
-    assert.deepEqual(channelData[1], np.zeros(16));
+    expect(channelData[0]).toEqual(np.zeros(16));
+    expect(channelData[1]).toEqual(np.zeros(16));
   });
 
   it('noise', () => {
@@ -39,7 +39,7 @@ describe('impl/dsp/AudioDestinationNode', () => {
 
     node2.process(channelData, 0);
 
-    assert.deepEqual(channelData[0], noise1);
-    assert.deepEqual(channelData[1], noise2);
+    expect(channelData[0]).toEqual(noise1);
+    expect(channelData[1]).toEqual(noise2);
   });
 });

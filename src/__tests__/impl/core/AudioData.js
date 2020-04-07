@@ -34,8 +34,8 @@ describe('impl/core/AudioData', () => {
       const data = new AudioData(2, 128, 44100);
 
       expect(data.channelData.length).toBe(2);
-      assert.deepEqual(data.channelData[0], np.zeros(128));
-      assert.deepEqual(data.channelData[1], np.zeros(128));
+      expect(data.channelData[0]).toEqual(np.zeros(128));
+      expect(data.channelData[1]).toEqual(np.zeros(128));
     });
   });
 });

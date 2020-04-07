@@ -42,19 +42,19 @@ describe('impl/AnalyserNode', () => {
     const waveform = new Float32Array(channel.length);
 
     analyser.getFloatTimeDomainData(waveform);
-    assert.deepEqual(waveform, np.zeros(waveform.length));
+    expect(waveform).toEqual(np.zeros(waveform.length));
 
     context.process(channels, 0);
     analyser.getFloatTimeDomainData(waveform);
 
-    assert.deepEqual(waveform, channel);
+    expect(waveform).toEqual(channel);
   });
 
   it('should get time domain data (byte)', () => {
     const waveform = new Uint8Array(channel.length);
 
     analyser.getByteTimeDomainData(waveform);
-    assert.deepEqual(waveform, np.full(waveform.length, 128, Uint8Array));
+    expect(waveform).toEqual(np.full(waveform.length, 128, Uint8Array));
 
     context.process(channels, 0);
     analyser.getByteTimeDomainData(waveform);
@@ -102,7 +102,7 @@ describe('impl/AnalyserNode', () => {
     const spectrum = new Float32Array(channel.length);
 
     analyser.getFloatFrequencyData(spectrum);
-    assert.deepEqual(spectrum, np.zeros(spectrum.length));
+    expect(spectrum).toEqual(np.zeros(spectrum.length));
 
     context.process(channels, 0);
     analyser.getFloatFrequencyData(spectrum);
@@ -117,7 +117,7 @@ describe('impl/AnalyserNode', () => {
     const spectrum = new Uint8Array(channel.length);
 
     analyser.getByteFrequencyData(spectrum);
-    // assert.deepEqual(spectrum, np.full(spectrum.length, 255));
+    // expect(spectrum).toEqual(np.full(spectrum.length, 255));
 
     context.process(channels, 0);
     analyser.getByteFrequencyData(spectrum);

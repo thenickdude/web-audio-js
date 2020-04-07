@@ -42,7 +42,7 @@ describe('utils/PCMBufferWriter', () => {
         120,
       ]);
 
-      assert.deepEqual(actual, expected);
+      expect(actual).toEqual(expected);
     });
   });
 
@@ -67,7 +67,7 @@ describe('utils/PCMBufferWriter', () => {
         24575,
       ]);
 
-      assert.deepEqual(actual, expected);
+      expect(actual).toEqual(expected);
     });
   });
 
@@ -83,7 +83,7 @@ describe('utils/PCMBufferWriter', () => {
       const actual = new Uint32Array(Uint8Array.from(buffer).buffer);
       const expected = new Uint32Array([2147483648, 3221225472, 0, 1073741823]);
 
-      assert.deepEqual(actual, expected);
+      expect(actual).toEqual(expected);
     });
   });
 
@@ -99,7 +99,7 @@ describe('utils/PCMBufferWriter', () => {
       const actual = new Float32Array(Uint8Array.from(buffer).buffer);
       const expected = new Float32Array([-1, -0.5, 0, 0.5]);
 
-      assert.deepEqual(actual, expected);
+      expect(actual).toEqual(expected);
     });
   });
 });

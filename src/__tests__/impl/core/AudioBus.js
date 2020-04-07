@@ -77,8 +77,8 @@ describe('impl/core/AudioBus', () => {
 
       bus.zeros();
 
-      assert.deepEqual(bus.getChannelData()[0], np.zeros(128));
-      assert.deepEqual(bus.getChannelData()[1], np.zeros(128));
+      expect(bus.getChannelData()[0]).toEqual(np.zeros(128));
+      expect(bus.getChannelData()[1]).toEqual(np.zeros(128));
       expect(bus.isSilent).toBe(true);
     });
 
@@ -92,7 +92,7 @@ describe('impl/core/AudioBus', () => {
       bus2.getMutableData()[0].set(noise2);
 
       bus2.copyFrom(bus1);
-      assert.deepEqual(bus2.getChannelData()[0], noise1);
+      expect(bus2.getChannelData()[0]).toEqual(noise1);
       expect(bus2.isSilent).toBe(false);
     });
 
@@ -107,7 +107,7 @@ describe('impl/core/AudioBus', () => {
 
       bus1.zeros();
       bus2.copyFrom(bus1);
-      assert.deepEqual(bus2.getChannelData()[0], np.zeros(128));
+      expect(bus2.getChannelData()[0]).toEqual(np.zeros(128));
       expect(bus2.isSilent).toBeTruthy();
     });
 
@@ -125,8 +125,8 @@ describe('impl/core/AudioBus', () => {
 
       bus3.copyFromWithOffset(bus1, 0);
       bus3.copyFromWithOffset(bus2, 128);
-      assert.deepEqual(bus3.getChannelData()[0].subarray(0, 128), noise1);
-      assert.deepEqual(bus3.getChannelData()[0].subarray(128, 256), noise2);
+      expect(bus3.getChannelData()[0].subarray(0).toEqual(128), noise1);
+      expect(bus3.getChannelData()[0].subarray(128).toEqual(256), noise2);
       expect(bus3.isSilent).toBe(false);
     });
   });

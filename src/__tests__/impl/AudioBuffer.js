@@ -62,7 +62,7 @@ describe('impl/AudioBuffer', () => {
       buffer.getChannelData(1).set(np.random_sample(32));
 
       buffer.copyFromChannel(destination, 1, 4);
-      assert.deepEqual(destination, buffer.getChannelData(1).subarray(4, 12));
+      expect(destination).toEqual(buffer.getChannelData(1).subarray(4, 12));
     });
 
     it('.copyToChannel(source, channelNumber, startInChannel)', () => {
@@ -73,7 +73,7 @@ describe('impl/AudioBuffer', () => {
       buffer.getChannelData(1).set(np.random_sample(32));
 
       buffer.copyToChannel(source, 0, 20);
-      assert.deepEqual(source, buffer.getChannelData(0).subarray(20, 28));
+      expect(source).toEqual(buffer.getChannelData(0).subarray(20, 28));
     });
   });
 });

@@ -30,8 +30,8 @@ describe('impl/dsp/WaveShaperNode', () => {
     const actual = node2.outputs[0].bus.getChannelData();
     const expected = [noise1.map(Math.abs), noise2.map(Math.abs)];
 
-    assert.deepEqual(actual[0], expected[0]);
-    assert.deepEqual(actual[1], expected[1]);
+    expect(actual[0]).toEqual(expected[0]);
+    expect(actual[1]).toEqual(expected[1]);
   });
 
   it('works - without curve', () => {
@@ -54,7 +54,7 @@ describe('impl/dsp/WaveShaperNode', () => {
     const actual = node2.outputs[0].bus.getChannelData();
     const expected = [noise1, noise2];
 
-    assert.deepEqual(actual[0], expected[0]);
-    assert.deepEqual(actual[1], expected[1]);
+    expect(actual[0]).toEqual(expected[0]);
+    expect(actual[1]).toEqual(expected[1]);
   });
 });

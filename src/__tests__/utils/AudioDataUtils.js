@@ -42,7 +42,7 @@ describe('utils/AudioDataUtils.toAudioData()', () => {
     const expected = Object.assign({ numberOfChannels: 1, length: 16 }, data);
 
     expect(actual).not.toBe(expected);
-    assert.deepEqual(actual, expected);
+    expect(actual).toEqual(expected);
   });
 
   it('convert to full audioData from audioData (channelData is empty)', () => {
@@ -51,7 +51,7 @@ describe('utils/AudioDataUtils.toAudioData()', () => {
     const expected = Object.assign({ numberOfChannels: 0, length: 0 }, data);
 
     expect(actual).not.toBe(expected);
-    assert.deepEqual(actual, expected);
+    expect(actual).toEqual(expected);
   });
 
   it('convert to full audioData from audioBuffer', () => {
@@ -71,7 +71,7 @@ describe('utils/AudioDataUtils.toAudioData()', () => {
       channelData,
     };
 
-    assert.deepEqual(actual, expected);
+    expect(actual).toEqual(expected);
   });
 
   it('convert to full audioData from audioBuffer (channelData is empty)', () => {
@@ -85,7 +85,7 @@ describe('utils/AudioDataUtils.toAudioData()', () => {
       channelData,
     };
 
-    assert.deepEqual(actual, expected);
+    expect(actual).toEqual(expected);
   });
 
   it('convert to full audioData from null', () => {
@@ -97,7 +97,7 @@ describe('utils/AudioDataUtils.toAudioData()', () => {
       channelData: [],
     };
 
-    assert.deepEqual(actual, expected);
+    expect(actual).toEqual(expected);
   });
 });
 

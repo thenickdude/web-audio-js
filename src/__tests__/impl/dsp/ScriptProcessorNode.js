@@ -1,7 +1,7 @@
 'use strict';
 
 import assert from 'assert';
-import sinon from 'sinon';
+
 import * as np from '../../../__tests_helpers/np';
 import AudioContext from '../../../impl/AudioContext';
 import ScriptProcessorNode from '../../../impl/ScriptProcessorNode';
@@ -29,7 +29,7 @@ describe('impl/dsp/ScriptProcessorNode', () => {
       numberOfOutputChannels,
     });
 
-    onaudioprocess = sinon.spy((e) => {
+    onaudioprocess = jest.fn((e) => {
       e.outputBuffer.getChannelData(0).set(noise3);
     });
 
@@ -51,7 +51,7 @@ describe('impl/dsp/ScriptProcessorNode', () => {
   });
 
   beforeEach(() => {
-    onaudioprocess.reset();
+    onaudioprocess.mockClear();
   });
 
   it('works [000-256]', () => {
@@ -65,13 +65,13 @@ describe('impl/dsp/ScriptProcessorNode', () => {
       context.process(channelData, 0);
     }
 
-    expect(onaudioprocess.callCount).toBe(1);
+    expect(onaudioprocess).toHaveBeenCalledTimes(1);
 
-    const eventItem = onaudioprocess.args[0][0];
+    const eventItem = onaudioprocess.mock.calls[0][0];
 
     expect(eventItem.playbackTime).toBe(256 / 8000);
-    assert.deepEqual(eventItem.inputBuffer.getChannelData(0), noise1);
-    assert.deepEqual(eventItem.inputBuffer.getChannelData(1), noise2);
+    expect(eventItem.inputBuffer.getChannelData(0)).toEqual(noise1);
+    expect(eventItem.inputBuffer.getChannelData(1)).toEqual(noise2);
   });
 
   it('works [256-512]', () => {
@@ -87,6 +87,6 @@ describe('impl/dsp/ScriptProcessorNode', () => {
       context.process(channelData, 0);
       actual.set(node2.outputs[0].bus.getChannelData()[0], i * 16);
     }
-    assert.deepEqual(actual, noise3);
+    expect(actual).toEqual(noise3);
   });
 });

@@ -1,7 +1,7 @@
 'use strict';
 
 import assert from 'assert';
-import sinon from 'sinon';
+
 import AudioContext from '../../impl/AudioContext';
 import OscillatorNode from '../../impl/OscillatorNode';
 import AudioNode from '../../impl/AudioNode';
@@ -149,7 +149,7 @@ describe('impl/OscillatorNode', () => {
     it('.stop(when)', () => {
       const context = new AudioContext({ sampleRate: 8000, blockSize: 16 });
       const node = new OscillatorNode(context);
-      const onended = sinon.spy();
+      const onended = jest.fn();
 
       node.connect(context.getDestination());
       node.addEventListener('ended', onended);
@@ -196,7 +196,7 @@ describe('impl/OscillatorNode', () => {
       //                currentTime
       processTo(context, 3);
       expect(node.getPlaybackState()).toBe('playing');
-      expect(onended.callCount).toBe(0);
+      expect(onended).toHaveBeenCalledTimes(0);
 
       //           start     stop
       //           |         |
@@ -205,7 +205,7 @@ describe('impl/OscillatorNode', () => {
       //                     currentTime
       processTo(context, 4);
       expect(node.getPlaybackState()).toBe('finished');
-      expect(onended.callCount).toBe(1);
+      expect(onended).toHaveBeenCalledTimes(1);
     });
   });
 

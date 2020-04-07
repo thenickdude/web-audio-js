@@ -1,24 +1,22 @@
 'use strict';
 
-import sinon from 'sinon';
 import * as decoder from '../decoder';
 import * as DecoderUtils from '../utils/DecoderUtils';
 import AudioBuffer from '../api/AudioBuffer';
 
 describe('decoder', () => {
-  let defaultWavDecoder, DecoderUtils$decode;
+  let defaultWavDecoder;
+  let DecoderUtils$decodeSpy;
 
   beforeAll(() => {
     defaultWavDecoder = decoder.get('wav');
-    DecoderUtils$decode = DecoderUtils.decode;
-    DecoderUtils.decode = sinon.spy(DecoderUtils.decode);
+    DecoderUtils$decodeSpy = jest.spyOn(DecoderUtils, 'decode');
   });
   afterEach(() => {
     decoder.set('wav', defaultWavDecoder);
-    DecoderUtils.decode.reset();
   });
   afterAll(() => {
-    DecoderUtils.decode = DecoderUtils$decode;
+    DecoderUtils$decodeSpy.mockRestore();
   });
 
   it('.get(type: string): function', () => {
@@ -30,16 +28,16 @@ describe('decoder', () => {
   });
 
   it('.set(type: string, fn: function)', () => {
-    const decodeFn1 = sinon.spy();
+    const decodeFn1 = jest.fn();
 
     decoder.set('spy', decodeFn1);
 
     expect(decoder.get('spy')).toBe(decodeFn1);
   });
 
-  it('.decode(audioData: ArrayBuffer, opts?:object): Promise<AudioBuffer>', () => {
+  it('.decode(audioData: ArrayBuffer, opts?:object): Promise<AudioBuffer>', async () => {
     const channelData = [new Float32Array(16), new Float32Array(16)];
-    const decodeFn = sinon.spy(() => {
+    const decodeFn = jest.fn(() => {
       return Promise.resolve({ sampleRate: 44100, channelData: channelData });
     });
     const audioData = new Uint32Array([
@@ -61,27 +59,26 @@ describe('decoder', () => {
 
     decoder.set('wav', decodeFn);
 
-    return decoder.decode(audioData, opts).then((audioBuffer) => {
-      expect(decodeFn.callCount).toBe(1);
-      expect(decodeFn.calledWith(audioData, opts)).toBeTruthy();
-      expect(DecoderUtils.decode.callCount).toBe(1);
-      expect(
-        DecoderUtils.decode.calledWith(decodeFn, audioData, opts),
-      ).toBeTruthy();
-      expect(audioBuffer instanceof AudioBuffer).toBeTruthy();
-      expect(audioBuffer.numberOfChannels).toBe(2);
-      expect(audioBuffer.length).toBe(16);
-      expect(audioBuffer.sampleRate).toBe(44100);
-      expect(audioBuffer.getChannelData(0)).toBe(channelData[0]);
-      expect(audioBuffer.getChannelData(1)).toBe(channelData[1]);
-    });
+    const audioBuffer = await decoder.decode(audioData, opts);
+    expect(decodeFn).toHaveBeenCalledTimes(1);
+    expect(decodeFn).toHaveBeenCalledWith(audioData, opts);
+    expect(DecoderUtils$decodeSpy).toHaveBeenCalledTimes(1);
+    expect(DecoderUtils$decodeSpy).toHaveBeenCalledWith(
+      decodeFn,
+      audioData,
+      opts,
+    );
+    expect(audioBuffer instanceof AudioBuffer).toBeTruthy();
+    expect(audioBuffer.numberOfChannels).toBe(2);
+    expect(audioBuffer.length).toBe(16);
+    expect(audioBuffer.sampleRate).toBe(44100);
+    expect(audioBuffer.getChannelData(0)).toBe(channelData[0]);
+    expect(audioBuffer.getChannelData(1)).toBe(channelData[1]);
   });
 
-  it('.decode(audioData: ArrayBuffer, opts?:object): Promise<AudioBuffer> - not supported', () => {
+  it('.decode(audioData: ArrayBuffer, opts?:object): Promise<AudioBuffer> - not supported', async () => {
     const audioData = new Uint8Array(16).buffer;
 
-    return decoder.decode(audioData).catch((err) => {
-      expect(err instanceof TypeError).toBeTruthy();
-    });
+    await expect(decoder.decode(audioData)).rejects.toBeInstanceOf(TypeError);
   });
 });

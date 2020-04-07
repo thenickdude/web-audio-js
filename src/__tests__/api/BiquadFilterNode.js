@@ -1,7 +1,7 @@
 'use strict';
 
 import assert from 'assert';
-import sinon from 'sinon';
+
 import * as api from '../../api';
 import AudioContext from '../../api/BaseAudioContext';
 import AudioParam from '../../api/AudioParam';
@@ -21,15 +21,15 @@ describe('api/BiquadFilterNode', () => {
       const type1 = 'lowpass';
       const type2 = 'highpass';
 
-      target._impl.getType = sinon.spy(() => type1);
-      target._impl.setType = sinon.spy();
+      target._impl.getType = jest.fn(() => type1);
+      target._impl.setType = jest.fn();
 
       expect(target.type).toBe(type1);
-      expect(target._impl.getType.callCount).toBe(1);
+      expect(target._impl.getType).toHaveBeenCalledTimes(1);
 
       target.type = type2;
-      expect(target._impl.setType.callCount).toBe(1);
-      expect(target._impl.setType.args[0][0]).toBe(type2);
+      expect(target._impl.setType).toHaveBeenCalledTimes(1);
+      expect(target._impl.setType.mock.calls[0][0]).toBe(type2);
     });
 
     it('.frequency', () => {
@@ -73,13 +73,13 @@ describe('api/BiquadFilterNode', () => {
       const magResponse = new Float32Array(128);
       const phaseResponse = new Float32Array(128);
 
-      target._impl.getFrequencyResponse = sinon.spy();
+      target._impl.getFrequencyResponse = jest.fn();
 
       target.getFrequencyResponse(frequencyHz, magResponse, phaseResponse);
-      expect(target._impl.getFrequencyResponse.callCount).toBe(1);
-      expect(target._impl.getFrequencyResponse.args[0][0]).toBe(frequencyHz);
-      expect(target._impl.getFrequencyResponse.args[0][1]).toBe(magResponse);
-      expect(target._impl.getFrequencyResponse.args[0][2]).toBe(phaseResponse);
+      expect(target._impl.getFrequencyResponse).toHaveBeenCalledTimes(1);
+      expect(target._impl.getFrequencyResponse.mock.calls[0][0]).toBe(frequencyHz);
+      expect(target._impl.getFrequencyResponse.mock.calls[0][1]).toBe(magResponse);
+      expect(target._impl.getFrequencyResponse.mock.calls[0][2]).toBe(phaseResponse);
     });
   });
 });

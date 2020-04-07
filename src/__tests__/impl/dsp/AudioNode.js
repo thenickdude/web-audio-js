@@ -1,7 +1,7 @@
 'use strict';
 
 import assert from 'assert';
-import sinon from 'sinon';
+
 import AudioContext from '../../../impl/AudioContext';
 import GainNode from '../../../impl/GainNode';
 
@@ -19,12 +19,12 @@ describe('impl/dsp/AudioNode', () => {
     node1.connect(node2);
     node2.connect(node3);
 
-    node1.dspProcess = sinon.spy();
-    param.dspProcess = sinon.spy();
+    node1.dspProcess = jest.fn();
+    param.dspProcess = jest.fn();
 
     node3.processIfNecessary();
 
-    expect(param.dspProcess.callCount).toBe(1);
+    expect(param.dspProcess).toHaveBeenCalledTimes(1);
   });
 
   it('feedback loop', () => {
@@ -38,10 +38,10 @@ describe('impl/dsp/AudioNode', () => {
     node2.connect(node3);
     node3.connect(node1);
 
-    node1.dspProcess = sinon.spy();
+    node1.dspProcess = jest.fn();
 
     node3.processIfNecessary();
 
-    expect(node1.dspProcess.callCount).toBe(1);
+    expect(node1.dspProcess).toHaveBeenCalledTimes(1);
   });
 });

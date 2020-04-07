@@ -50,7 +50,7 @@ function decode(audioData, opts) {
 }
 
 function toAudioType(audioData) {
-  if (audioData instanceof ArrayBuffer) {
+  if (!(audioData instanceof Uint8Array)) {
     audioData = new Uint8Array(audioData, 0, 16);
   }
   return audioType(audioData) || '';

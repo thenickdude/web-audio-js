@@ -9,8 +9,8 @@ describe('utils/fill(list, value)', () => {
     const actual = fill(list, 1);
     const expected = new Float32Array([1, 1, 1, 1, 1, 1, 1, 1]);
 
-    assert.deepEqual(actual, expected);
-    assert.deepEqual(list, expected);
+    expect(actual).toEqual(expected);
+    expect(list).toEqual(expected);
   });
 
   it('fill value - polyfill ver', () => {
@@ -22,7 +22,7 @@ describe('utils/fill(list, value)', () => {
     const actual = fill(list, 1);
     const expected = new Float32Array([1, 1, 1, 1, 1, 1, 1, 1]);
 
-    assert.deepEqual(actual, expected);
-    assert.deepEqual(list, expected);
+    expect(actual).toEqual(expected);
+    expect(list).toEqual(expected);
   });
 });

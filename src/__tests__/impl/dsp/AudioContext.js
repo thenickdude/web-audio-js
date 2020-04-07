@@ -1,7 +1,7 @@
 'use strict';
 
 import assert from 'assert';
-import sinon from 'sinon';
+
 import AudioContext from '../../../impl/AudioContext';
 
 const contextOpts = { sampleRate: 8000, blockSize: 16 };
@@ -20,30 +20,30 @@ describe('impl/dsp/AudioContext', () => {
     const channelData = [new Float32Array(16), new Float32Array(16)];
 
     expect(context.getCurrentTime()).toBe(0);
-    destination.process = sinon.spy();
+    destination.process = jest.fn();
 
     context.process(channelData, 0);
 
-    expect(destination.process.callCount).toBe(1);
-    expect(destination.process.calledWith(channelData, 0)).toBeTruthy();
+    expect(destination.process).toHaveBeenCalledTimes(1);
+    expect(destination.process).toBeCalledWith(channelData, 0);
     expect(context.getCurrentTime()).toBe(16 / 8000);
   });
 
   it('2: do post process and reserve pre process (for next process)', () => {
     const channelData = [new Float32Array(16), new Float32Array(16)];
-    const immediateSpy = sinon.spy();
+    const immediateSpy = jest.fn();
 
     expect(context.getCurrentTime()).toBe(16 / 8000);
-    destination.process = sinon.spy(() => {
+    destination.process = jest.fn(() => {
       context.addPostProcess(immediateSpy);
     });
 
     context.process(channelData, 0);
 
-    expect(destination.process.callCount).toBe(1);
-    expect(destination.process.calledWith(channelData, 0)).toBeTruthy();
+    expect(destination.process).toHaveBeenCalledTimes(1);
+    expect(destination.process).toBeCalledWith(channelData, 0);
     expect(context.getCurrentTime()).toBe(32 / 8000);
-    expect(immediateSpy.callCount).toBe(1);
+    expect(immediateSpy).toHaveBeenCalledTimes(1);
     expect(immediateSpy.calledAfter(destination.process)).toBeTruthy();
   });
 });

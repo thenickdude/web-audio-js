@@ -1,7 +1,7 @@
 'use strict';
 
 import assert from 'assert';
-import sinon from 'sinon';
+
 import * as api from '../../api';
 import AudioContext from '../../api/BaseAudioContext';
 import AudioParam from '../../api/AudioParam';
@@ -44,10 +44,10 @@ describe('api/DynamicsCompressorNode', () => {
       const target = context.createDynamicsCompressor();
       const reduction = 0;
 
-      target._impl.getReduction = sinon.spy(() => reduction);
+      target._impl.getReduction = jest.fn(() => reduction);
 
       expect(target.reduction).toBe(reduction);
-      expect(target._impl.getReduction.callCount).toBe(1);
+      expect(target._impl.getReduction).toHaveBeenCalledTimes(1);
     });
 
     it('.attack', () => {

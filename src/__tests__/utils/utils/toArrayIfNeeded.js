@@ -9,7 +9,7 @@ describe('utils/toArrayIfNeeded(value)', () => {
     const actual = toArrayIfNeeded(value);
     const expected = [value];
 
-    assert.deepEqual(actual, expected);
+    expect(actual).toEqual(expected);
   });
 
   it('nothing to do if array', () => {

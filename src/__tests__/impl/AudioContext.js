@@ -1,7 +1,5 @@
 'use strict';
 
-import assert from 'assert';
-import sinon from 'sinon';
 import AudioContext from '../../impl/AudioContext';
 import AudioDestinationNode from '../../impl/AudioDestinationNode';
 import AudioListener from '../../impl/AudioListener';
@@ -65,7 +63,7 @@ describe('impl/AudioContext', () => {
 
     beforeAll(() => {
       context = new AudioContext(contextOpts);
-      stateChangeSpy = sinon.spy();
+      stateChangeSpy = jest.fn();
 
       context.addEventListener('statechange', stateChangeSpy);
     });
@@ -79,12 +77,12 @@ describe('impl/AudioContext', () => {
 
       context.resume();
       expect(context.getState()).toBe('running');
-      expect(stateChangeSpy.callCount).toBe(1);
+      expect(stateChangeSpy.mock.calls).toHaveLength(1);
 
       // resume() in state 'running'
       context.resume();
       expect(context.getState()).toBe('running');
-      expect(stateChangeSpy.callCount).toBe(1);
+      expect(stateChangeSpy.mock.calls).toHaveLength(1);
     });
 
     it('suspend', () => {
@@ -92,12 +90,12 @@ describe('impl/AudioContext', () => {
 
       context.suspend();
       expect(context.getState()).toBe('suspended');
-      expect(stateChangeSpy.callCount).toBe(1);
+      expect(stateChangeSpy.mock.calls).toHaveLength(1);
 
       // suspend() in state 'suspended'
       context.suspend();
       expect(context.getState()).toBe('suspended');
-      expect(stateChangeSpy.callCount).toBe(1);
+      expect(stateChangeSpy.mock.calls).toHaveLength(1);
     });
 
     it('close', () => {
@@ -105,12 +103,12 @@ describe('impl/AudioContext', () => {
 
       context.close();
       expect(context.getState()).toBe('closed');
-      expect(stateChangeSpy.callCount).toBe(1);
+      expect(stateChangeSpy.mock.calls).toHaveLength(1);
 
       // close() in state 'closed'
       context.close();
       expect(context.getState()).toBe('closed');
-      expect(stateChangeSpy.callCount).toBe(1);
+      expect(stateChangeSpy.mock.calls).toHaveLength(1);
     });
   });
 });

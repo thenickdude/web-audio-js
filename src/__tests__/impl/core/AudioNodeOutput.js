@@ -1,7 +1,7 @@
 'use strict';
 
 import assert from 'assert';
-import sinon from 'sinon';
+
 import AudioNodeOutput from '../../../impl/core/AudioNodeOutput';
 import AudioBus from '../../../impl/core/AudioBus';
 import AudioContext from '../../../impl/AudioContext';
@@ -45,8 +45,8 @@ describe('impl/core/AudioNodeOutput', () => {
     it('.inputs', () => {
       const node = new AudioNode(context, {}, { outputs: [1, 1] });
 
-      assert.deepEqual(node.outputs[0].inputs, []);
-      assert.deepEqual(node.outputs[1].inputs, []);
+      expect(node.outputs[0].inputs).toEqual([]);
+      expect(node.outputs[1].inputs).toEqual([]);
     });
 
     it('.numberOfChannels=', () => {
@@ -86,11 +86,11 @@ describe('impl/core/AudioNodeOutput', () => {
         { inputs: [1, 1], outputs: [1, 1] },
       );
 
-      node.dspProcess = sinon.spy();
+      node.dspProcess = jest.fn();
 
       const retVal = node.outputs[0].pull();
 
-      expect(node.dspProcess.callCount).toBe(1);
+      expect(node.dspProcess).toHaveBeenCalledTimes(1);
       expect(retVal instanceof AudioBus).toBeTruthy();
     });
   });
