@@ -125,8 +125,8 @@ describe('impl/core/AudioBus', () => {
 
       bus3.copyFromWithOffset(bus1, 0);
       bus3.copyFromWithOffset(bus2, 128);
-      expect(bus3.getChannelData()[0].subarray(0).toEqual(128), noise1);
-      expect(bus3.getChannelData()[0].subarray(128).toEqual(256), noise2);
+      expect(bus3.getChannelData()[0].subarray(0, 128)).toEqual(noise1);
+      expect(bus3.getChannelData()[0].subarray(128, 256)).toEqual(noise2);
       expect(bus3.isSilent).toBe(false);
     });
   });

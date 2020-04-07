@@ -69,7 +69,7 @@ describe('impl/AudioContext', () => {
     });
 
     beforeEach(() => {
-      stateChangeSpy.reset();
+      stateChangeSpy.mockReset();
     });
 
     it('resume', () => {

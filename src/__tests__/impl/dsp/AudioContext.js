@@ -31,10 +31,12 @@ describe('impl/dsp/AudioContext', () => {
 
   it('2: do post process and reserve pre process (for next process)', () => {
     const channelData = [new Float32Array(16), new Float32Array(16)];
-    const immediateSpy = jest.fn();
+    const callOrder = [];
+    const immediateSpy = jest.fn(() => callOrder.push('immediateSpy'));
 
     expect(context.getCurrentTime()).toBe(16 / 8000);
     destination.process = jest.fn(() => {
+      callOrder.push('destination.process');
       context.addPostProcess(immediateSpy);
     });
 
@@ -44,6 +46,6 @@ describe('impl/dsp/AudioContext', () => {
     expect(destination.process).toBeCalledWith(channelData, 0);
     expect(context.getCurrentTime()).toBe(32 / 8000);
     expect(immediateSpy).toHaveBeenCalledTimes(1);
-    expect(immediateSpy.calledAfter(destination.process)).toBeTruthy();
+    expect(callOrder).toEqual(['destination.process', 'immediateSpy']);
   });
 });
