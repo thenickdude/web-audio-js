@@ -14,10 +14,14 @@ export default {
   external: ['assert', 'events', ...Object.keys(pkg.dependencies)],
   output: [
     {
+      sourcemap: true,
+      sourcemapExcludeSources: true,
       file: pkg.main,
       format: 'cjs',
     },
     {
+      sourcemap: true,
+      sourcemapExcludeSources: true,
       file: pkg.module,
       format: 'esm',
     },

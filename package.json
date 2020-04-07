@@ -39,8 +39,8 @@
   "files": [
     "package.json",
     "README.md",
-    "build",
-    "lib"
+    "src",
+    "build"
   ],
   "homepage": "https://github.com/descriptinc/web-audio-engine/",
   "keywords": [
