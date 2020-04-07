@@ -12,12 +12,11 @@ function create(length, format) {
   const methodName = resolveWriteMethodName(bitDepth, format.float);
   const bytes = bitDepth >> 3;
   const numberOfChannels = format.channels;
-  const bufferLength = numberOfChannels * length * bytes;
 
   if (numberOfChannels === 1) {
     return {
       encode(channelData, offset = 0, len = length) {
-        const buffer = alloc(bufferLength);
+        const buffer = alloc(len * bytes);
         const writer = new PCMWriter(buffer);
         const output = channelData[0];
 
@@ -33,7 +32,7 @@ function create(length, format) {
   if (numberOfChannels === 2) {
     return {
       encode(channelData, offset = 0, len = length) {
-        const buffer = alloc(bufferLength);
+        const buffer = alloc(2 * len * bytes);
         const writer = new PCMWriter(buffer);
         const outputL = channelData[0];
         const outputR = channelData[1];
