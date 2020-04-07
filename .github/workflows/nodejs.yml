@@ -4,26 +4,19 @@ on: [push]
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
     strategy:
       matrix:
         node-version: [10.x, 12.x]
     env:
       CI: true
-
     steps:
     - uses: actions/checkout@v1
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
-    - name: Install dependencies
-      run: yarn install --frozen-lockfile
-    - name: Lint files
-      run: yarn lint
-    - name: Run tests
-      run: yarn test-ci
-    - name: Build code
-      run: yarn build
+    - run: yarn install --frozen-lockfile
+    - run: yarn lint
+    - run: yarn test-ci
+    - run: yarn build
