@@ -16,12 +16,12 @@ function create(length, format) {
 
   if (numberOfChannels === 1) {
     return {
-      encode(channelData) {
+      encode(channelData, offset = 0, len = length) {
         const buffer = alloc(bufferLength);
         const writer = new PCMWriter(buffer);
         const output = channelData[0];
 
-        for (let i = 0, imax = length; i < imax; i++) {
+        for (let i = offset; i < len; i++) {
           writer[methodName](output[i]);
         }
 
@@ -32,13 +32,13 @@ function create(length, format) {
 
   if (numberOfChannels === 2) {
     return {
-      encode(channelData) {
+      encode(channelData, offset = 0, len = length) {
         const buffer = alloc(bufferLength);
         const writer = new PCMWriter(buffer);
         const outputL = channelData[0];
         const outputR = channelData[1];
 
-        for (let i = 0, imax = length; i < imax; i++) {
+        for (let i = offset; i < len; i++) {
           writer[methodName](outputL[i]);
           writer[methodName](outputR[i]);
         }

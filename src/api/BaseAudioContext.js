@@ -89,7 +89,11 @@ class BaseAudioContext extends EventTarget {
     return new AudioBuffer({ numberOfChannels, length, sampleRate });
   }
 
-  decodeAudioData(audioData, successCallback, errorCallback) {
+  decodeAudioData(
+    audioData,
+    successCallback = undefined,
+    errorCallback = undefined,
+  ) {
     const promise = decoder.decode(audioData, { sampleRate: this.sampleRate });
 
     promise.then(successCallback, errorCallback);
