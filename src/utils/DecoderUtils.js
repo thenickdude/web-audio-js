@@ -1,6 +1,6 @@
 'use strict';
 
-import nmap from 'nmap';
+import { nmap } from '../utils/nmap';
 import * as AudioDataUtils from './AudioDataUtils';
 
 /**
