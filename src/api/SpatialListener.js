@@ -1,12 +1,12 @@
-"use strict";
+'use strict';
 
-const AudioParam = require("./AudioParam");
-const { defineProp } = require("../utils");
+import AudioParam from './AudioParam';
+import { defineProp } from '../utils';
 
 class SpatialListener {
   constructor(context, impl) {
-    defineProp(this, "_context", context);
-    defineProp(this, "_impl", impl);
+    defineProp(this, '_context', context);
+    defineProp(this, '_impl', impl);
 
     this._impl.$positionX = new AudioParam(context, this._impl.getPositionX());
     this._impl.$positionY = new AudioParam(context, this._impl.getPositionY());
@@ -56,4 +56,4 @@ class SpatialListener {
   }
 }
 
-module.exports = SpatialListener;
+export default SpatialListener;

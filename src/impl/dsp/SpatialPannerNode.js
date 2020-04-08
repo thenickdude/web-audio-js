@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 const SpatialPannerNodeDSP = {
   dspProcess() {
@@ -6,7 +6,7 @@ const SpatialPannerNodeDSP = {
 
     outputBus.zeros();
     outputBus.sumFrom(this.inputs[0].bus);
-  }
+  },
 };
 
-module.exports = SpatialPannerNodeDSP;
+export default SpatialPannerNodeDSP;

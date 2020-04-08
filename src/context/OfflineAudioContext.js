@@ -1,13 +1,18 @@
-"use strict";
+'use strict';
 
-const nmap = require("nmap");
-const AudioDataUtils = require("../utils/AudioDataUtils");
-const BaseAudioContext = require("../api/BaseAudioContext");
-const AudioBuffer = require("../api/AudioBuffer");
-const setImmediate = require("../utils/setImmediate");
-const { defineProp } = require("../utils");
-const { toValidNumberOfChannels, toValidSampleRate, toNumber } = require("../utils");
-const { RUNNING, SUSPENDED, CLOSED } = require("../constants/AudioContextState");
+import { nmap } from '../utils/nmap';
+import * as AudioDataUtils from '../utils/AudioDataUtils';
+import BaseAudioContext from '../api/BaseAudioContext';
+import AudioBuffer from '../api/AudioBuffer';
+import setImmediate from '../utils/setImmediate';
+import {
+  defineProp,
+  toNumber,
+  toValidNumberOfChannels,
+  toValidSampleRate,
+} from '../utils';
+
+import { CLOSED, RUNNING, SUSPENDED } from '../constants/AudioContextState';
 
 class OfflineAudioContext extends BaseAudioContext {
   /**
@@ -17,23 +22,23 @@ class OfflineAudioContext extends BaseAudioContext {
    */
   constructor(numberOfChannels, length, sampleRate) {
     numberOfChannels = toValidNumberOfChannels(numberOfChannels);
-    length = Math.max(0, length|0);
+    length = Math.max(0, length | 0);
     sampleRate = toValidSampleRate(sampleRate);
 
     super({ sampleRate, numberOfChannels });
 
     this._impl.$oncomplete = null;
 
-    defineProp(this, "_numberOfChannels", numberOfChannels);
-    defineProp(this, "_length", length);
-    defineProp(this, "_suspendedTime", Infinity);
-    defineProp(this, "_suspendPromise", null);
-    defineProp(this, "_suspendResolve", null);
-    defineProp(this, "_renderingPromise", null);
-    defineProp(this, "_renderingResolve", null);
-    defineProp(this, "_renderingIterations", 128);
-    defineProp(this, "_audioData", null);
-    defineProp(this, "_writeIndex", 0);
+    defineProp(this, '_numberOfChannels', numberOfChannels);
+    defineProp(this, '_length', length);
+    defineProp(this, '_suspendedTime', Infinity);
+    defineProp(this, '_suspendPromise', null);
+    defineProp(this, '_suspendResolve', null);
+    defineProp(this, '_renderingPromise', null);
+    defineProp(this, '_renderingResolve', null);
+    defineProp(this, '_renderingIterations', 128);
+    defineProp(this, '_audioData', null);
+    defineProp(this, '_writeIndex', 0);
   }
 
   /**
@@ -54,7 +59,11 @@ class OfflineAudioContext extends BaseAudioContext {
    * @param {function} callback
    */
   set oncomplete(callback) {
-    this._impl.replaceEventListener("complete", this._impl.$oncomplete, callback);
+    this._impl.replaceEventListener(
+      'complete',
+      this._impl.$oncomplete,
+      callback,
+    );
     this._impl.$oncomplete = callback;
   }
 
@@ -64,11 +73,17 @@ class OfflineAudioContext extends BaseAudioContext {
   resume() {
     /* istanbul ignore next */
     if (this._impl.state === CLOSED) {
-      return Promise.reject(new TypeError("cannot startRendering when an OfflineAudioContext is closed"));
+      return Promise.reject(
+        new TypeError(
+          'cannot startRendering when an OfflineAudioContext is closed',
+        ),
+      );
     }
     /* istanbul ignore next */
     if (this._renderingPromise === null) {
-      return Promise.reject(new TypeError("cannot resume an offline context that has not started"));
+      return Promise.reject(
+        new TypeError('cannot resume an offline context that has not started'),
+      );
     }
     /* istanbul ignore else */
     if (this._impl.state === SUSPENDED) {
@@ -84,11 +99,17 @@ class OfflineAudioContext extends BaseAudioContext {
   suspend(time) {
     /* istanbul ignore next */
     if (this._impl.state === CLOSED) {
-      return Promise.reject(new TypeError("cannot startRendering when an OfflineAudioContext is closed"));
+      return Promise.reject(
+        new TypeError(
+          'cannot startRendering when an OfflineAudioContext is closed',
+        ),
+      );
     }
     /* istanbul ignore next */
     if (this._suspendPromise !== null) {
-      return Promise.reject(new TypeError("cannot schedule more than one suspend"));
+      return Promise.reject(
+        new TypeError('cannot schedule more than one suspend'),
+      );
     }
 
     time = Math.max(0, toNumber(time));
@@ -106,7 +127,7 @@ class OfflineAudioContext extends BaseAudioContext {
    */
   /* istanbul ignore next */
   close() {
-    return Promise.reject(new TypeError("cannot close an OfflineAudioContext"));
+    return Promise.reject(new TypeError('cannot close an OfflineAudioContext'));
   }
 
   /**
@@ -115,11 +136,17 @@ class OfflineAudioContext extends BaseAudioContext {
   startRendering() {
     /* istanbul ignore next */
     if (this._impl.state === CLOSED) {
-      return Promise.reject(new TypeError("cannot startRendering when an OfflineAudioContext is closed"));
+      return Promise.reject(
+        new TypeError(
+          'cannot startRendering when an OfflineAudioContext is closed',
+        ),
+      );
     }
     /* istanbul ignore next */
     if (this._renderingPromise !== null) {
-      return Promise.reject(new TypeError("cannot call startRendering more than once"));
+      return Promise.reject(
+        new TypeError('cannot call startRendering more than once'),
+      );
     }
 
     this._renderingPromise = new Promise((resolve) => {
@@ -128,7 +155,12 @@ class OfflineAudioContext extends BaseAudioContext {
       const sampleRate = this.sampleRate;
       const blockSize = this._impl.blockSize;
 
-      this._audioData = createRenderingAudioData(numberOfChannels, length, sampleRate, blockSize);
+      this._audioData = createRenderingAudioData(
+        numberOfChannels,
+        length,
+        sampleRate,
+        blockSize,
+      );
       this._renderingResolve = resolve;
 
       render.call(this, this._impl);
@@ -138,7 +170,12 @@ class OfflineAudioContext extends BaseAudioContext {
   }
 }
 
-function createRenderingAudioData(numberOfChannels, length, sampleRate, blockSize) {
+function createRenderingAudioData(
+  numberOfChannels,
+  length,
+  sampleRate,
+  blockSize,
+) {
   length = Math.ceil(length / blockSize) * blockSize;
 
   const channelData = nmap(numberOfChannels, () => new Float32Array(length));
@@ -164,7 +201,7 @@ function doneRendering(audioData) {
   const audioBuffer = AudioDataUtils.toAudioBuffer(audioData, AudioBuffer);
 
   this._impl.changeState(CLOSED);
-  this._impl.dispatchEvent({ type: "complete", renderedBuffer: audioBuffer });
+  this._impl.dispatchEvent({ type: 'complete', renderedBuffer: audioBuffer });
 
   this._renderingResolve(audioBuffer);
   this._renderingResolve = null;
@@ -180,8 +217,8 @@ function render(impl) {
   let writeIndex = this._writeIndex;
 
   const loop = () => {
-    const remainIterations = ((audioDataLength - writeIndex) / blockSize);
-    const iterations = Math.min(renderingIterations, remainIterations)|0;
+    const remainIterations = (audioDataLength - writeIndex) / blockSize;
+    const iterations = Math.min(renderingIterations, remainIterations) | 0;
 
     for (let i = 0; i < iterations; i++) {
       if (this._suspendedTime <= impl.currentTime) {
@@ -206,4 +243,4 @@ function render(impl) {
   setImmediate(loop);
 }
 
-module.exports = OfflineAudioContext;
+export default OfflineAudioContext;

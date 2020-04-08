@@ -1,8 +1,8 @@
-"use strict";
+'use strict';
 
-const impl = require("../impl");
-const AudioNode = require("./AudioNode");
-const AudioParam = require("./AudioParam");
+import * as impl from '../impl';
+import AudioNode from './AudioNode';
+import AudioParam from './AudioParam';
 
 class DelayNode extends AudioNode {
   constructor(context, opts) {
@@ -17,4 +17,4 @@ class DelayNode extends AudioNode {
   }
 }
 
-module.exports = DelayNode;
+export default DelayNode;

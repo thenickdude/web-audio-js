@@ -1,14 +1,16 @@
-"use strict";
+'use strict';
 
-const EventTarget = require("./EventTarget");
-const AudioNodeInput = require("./core/AudioNodeInput");
-const AudioNodeOutput = require("./core/AudioNodeOutput");
-const AudioParam = require("./AudioParam");
-const { defaults, clamp } = require("../utils");
-const { toNumber } = require("../utils");
-const { MIN_NUMBER_OF_CHANNELS, MAX_NUMBER_OF_CHANNELS } = require("../constants");
-const { MAX, CLAMPED_MAX, EXPLICIT } = require("../constants/ChannelCountMode");
-const { DISCRETE, SPEAKERS } = require("../constants/ChannelInterpretation");
+import EventTarget from './EventTarget';
+import AudioNodeInput from './core/AudioNodeInput';
+import AudioNodeOutput from './core/AudioNodeOutput';
+import AudioParam from './AudioParam';
+import { clamp, defaults, toNumber } from '../utils';
+
+import { MAX_NUMBER_OF_CHANNELS, MIN_NUMBER_OF_CHANNELS } from '../constants';
+
+import { CLAMPED_MAX, EXPLICIT, MAX } from '../constants/ChannelCountMode';
+
+import { DISCRETE, SPEAKERS } from '../constants/ChannelInterpretation';
 
 /**
  * @prop {AudioContext}      context
@@ -30,15 +32,28 @@ class AudioNode extends EventTarget {
    * @param {string}       config.channelCountMode
    */
   constructor(context, opts = {}, config = {}) {
-    let inputs = defaults(config.inputs, []);
-    let outputs = defaults(config.outputs, []);
-    let channelCount = defaults(config.channelCount, 1);
-    let channelCountMode = defaults(config.channelCountMode, MAX);
-    let channelInterpretation = SPEAKERS;
-    let allowedMinChannelCount = defaults(config.allowedMinChannelCount, MIN_NUMBER_OF_CHANNELS);
-    let allowedMaxChannelCount = defaults(config.allowedMaxChannelCount, MAX_NUMBER_OF_CHANNELS);
-    let allowedChannelCountMode = defaults(config.allowedChannelCountMode, [ MAX, CLAMPED_MAX, EXPLICIT ]);
-    let allowedChannelInterpretation = defaults(config.allowedChannelInterpretation, [ DISCRETE, SPEAKERS ]);
+    const inputs = defaults(config.inputs, []);
+    const outputs = defaults(config.outputs, []);
+    const channelCount = defaults(config.channelCount, 1);
+    const channelCountMode = defaults(config.channelCountMode, MAX);
+    const channelInterpretation = SPEAKERS;
+    const allowedMinChannelCount = defaults(
+      config.allowedMinChannelCount,
+      MIN_NUMBER_OF_CHANNELS,
+    );
+    const allowedMaxChannelCount = defaults(
+      config.allowedMaxChannelCount,
+      MAX_NUMBER_OF_CHANNELS,
+    );
+    const allowedChannelCountMode = defaults(config.allowedChannelCountMode, [
+      MAX,
+      CLAMPED_MAX,
+      EXPLICIT,
+    ]);
+    const allowedChannelInterpretation = defaults(
+      config.allowedChannelInterpretation,
+      [DISCRETE, SPEAKERS],
+    );
 
     super();
 
@@ -67,13 +82,13 @@ class AudioNode extends EventTarget {
       this.addOutput(numberOfChannels);
     });
 
-    if (typeof opts.channelCount === "number") {
+    if (typeof opts.channelCount === 'number') {
       this.setChannelCount(opts.channelCount);
     }
-    if (typeof opts.channelCountMode === "string") {
+    if (typeof opts.channelCountMode === 'string') {
       this.setChannelCountMode(opts.channelCountMode);
     }
-    if (typeof opts.channelInterpretation === "string") {
+    if (typeof opts.channelInterpretation === 'string') {
       this.setChannelInterpretation(opts.channelInterpretation);
     }
   }
@@ -105,11 +120,15 @@ class AudioNode extends EventTarget {
   setChannelCount(value) {
     value = toNumber(value);
 
-    const channelCount = clamp(value, this.allowedMinChannelCount, this.allowedMaxChannelCount);
+    const channelCount = clamp(
+      value,
+      this.allowedMinChannelCount,
+      this.allowedMaxChannelCount,
+    );
 
     if (channelCount !== this.channelCount) {
       this.channelCount = channelCount;
-      this.inputs.forEach(input => {
+      this.inputs.forEach((input) => {
         input.setChannelCount(value);
       });
     }
@@ -163,7 +182,7 @@ class AudioNode extends EventTarget {
    * @param {number}               input
    */
   connect(destination, output, input) {
-    this.outputs[output|0].connect(destination, input|0);
+    this.outputs[output | 0].connect(destination, input | 0);
   }
 
   /**
@@ -173,13 +192,17 @@ class AudioNode extends EventTarget {
     if (args.length === 0) {
       return this.disconnectAll();
     }
-    if (typeof args[0] === "number") {
-      return this.disconnectAllFromOutput(args[0]|0);
+    if (typeof args[0] === 'number') {
+      return this.disconnectAllFromOutput(args[0] | 0);
     }
     if (args.length === 1) {
       return this.disconnectIfConnected(args[0]);
     }
-    return this.disconnectFromOutputIfConnected(args[1]|0, args[0], args[2]|0);
+    return this.disconnectFromOutputIfConnected(
+      args[1] | 0,
+      args[0],
+      args[2] | 0,
+    );
   }
 
   /**
@@ -191,7 +214,13 @@ class AudioNode extends EventTarget {
   addInput(numberOfChannels, channelCount, channelCountMode) {
     const node = this;
     const index = this.inputs.length;
-    const input = new AudioNodeInput({ node, index, numberOfChannels, channelCount, channelCountMode });
+    const input = new AudioNodeInput({
+      node,
+      index,
+      numberOfChannels,
+      channelCount,
+      channelCountMode,
+    });
 
     this.inputs.push(input);
 
@@ -296,7 +325,7 @@ class AudioNode extends EventTarget {
    * @param {number} output
    */
   disconnectAllFromOutput(output) {
-    this.outputs[output|0].disconnect();
+    this.outputs[output | 0].disconnect();
   }
 
   /**
@@ -314,7 +343,7 @@ class AudioNode extends EventTarget {
    * @param {number} output
    */
   disconnectFromOutputIfConnected(output, destination, input) {
-    this.outputs[output|0].disconnect(destination, input|0);
+    this.outputs[output | 0].disconnect(destination, input | 0);
   }
 
   /**
@@ -360,4 +389,4 @@ class AudioNode extends EventTarget {
   dspProcess() {}
 }
 
-module.exports = AudioNode;
+export default AudioNode;

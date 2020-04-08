@@ -1,10 +1,10 @@
-"use strict";
+'use strict';
 
 // Port from Chromium
 // https://chromium.googlesource.com/chromium/blink/+/master/Source/platform/audio/DynamicsCompressorKernel.cpp
 
-const assert = require('assert');
-const { toDecibel, toLinear, flushDenormalFloatToZero } = require("../../utils");
+import assert from 'assert';
+import { flushDenormalFloatToZero, toDecibel, toLinear } from '../../utils';
 
 const DEFAULT_PRE_DELAY_FRAMES = 256;
 const MAX_PRE_DELAY_FRAMES = 1024;
@@ -59,7 +59,10 @@ class DynamicsCompressorKernel {
     // Initializes most member variables;
     this.reset();
 
-    this.meteringReleaseK = discreteTimeConstantForSampleRate(METERING_RELEASE_TIME_CONSTANT, sampleRate);
+    this.meteringReleaseK = discreteTimeConstantForSampleRate(
+      METERING_RELEASE_TIME_CONSTANT,
+      sampleRate,
+    );
   }
 
   setNumberOfChannels(numberOfChannels) {
@@ -98,19 +101,22 @@ class DynamicsCompressorKernel {
     if (x < this.linearThreshold) {
       return x;
     }
-    return this.linearThreshold + (1 - Math.exp(-k * (x - this.linearThreshold))) / k;
+    return (
+      this.linearThreshold + (1 - Math.exp(-k * (x - this.linearThreshold))) / k
+    );
   }
 
   // Full compression curve with constant ratio after knee.
   saturate(x, k) {
-     if (x < this.kneeThreshold) {
-       return this.kneeCurve(x, k);
-     }
+    if (x < this.kneeThreshold) {
+      return this.kneeCurve(x, k);
+    }
 
-     // Constant ratio after knee
-     const xDb = toDecibel(x);
-     const yDb = this.ykneeThresholdDb + this.slope * (xDb - this.kneeThresholdDb);
-     return toLinear(yDb);
+    // Constant ratio after knee
+    const xDb = toDecibel(x);
+    const yDb =
+      this.ykneeThresholdDb + this.slope * (xDb - this.kneeThresholdDb);
+    return toLinear(yDb);
   }
 
   // Approximate 1st derivative with input and output expressed in dB.
@@ -161,7 +167,11 @@ class DynamicsCompressorKernel {
   }
 
   updateStaticCurveParameters(dbThreshold, dbKnee, ratio) {
-    if (dbThreshold !== this.dbThreshold || dbKnee !== this.dbKnee || ratio !== this.ratio) {
+    if (
+      dbThreshold !== this.dbThreshold ||
+      dbKnee !== this.dbKnee ||
+      ratio !== this.ratio
+    ) {
       // Threshold and knee
       this.dbThreshold = dbThreshold;
       this.linearThreshold = toLinear(dbThreshold);
@@ -199,7 +209,7 @@ class DynamicsCompressorKernel {
     releaseZone1,
     releaseZone2,
     releaseZone3,
-    releaseZone4
+    releaseZone4,
   ) {
     assert(this.preDelayBuffers.length === numberOfChannels);
 
@@ -242,11 +252,31 @@ class DynamicsCompressorKernel {
 
     // All of these coefficients were derived for 4th order polynomial curve fitting where the y values
     // match the evenly spaced x values as follows: (y1 : x == 0, y2 : x == 1, y3 : x == 2, y4 : x == 3)
-    const kA = 0.9999999999999998*y1 + 1.8432219684323923e-16*y2 - 1.9373394351676423e-16*y3 + 8.824516011816245e-18*y4;
-    const kB = -1.5788320352845888*y1 + 2.3305837032074286*y2 - 0.9141194204840429*y3 + 0.1623677525612032*y4;
-    const kC = 0.5334142869106424*y1 - 1.272736789213631*y2 + 0.9258856042207512*y3 - 0.18656310191776226*y4;
-    const kD = 0.08783463138207234*y1 - 0.1694162967925622*y2 + 0.08588057951595272*y3 - 0.00429891410546283*y4;
-    const kE = -0.042416883008123074*y1 + 0.1115693827987602*y2 - 0.09764676325265872*y3 + 0.028494263462021576*y4;
+    const kA =
+      0.9999999999999998 * y1 +
+      1.8432219684323923e-16 * y2 -
+      1.9373394351676423e-16 * y3 +
+      8.824516011816245e-18 * y4;
+    const kB =
+      -1.5788320352845888 * y1 +
+      2.3305837032074286 * y2 -
+      0.9141194204840429 * y3 +
+      0.1623677525612032 * y4;
+    const kC =
+      0.5334142869106424 * y1 -
+      1.272736789213631 * y2 +
+      0.9258856042207512 * y3 -
+      0.18656310191776226 * y4;
+    const kD =
+      0.08783463138207234 * y1 -
+      0.1694162967925622 * y2 +
+      0.08588057951595272 * y3 -
+      0.00429891410546283 * y4;
+    const kE =
+      -0.042416883008123074 * y1 +
+      0.1115693827987602 * y2 -
+      0.09764676325265872 * y3 +
+      0.028494263462021576 * y4;
 
     // x ranges from 0 -> 3       0    1    2   3
     //                           -15  -10  -5   0db
@@ -268,7 +298,10 @@ class DynamicsCompressorKernel {
       if (isNaN(this.detectorAverage)) {
         this.detectorAverage = 1;
       }
-      if (this.detectorAverage === Infinity || this.detectorAverage === -Infinity) {
+      if (
+        this.detectorAverage === Infinity ||
+        this.detectorAverage === -Infinity
+      ) {
         this.detectorAverage = 1;
       }
 
@@ -288,7 +321,9 @@ class DynamicsCompressorKernel {
       const isReleasing = scaledDesiredGain > this.compressorGain;
 
       // compressionDiffDb is the difference between current compression level and the desired level.
-      let compressionDiffDb = toDecibel(this.compressorGain / scaledDesiredGain);
+      let compressionDiffDb = toDecibel(
+        this.compressorGain / scaledDesiredGain,
+      );
 
       if (isReleasing) {
         // Release mode - compressionDiffDb should be negative dB
@@ -334,7 +369,10 @@ class DynamicsCompressorKernel {
 
         // As long as we're still in attack mode, use a rate based off
         // the largest compressionDiffDb we've encountered so far.
-        if (this.maxAttackCompressionDiffDb === -1 || this.maxAttackCompressionDiffDb < compressionDiffDb) {
+        if (
+          this.maxAttackCompressionDiffDb === -1 ||
+          this.maxAttackCompressionDiffDb < compressionDiffDb
+        ) {
           this.maxAttackCompressionDiffDb = compressionDiffDb;
         }
 
@@ -364,7 +402,8 @@ class DynamicsCompressorKernel {
             const undelayedSource = sourceChannels[i][frameIndex];
             delayBuffer[preDelayWriteIndex] = undelayedSource;
 
-            const absUndelayedSource = undelayedSource > 0 ? undelayedSource : -undelayedSource;
+            const absUndelayedSource =
+              undelayedSource > 0 ? undelayedSource : -undelayedSource;
             if (compressorInput < absUndelayedSource) {
               compressorInput = absUndelayedSource;
             }
@@ -407,7 +446,8 @@ class DynamicsCompressorKernel {
           // Exponential approach to desired gain
           if (envelopeRate < 1) {
             // Attack - reduce gain to desired
-            compressorGain += (scaledDesiredGain - compressorGain) * envelopeRate;
+            compressorGain +=
+              (scaledDesiredGain - compressorGain) * envelopeRate;
           } else {
             // Release - exponentially increase gain to 1.0
             compressorGain *= envelopeRate;
@@ -418,25 +458,30 @@ class DynamicsCompressorKernel {
           const postWarpCompressorGain = Math.sin(PI_OVER_2 * compressorGain);
 
           // Calculate total gain using master gain and effect blend.
-          const totalGain = dryMix + wetMix * masterLinearGain * postWarpCompressorGain;
+          const totalGain =
+            dryMix + wetMix * masterLinearGain * postWarpCompressorGain;
 
           // Calculte metering.
           const dbRealGain = 20 * Math.log10(postWarpCompressorGain);
           if (dbRealGain < this.meteringGain) {
             this.meteringGain = dbRealGain;
           } else {
-            this.meteringGain += (dbRealGain - this.meteringGain) * this.meteringReleaseK;
+            this.meteringGain +=
+              (dbRealGain - this.meteringGain) * this.meteringReleaseK;
           }
 
           // Apply final gain
           for (let i = 0; i < numberOfChannels; i++) {
             const delayBuffer = this.preDelayBuffers[i];
-            destinationChannels[i][frameIndex] = delayBuffer[preDelayReadIndex] * totalGain;
+            destinationChannels[i][frameIndex] =
+              delayBuffer[preDelayReadIndex] * totalGain;
           }
 
           frameIndex++;
-          preDelayReadIndex = (preDelayReadIndex + 1) & MAX_PRE_DELAY_FRAMES_MASK;
-          preDelayWriteIndex = (preDelayWriteIndex + 1) & MAX_PRE_DELAY_FRAMES_MASK;
+          preDelayReadIndex =
+            (preDelayReadIndex + 1) & MAX_PRE_DELAY_FRAMES_MASK;
+          preDelayWriteIndex =
+            (preDelayWriteIndex + 1) & MAX_PRE_DELAY_FRAMES_MASK;
         }
 
         // Locals back to member variables
@@ -465,4 +510,4 @@ class DynamicsCompressorKernel {
   }
 }
 
-module.exports = DynamicsCompressorKernel;
+export default DynamicsCompressorKernel;

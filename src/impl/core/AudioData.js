@@ -1,6 +1,6 @@
-"use strict";
+'use strict';
 
-const nmap = require("nmap");
+import { nmap } from '../../utils/nmap';
 
 /**
  * AudioData is struct like AudioBuffer.
@@ -16,13 +16,16 @@ class AudioData {
    * @param {number} numberOfChannels
    * @param {number} length
    * @param {number} sampleRate
+   * @param {Float32Array[]} [channelData]
    */
-  constructor(numberOfChannels, length, sampleRate) {
-    this.numberOfChannels = numberOfChannels|0;
-    this.length = length|0;
-    this.sampleRate = sampleRate|0;
-    this.channelData = nmap(this.numberOfChannels, () => new Float32Array(this.length));
+  constructor(numberOfChannels, length, sampleRate, channelData) {
+    this.numberOfChannels = numberOfChannels | 0;
+    this.length = length | 0;
+    this.sampleRate = sampleRate | 0;
+    this.channelData =
+      channelData ||
+      nmap(this.numberOfChannels, () => new Float32Array(this.length));
   }
 }
 
-module.exports = AudioData;
+export default AudioData;

@@ -1,28 +1,24 @@
-"use strict",
-
-module.exports = {
-  AnalyserNode: require("./AnalyserNode"),
-  AudioBuffer: require("./AudioBuffer"),
-  AudioBufferSourceNode: require("./AudioBufferSourceNode"),
-  AudioContext: require("./AudioContext"),
-  AudioDestinationNode: require("./AudioDestinationNode"),
-  AudioListener: require("./AudioListener"),
-  AudioNode: require("./AudioNode"),
-  AudioParam: require("./AudioParam"),
-  BiquadFilterNode: require("./BiquadFilterNode"),
-  ChannelMergerNode: require("./ChannelMergerNode"),
-  ChannelSplitterNode: require("./ChannelSplitterNode"),
-  ConstantSourceNode: require("./ConstantSourceNode"),
-  ConvolverNode: require("./ConvolverNode"),
-  DelayNode: require("./DelayNode"),
-  DynamicsCompressorNode: require("./DynamicsCompressorNode"),
-  GainNode: require("./GainNode"),
-  IIRFilterNode: require("./IIRFilterNode"),
-  OscillatorNode: require("./OscillatorNode"),
-  PannerNode: require("./PannerNode"),
-  PeriodicWave: require("./PeriodicWave"),
-  ScriptProcessorNode: require("./ScriptProcessorNode"),
-  SpatialPannerNode: require("./SpatialPannerNode"),
-  StereoPannerNode: require("./StereoPannerNode"),
-  WaveShaperNode: require("./WaveShaperNode")
-};
+export { default as AnalyserNode } from './AnalyserNode';
+export { default as AudioBuffer } from './AudioBuffer';
+export { default as AudioBufferSourceNode } from './AudioBufferSourceNode';
+export { default as AudioContext } from './AudioContext';
+export { default as AudioDestinationNode } from './AudioDestinationNode';
+export { default as AudioListener } from './AudioListener';
+export { default as AudioNode } from './AudioNode';
+export { default as AudioParam } from './AudioParam';
+export { default as BiquadFilterNode } from './BiquadFilterNode';
+export { default as ChannelMergerNode } from './ChannelMergerNode';
+export { default as ChannelSplitterNode } from './ChannelSplitterNode';
+export { default as ConstantSourceNode } from './ConstantSourceNode';
+export { default as ConvolverNode } from './ConvolverNode';
+export { default as DelayNode } from './DelayNode';
+export { default as DynamicsCompressorNode } from './DynamicsCompressorNode';
+export { default as GainNode } from './GainNode';
+export { default as IIRFilterNode } from './IIRFilterNode';
+export { default as OscillatorNode } from './OscillatorNode';
+export { default as PannerNode } from './PannerNode';
+export { default as PeriodicWave } from './PeriodicWave';
+export { default as ScriptProcessorNode } from './ScriptProcessorNode';
+export { default as SpatialPannerNode } from './SpatialPannerNode';
+export { default as StereoPannerNode } from './StereoPannerNode';
+export { default as WaveShaperNode } from './WaveShaperNode';

@@ -1,8 +1,8 @@
-"use strict";
+'use strict';
 
-const BasePannerNode = require("./BasePannerNode");
-const SpatialPannerNodeDSP = require("./dsp/SpatialPannerNode");
-const { AUDIO_RATE } = require("../constants/AudioParamRate");
+import BasePannerNode from './BasePannerNode';
+import SpatialPannerNodeDSP from './dsp/SpatialPannerNode';
+import { AUDIO_RATE } from '../constants/AudioParamRate';
 
 class SpatialPannerNode extends BasePannerNode {
   /**
@@ -64,4 +64,4 @@ class SpatialPannerNode extends BasePannerNode {
 
 Object.assign(SpatialPannerNode.prototype, SpatialPannerNodeDSP);
 
-module.exports = SpatialPannerNode;
+export default SpatialPannerNode;

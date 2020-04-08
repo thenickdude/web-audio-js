@@ -1,10 +1,12 @@
-"use strict";
+'use strict';
 
-const AudioNode = require("./AudioNode");
-const GainNodeDSP = require("./dsp/GainNode");
-const { defaults } = require("../utils");
-const { MAX } = require("../constants/ChannelCountMode");
-const { AUDIO_RATE } = require("../constants/AudioParamRate");
+import AudioNode from './AudioNode';
+import GainNodeDSP from './dsp/GainNode';
+import { defaults } from '../utils';
+
+import { MAX } from '../constants/ChannelCountMode';
+
+import { AUDIO_RATE } from '../constants/AudioParamRate';
 
 const DEFAULT_GAIN = 1;
 
@@ -15,13 +17,13 @@ class GainNode extends AudioNode {
    * @param {number}       opts.gain
    */
   constructor(context, opts = {}) {
-    let gain = defaults(opts.gain, DEFAULT_GAIN);
+    const gain = defaults(opts.gain, DEFAULT_GAIN);
 
     super(context, opts, {
-      inputs: [ 1 ],
-      outputs: [ 1 ],
+      inputs: [1],
+      outputs: [1],
       channelCount: 2,
-      channelCountMode: MAX
+      channelCountMode: MAX,
     });
 
     this._gain = this.addParam(AUDIO_RATE, gain);
@@ -44,4 +46,4 @@ class GainNode extends AudioNode {
 
 Object.assign(GainNode.prototype, GainNodeDSP);
 
-module.exports = GainNode;
+export default GainNode;

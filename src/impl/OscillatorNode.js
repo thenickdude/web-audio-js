@@ -1,17 +1,22 @@
-"use strict";
+'use strict';
 
-const AudioScheduledSourceNode = require("./AudioScheduledSourceNode");
-const PeriodicWave = require("./PeriodicWave");
-const OscillatorNodeDSP = require("./dsp/OscillatorNode");
-const { defaults } = require("../utils");
-const { toImpl } = require("../utils");
-const { AUDIO_RATE } = require("../constants/AudioParamRate");
-const { SINE, SAWTOOTH, TRIANGLE, SQUARE, CUSTOM } = require("../constants/OscillatorType");
+import AudioScheduledSourceNode from './AudioScheduledSourceNode';
+import PeriodicWave from './PeriodicWave';
+import OscillatorNodeDSP from './dsp/OscillatorNode';
+import { defaults, toImpl } from '../utils';
+
+import { AUDIO_RATE } from '../constants/AudioParamRate';
+
+import {
+  CUSTOM,
+  SAWTOOTH,
+  SINE,
+  SQUARE,
+  TRIANGLE,
+} from '../constants/OscillatorType';
 
 const DefaultPeriodicWaves = {};
-const allowedOscillatorTypes = [
-  SINE, SAWTOOTH, TRIANGLE, SQUARE
-];
+const allowedOscillatorTypes = [SINE, SAWTOOTH, TRIANGLE, SQUARE];
 
 const DEFAULT_TYPE = SINE;
 const DEFAULT_FREQUENCY = 440;
@@ -26,9 +31,9 @@ class OscillatorNode extends AudioScheduledSourceNode {
    * @param {number}       opts.detune
    */
   constructor(context, opts = {}) {
-    let type = defaults(opts.type, DEFAULT_TYPE);
-    let frequency = defaults(opts.frequency, DEFAULT_FREQUENCY);
-    let detune = defaults(opts.detune, DEFAULT_DETUNE);
+    const type = defaults(opts.type, DEFAULT_TYPE);
+    const frequency = defaults(opts.frequency, DEFAULT_FREQUENCY);
+    const detune = defaults(opts.detune, DEFAULT_DETUNE);
 
     super(context, opts);
 
@@ -100,12 +105,15 @@ class OscillatorNode extends AudioScheduledSourceNode {
    * @return {PeriodicWave}
    */
   buildPeriodicWave(type) {
-    const sampleRate = this.context.sampleRate
-    const key = type + ":" + sampleRate;
+    const sampleRate = this.context.sampleRate;
+    const key = type + ':' + sampleRate;
 
     /* istanbul ignore else */
     if (!DefaultPeriodicWaves[key]) {
-      const periodicWave = new PeriodicWave({ sampleRate }, { constraints: false });
+      const periodicWave = new PeriodicWave(
+        { sampleRate },
+        { constraints: false },
+      );
 
       periodicWave.generateBasicWaveform(type);
 
@@ -118,4 +126,4 @@ class OscillatorNode extends AudioScheduledSourceNode {
 
 Object.assign(OscillatorNode.prototype, OscillatorNodeDSP);
 
-module.exports = OscillatorNode;
+export default OscillatorNode;

@@ -1,7 +1,7 @@
-"use strict";
+'use strict';
 
-const impl = require("../impl");
-const AudioNode = require("./AudioNode");
+import * as impl from '../impl';
+import AudioNode from './AudioNode';
 
 class ConvolverNode extends AudioNode {
   constructor(context, opts) {
@@ -33,4 +33,4 @@ class ConvolverNode extends AudioNode {
   }
 }
 
-module.exports = ConvolverNode;
+export default ConvolverNode;

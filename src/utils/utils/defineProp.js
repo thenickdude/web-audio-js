@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 /**
  * @param {object} target
@@ -6,7 +6,12 @@
  * @param {*}      value
  */
 function defineProp(target, name, value) {
-  Object.defineProperty(target, name, { value: value, enumerable: false, writable: true, configurable: true });
+  Object.defineProperty(target, name, {
+    value: value,
+    enumerable: false,
+    writable: true,
+    configurable: true,
+  });
 }
 
-module.exports = defineProp;
+export default defineProp;

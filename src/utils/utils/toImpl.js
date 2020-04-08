@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 /**
  * @param {object} value
@@ -8,4 +8,4 @@ function toImpl(value) {
   return value._impl || value;
 }
 
-module.exports = toImpl;
+export default toImpl;

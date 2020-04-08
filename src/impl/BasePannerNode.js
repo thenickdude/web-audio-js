@@ -1,15 +1,15 @@
-"use strict";
+'use strict';
 
-const AudioNode = require("./AudioNode");
-const { defaults } = require("../utils");
-const { toNumber } = require("../utils");
-const { CLAMPED_MAX, EXPLICIT } = require("../constants/ChannelCountMode");
+import AudioNode from './AudioNode';
+import { defaults, toNumber } from '../utils';
 
-const PanningModelTypes = [ "equalpower", "HRTF" ];
-const DistanceModelTypes = [ "linear", "inverse", "exponential" ];
+import { CLAMPED_MAX, EXPLICIT } from '../constants/ChannelCountMode';
 
-const DEFAULT_PANNING_MODEL = "equalpower";
-const DEFAULT_DISTANCE_MODEL = "inverse";
+const PanningModelTypes = ['equalpower', 'HRTF'];
+const DistanceModelTypes = ['linear', 'inverse', 'exponential'];
+
+const DEFAULT_PANNING_MODEL = 'equalpower';
+const DEFAULT_DISTANCE_MODEL = 'inverse';
 const DEFAULT_REF_DISTANCE = 1;
 const DEFAULT_MAX_DISTANCE = 10000;
 const DEFAULT_ROLLOFF_FACTOR = 1;
@@ -31,22 +31,28 @@ class BasePannerNode extends AudioNode {
    * @param {number}       opts.coneOuterGain
    */
   constructor(context, opts = {}) {
-    let panningModel = defaults(opts.panningModel, DEFAULT_PANNING_MODEL);
-    let distanceModel = defaults(opts.distanceModel, DEFAULT_DISTANCE_MODEL);
-    let refDistance = defaults(opts.refDistance, DEFAULT_REF_DISTANCE);
-    let maxDistance = defaults(opts.maxDistance, DEFAULT_MAX_DISTANCE);
-    let rolloffFactor = defaults(opts.rolloffFactor, DEFAULT_ROLLOFF_FACTOR);
-    let coneInnerAngle = defaults(opts.coneInnerAngle, DEFAULT_CONE_INNER_ANGLE);
-    let coneOuterAngle = defaults(opts.coneOuterAngle, DEFAULT_CONE_OUTER_ANGLE);
-    let coneOuterGain = defaults(opts.coneOuterGain, DEFAULT_CONE_OUTER_GAIN);
+    const panningModel = defaults(opts.panningModel, DEFAULT_PANNING_MODEL);
+    const distanceModel = defaults(opts.distanceModel, DEFAULT_DISTANCE_MODEL);
+    const refDistance = defaults(opts.refDistance, DEFAULT_REF_DISTANCE);
+    const maxDistance = defaults(opts.maxDistance, DEFAULT_MAX_DISTANCE);
+    const rolloffFactor = defaults(opts.rolloffFactor, DEFAULT_ROLLOFF_FACTOR);
+    const coneInnerAngle = defaults(
+      opts.coneInnerAngle,
+      DEFAULT_CONE_INNER_ANGLE,
+    );
+    const coneOuterAngle = defaults(
+      opts.coneOuterAngle,
+      DEFAULT_CONE_OUTER_ANGLE,
+    );
+    const coneOuterGain = defaults(opts.coneOuterGain, DEFAULT_CONE_OUTER_GAIN);
 
     super(context, opts, {
-      inputs: [ 1 ],
-      outputs: [ 2 ],
+      inputs: [1],
+      outputs: [2],
       channelCount: 2,
       channelCountMode: CLAMPED_MAX,
       allowedMaxChannelCount: 2,
-      allowedChannelCountMode: [ CLAMPED_MAX, EXPLICIT ]
+      allowedChannelCountMode: [CLAMPED_MAX, EXPLICIT],
     });
 
     this._panningModel = panningModel;
@@ -178,4 +184,4 @@ class BasePannerNode extends AudioNode {
   }
 }
 
-module.exports = BasePannerNode;
+export default BasePannerNode;

@@ -1,11 +1,11 @@
-"use strict";
+'use strict';
 
 // Port from Chromium
 // https://chromium.googlesource.com/chromium/blink/+/master/Source/platform/audio/DynamicsCompressor.cpp
 
-const assert = require("assert");
-const nmap = require("nmap");
-const DynamicsCompressorKernel = require("./DynamicsCompressorKernel");
+import assert from 'assert';
+import { nmap } from '../../utils/nmap';
+import DynamicsCompressorKernel from './DynamicsCompressorKernel';
 
 const THRESHOLD = 0;
 const KNEE = 1;
@@ -39,7 +39,10 @@ class DynamicsCompressor {
     this.numberOfChannels = numberOfChannels;
     this.sampleRate = sampleRate;
     this.nyquist = sampleRate / 2;
-    this.compressor = new DynamicsCompressorKernel(sampleRate, numberOfChannels);
+    this.compressor = new DynamicsCompressorKernel(
+      sampleRate,
+      numberOfChannels,
+    );
 
     this.lastFilterStageRatio = -1;
     this.lastAnchor = -1;
@@ -64,7 +67,7 @@ class DynamicsCompressor {
     this.parameters[KNEE] = 30; // dB
     this.parameters[RATIO] = 12; // unit-less
     this.parameters[ATTACK] = 0.003; // seconds
-    this.parameters[RELEASE] = 0.250; // seconds
+    this.parameters[RELEASE] = 0.25; // seconds
     this.parameters[PRE_DELAY] = 0.006; // seconds
 
     // Release zone values 0 -> 1.
@@ -96,13 +99,17 @@ class DynamicsCompressor {
 
     assert(numberOfChannels === this.numberOfChannels && numberOfChannels > 0);
 
-    if (numberOfChannels !== this.numberOfChannels || numberOfSourceChannels === 0) {
+    if (
+      numberOfChannels !== this.numberOfChannels ||
+      numberOfSourceChannels === 0
+    ) {
       destinatonBus.zeros();
       return;
     }
 
     switch (numberOfChannels) {
-      case 2: { // stereo
+      case 2: {
+        // stereo
         this.sourceChannels[0] = sourceBus.getChannelData()[0];
 
         if (numberOfSourceChannels > 1) {
@@ -177,7 +184,7 @@ class DynamicsCompressor {
       releaseZone1,
       releaseZone2,
       releaseZone3,
-      releaseZone4
+      releaseZone4,
     );
 
     // Update the compression amount.
@@ -205,7 +212,4 @@ class DynamicsCompressor {
   }
 }
 
-module.exports = {
-  DynamicsCompressor,
-  CompressorParameters,
-};
+export { DynamicsCompressor, CompressorParameters };

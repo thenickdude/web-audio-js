@@ -1,21 +1,33 @@
-"use strict";
+'use strict';
 
-const AudioNode = require("./AudioNode");
-const BiquadFilterNodeDSP = require("./dsp/BiquadFilterNode");
-const { defaults } = require("../utils");
-const { MAX } = require("../constants/ChannelCountMode");
-const { CONTROL_RATE } = require("../constants/AudioParamRate");
-const { LOWPASS } = require("../constants/BiquadFilterType");
-const { HIGHPASS } = require("../constants/BiquadFilterType");
-const { BANDPASS } = require("../constants/BiquadFilterType");
-const { LOWSHELF } = require("../constants/BiquadFilterType");
-const { HIGHSHELF } = require("../constants/BiquadFilterType");
-const { PEAKING } = require("../constants/BiquadFilterType");
-const { NOTCH } = require("../constants/BiquadFilterType");
-const { ALLPASS } = require("../constants/BiquadFilterType");
+import AudioNode from './AudioNode';
+import BiquadFilterNodeDSP from './dsp/BiquadFilterNode';
+import { defaults } from '../utils';
+
+import { MAX } from '../constants/ChannelCountMode';
+
+import { CONTROL_RATE } from '../constants/AudioParamRate';
+
+import {
+  ALLPASS,
+  BANDPASS,
+  HIGHPASS,
+  HIGHSHELF,
+  LOWPASS,
+  LOWSHELF,
+  NOTCH,
+  PEAKING,
+} from '../constants/BiquadFilterType';
 
 const allowedBiquadFilterTypes = [
-  LOWPASS, HIGHPASS, BANDPASS, LOWSHELF, HIGHSHELF, PEAKING, NOTCH, ALLPASS
+  LOWPASS,
+  HIGHPASS,
+  BANDPASS,
+  LOWSHELF,
+  HIGHSHELF,
+  PEAKING,
+  NOTCH,
+  ALLPASS,
 ];
 
 const DEFAULT_TYPE = LOWPASS;
@@ -35,17 +47,17 @@ class BiquadFilterNode extends AudioNode {
    * @param {number}       opts.gain
    */
   constructor(context, opts = {}) {
-    let type = defaults(opts.type, DEFAULT_TYPE);
-    let frequency = defaults(opts.frequency, DEFAULT_FREQUENCY);
-    let detune = defaults(opts.detune, DEFAULT_DETUNE);
-    let Q = defaults(opts.Q, DEFAULT_Q);
-    let gain = defaults(opts.gain, DEFAULT_GAIN);
+    const type = defaults(opts.type, DEFAULT_TYPE);
+    const frequency = defaults(opts.frequency, DEFAULT_FREQUENCY);
+    const detune = defaults(opts.detune, DEFAULT_DETUNE);
+    const Q = defaults(opts.Q, DEFAULT_Q);
+    const gain = defaults(opts.gain, DEFAULT_GAIN);
 
     super(context, opts, {
-      inputs: [ 1 ],
-      outputs: [ 1 ],
+      inputs: [1],
+      outputs: [1],
       channelCount: 2,
-      channelCountMode: MAX
+      channelCountMode: MAX,
     });
 
     this._type = type;
@@ -130,4 +142,4 @@ class BiquadFilterNode extends AudioNode {
 
 Object.assign(BiquadFilterNode.prototype, BiquadFilterNodeDSP);
 
-module.exports = BiquadFilterNode;
+export default BiquadFilterNode;

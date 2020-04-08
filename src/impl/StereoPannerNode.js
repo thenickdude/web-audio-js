@@ -1,9 +1,10 @@
-"use strict";
+'use strict';
 
-const BasePannerNode = require("./BasePannerNode");
-const StereoPannerNodeDSP = require("./dsp/StereoPannerNode");
-const { defaults } = require("../utils");
-const { AUDIO_RATE } = require("../constants/AudioParamRate");
+import BasePannerNode from './BasePannerNode';
+import StereoPannerNodeDSP from './dsp/StereoPannerNode';
+import { defaults } from '../utils';
+
+import { AUDIO_RATE } from '../constants/AudioParamRate';
 
 const DEFAULT_PAN = 0;
 
@@ -14,7 +15,7 @@ class StereoPannerNode extends BasePannerNode {
    * @param {number}       opts.pan
    */
   constructor(context, opts = {}) {
-    let pan = defaults(opts.pan, DEFAULT_PAN);
+    const pan = defaults(opts.pan, DEFAULT_PAN);
 
     super(context, opts);
 
@@ -31,4 +32,4 @@ class StereoPannerNode extends BasePannerNode {
 
 Object.assign(StereoPannerNode.prototype, StereoPannerNodeDSP);
 
-module.exports = StereoPannerNode;
+export default StereoPannerNode;

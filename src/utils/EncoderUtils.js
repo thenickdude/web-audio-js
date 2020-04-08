@@ -1,6 +1,6 @@
-"use strict";
+'use strict';
 
-const AudioDataUtils = require("./AudioDataUtils");
+import * as AudioDataUtils from './AudioDataUtils';
 
 /**
  * @param {function}  encodeFn
@@ -14,4 +14,4 @@ function encode(encodeFn, audioData, /* istanbul ignore next */ opts = {}) {
   return encodeFn(audioData, opts);
 }
 
-module.exports = { encode };
+export { encode };

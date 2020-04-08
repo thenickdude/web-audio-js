@@ -1,18 +1,13 @@
-"use strict";
+'use strict';
 
-const OfflineAudioContext = require("./context/OfflineAudioContext");
-const StreamAudioContext = require("./context/StreamAudioContext");
-const RenderingAudioContext = require("./context/RenderingAudioContext");
-const WebAudioContext = require("./context/WebAudioContext");
-const api = require("./api");
-const impl = require("./impl");
-const decoder = require("./decoder");
-const encoder = require("./encoder");
+export { default as OfflineAudioContext } from './context/OfflineAudioContext';
+export { default as StreamAudioContext } from './context/StreamAudioContext';
+export { default as RenderingAudioContext } from './context/RenderingAudioContext';
+export { default as WebAudioContext } from './context/WebAudioContext';
+export { RawDataAudioContext } from './context/RawDataAudioContext';
+import * as api from './api';
+import * as impl from './impl';
+import * as decoder from './decoder';
+import * as encoder from './encoder';
 
-module.exports = {
-  OfflineAudioContext,
-  StreamAudioContext,
-  RenderingAudioContext,
-  WebAudioContext,
-  api, impl, decoder, encoder
-};
+export { api, impl, decoder, encoder };

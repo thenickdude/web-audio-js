@@ -1,6 +1,6 @@
-"use strict";
+'use strict';
 
-const events = require("events");
+import events from 'events';
 
 class EventTarget {
   constructor() {
@@ -13,7 +13,7 @@ class EventTarget {
    */
   addEventListener(type, listener) {
     /* istanbul ignore else */
-    if (typeof listener === "function") {
+    if (typeof listener === 'function') {
       this._emitter.addListener(type, listener);
     }
   }
@@ -24,7 +24,7 @@ class EventTarget {
    */
   removeEventListener(type, listener) {
     /* istanbul ignore else */
-    if (typeof listener === "function") {
+    if (typeof listener === 'function') {
       this._emitter.removeListener(type, listener);
     }
   }
@@ -48,4 +48,4 @@ class EventTarget {
   }
 }
 
-module.exports = EventTarget;
+export default EventTarget;

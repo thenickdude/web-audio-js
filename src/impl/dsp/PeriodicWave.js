@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 const WAVE_TABLE_LENGTH = 8192;
 
@@ -17,7 +17,7 @@ const PeriodicWaveDSP = {
     const imag = this._imag;
 
     let maxAbsValue = 0;
-    let periodicWaveLength = Math.min(real.length, 16);
+    const periodicWaveLength = Math.min(real.length, 16);
 
     for (let i = 0; i < WAVE_TABLE_LENGTH; i++) {
       const x = (i / WAVE_TABLE_LENGTH) * Math.PI * 2;
@@ -39,7 +39,7 @@ const PeriodicWaveDSP = {
     this._waveTable = waveTable;
 
     return waveTable;
-  }
+  },
 };
 
-module.exports = PeriodicWaveDSP;
+export default PeriodicWaveDSP;

@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 class AudioListener {
   /**
@@ -15,7 +15,7 @@ class AudioListener {
    */
   /* istanbul ignore next */
   setPosition() {
-    throw new TypeError("NOT YET IMPLEMENTED");
+    throw new TypeError('NOT YET IMPLEMENTED');
   }
 
   /**
@@ -28,8 +28,8 @@ class AudioListener {
    */
   /* istanbul ignore next */
   setOrientation() {
-    throw new TypeError("NOT YET IMPLEMENTED");
+    throw new TypeError('NOT YET IMPLEMENTED');
   }
 }
 
-module.exports = AudioListener;
+export default AudioListener;

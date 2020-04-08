@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 class EventTarget {
   addEventListener(type, listener) {
@@ -10,4 +10,4 @@ class EventTarget {
   }
 }
 
-module.exports = EventTarget;
+export default EventTarget;

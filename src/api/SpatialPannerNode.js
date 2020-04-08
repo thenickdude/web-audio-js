@@ -1,8 +1,8 @@
-"use strict";
+'use strict';
 
-const impl = require("../impl");
-const AudioNode = require("./AudioNode");
-const AudioParam = require("./AudioParam");
+import * as impl from '../impl';
+import AudioNode from './AudioNode';
+import AudioParam from './AudioParam';
 
 class SpatialPannerNode extends AudioNode {
   constructor(context, opts) {
@@ -12,9 +12,18 @@ class SpatialPannerNode extends AudioNode {
     this._impl.$positionX = new AudioParam(context, this._impl.getPositionX());
     this._impl.$positionY = new AudioParam(context, this._impl.getPositionY());
     this._impl.$positionZ = new AudioParam(context, this._impl.getPositionZ());
-    this._impl.$orientationX = new AudioParam(context, this._impl.getOrientationX());
-    this._impl.$orientationY = new AudioParam(context, this._impl.getOrientationY());
-    this._impl.$orientationZ = new AudioParam(context, this._impl.getOrientationZ());
+    this._impl.$orientationX = new AudioParam(
+      context,
+      this._impl.getOrientationX(),
+    );
+    this._impl.$orientationY = new AudioParam(
+      context,
+      this._impl.getOrientationY(),
+    );
+    this._impl.$orientationZ = new AudioParam(
+      context,
+      this._impl.getOrientationZ(),
+    );
   }
 
   get panningModel() {
@@ -106,4 +115,4 @@ class SpatialPannerNode extends AudioNode {
   }
 }
 
-module.exports = SpatialPannerNode;
+export default SpatialPannerNode;

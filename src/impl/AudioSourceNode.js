@@ -1,7 +1,7 @@
-"use strict";
+'use strict';
 
-const assert = require("assert");
-const AudioNode = require("./AudioNode");
+import assert from 'assert';
+import AudioNode from './AudioNode';
 
 /* istanbul ignore next */
 class AudioSourceNode extends AudioNode {
@@ -11,17 +11,17 @@ class AudioSourceNode extends AudioNode {
   constructor(context, opts) {
     super(context, opts, {
       inputs: [],
-      outputs: [ 1 ]
+      outputs: [1],
     });
   }
 
   enableOutputsIfNecessary() {
-    assert(!"SHOULD NOT BE CALLED");
+    assert(!'SHOULD NOT BE CALLED');
   }
 
   disableOutputsIfNecessary() {
-    assert(!"SHOULD NOT BE CALLED");
+    assert(!'SHOULD NOT BE CALLED');
   }
 }
 
-module.exports = AudioSourceNode;
+export default AudioSourceNode;

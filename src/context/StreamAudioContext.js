@@ -1,13 +1,21 @@
-"use strict";
+'use strict';
 
-const nmap = require("nmap");
-const config = require("../config");
-const BaseAudioContext = require("../api/BaseAudioContext");
-const PCMEncoder = require("../utils/PCMEncoder");
-const setImmediate = require("../utils/setImmediate");
-const { defaults, defineProp } = require("../utils");
-const { toValidSampleRate, toValidBlockSize, toValidNumberOfChannels, toValidBitDepth } = require("../utils");
-const { RUNNING, SUSPENDED, CLOSED } = require("../constants/AudioContextState");
+import { nmap } from '../utils/nmap';
+import config from '../config';
+import BaseAudioContext from '../api/BaseAudioContext';
+import PCMEncoder from '../utils/PCMEncoder';
+import setImmediate from '../utils/setImmediate';
+import {
+  defaults,
+  defineProp,
+  toValidBitDepth,
+  toValidBlockSize,
+  toValidNumberOfChannels,
+  toValidSampleRate,
+} from '../utils';
+
+import { CLOSED, RUNNING, SUSPENDED } from '../constants/AudioContextState';
+
 const noopWriter = { write: () => true };
 
 class StreamAudioContext extends BaseAudioContext {
@@ -22,7 +30,10 @@ class StreamAudioContext extends BaseAudioContext {
   constructor(opts = {}) {
     let sampleRate = defaults(opts.sampleRate, config.sampleRate);
     let blockSize = defaults(opts.blockSize, config.blockSize);
-    let numberOfChannels = defaults(opts.channels || opts.numberOfChannels, config.numberOfChannels);
+    let numberOfChannels = defaults(
+      opts.channels || opts.numberOfChannels,
+      config.numberOfChannels,
+    );
     let bitDepth = defaults(opts.bitDepth, config.bitDepth);
     let floatingPoint = opts.float || opts.floatingPoint;
 
@@ -34,15 +45,20 @@ class StreamAudioContext extends BaseAudioContext {
 
     super({ sampleRate, blockSize, numberOfChannels });
 
-    const format = { sampleRate, channels: numberOfChannels, bitDepth, float: floatingPoint };
+    const format = {
+      sampleRate,
+      channels: numberOfChannels,
+      bitDepth,
+      float: floatingPoint,
+    };
     const encoder = PCMEncoder.create(blockSize, format);
 
-    defineProp(this, "_numberOfChannels", numberOfChannels);
-    defineProp(this, "_encoder", encoder);
-    defineProp(this, "_blockSize", blockSize);
-    defineProp(this, "_stream", noopWriter);
-    defineProp(this, "_isPlaying", false);
-    defineProp(this, "_format", format);
+    defineProp(this, '_numberOfChannels', numberOfChannels);
+    defineProp(this, '_encoder', encoder);
+    defineProp(this, '_blockSize', blockSize);
+    defineProp(this, '_stream', noopWriter);
+    defineProp(this, '_isPlaying', false);
+    defineProp(this, '_format', format);
   }
 
   /**
@@ -97,7 +113,6 @@ class StreamAudioContext extends BaseAudioContext {
     return super.suspend();
   }
 
-
   /**
    * @return {Promise<void>}
    */
@@ -115,7 +130,10 @@ class StreamAudioContext extends BaseAudioContext {
     const encoder = this._encoder;
     const impl = this._impl;
     const aheadTime = 0.1;
-    const channelData = nmap(this._numberOfChannels, () => new Float32Array(this._blockSize));
+    const channelData = nmap(
+      this._numberOfChannels,
+      () => new Float32Array(this._blockSize),
+    );
 
     const renderingProcess = () => {
       if (this._isPlaying) {
@@ -128,7 +146,7 @@ class StreamAudioContext extends BaseAudioContext {
           const buffer = encoder.encode(channelData);
 
           if (!this._stream.write(buffer)) {
-            this._stream.once("drain", renderingProcess);
+            this._stream.once('drain', renderingProcess);
             return;
           }
         }
@@ -153,4 +171,4 @@ class StreamAudioContext extends BaseAudioContext {
   }
 }
 
-module.exports = StreamAudioContext;
+export default StreamAudioContext;

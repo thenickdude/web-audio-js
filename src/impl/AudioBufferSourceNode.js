@@ -1,12 +1,13 @@
-"use strict";
+'use strict';
 
-const AudioScheduledSourceNode = require("./AudioScheduledSourceNode");
-const AudioBuffer = require("./AudioBuffer");
-const AudioBufferSourceNodeDSP = require("./dsp/AudioBufferSourceNode");
-const { defaults } = require("../utils");
-const { toImpl, toNumber } = require("../utils");
-const { CONTROL_RATE } = require("../constants/AudioParamRate");
-const { FINISHED } = require("../constants/PlaybackState");
+import AudioScheduledSourceNode from './AudioScheduledSourceNode';
+import AudioBuffer from './AudioBuffer';
+import AudioBufferSourceNodeDSP from './dsp/AudioBufferSourceNode';
+import { defaults, toImpl, toNumber } from '../utils';
+
+import { CONTROL_RATE } from '../constants/AudioParamRate';
+
+import { FINISHED } from '../constants/PlaybackState';
 
 const DEFAULT_PLAYBACK_RATE = 1;
 const DEFAULT_DETUNE = 0;
@@ -25,11 +26,11 @@ class AudioBufferSourceNode extends AudioScheduledSourceNode {
    * @param {number}       opts.loopEnd
    */
   constructor(context, opts = {}) {
-    let playbackRate = defaults(opts.playbackRate, DEFAULT_PLAYBACK_RATE);
-    let detune = defaults(opts.detune, DEFAULT_DETUNE);
-    let loop = defaults(opts.loop, DEFAULT_LOOP);
-    let loopStart = defaults(opts.loopStart, DEFAULT_LOOP_START);
-    let loopEnd = defaults(opts.loopEnd, DEFAULT_LOOP_END);
+    const playbackRate = defaults(opts.playbackRate, DEFAULT_PLAYBACK_RATE);
+    const detune = defaults(opts.detune, DEFAULT_DETUNE);
+    const loop = defaults(opts.loop, DEFAULT_LOOP);
+    const loopStart = defaults(opts.loopStart, DEFAULT_LOOP_START);
+    const loopEnd = defaults(opts.loopEnd, DEFAULT_LOOP_END);
 
     super(context, opts);
 
@@ -174,7 +175,9 @@ class AudioBufferSourceNode extends AudioScheduledSourceNode {
 
     if (duration !== Infinity) {
       this._duration = duration;
-      this._stopFrame = Math.round((this._startTime + duration) * this.sampleRate);
+      this._stopFrame = Math.round(
+        (this._startTime + duration) * this.sampleRate,
+      );
     }
 
     this.context.sched(when, () => {
@@ -186,4 +189,4 @@ class AudioBufferSourceNode extends AudioScheduledSourceNode {
 
 Object.assign(AudioBufferSourceNode.prototype, AudioBufferSourceNodeDSP);
 
-module.exports = AudioBufferSourceNode;
+export default AudioBufferSourceNode;

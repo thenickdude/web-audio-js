@@ -1,6 +1,6 @@
-"use strict";
+'use strict';
 
-const { fill } = require("../../utils");
+import { fill } from '../../utils';
 
 const ConstantSourceNode = {
   dspInit() {},
@@ -15,7 +15,7 @@ const ConstantSourceNode = {
     } else {
       fill(outputs[0], offsetParam.getValue());
     }
-  }
+  },
 };
 
-module.exports = ConstantSourceNode;
+export default ConstantSourceNode;

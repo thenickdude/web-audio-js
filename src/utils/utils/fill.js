@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 /**
  * @param {number[]} list
@@ -17,4 +17,4 @@ function fill(list, value) {
   return list;
 }
 
-module.exports = fill;
+export default fill;

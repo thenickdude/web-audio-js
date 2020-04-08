@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 const DSPAlgorithm = {};
 
@@ -44,7 +44,7 @@ const GainNodeDSP = {
     const dsp = selectAlgorithm(numberOfChannels, 2000);
 
     dsp(inputs, outputs, gainValue, this.blockSize);
-  }
+  },
 };
 
 function selectAlgorithm(numberOfChannels, base) {
@@ -119,4 +119,4 @@ DSPAlgorithm[2002] = (inputs, outputs, gainValue, blockSize) => {
   }
 };
 
-module.exports = GainNodeDSP;
+export default GainNodeDSP;

@@ -1,6 +1,6 @@
-"use strict";
+'use strict';
 
-const AudioNode = require("./AudioNode");
+import AudioNode from './AudioNode';
 
 class AudioScheduledSourceNode extends AudioNode {
   get onended() {
@@ -8,7 +8,7 @@ class AudioScheduledSourceNode extends AudioNode {
   }
 
   set onended(callback) {
-    this._impl.replaceEventListener("ended", this._impl.$onended, callback);
+    this._impl.replaceEventListener('ended', this._impl.$onended, callback);
     this._impl.$onended = callback;
   }
 
@@ -21,4 +21,4 @@ class AudioScheduledSourceNode extends AudioNode {
   }
 }
 
-module.exports = AudioScheduledSourceNode;
+export default AudioScheduledSourceNode;

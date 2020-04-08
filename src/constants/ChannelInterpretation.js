@@ -1,6 +1,4 @@
-"use strict";
+'use strict';
 
-module.exports = {
-  SPEAKERS: "speakers",
-  DISCRETE: "discrete",
-};
+export const SPEAKERS = 'speakers';
+export const DISCRETE = 'discrete';

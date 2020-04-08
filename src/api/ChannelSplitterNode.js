@@ -1,7 +1,7 @@
-"use strict";
+'use strict';
 
-const impl = require("../impl");
-const AudioNode = require("./AudioNode");
+import * as impl from '../impl';
+import AudioNode from './AudioNode';
 
 class ChannelSplitterNode extends AudioNode {
   constructor(context, opts) {
@@ -11,4 +11,4 @@ class ChannelSplitterNode extends AudioNode {
   }
 }
 
-module.exports = ChannelSplitterNode;
+export default ChannelSplitterNode;

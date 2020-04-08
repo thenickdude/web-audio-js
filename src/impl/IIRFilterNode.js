@@ -1,9 +1,10 @@
-"use strict";
+'use strict';
 
-const AudioNode = require("./AudioNode");
-const IIRFilterNodeDSP = require("./dsp/IIRFilterNode");
-const { defaults } = require("../utils");
-const { MAX } = require("../constants/ChannelCountMode");
+import AudioNode from './AudioNode';
+import IIRFilterNodeDSP from './dsp/IIRFilterNode';
+import { defaults } from '../utils';
+
+import { MAX } from '../constants/ChannelCountMode';
 
 class IIRFilterNode extends AudioNode {
   /**
@@ -13,14 +14,14 @@ class IIRFilterNode extends AudioNode {
    * @param {Float32Array} opts.feedback
    */
   constructor(context, opts = {}) {
-    let feedforward = defaults(opts.feedforward, [ 0 ]);
-    let feedback = defaults(opts.feedback, [ 1 ]);
+    const feedforward = defaults(opts.feedforward, [0]);
+    const feedback = defaults(opts.feedback, [1]);
 
     super(context, opts, {
-      inputs: [ 1 ],
-      outputs: [ 1 ],
+      inputs: [1],
+      outputs: [1],
       channelCount: 2,
-      channelCountMode: MAX
+      channelCountMode: MAX,
     });
 
     this._feedforward = feedforward;
@@ -35,9 +36,9 @@ class IIRFilterNode extends AudioNode {
    * @param {Float32Array} magResponse
    * @param {Float32Array} phaseResponse
    */
-   getFrequencyResponse(frequencyHz, magResponse, phaseResponse) {
-     this.dspGetFrequencyResponse(frequencyHz, magResponse, phaseResponse);
-   }
+  getFrequencyResponse(frequencyHz, magResponse, phaseResponse) {
+    this.dspGetFrequencyResponse(frequencyHz, magResponse, phaseResponse);
+  }
 
   /**
    * @return {Float32Array}
@@ -64,4 +65,4 @@ class IIRFilterNode extends AudioNode {
 
 Object.assign(IIRFilterNode.prototype, IIRFilterNodeDSP);
 
-module.exports = IIRFilterNode;
+export default IIRFilterNode;

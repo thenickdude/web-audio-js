@@ -1,11 +1,11 @@
-"use strict";
+'use strict';
 
 /**
  * @param {*} value
  * @param {*) defaultValue
  */
 function defaults(value, defaultValue) {
-  return typeof value !== "undefined" ? value : defaultValue;
+  return typeof value !== 'undefined' ? value : defaultValue;
 }
 
-module.exports = defaults;
+export default defaults;

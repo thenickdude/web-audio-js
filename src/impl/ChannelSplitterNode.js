@@ -1,10 +1,10 @@
-"use strict";
+'use strict';
 
-const AudioNode = require("./AudioNode");
-const ChannelSplitterNodeDSP = require("./dsp/ChannelSplitterNode");
-const { defaults, fill } = require("../utils");
-const { toValidNumberOfChannels } = require("../utils");
-const { MAX } = require("../constants/ChannelCountMode");
+import AudioNode from './AudioNode';
+import ChannelSplitterNodeDSP from './dsp/ChannelSplitterNode';
+import { defaults, fill, toValidNumberOfChannels } from '../utils';
+
+import { MAX } from '../constants/ChannelCountMode';
 
 const DEFAULT_NUMBER_OF_OUTPUTS = 6;
 
@@ -15,19 +15,22 @@ class ChannelSplitterNode extends AudioNode {
    * @param {number}       opts.numberOfOutputs
    */
   constructor(context, opts = {}) {
-    let numberOfOutputs = defaults(opts.numberOfOutputs, DEFAULT_NUMBER_OF_OUTPUTS);
+    let numberOfOutputs = defaults(
+      opts.numberOfOutputs,
+      DEFAULT_NUMBER_OF_OUTPUTS,
+    );
 
     numberOfOutputs = toValidNumberOfChannels(numberOfOutputs);
 
     super(context, opts, {
-      inputs: [ 1 ],
+      inputs: [1],
       outputs: fill(new Array(numberOfOutputs), 1),
       channelCount: 2,
-      channelCountMode: MAX
+      channelCountMode: MAX,
     });
   }
 }
 
 Object.assign(ChannelSplitterNode.prototype, ChannelSplitterNodeDSP);
 
-module.exports = ChannelSplitterNode;
+export default ChannelSplitterNode;

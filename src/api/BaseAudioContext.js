@@ -1,38 +1,41 @@
-"use strict";
+'use strict';
 
-const impl = require("../impl");
-const EventTarget = require("./EventTarget");
-const AudioDestinationNode = require("./AudioDestinationNode");
-const AudioListener = require("./AudioListener");
-const AudioBuffer = require("./AudioBuffer");
-const AudioBufferSourceNode = require("./AudioBufferSourceNode");
-const ScriptProcessorNode = require("./ScriptProcessorNode");
-const AnalyserNode = require("./AnalyserNode");
-const GainNode = require("./GainNode");
-const DelayNode = require("./DelayNode");
-const BiquadFilterNode = require("./BiquadFilterNode");
-const IIRFilterNode = require("./IIRFilterNode");
-const WaveShaperNode = require("./WaveShaperNode");
-const PannerNode = require("./PannerNode");
-const SpatialPannerNode = require("./SpatialPannerNode");
-const StereoPannerNode = require("./StereoPannerNode");
-const ConvolverNode = require("./ConvolverNode");
-const ConstantSourceNode = require("./ConstantSourceNode");
-const ChannelSplitterNode = require("./ChannelSplitterNode");
-const ChannelMergerNode = require("./ChannelMergerNode");
-const DynamicsCompressorNode = require("./DynamicsCompressorNode");
-const OscillatorNode = require("./OscillatorNode");
-const PeriodicWave = require("./PeriodicWave");
-const decoder = require("../decoder");
-const { defineProp } = require("../utils");
+import * as impl from '../impl';
+import EventTarget from './EventTarget';
+import AudioDestinationNode from './AudioDestinationNode';
+import AudioListener from './AudioListener';
+import AudioBuffer from './AudioBuffer';
+import AudioBufferSourceNode from './AudioBufferSourceNode';
+import ScriptProcessorNode from './ScriptProcessorNode';
+import AnalyserNode from './AnalyserNode';
+import GainNode from './GainNode';
+import DelayNode from './DelayNode';
+import BiquadFilterNode from './BiquadFilterNode';
+import IIRFilterNode from './IIRFilterNode';
+import WaveShaperNode from './WaveShaperNode';
+import PannerNode from './PannerNode';
+import SpatialPannerNode from './SpatialPannerNode';
+import StereoPannerNode from './StereoPannerNode';
+import ConvolverNode from './ConvolverNode';
+import ConstantSourceNode from './ConstantSourceNode';
+import ChannelSplitterNode from './ChannelSplitterNode';
+import ChannelMergerNode from './ChannelMergerNode';
+import DynamicsCompressorNode from './DynamicsCompressorNode';
+import OscillatorNode from './OscillatorNode';
+import PeriodicWave from './PeriodicWave';
+import * as decoder from '../decoder';
+import { defineProp } from '../utils';
 
 class BaseAudioContext extends EventTarget {
   constructor(opts) {
     super();
 
-    defineProp(this, "_impl", new impl.AudioContext(opts));
+    defineProp(this, '_impl', new impl.AudioContext(opts));
 
-    this._impl.$destination = new AudioDestinationNode(this, this._impl.getDestination());
+    this._impl.$destination = new AudioDestinationNode(
+      this,
+      this._impl.getDestination(),
+    );
     this._impl.$listener = new AudioListener(this, this._impl.getListener());
     this._impl.$onstatechange = null;
   }
@@ -74,7 +77,11 @@ class BaseAudioContext extends EventTarget {
   }
 
   set onstatechange(callback) {
-    this._impl.replaceEventListener("statechange", this._impl.$onstatechange, callback);
+    this._impl.replaceEventListener(
+      'statechange',
+      this._impl.$onstatechange,
+      callback,
+    );
     this._impl.$onstatechange = callback;
   }
 
@@ -82,7 +89,11 @@ class BaseAudioContext extends EventTarget {
     return new AudioBuffer({ numberOfChannels, length, sampleRate });
   }
 
-  decodeAudioData(audioData, successCallback, errorCallback) {
+  decodeAudioData(
+    audioData,
+    successCallback = undefined,
+    errorCallback = undefined,
+  ) {
     const promise = decoder.decode(audioData, { sampleRate: this.sampleRate });
 
     promise.then(successCallback, errorCallback);
@@ -98,8 +109,16 @@ class BaseAudioContext extends EventTarget {
     return new ConstantSourceNode(this);
   }
 
-  createScriptProcessor(bufferSize, numberOfInputChannels, numberOfOutputChannels) {
-    return new ScriptProcessorNode(this, { bufferSize, numberOfInputChannels, numberOfOutputChannels });
+  createScriptProcessor(
+    bufferSize,
+    numberOfInputChannels,
+    numberOfOutputChannels,
+  ) {
+    return new ScriptProcessorNode(this, {
+      bufferSize,
+      numberOfInputChannels,
+      numberOfOutputChannels,
+    });
   }
 
   createAnalyser() {
@@ -163,4 +182,4 @@ class BaseAudioContext extends EventTarget {
   }
 }
 
-module.exports = BaseAudioContext;
+export default BaseAudioContext;

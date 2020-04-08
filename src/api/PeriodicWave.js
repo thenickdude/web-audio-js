@@ -1,12 +1,12 @@
-"use strict";
+'use strict';
 
-const impl = require("../impl");
-const { defineProp } = require("../utils");
+import * as impl from '../impl';
+import { defineProp } from '../utils';
 
 class PeriodicWave {
   constructor(context, opts) {
-    defineProp(this, "_impl", new impl.PeriodicWave(context._impl, opts));
+    defineProp(this, '_impl', new impl.PeriodicWave(context._impl, opts));
   }
 }
 
-module.exports = PeriodicWave;
+export default PeriodicWave;

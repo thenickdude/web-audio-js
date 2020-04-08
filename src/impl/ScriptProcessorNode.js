@@ -1,10 +1,15 @@
-"use strict";
+'use strict';
 
-const AudioNode = require("./AudioNode");
-const ScriptProcessorNodeDSP = require("./dsp/ScriptProcessorNode");
-const { defaults, clamp } = require("../utils");
-const { toPowerOfTwo, toValidNumberOfChannels } = require("../utils");
-const { EXPLICIT } = require("../constants/ChannelCountMode");
+import AudioNode from './AudioNode';
+import ScriptProcessorNodeDSP from './dsp/ScriptProcessorNode';
+import {
+  clamp,
+  defaults,
+  toPowerOfTwo,
+  toValidNumberOfChannels,
+} from '../utils';
+
+import { EXPLICIT } from '../constants/ChannelCountMode';
 
 const DEFAULT_BUFFER_SIZE = 1024;
 const DEFAULT_NUMBER_OF_INPUT_CHANNELS = 1;
@@ -22,22 +27,28 @@ class ScriptProcessorNode extends AudioNode {
    */
   constructor(context, opts = {}) {
     let bufferSize = defaults(opts.bufferSize, DEFAULT_BUFFER_SIZE);
-    let numberOfInputChannels = defaults(opts.numberOfInputChannels, DEFAULT_NUMBER_OF_INPUT_CHANNELS);
-    let numberOfOutputChannels = defaults(opts.numberOfOutputChannels, DEFAULT_NUMBER_OF_OUTPUT_CHANNELS);
+    let numberOfInputChannels = defaults(
+      opts.numberOfInputChannels,
+      DEFAULT_NUMBER_OF_INPUT_CHANNELS,
+    );
+    let numberOfOutputChannels = defaults(
+      opts.numberOfOutputChannels,
+      DEFAULT_NUMBER_OF_OUTPUT_CHANNELS,
+    );
 
-    bufferSize = clamp(bufferSize|0, MIN_BUFFER_SIZE, MAX_BUFFER_SIZE);
+    bufferSize = clamp(bufferSize | 0, MIN_BUFFER_SIZE, MAX_BUFFER_SIZE);
     bufferSize = toPowerOfTwo(bufferSize, Math.ceil);
     numberOfInputChannels = toValidNumberOfChannels(numberOfInputChannels);
     numberOfOutputChannels = toValidNumberOfChannels(numberOfOutputChannels);
 
     super(context, opts, {
-      inputs: [ numberOfInputChannels ],
-      outputs: [ numberOfOutputChannels ],
+      inputs: [numberOfInputChannels],
+      outputs: [numberOfOutputChannels],
       channelCount: numberOfInputChannels,
       channelCountMode: EXPLICIT,
       allowedMaxChannelCount: numberOfInputChannels,
       allowedMinChannelCount: numberOfInputChannels,
-      allowedChannelCountMode: [ EXPLICIT ]
+      allowedChannelCountMode: [EXPLICIT],
     });
 
     this._bufferSize = bufferSize;
@@ -70,4 +81,4 @@ class ScriptProcessorNode extends AudioNode {
 
 Object.assign(ScriptProcessorNode.prototype, ScriptProcessorNodeDSP);
 
-module.exports = ScriptProcessorNode;
+export default ScriptProcessorNode;

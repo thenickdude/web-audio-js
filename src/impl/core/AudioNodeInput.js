@@ -1,10 +1,12 @@
-"use strict";
+'use strict';
 
-const assert = require("assert");
-const AudioBus = require("./AudioBus");
-const { toValidNumberOfChannels } = require("../../utils");
-const { CLAMPED_MAX, EXPLICIT } = require("../../constants/ChannelCountMode");
-const { SPEAKERS } = require("../../constants/ChannelInterpretation");
+import assert from 'assert';
+import AudioBus from './AudioBus';
+import { toValidNumberOfChannels } from '../../utils';
+
+import { CLAMPED_MAX, EXPLICIT } from '../../constants/ChannelCountMode';
+
+import { SPEAKERS } from '../../constants/ChannelInterpretation';
 
 /**
  * @prop {AudioNode} node
@@ -21,20 +23,20 @@ class AudioNodeInput {
    * @param {string}    opts.channelCountMode
    */
   constructor(opts) {
-    let node = opts.node;
-    let index = opts.index;
-    let numberOfChannels = opts.numberOfChannels;
-    let channelCount = opts.channelCount;
-    let channelCountMode = opts.channelCountMode;
+    const node = opts.node;
+    const index = opts.index;
+    const numberOfChannels = opts.numberOfChannels;
+    const channelCount = opts.channelCount;
+    const channelCountMode = opts.channelCountMode;
 
     this.node = node;
-    this.index = index|0;
+    this.index = index | 0;
     this.bus = new AudioBus(numberOfChannels, node.blockSize, node.sampleRate);
 
     this.bus.setChannelInterpretation(SPEAKERS);
     this.outputs = [];
     this._disabledOutputs = new WeakSet();
-    this._channelCount = channelCount|0;
+    this._channelCount = channelCount | 0;
     this._channelCountMode = channelCountMode;
   }
 
@@ -204,8 +206,14 @@ class AudioNodeInput {
    * @return {boolean}
    */
   isConnectedFrom(node) {
-    return this.outputs.some(target => target.node === node) ||
-      !!(node && Array.isArray(node.outputs) && node.outputs.some(target => this._disabledOutputs.has(target)));
+    return (
+      this.outputs.some((target) => target.node === node) ||
+      !!(
+        node &&
+        Array.isArray(node.outputs) &&
+        node.outputs.some((target) => this._disabledOutputs.has(target))
+      )
+    );
   }
 
   /**
@@ -283,4 +291,4 @@ function moveItem(target, source, destination) {
   return removeItem(target, source) && addItem(target, destination);
 }
 
-module.exports = AudioNodeInput;
+export default AudioNodeInput;

@@ -1,10 +1,12 @@
-"use strict";
+'use strict';
 
-const AudioScheduledSourceNode = require("./AudioScheduledSourceNode");
-const ConstantSourceNodeDSP = require("./dsp/ConstantSourceNode");
-const { defaults } = require("../utils");
-const { MAX } = require("../constants/ChannelCountMode");
-const { AUDIO_RATE } = require("../constants/AudioParamRate");
+import AudioScheduledSourceNode from './AudioScheduledSourceNode';
+import ConstantSourceNodeDSP from './dsp/ConstantSourceNode';
+import { defaults } from '../utils';
+
+import { MAX } from '../constants/ChannelCountMode';
+
+import { AUDIO_RATE } from '../constants/AudioParamRate';
 
 const DEFAULT_OFFSET = 1;
 
@@ -15,13 +17,13 @@ class ConstantSourceNode extends AudioScheduledSourceNode {
    * @param {number}       opts.offset
    */
   constructor(context, opts = {}) {
-    let offset = defaults(opts.offset, DEFAULT_OFFSET);
+    const offset = defaults(opts.offset, DEFAULT_OFFSET);
 
     super(context, opts, {
-      inputs: [ 1 ],
-      outputs: [ 1 ],
+      inputs: [1],
+      outputs: [1],
       channelCount: 2,
-      channelCountMode: MAX
+      channelCountMode: MAX,
     });
 
     this._offset = this.addParam(AUDIO_RATE, offset);
@@ -37,4 +39,4 @@ class ConstantSourceNode extends AudioScheduledSourceNode {
 
 Object.assign(ConstantSourceNode.prototype, ConstantSourceNodeDSP);
 
-module.exports = ConstantSourceNode;
+export default ConstantSourceNode;

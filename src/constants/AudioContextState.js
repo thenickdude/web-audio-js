@@ -1,7 +1,5 @@
-"use strict";
+'use strict';
 
-module.exports = {
-  RUNNING: "running",
-  SUSPENDED: "suspended",
-  CLOSED: "closed",
-};
+export const RUNNING = 'running';
+export const SUSPENDED = 'suspended';
+export const CLOSED = 'closed';

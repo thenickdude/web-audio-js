@@ -1,10 +1,10 @@
-"use strict";
+'use strict';
 
-const { defineProp } = require("../utils");
+import { defineProp } from '../utils';
 
 class AudioListener {
   constructor(context, impl) {
-    defineProp(this, "_impl", impl);
+    defineProp(this, '_impl', impl);
   }
 
   setPosition(x, y, z) {
@@ -16,4 +16,4 @@ class AudioListener {
   }
 }
 
-module.exports = AudioListener;
+export default AudioListener;

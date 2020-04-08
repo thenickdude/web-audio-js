@@ -1,8 +1,8 @@
-"use strict";
+'use strict';
 
-const assert = require("assert");
-const IIRFilterKernel = require("./IIRFilterKernel");
-const { getFilterResponse } = require("../../utils/FilterUtils");
+import assert from 'assert';
+import IIRFilterKernel from './IIRFilterKernel';
+import { getFilterResponse } from '../../utils/FilterUtils';
 
 const IIRFilterNodeDSP = {
   dspInit() {
@@ -14,22 +14,24 @@ const IIRFilterNodeDSP = {
       this._kernels.splice(numberOfChannels);
     } else if (this._kernels.length < numberOfChannels) {
       while (numberOfChannels !== this._kernels.length) {
-        this._kernels.push(new IIRFilterKernel(this._feedforward, this._feedback));
+        this._kernels.push(
+          new IIRFilterKernel(this._feedforward, this._feedback),
+        );
       }
     }
 
     assert(numberOfChannels === this._kernels.length);
 
     switch (numberOfChannels) {
-    case 1:
-      this.dspProcess = this.dspProcess1;
-      break;
-    case 2:
-      this.dspProcess = this.dspProcess2;
-      break;
-    default:
-      this.dspProcess = this.dspProcessN;
-      break;
+      case 1:
+        this.dspProcess = this.dspProcess1;
+        break;
+      case 2:
+        this.dspProcess = this.dspProcess2;
+        break;
+      default:
+        this.dspProcess = this.dspProcessN;
+        break;
     }
   },
 
@@ -66,8 +68,15 @@ const IIRFilterNodeDSP = {
     const b = this._feedforward;
     const a = this._feedback;
 
-    getFilterResponse(b, a, frequencyHz, magResponse, phaseResponse, this.sampleRate);
-  }
+    getFilterResponse(
+      b,
+      a,
+      frequencyHz,
+      magResponse,
+      phaseResponse,
+      this.sampleRate,
+    );
+  },
 };
 
-module.exports = IIRFilterNodeDSP;
+export default IIRFilterNodeDSP;

@@ -1,11 +1,11 @@
-"use strict";
+'use strict';
 
-const impl = require("../impl");
-const { defineProp } = require("../utils");
+import * as impl from '../impl';
+import { defineProp } from '../utils';
 
 class AudioBuffer {
   constructor(opts) {
-    defineProp(this, "_impl", new impl.AudioBuffer(opts));
+    defineProp(this, '_impl', new impl.AudioBuffer(opts));
   }
 
   get sampleRate() {
@@ -37,4 +37,4 @@ class AudioBuffer {
   }
 }
 
-module.exports = AudioBuffer;
+export default AudioBuffer;

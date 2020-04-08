@@ -1,10 +1,10 @@
-"use strict";
+'use strict';
 
-const AudioNode = require("./AudioNode");
-const AnalyserNodeDSP = require("./dsp/AnalyserNode");
-const { defaults, clamp } = require("../utils");
-const { toNumber, toPowerOfTwo } = require("../utils");
-const { MAX } = require("../constants/ChannelCountMode");
+import AudioNode from './AudioNode';
+import AnalyserNodeDSP from './dsp/AnalyserNode';
+import { clamp, defaults, toNumber, toPowerOfTwo } from '../utils';
+
+import { MAX } from '../constants/ChannelCountMode';
 
 const DEFAULT_FFT_SIZE = 2048;
 const DEFAULT_MIN_DECIBELS = -100;
@@ -23,16 +23,19 @@ class AnalyserNode extends AudioNode {
    * @param {number}       opts.smoothingTimeConstant
    */
   constructor(context, opts = {}) {
-    let fftSize = defaults(opts.fftSize, DEFAULT_FFT_SIZE);
-    let minDecibels = defaults(opts.minDecibels, DEFAULT_MIN_DECIBELS);
-    let maxDecibels = defaults(opts.maxDecibels, DEFAULT_MAX_DECIBELS);
-    let smoothingTimeConstant = defaults(opts.smoothingTimeConstant, DEFAULT_SMOOTHING_TIME_CONSTANT);
+    const fftSize = defaults(opts.fftSize, DEFAULT_FFT_SIZE);
+    const minDecibels = defaults(opts.minDecibels, DEFAULT_MIN_DECIBELS);
+    const maxDecibels = defaults(opts.maxDecibels, DEFAULT_MAX_DECIBELS);
+    const smoothingTimeConstant = defaults(
+      opts.smoothingTimeConstant,
+      DEFAULT_SMOOTHING_TIME_CONSTANT,
+    );
 
     super(context, opts, {
-      inputs: [ 1 ],
-      outputs: [ 1 ],
+      inputs: [1],
+      outputs: [1],
       channelCount: 1,
-      channelCountMode: MAX
+      channelCountMode: MAX,
     });
 
     this._fftSize = fftSize;
@@ -55,7 +58,7 @@ class AnalyserNode extends AudioNode {
    * @param {number} value
    */
   setFftSize(value) {
-    value = clamp(value|0, MIN_FFT_SIZE, MAX_FFT_SIZE);
+    value = clamp(value | 0, MIN_FFT_SIZE, MAX_FFT_SIZE);
     value = toPowerOfTwo(value, Math.ceil);
     this._fftSize = value;
     this.dspUpdateSizes(this._fftSize);
@@ -103,7 +106,6 @@ class AnalyserNode extends AudioNode {
       this._maxDecibels = value;
     }
   }
-
 
   /**
    * @return {number}
@@ -158,4 +160,4 @@ class AnalyserNode extends AudioNode {
 
 Object.assign(AnalyserNode.prototype, AnalyserNodeDSP);
 
-module.exports = AnalyserNode;
+export default AnalyserNode;
