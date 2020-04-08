@@ -1,6 +1,5 @@
 'use strict';
 
-import assert from 'assert';
 import toGain from '../../../utils/utils/toGain';
 
 function closeTo(a, b, delta) {

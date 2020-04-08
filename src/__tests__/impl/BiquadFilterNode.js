@@ -1,6 +1,5 @@
 'use strict';
 
-import assert from 'assert';
 import AudioContext from '../../impl/AudioContext';
 import BiquadFilterNode from '../../impl/BiquadFilterNode';
 import AudioParam from '../../impl/AudioParam';

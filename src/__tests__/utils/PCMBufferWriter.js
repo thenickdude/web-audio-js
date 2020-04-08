@@ -1,6 +1,5 @@
 'use strict';
 
-import assert from 'assert';
 import PCMBufferWriter from '../../utils/PCMBufferWriter';
 
 describe('utils/PCMBufferWriter', () => {

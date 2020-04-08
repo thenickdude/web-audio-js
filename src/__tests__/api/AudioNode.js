@@ -1,7 +1,5 @@
 'use strict';
 
-import assert from 'assert';
-
 import AudioContext from '../../api/BaseAudioContext';
 
 describe('api/AudioNode', () => {

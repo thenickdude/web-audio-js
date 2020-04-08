@@ -1,6 +1,5 @@
 'use strict';
 
-import assert from 'assert';
 import * as AudioDataUtils from '../../utils/AudioDataUtils';
 import APIAudioBuffer from '../../api/AudioBuffer';
 import IMPLAudioBuffer from '../../impl/AudioBuffer';

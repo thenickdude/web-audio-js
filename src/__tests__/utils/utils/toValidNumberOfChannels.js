@@ -1,6 +1,5 @@
 'use strict';
 
-import assert from 'assert';
 import toValidNumberOfChannels from '../../../utils/utils/toValidNumberOfChannels';
 
 describe('utils/toValidNumberOfChannels()', () => {

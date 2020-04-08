@@ -1,6 +1,5 @@
 'use strict';
 
-import assert from 'assert';
 import RenderingAudioContext from '../../context/RenderingAudioContext';
 
 describe('RenderingAudioContext', () => {

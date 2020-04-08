@@ -3,7 +3,6 @@
 // Port from Chromium
 // https://chromium.googlesource.com/chromium/blink/+/master/Source/platform/audio/DynamicsCompressorKernel.cpp
 
-import assert from 'assert';
 import { flushDenormalFloatToZero, toDecibel, toLinear } from '../../utils';
 
 const DEFAULT_PRE_DELAY_FRAMES = 256;

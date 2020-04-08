@@ -1,6 +1,5 @@
 'use strict';
 
-import assert from 'assert';
 import toAudioTime from '../../../utils/utils/toAudioTime';
 
 describe('utils/toAudioTime()', () => {

@@ -1,6 +1,5 @@
 'use strict';
 
-import assert from 'assert';
 import toImpl from '../../../utils/utils/toImpl';
 
 describe('utils/toImpl(value)', () => {

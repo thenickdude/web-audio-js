@@ -1,7 +1,5 @@
 'use strict';
 
-import assert from 'assert';
-
 import * as api from '../../api';
 import AudioContext from '../../api/BaseAudioContext';
 
@@ -85,7 +83,9 @@ describe('api/AudioBuffer', () => {
       expect(target._impl.copyFromChannel).toHaveBeenCalledTimes(1);
       expect(target._impl.copyFromChannel.mock.calls[0][0]).toBe(destination);
       expect(target._impl.copyFromChannel.mock.calls[0][1]).toBe(channelNumber);
-      expect(target._impl.copyFromChannel.mock.calls[0][2]).toBe(startInChannel);
+      expect(target._impl.copyFromChannel.mock.calls[0][2]).toBe(
+        startInChannel,
+      );
     });
 
     it('.copyToChannel(source, channelNumber, startInChannel)', () => {

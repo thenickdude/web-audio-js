@@ -1,6 +1,5 @@
 'use strict';
 
-import assert from 'assert';
 import AudioParam from '../impl/AudioParam';
 import { AUDIO_RATE } from '../constants/AudioParamRate';
 

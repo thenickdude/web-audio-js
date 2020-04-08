@@ -1,6 +1,5 @@
 'use strict';
 
-import assert from 'assert';
 import AudioContext from '../../../api/BaseAudioContext';
 import DynamicsCompressorNode from '../../../api/DynamicsCompressorNode';
 import DynamicsCompressorData from '../../../__tests_helpers/DynamicsCompressorData';

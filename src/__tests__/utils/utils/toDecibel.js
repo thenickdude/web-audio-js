@@ -1,6 +1,5 @@
 'use strict';
 
-import assert from 'assert';
 import toDecibel from '../../../utils/utils/toDecibel';
 
 describe('utils/toDecibel(gainValue)', () => {

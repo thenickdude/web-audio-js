@@ -1,6 +1,5 @@
 'use strict';
 
-import assert from 'assert';
 import * as np from '../../__tests_helpers/np';
 import AudioBuffer from '../../impl/AudioBuffer';
 import AudioData from '../../impl/core/AudioData';

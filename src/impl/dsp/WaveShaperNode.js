@@ -1,7 +1,5 @@
 'use strict';
 
-import assert from 'assert';
-
 const WaveShaperNodeDSP = {
   dspInit() {
     this._kernels = [];

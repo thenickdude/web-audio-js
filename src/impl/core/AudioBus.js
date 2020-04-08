@@ -1,6 +1,5 @@
 'use strict';
 
-import assert from 'assert';
 import AudioData from './AudioData';
 import { fill } from '../../utils';
 

@@ -1,6 +1,5 @@
 'use strict';
 
-import assert from 'assert';
 import * as api from '../../api';
 import AudioContext from '../../api/BaseAudioContext';
 import AudioParam from '../../api/AudioParam';

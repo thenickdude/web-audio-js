@@ -1,7 +1,5 @@
 'use strict';
 
-import assert from 'assert';
-
 import AudioContext from '../../../impl/AudioContext';
 
 const contextOpts = { sampleRate: 8000, blockSize: 16 };

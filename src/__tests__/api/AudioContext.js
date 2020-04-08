@@ -1,6 +1,5 @@
 'use strict';
 
-
 import AudioContext from '../../api/BaseAudioContext';
 import AudioDestinationNode from '../../api/AudioDestinationNode';
 import AudioListener from '../../api/AudioListener';

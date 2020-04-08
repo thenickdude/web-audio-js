@@ -1,7 +1,5 @@
 'use strict';
 
-import assert from 'assert';
-
 import * as encoder from '../encoder';
 import * as EncoderUtils from '../utils/EncoderUtils';
 

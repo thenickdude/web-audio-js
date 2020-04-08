@@ -1,6 +1,5 @@
 'use strict';
 
-import assert from 'assert';
 import toValidBitDepth from '../../../utils/utils/toValidBitDepth';
 
 describe('utils/toValidBitDepth()', () => {

@@ -1,7 +1,5 @@
 'use strict';
 
-import assert from 'assert';
-
 import AudioContext from '../../api/BaseAudioContext';
 
 describe('api/AudioParam', () => {
@@ -61,7 +59,9 @@ describe('api/AudioParam', () => {
       target.linearRampToValueAtTime(value, endTime);
       expect(target._impl.linearRampToValueAtTime).toHaveBeenCalledTimes(1);
       expect(target._impl.linearRampToValueAtTime.mock.calls[0][0]).toBe(value);
-      expect(target._impl.linearRampToValueAtTime.mock.calls[0][1]).toBe(endTime);
+      expect(target._impl.linearRampToValueAtTime.mock.calls[0][1]).toBe(
+        endTime,
+      );
     });
 
     it('.exponentialRampToValueAtTime(value, endTime)', () => {
@@ -73,8 +73,12 @@ describe('api/AudioParam', () => {
       target._impl.exponentialRampToValueAtTime = jest.fn();
 
       target.exponentialRampToValueAtTime(value, endTime);
-      expect(target._impl.exponentialRampToValueAtTime).toHaveBeenCalledTimes(1);
-      expect(target._impl.exponentialRampToValueAtTime.mock.calls[0][0]).toBe(value);
+      expect(target._impl.exponentialRampToValueAtTime).toHaveBeenCalledTimes(
+        1,
+      );
+      expect(target._impl.exponentialRampToValueAtTime.mock.calls[0][0]).toBe(
+        value,
+      );
       expect(target._impl.exponentialRampToValueAtTime.mock.calls[0][1]).toBe(
         endTime,
       );
@@ -121,7 +125,9 @@ describe('api/AudioParam', () => {
 
       target.cancelScheduledValues(startTime);
       expect(target._impl.cancelScheduledValues).toHaveBeenCalledTimes(1);
-      expect(target._impl.cancelScheduledValues.mock.calls[0][0]).toBe(startTime);
+      expect(target._impl.cancelScheduledValues.mock.calls[0][0]).toBe(
+        startTime,
+      );
     });
   });
 });

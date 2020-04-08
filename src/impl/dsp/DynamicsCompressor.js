@@ -3,7 +3,6 @@
 // Port from Chromium
 // https://chromium.googlesource.com/chromium/blink/+/master/Source/platform/audio/DynamicsCompressor.cpp
 
-import assert from 'assert';
 import { nmap } from '../../utils/nmap';
 import DynamicsCompressorKernel from './DynamicsCompressorKernel';
 

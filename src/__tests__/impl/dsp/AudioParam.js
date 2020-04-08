@@ -1,6 +1,5 @@
 'use strict';
 
-import assert from 'assert';
 import * as np from '../../../__tests_helpers/np';
 import * as paramTester from '../../../__tests_helpers/paramTester';
 import AudioContext from '../../../impl/AudioContext';

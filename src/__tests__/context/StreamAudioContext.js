@@ -1,7 +1,5 @@
 'use strict';
 
-import assert from 'assert';
-
 import events from 'events';
 import StreamAudioContext from '../../context/StreamAudioContext';
 

@@ -1,7 +1,5 @@
 'use strict';
 
-import assert from 'assert';
-
 import * as api from '../../api';
 import AudioContext from '../../api/BaseAudioContext';
 import AudioParam from '../../api/AudioParam';
@@ -94,7 +92,9 @@ describe('api/SpatialPannerNode', () => {
 
       target.distanceModel = distanceModel2;
       expect(target._impl.setDistanceModel).toHaveBeenCalledTimes(1);
-      expect(target._impl.setDistanceModel.mock.calls[0][0]).toBe(distanceModel2);
+      expect(target._impl.setDistanceModel.mock.calls[0][0]).toBe(
+        distanceModel2,
+      );
     });
 
     it('.refDistance=', () => {
@@ -145,7 +145,9 @@ describe('api/SpatialPannerNode', () => {
 
       target.rolloffFactor = rolloffFactor2;
       expect(target._impl.setRolloffFactor).toHaveBeenCalledTimes(1);
-      expect(target._impl.setRolloffFactor.mock.calls[0][0]).toBe(rolloffFactor2);
+      expect(target._impl.setRolloffFactor.mock.calls[0][0]).toBe(
+        rolloffFactor2,
+      );
     });
 
     it('.coneInnerAngle=', () => {
@@ -162,7 +164,9 @@ describe('api/SpatialPannerNode', () => {
 
       target.coneInnerAngle = coneInnerAngle2;
       expect(target._impl.setConeInnerAngle).toHaveBeenCalledTimes(1);
-      expect(target._impl.setConeInnerAngle.mock.calls[0][0]).toBe(coneInnerAngle2);
+      expect(target._impl.setConeInnerAngle.mock.calls[0][0]).toBe(
+        coneInnerAngle2,
+      );
     });
 
     it('.coneOuterAngle=', () => {
@@ -179,7 +183,9 @@ describe('api/SpatialPannerNode', () => {
 
       target.coneOuterAngle = coneOuterAngle2;
       expect(target._impl.setConeOuterAngle).toHaveBeenCalledTimes(1);
-      expect(target._impl.setConeOuterAngle.mock.calls[0][0]).toBe(coneOuterAngle2);
+      expect(target._impl.setConeOuterAngle.mock.calls[0][0]).toBe(
+        coneOuterAngle2,
+      );
     });
 
     it('.coneOuterGain=', () => {
@@ -196,7 +202,9 @@ describe('api/SpatialPannerNode', () => {
 
       target.coneOuterGain = coneOuterGain2;
       expect(target._impl.setConeOuterGain).toHaveBeenCalledTimes(1);
-      expect(target._impl.setConeOuterGain.mock.calls[0][0]).toBe(coneOuterGain2);
+      expect(target._impl.setConeOuterGain.mock.calls[0][0]).toBe(
+        coneOuterGain2,
+      );
     });
   });
 });

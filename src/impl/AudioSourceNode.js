@@ -1,6 +1,5 @@
 'use strict';
 
-import assert from 'assert';
 import AudioNode from './AudioNode';
 
 /* istanbul ignore next */

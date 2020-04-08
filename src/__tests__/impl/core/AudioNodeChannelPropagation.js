@@ -1,6 +1,5 @@
 'use strict';
 
-import assert from 'assert';
 import AudioContext from '../../../impl/AudioContext';
 import AudioNode from '../../../impl/AudioNode';
 import GainNode from '../../../impl/GainNode';

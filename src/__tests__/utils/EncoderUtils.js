@@ -1,7 +1,5 @@
 'use strict';
 
-import assert from 'assert';
-
 import * as EncoderUtils from '../../utils/EncoderUtils';
 
 describe('utils/EncoderUtils.encode(encodeFn: function, audioData: AudioData, opts?: object): Promise<ArrayBuffer>', () => {

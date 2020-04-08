@@ -1,6 +1,5 @@
 'use strict';
 
-import assert from 'assert';
 import AudioContext from '../../impl/AudioContext';
 import PannerNode from '../../impl/PannerNode';
 import BasePannerNode from '../../impl/BasePannerNode';

@@ -1,6 +1,5 @@
 'use strict';
 
-import assert from 'assert';
 import AudioBus from './AudioBus';
 import { toValidNumberOfChannels } from '../../utils';
 

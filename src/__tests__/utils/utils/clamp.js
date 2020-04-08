@@ -1,6 +1,5 @@
 'use strict';
 
-import assert from 'assert';
 import clamp from '../../../utils/utils/clamp';
 
 describe('utils/clamp(value, minValue, maxValue)', () => {

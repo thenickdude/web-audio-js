@@ -1,6 +1,5 @@
 'use strict';
 
-import assert from 'assert';
 import defaults from '../../../utils/utils/defaults';
 
 describe('utils/defaults(value, defaultValue)', () => {

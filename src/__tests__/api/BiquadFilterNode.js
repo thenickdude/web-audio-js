@@ -1,7 +1,5 @@
 'use strict';
 
-import assert from 'assert';
-
 import * as api from '../../api';
 import AudioContext from '../../api/BaseAudioContext';
 import AudioParam from '../../api/AudioParam';
@@ -77,9 +75,15 @@ describe('api/BiquadFilterNode', () => {
 
       target.getFrequencyResponse(frequencyHz, magResponse, phaseResponse);
       expect(target._impl.getFrequencyResponse).toHaveBeenCalledTimes(1);
-      expect(target._impl.getFrequencyResponse.mock.calls[0][0]).toBe(frequencyHz);
-      expect(target._impl.getFrequencyResponse.mock.calls[0][1]).toBe(magResponse);
-      expect(target._impl.getFrequencyResponse.mock.calls[0][2]).toBe(phaseResponse);
+      expect(target._impl.getFrequencyResponse.mock.calls[0][0]).toBe(
+        frequencyHz,
+      );
+      expect(target._impl.getFrequencyResponse.mock.calls[0][1]).toBe(
+        magResponse,
+      );
+      expect(target._impl.getFrequencyResponse.mock.calls[0][2]).toBe(
+        phaseResponse,
+      );
     });
   });
 });
