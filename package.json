@@ -1,7 +1,7 @@
 {
   "name": "@descript/web-audio-js",
   "description": "Pure JS implementation of the Web Audio API",
-  "version": "0.14.0",
+  "version": "0.14.1",
   "author": "Nao Yonamine <mohayonao@gmail.com>",
   "bugs": {
     "url": "https://github.com/mohayonao/web-audio-engine/issues"
