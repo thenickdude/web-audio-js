@@ -1,5 +1,6 @@
 'use strict';
 
+import assert from 'assert';
 import config from '../config';
 import EventTarget from './EventTarget';
 import AudioDestinationNode from './AudioDestinationNode';

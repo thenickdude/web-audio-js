@@ -22,7 +22,7 @@ describe('StreamAudioContext', () => {
 
       expect(context.numberOfChannels).toBe(1);
       expect(context.blockSize).toBe(16);
-      assert.deepEqual(context.format, {
+      expect(context.format).toEqual({
         sampleRate: 8000,
         channels: 1,
         bitDepth: 8,

@@ -90,9 +90,8 @@ describe('api/AnalyserNode', () => {
 
       target.smoothingTimeConstant = smoothingTimeConstant2;
       expect(target._impl.setSmoothingTimeConstant).toHaveBeenCalledTimes(1);
-      assert(
-        target._impl.setSmoothingTimeConstant.mock.calls[0][0] ===
-          smoothingTimeConstant2,
+      expect(target._impl.setSmoothingTimeConstant.mock.calls[0][0]).toBe(
+        smoothingTimeConstant2,
       );
     });
   });

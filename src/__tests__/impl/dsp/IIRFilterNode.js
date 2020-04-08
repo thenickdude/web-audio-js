@@ -37,11 +37,11 @@ describe('impl/dsp/IIRFilterNode', () => {
       expect(
         magResponse.every((mag, i) => closeTo(mag, magExpected[i], 1e-6)),
       ).toBeTruthy();
-      assert(
+      expect(
         phaseResponse.every((phase, i) =>
           closeTo(phase, phaseExpected[i], 1e-6),
         ),
-      );
+      ).toBeTruthy();
     });
   });
 });

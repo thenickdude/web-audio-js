@@ -85,9 +85,8 @@ describe('api/AudioNode', () => {
 
       target.channelInterpretation = channelInterpretation2;
       expect(target._impl.setChannelInterpretation).toHaveBeenCalledTimes(1);
-      assert(
-        target._impl.setChannelInterpretation.mock.calls[0][0] ===
-          channelInterpretation2,
+      expect(target._impl.setChannelInterpretation.mock.calls[0][0]).toBe(
+        channelInterpretation2,
       );
     });
   });

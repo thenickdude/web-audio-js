@@ -46,8 +46,8 @@ describe('impl/AudioBuffer', () => {
       expect(buffer.audioData instanceof AudioData).toBeTruthy();
       expect(buffer.audioData.sampleRate).toBe(buffer.getSampleRate());
       expect(buffer.audioData.length).toBe(buffer.getLength());
-      assert(
-        buffer.audioData.numberOfChannels === buffer.getNumberOfChannels(),
+      expect(buffer.audioData.numberOfChannels).toBe(
+        buffer.getNumberOfChannels(),
       );
     });
   });

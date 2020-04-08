@@ -39,7 +39,7 @@ export class RawDataAudioContext extends BaseAudioContext {
     length: number,
     sampleRate: number,
     channels: Float32Array[],
-  ) {
+  ): AudioBuffer {
     return new AudioBuffer(
       new AudioData(channels.length, length, sampleRate, channels),
     );

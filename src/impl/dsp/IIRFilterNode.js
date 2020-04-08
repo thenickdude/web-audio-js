@@ -1,5 +1,6 @@
 'use strict';
 
+import assert from 'assert';
 import IIRFilterKernel from './IIRFilterKernel';
 import { getFilterResponse } from '../../utils/FilterUtils';
 

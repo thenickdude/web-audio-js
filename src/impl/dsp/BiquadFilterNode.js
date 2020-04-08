@@ -1,5 +1,6 @@
 'use strict';
 
+import assert from 'assert';
 import BiquadCoeffs from 'biquad-coeffs-webaudio';
 import BiquadFilterKernel from './BiquadFilterKernel';
 import { getFilterResponse } from '../../utils/FilterUtils';

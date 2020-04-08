@@ -1,5 +1,7 @@
 'use strict';
 
+import assert from 'assert';
+
 const DelayNodeDSP = {
   dspInit(maxDelayTime) {
     this._kernels = [];

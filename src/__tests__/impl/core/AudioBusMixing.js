@@ -63,16 +63,12 @@ describe('impl/core/AudioBus - mixing', () => {
 
     bus3.sumFrom(bus1);
 
-    assert.deepEqual(
-      bus3.getChannelData(),
-      mixBy(bus1.getChannelData(), mixer),
-    );
+    expect(bus3.getChannelData()).toEqual(mixBy(bus1.getChannelData(), mixer));
     expect(bus3.isSilent).toBe(false);
 
     bus3.sumFrom(bus2);
 
-    assert.deepEqual(
-      bus3.getChannelData(),
+    expect(bus3.getChannelData()).toEqual(
       mixBy(bus1.getChannelData(), bus2.getChannelData(), mixer),
     );
     expect(bus3.isSilent).toBe(false);
@@ -93,16 +89,12 @@ describe('impl/core/AudioBus - mixing', () => {
 
     bus3.sumFrom(bus1);
 
-    assert.deepEqual(
-      bus3.getChannelData(),
-      mixBy(bus1.getChannelData(), mixer),
-    );
+    expect(bus3.getChannelData()).toEqual(mixBy(bus1.getChannelData(), mixer));
     expect(bus3.isSilent).toBe(false);
 
     bus3.sumFrom(bus2);
 
-    assert.deepEqual(
-      bus3.getChannelData(),
+    expect(bus3.getChannelData()).toEqual(
       mixBy(bus1.getChannelData(), bus2.getChannelData(), mixer),
     );
     expect(bus3.isSilent).toBe(false);
@@ -121,16 +113,12 @@ describe('impl/core/AudioBus - mixing', () => {
 
     bus3.sumFrom(bus1);
 
-    assert.deepEqual(
-      bus3.getChannelData(),
-      mixBy(bus1.getChannelData(), mixer),
-    );
+    expect(bus3.getChannelData()).toEqual(mixBy(bus1.getChannelData(), mixer));
     expect(bus3.isSilent).toBe(false);
 
     bus3.sumFrom(bus2);
 
-    assert.deepEqual(
-      bus3.getChannelData(),
+    expect(bus3.getChannelData()).toEqual(
       mixBy(bus1.getChannelData(), bus2.getChannelData(), mixer),
     );
     expect(bus3.isSilent).toBe(false);
@@ -149,15 +137,12 @@ describe('impl/core/AudioBus - mixing', () => {
 
     bus3.sumFrom(bus1);
 
-    assert.deepEqual(
-      bus3.getChannelData(),
-      mixBy(bus1.getChannelData(), mixer),
-    );
+    expect(bus3.getChannelData(), mixBy(bus1.getChannelData(), mixer));
     expect(bus3.isSilent).toBe(false);
 
     bus3.sumFrom(bus2);
 
-    assert.deepEqual(
+    expect(
       bus3.getChannelData(),
       mixBy(bus1.getChannelData(), bus2.getChannelData(), mixer),
     );
@@ -177,16 +162,12 @@ describe('impl/core/AudioBus - mixing', () => {
 
     bus3.sumFrom(bus1);
 
-    assert.deepEqual(
-      bus3.getChannelData(),
-      mixBy(bus1.getChannelData(), mixer),
-    );
+    expect(bus3.getChannelData()).toEqual(mixBy(bus1.getChannelData(), mixer));
     expect(bus3.isSilent).toBe(false);
 
     bus3.sumFrom(bus2);
 
-    assert.deepEqual(
-      bus3.getChannelData(),
+    expect(bus3.getChannelData()).toEqual(
       mixBy(bus1.getChannelData(), bus2.getChannelData(), mixer),
     );
     expect(bus3.isSilent).toBe(false);
@@ -205,16 +186,12 @@ describe('impl/core/AudioBus - mixing', () => {
 
     bus3.sumFrom(bus1);
 
-    assert.deepEqual(
-      bus3.getChannelData(),
-      mixBy(bus1.getChannelData(), mixer),
-    );
+    expect(bus3.getChannelData()).toEqual(mixBy(bus1.getChannelData(), mixer));
     expect(bus3.isSilent).toBe(false);
 
     bus3.sumFrom(bus2);
 
-    assert.deepEqual(
-      bus3.getChannelData(),
+    expect(bus3.getChannelData()).toEqual(
       mixBy(bus1.getChannelData(), bus2.getChannelData(), mixer),
     );
     expect(bus3.isSilent).toBe(false);
@@ -235,16 +212,12 @@ describe('impl/core/AudioBus - mixing', () => {
 
     bus3.sumFrom(bus1);
 
-    assert.deepEqual(
-      bus3.getChannelData(),
-      mixBy(bus1.getChannelData(), mixer),
-    );
+    expect(bus3.getChannelData(), mixBy(bus1.getChannelData(), mixer));
     expect(bus3.isSilent).toBe(false);
 
     bus3.sumFrom(bus2);
 
-    assert.deepEqual(
-      bus3.getChannelData(),
+    expect(bus3.getChannelData()).toEqual(
       mixBy(bus1.getChannelData(), bus2.getChannelData(), mixer),
     );
     expect(bus3.isSilent).toBe(false);
@@ -265,16 +238,12 @@ describe('impl/core/AudioBus - mixing', () => {
 
     bus3.sumFrom(bus1);
 
-    assert.deepEqual(
-      bus3.getChannelData(),
-      mixBy(bus1.getChannelData(), mixer),
-    );
+    expect(bus3.getChannelData(), mixBy(bus1.getChannelData(), mixer));
     expect(bus3.isSilent).toBe(false);
 
     bus3.sumFrom(bus2);
 
-    assert.deepEqual(
-      bus3.getChannelData(),
+    expect(bus3.getChannelData()).toEqual(
       mixBy(bus1.getChannelData(), bus2.getChannelData(), mixer),
     );
     expect(bus3.isSilent).toBe(false);
@@ -295,16 +264,12 @@ describe('impl/core/AudioBus - mixing', () => {
 
     bus3.sumFrom(bus1);
 
-    assert.deepEqual(
-      bus3.getChannelData(),
-      mixBy(bus1.getChannelData(), mixer),
-    );
+    expect(bus3.getChannelData()).toEqual(mixBy(bus1.getChannelData(), mixer));
     expect(bus3.isSilent).toBe(false);
 
     bus3.sumFrom(bus2);
 
-    assert.deepEqual(
-      bus3.getChannelData(),
+    expect(bus3.getChannelData()).toEqual(
       mixBy(bus1.getChannelData(), bus2.getChannelData(), mixer),
     );
     expect(bus3.isSilent).toBe(false);
@@ -329,16 +294,12 @@ describe('impl/core/AudioBus - mixing', () => {
 
     bus3.sumFrom(bus1);
 
-    assert.deepEqual(
-      bus3.getChannelData(),
-      mixBy(bus1.getChannelData(), mixer),
-    );
+    expect(bus3.getChannelData()).toEqual(mixBy(bus1.getChannelData(), mixer));
     expect(bus3.isSilent).toBe(false);
 
     bus3.sumFrom(bus2);
 
-    assert.deepEqual(
-      bus3.getChannelData(),
+    expect(bus3.getChannelData()).toEqual(
       mixBy(bus1.getChannelData(), bus2.getChannelData(), mixer),
     );
     expect(bus3.isSilent).toBe(false);
@@ -363,16 +324,12 @@ describe('impl/core/AudioBus - mixing', () => {
 
     bus3.sumFrom(bus1);
 
-    assert.deepEqual(
-      bus3.getChannelData(),
-      mixBy(bus1.getChannelData(), mixer),
-    );
+    expect(bus3.getChannelData()).toEqual(mixBy(bus1.getChannelData(), mixer));
     expect(bus3.isSilent).toBe(false);
 
     bus3.sumFrom(bus2);
 
-    assert.deepEqual(
-      bus3.getChannelData(),
+    expect(bus3.getChannelData()).toEqual(
       mixBy(bus1.getChannelData(), bus2.getChannelData(), mixer),
     );
     expect(bus3.isSilent).toBe(false);
@@ -393,15 +350,12 @@ describe('impl/core/AudioBus - mixing', () => {
 
     bus3.sumFrom(bus1);
 
-    assert.deepEqual(
-      bus3.getChannelData(),
-      mixBy(bus1.getChannelData(), mixer),
-    );
+    expect(bus3.getChannelData()).toEqual(mixBy(bus1.getChannelData(), mixer));
     expect(bus3.isSilent).toBe(false);
 
     bus3.sumFrom(bus2);
 
-    assert.deepEqual(
+    expect(
       bus3.getChannelData(),
       mixBy(bus1.getChannelData(), bus2.getChannelData(), mixer),
     );
@@ -427,16 +381,12 @@ describe('impl/core/AudioBus - mixing', () => {
 
     bus3.sumFrom(bus1);
 
-    assert.deepEqual(
-      bus3.getChannelData(),
-      mixBy(bus1.getChannelData(), mixer),
-    );
+    expect(bus3.getChannelData()).toEqual(mixBy(bus1.getChannelData(), mixer));
     expect(bus3.isSilent).toBe(false);
 
     bus3.sumFrom(bus2);
 
-    assert.deepEqual(
-      bus3.getChannelData(),
+    expect(bus3.getChannelData()).toEqual(
       mixBy(bus1.getChannelData(), bus2.getChannelData(), mixer),
     );
     expect(bus3.isSilent).toBe(false);
@@ -467,16 +417,12 @@ describe('impl/core/AudioBus - mixing', () => {
 
     bus3.sumFrom(bus1);
 
-    assert.deepEqual(
-      bus3.getChannelData(),
-      mixBy(bus1.getChannelData(), mixer),
-    );
+    expect(bus3.getChannelData()).toEqual(mixBy(bus1.getChannelData(), mixer));
     expect(bus3.isSilent).toBe(false);
 
     bus3.sumFrom(bus2);
 
-    assert.deepEqual(
-      bus3.getChannelData(),
+    expect(bus3.getChannelData()).toEqual(
       mixBy(bus1.getChannelData(), bus2.getChannelData(), mixer),
     );
     expect(bus3.isSilent).toBe(false);
@@ -501,16 +447,12 @@ describe('impl/core/AudioBus - mixing', () => {
 
     bus3.sumFrom(bus1);
 
-    assert.deepEqual(
-      bus3.getChannelData(),
-      mixBy(bus1.getChannelData(), mixer),
-    );
+    expect(bus3.getChannelData()).toEqual(mixBy(bus1.getChannelData(), mixer));
     expect(bus3.isSilent).toBe(false);
 
     bus3.sumFrom(bus2);
 
-    assert.deepEqual(
-      bus3.getChannelData(),
+    expect(bus3.getChannelData()).toEqual(
       mixBy(bus1.getChannelData(), bus2.getChannelData(), mixer),
     );
     expect(bus3.isSilent).toBe(false);
@@ -542,16 +484,12 @@ describe('impl/core/AudioBus - mixing', () => {
 
     bus3.sumFrom(bus1);
 
-    assert.deepEqual(
-      bus3.getChannelData(),
-      mixBy(bus1.getChannelData(), mixer),
-    );
+    expect(bus3.getChannelData(), mixBy(bus1.getChannelData(), mixer));
     expect(bus3.isSilent).toBe(false);
 
     bus3.sumFrom(bus2);
 
-    assert.deepEqual(
-      bus3.getChannelData(),
+    expect(bus3.getChannelData()).toEqual(
       mixBy(bus1.getChannelData(), bus2.getChannelData(), mixer),
     );
     expect(bus3.isSilent).toBe(false);
@@ -585,16 +523,12 @@ describe('impl/core/AudioBus - mixing', () => {
 
     bus3.sumFrom(bus1);
 
-    assert.deepEqual(
-      bus3.getChannelData(),
-      mixBy(bus1.getChannelData(), mixer),
-    );
+    expect(bus3.getChannelData()).toEqual(mixBy(bus1.getChannelData(), mixer));
     expect(bus3.isSilent).toBe(false);
 
     bus3.sumFrom(bus2);
 
-    assert.deepEqual(
-      bus3.getChannelData(),
+    expect(bus3.getChannelData()).toEqual(
       mixBy(bus1.getChannelData(), bus2.getChannelData(), mixer),
     );
     expect(bus3.isSilent).toBe(false);
@@ -622,31 +556,27 @@ describe('impl/core/AudioBus - mixing', () => {
     bus5.sumFromWithOffset(bus1, 0);
     bus5.sumFromWithOffset(bus2, 128);
 
-    assert.deepEqual(
-      bus5.getChannelData().map((data) => data.subarray(0, 128)),
+    expect(bus5.getChannelData().map((data) => data.subarray(0, 128))).toEqual(
       mixBy(bus1.getChannelData(), mixer),
     );
     expect(bus5.isSilent).toBe(false);
 
-    assert.deepEqual(
+    expect(
       bus5.getChannelData().map((data) => data.subarray(128, 256)),
-      mixBy(bus2.getChannelData(), mixer),
-    );
+    ).toEqual(mixBy(bus2.getChannelData(), mixer));
     expect(bus5.isSilent).toBe(false);
 
     bus5.sumFromWithOffset(bus3, 0);
     bus5.sumFromWithOffset(bus4, 128);
 
-    assert.deepEqual(
-      bus5.getChannelData().map((data) => data.subarray(0, 128)),
+    expect(bus5.getChannelData().map((data) => data.subarray(0, 128))).toEqual(
       mixBy(bus1.getChannelData(), bus3.getChannelData(), mixer),
     );
     expect(bus5.isSilent).toBe(false);
 
-    assert.deepEqual(
+    expect(
       bus5.getChannelData().map((data) => data.subarray(128, 256)),
-      mixBy(bus2.getChannelData(), bus4.getChannelData(), mixer),
-    );
+    ).toEqual(mixBy(bus2.getChannelData(), bus4.getChannelData(), mixer));
     expect(bus5.isSilent).toBe(false);
   });
 });

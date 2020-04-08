@@ -89,7 +89,7 @@ describe('AudioParam', () => {
       param.exponentialRampToValueAtTime(0.05, 0.7);
       param.setValueCurveAtTime(curve, 0.7, 0.3);
 
-      assert.deepEqual(param.getEvents(), [
+      expect(context.format).toEqual([
         { type: 'setValueAtTime', time: 0, args: [0.2, 0] },
         { type: 'setValueAtTime', time: 0.1, args: [0.3, 0.1] },
         { type: 'setValueAtTime', time: 0.2, args: [0.4, 0.2] },
@@ -114,7 +114,7 @@ describe('AudioParam', () => {
       param.linearRampToValueAtTime(0.8, 0.5);
       param.setValueAtTime(1.0, 0.5);
 
-      assert.deepEqual(param.getEvents(), [
+      expect(context.format).toEqual([
         { type: 'setValueAtTime', time: 0, args: [0.2, 0] },
         { type: 'linearRampToValueAtTime', time: 0.5, args: [0.8, 0.5] },
         { type: 'setValueAtTime', time: 0.5, args: [1.0, 0.5] },
@@ -131,7 +131,7 @@ describe('AudioParam', () => {
       param.setValueAtTime(0.5, 0.5);
       param.setValueAtTime(0.0, 0.0);
 
-      assert.deepEqual(param.getEvents(), [
+      expect(context.format).toEqual([
         { type: 'setValueAtTime', time: 0.0, args: [0.0, 0.0] },
         { type: 'setValueAtTime', time: 0.5, args: [0.5, 0.5] },
         { type: 'setValueAtTime', time: 1.0, args: [1.0, 1.0] },
@@ -158,7 +158,7 @@ describe('AudioParam', () => {
 
       param.cancelScheduledValues(0.4);
 
-      assert.deepEqual(param.getEvents(), [
+      expect(context.format).toEqual([
         { type: 'setValueAtTime', time: 0, args: [0.2, 0] },
         { type: 'setValueAtTime', time: 0.1, args: [0.3, 0.1] },
         { type: 'setValueAtTime', time: 0.2, args: [0.4, 0.2] },
@@ -200,7 +200,7 @@ describe('AudioParam', () => {
       param.linearRampToValueAtTime(0.3, 3);
       param.setValueAtTime(0.4, 4);
 
-      assert.deepEqual(param.getTimeline().map(pluck), [
+      expect(context.format).toEqual([
         //                                   startTime, endTime, startValue, endValue
         [SET_VALUE_AT_TIME, fr(0), fr(1), 0.0, 0.0],
         [SET_VALUE_AT_TIME, fr(1), fr(2), 0.1, 0.1],
@@ -221,7 +221,7 @@ describe('AudioParam', () => {
       param.setValueAtTime(0.3, 3);
       param.linearRampToValueAtTime(0.4, 4);
 
-      assert.deepEqual(param.getTimeline().map(pluck), [
+      expect(context.format).toEqual([
         //                                   startTime, endTime, startValue, endValue
         [LINEAR_RAMP_TO_VALUE_AT_TIME, fr(0), fr(1), 0.0, 0.1],
         [LINEAR_RAMP_TO_VALUE_AT_TIME, fr(1), fr(2), 0.1, 0.2],
@@ -241,7 +241,7 @@ describe('AudioParam', () => {
       param.setValueAtTime(0.3, 3);
       param.exponentialRampToValueAtTime(0.4, 4);
 
-      assert.deepEqual(param.getTimeline().map(pluck), [
+      expect(context.format).toEqual([
         //                                   startTime, endTime, startValue, endValue
         [EXPONENTIAL_RAMP_TO_VALUE_AT_TIME, fr(0), fr(1), 1e-6, 0.1],
         [EXPONENTIAL_RAMP_TO_VALUE_AT_TIME, fr(1), fr(2), 0.1, 0.2],
@@ -264,7 +264,7 @@ describe('AudioParam', () => {
       param.linearRampToValueAtTime(0.6, 6);
       param.setTargetAtTime(0.7, 7, 0.1);
 
-      assert.deepEqual(param.getTimeline().map(pluck), [
+      expect(context.format).toEqual([
         //                                   startTime, endTime, startValue, endValue
         [SET_TARGET_AT_TIME, fr(1), fr(2), 0.0, 0.1],
         [SET_TARGET_AT_TIME, fr(2), fr(3), 0.0, 0.2],
@@ -290,7 +290,7 @@ describe('AudioParam', () => {
       param.setValueCurveAtTime(curve2, 3, 1);
       param.linearRampToValueAtTime(1.0, 5);
 
-      assert.deepEqual(param.getTimeline().map(pluck), [
+      expect(context.format).toEqual([
         //                                   startTime, endTime, startValue, endValue
         [SET_VALUE_CURVE_AT_TIME, fr(0), fr(1), f32(0.1), f32(0.3)],
         [SET_VALUE_AT_TIME, fr(2), fr(3), 0.2, 0.2],
@@ -310,7 +310,7 @@ describe('AudioParam', () => {
       param.setValueAtTime(0.2, 2);
       param.cancelScheduledValues(2);
 
-      assert.deepEqual(param.getTimeline().map(pluck), [
+      expect(context.format).toEqual([
         //                                   startTime, endTime, startValue, endValue
         [SET_VALUE_AT_TIME, fr(0), fr(1), 0.0, 0.0],
         [SET_VALUE_AT_TIME, fr(1), inf, 0.1, 0.1],

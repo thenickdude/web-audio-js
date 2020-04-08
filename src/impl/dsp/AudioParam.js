@@ -1,5 +1,6 @@
 'use strict';
 
+import assert from 'assert';
 import * as AudioParamUtils from '../../utils/AudioParamUtils';
 import { fill } from '../../utils';
 

@@ -40,79 +40,79 @@ describe('utils/AudioParamUtils.computeValueAtTime(timeline: object[], time: num
     expect(AudioParamUtils.computeValueAtTime(timeline, 0.25, 0)).toBe(0.7);
     expect(AudioParamUtils.computeValueAtTime(timeline, 0.3, 0)).toBe(1.0);
     expect(AudioParamUtils.computeValueAtTime(timeline, 0.325, 0)).toBe(0.8);
-    assert(
+    expect(
       closeTo(
         AudioParamUtils.computeValueAtTime(timeline, 0.35, 0),
         0.7336,
         1e-4,
       ),
-    );
-    assert(
+    ).toBeTruthy();
+    expect(
       closeTo(
         AudioParamUtils.computeValueAtTime(timeline, 0.4, 0),
         0.6417,
         1e-4,
       ),
-    );
-    assert(
+    ).toBeTruthy();
+    expect(
       closeTo(
         AudioParamUtils.computeValueAtTime(timeline, 0.45, 0),
         0.5859,
         1e-4,
       ),
-    );
-    assert(
+    ).toBeTruthy();
+    expect(
       closeTo(
         AudioParamUtils.computeValueAtTime(timeline, 0.5, 0),
         0.5521,
         1e-4,
       ),
-    );
-    assert(
+    ).toBeTruthy();
+    expect(
       closeTo(
         AudioParamUtils.computeValueAtTime(timeline, 0.55, 0),
         0.6435,
         1e-4,
       ),
-    );
-    assert(
+    ).toBeTruthy();
+    expect(
       closeTo(AudioParamUtils.computeValueAtTime(timeline, 0.6, 0), 0.75, 1e-4),
-    );
-    assert(
+    ).toBeTruthy();
+    expect(
       closeTo(
         AudioParamUtils.computeValueAtTime(timeline, 0.65, 0),
         0.1936,
         1e-4,
       ),
-    );
-    assert(
+    ).toBeTruthy();
+    expect(
       closeTo(AudioParamUtils.computeValueAtTime(timeline, 0.7, 0), 0.0, 1e-4),
-    );
-    assert(
+    ).toBeTruthy();
+    expect(
       closeTo(AudioParamUtils.computeValueAtTime(timeline, 0.75, 0), 0.5, 1e-4),
-    );
-    assert(
+    ).toBeTruthy();
+    expect(
       closeTo(
         AudioParamUtils.computeValueAtTime(timeline, 0.8, 0),
         0.866,
         1e-4,
       ),
-    );
-    assert(
+    ).toBeTruthy();
+    expect(
       closeTo(AudioParamUtils.computeValueAtTime(timeline, 0.85, 0), 1.0, 1e-4),
-    );
-    assert(
+    ).toBeTruthy();
+    expect(
       closeTo(
         AudioParamUtils.computeValueAtTime(timeline, 0.9, 0),
         0.866,
         1e-4,
       ),
-    );
-    assert(
+    ).toBeTruthy();
+    expect(
       closeTo(AudioParamUtils.computeValueAtTime(timeline, 0.95, 0), 0.5, 1e-4),
-    );
-    assert(
+    ).toBeTruthy();
+    expect(
       closeTo(AudioParamUtils.computeValueAtTime(timeline, 1.0, 0), 0.0, 1e-4),
-    );
+    ).toBeTruthy();
   });
 });

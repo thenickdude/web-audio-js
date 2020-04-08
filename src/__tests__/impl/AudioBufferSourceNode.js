@@ -533,8 +533,8 @@ describe('impl/AudioBufferSourceNode', () => {
       // | node2 |
       // +-------+
       node1.setBuffer(buffer);
-      assert(
-        node2.inputs[0].getNumberOfChannels() === buffer.getNumberOfChannels(),
+      expect(node2.inputs[0].getNumberOfChannels()).toBe(
+        buffer.getNumberOfChannels(),
       );
     });
   });
