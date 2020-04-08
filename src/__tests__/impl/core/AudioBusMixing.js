@@ -137,7 +137,7 @@ describe('impl/core/AudioBus - mixing', () => {
 
     bus3.sumFrom(bus1);
 
-    expect(bus3.getChannelData(), mixBy(bus1.getChannelData(), mixer));
+    expect(bus3.getChannelData()).toEqual(mixBy(bus1.getChannelData(), mixer));
     expect(bus3.isSilent).toBe(false);
 
     bus3.sumFrom(bus2);
@@ -212,7 +212,7 @@ describe('impl/core/AudioBus - mixing', () => {
 
     bus3.sumFrom(bus1);
 
-    expect(bus3.getChannelData(), mixBy(bus1.getChannelData(), mixer));
+    expect(bus3.getChannelData()).toEqual(mixBy(bus1.getChannelData(), mixer));
     expect(bus3.isSilent).toBe(false);
 
     bus3.sumFrom(bus2);
@@ -238,7 +238,7 @@ describe('impl/core/AudioBus - mixing', () => {
 
     bus3.sumFrom(bus1);
 
-    expect(bus3.getChannelData(), mixBy(bus1.getChannelData(), mixer));
+    expect(bus3.getChannelData()).toEqual(mixBy(bus1.getChannelData(), mixer));
     expect(bus3.isSilent).toBe(false);
 
     bus3.sumFrom(bus2);
@@ -355,8 +355,7 @@ describe('impl/core/AudioBus - mixing', () => {
 
     bus3.sumFrom(bus2);
 
-    expect(
-      bus3.getChannelData(),
+    expect(bus3.getChannelData()).toEqual(
       mixBy(bus1.getChannelData(), bus2.getChannelData(), mixer),
     );
     expect(bus3.isSilent).toBe(false);
@@ -484,7 +483,7 @@ describe('impl/core/AudioBus - mixing', () => {
 
     bus3.sumFrom(bus1);
 
-    expect(bus3.getChannelData(), mixBy(bus1.getChannelData(), mixer));
+    expect(bus3.getChannelData()).toEqual(mixBy(bus1.getChannelData(), mixer));
     expect(bus3.isSilent).toBe(false);
 
     bus3.sumFrom(bus2);
