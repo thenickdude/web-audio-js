@@ -1,4 +1,4 @@
-# web-audio-engine
+# @descript/web-audio-js
 
 [![Build Status](https://img.shields.io/travis/mohayonao/web-audio-engine.svg?style=flat-square)](https://travis-ci.org/mohayonao/web-audio-engine)
 [![NPM Version](https://img.shields.io/npm/v/web-audio-engine.svg?style=flat-square)](https://www.npmjs.org/package/web-audio-engine)

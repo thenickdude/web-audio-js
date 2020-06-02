@@ -2,7 +2,10 @@
   "name": "@descript/web-audio-js",
   "description": "Pure JS implementation of the Web Audio API",
   "version": "0.15.1",
-  "author": "Nao Yonamine <mohayonao@gmail.com>",
+  "authors": [
+    "Nao Yonamine <mohayonao@gmail.com>",
+    "Marcello Bastea-Forte <marcello@descript.com>"
+  ],
   "bugs": {
     "url": "https://github.com/mohayonao/web-audio-engine/issues"
   },
