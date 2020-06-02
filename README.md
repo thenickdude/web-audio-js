@@ -1,7 +1,7 @@
 # @descript/web-audio-js
 
-[![Build Status](https://img.shields.io/travis/mohayonao/web-audio-engine.svg?style=flat-square)](https://travis-ci.org/mohayonao/web-audio-engine)
-[![NPM Version](https://img.shields.io/npm/v/web-audio-engine.svg?style=flat-square)](https://www.npmjs.org/package/web-audio-engine)
+![Node CI](https://github.com/descriptinc/web-audio-js/workflows/Node%20CI/badge.svg)
+[![NPM Version](https://img.shields.io/npm/v/@descript/web-audio-js.svg?style=flat-square)](https://www.npmjs.org/package/@descript/web-audio-js)
 [![License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](https://mohayonao.mit-license.org/)
 
 > Pure JS implementation of the [Web Audio API](https://www.w3.org/TR/webaudio/)
