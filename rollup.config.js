@@ -11,7 +11,12 @@ export default {
     resolve({ preferBuiltins: true }),
     typescript({ exclude: '**/*.test.ts' }),
   ],
-  external: ['assert', 'events', ...Object.keys(pkg.dependencies)],
+  external: [
+    'assert',
+    'events',
+    'worker_threads',
+    ...Object.keys(pkg.dependencies),
+  ],
   output: [
     {
       sourcemap: true,

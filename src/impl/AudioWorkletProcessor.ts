@@ -1,4 +1,4 @@
-import { MessagePort } from 'worker_threads';
+import type { MessagePort } from 'worker_threads';
 import { getNextPort } from './AudioWorkletPort';
 import { AudioWorkletOptions } from './AudioWorklet';
 
@@ -11,7 +11,7 @@ export interface AudioParamDescriptor {
 }
 
 export default class AudioWorkletProcessor {
-  port: MessagePort | undefined;
+  port: MessagePort;
 
   sampleRate = 0;
   currentTime = 0;
