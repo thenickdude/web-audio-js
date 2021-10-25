@@ -60,6 +60,15 @@ class BaseAudioContext extends EventTarget {
     return this._impl.getState();
   }
 
+  /**
+   * @returns {AudioWorklet}
+   */
+  get audioWorklet() {
+    return (
+      this._audioWorklet || (this._audioWorklet = new impl.AudioWorklet(this))
+    );
+  }
+
   resume() {
     return this._impl.resume();
   }

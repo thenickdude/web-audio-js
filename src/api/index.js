@@ -8,6 +8,8 @@ export { default as AudioListener } from './AudioListener';
 export { default as AudioNode } from './AudioNode';
 export { default as AudioParam } from './AudioParam';
 export { default as AudioScheduledSourceNode } from './AudioScheduledSourceNode';
+export { default as AudioWorkletNode } from './AudioWorkletNode';
+export { default as AudioWorkletProcessor } from './AudioWorkletProcessor';
 export { default as BaseAudioContext } from './BaseAudioContext';
 export { default as BiquadFilterNode } from './BiquadFilterNode';
 export { default as ChannelMergerNode } from './ChannelMergerNode';

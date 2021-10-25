@@ -1,7 +1,7 @@
 {
   "name": "@descript/web-audio-js",
   "description": "Pure JS implementation of the Web Audio API",
-  "version": "0.15.3-patched.2",
+  "version": "0.15.3-patched.3",
   "authors": [
     "Nao Yonamine <mohayonao@gmail.com>",
     "Marcello Bastea-Forte <marcello@descript.com>"
@@ -36,7 +36,7 @@
     "typescript": "^3.8.3"
   },
   "engines": {
-    "node": ">= 10.0.0"
+    "node": ">= 12.0.0"
   },
   "files": [
     "package.json",

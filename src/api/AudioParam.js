@@ -16,6 +16,10 @@ class AudioParam {
     this._impl.setValue(value);
   }
 
+  get automationRate() {
+    return this._impl.getRate();
+  }
+
   get defaultValue() {
     return this._impl.getDefaultValue();
   }
