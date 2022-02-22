@@ -250,7 +250,12 @@ class DelayKernel {
       const ia = ix % 1;
 
       if (ia === 0) {
-        output[i] = delayBuffer[i0];
+        if (i0 === delayBufferLength) {
+          // Fix out-of-bounds read due to rounding in computeAccurateDelayIndices()
+          output[i] = delayBuffer[delayBufferLength - 1];
+        } else {
+          output[i] = delayBuffer[i0];
+        }
       } else {
         const i1 = (i0 + 1) % delayBufferLength;
 
