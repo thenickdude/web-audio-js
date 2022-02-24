@@ -14,7 +14,7 @@ import { EXPLICIT } from '../constants/ChannelCountMode';
 const DEFAULT_BUFFER_SIZE = 1024;
 const DEFAULT_NUMBER_OF_INPUT_CHANNELS = 1;
 const DEFAULT_NUMBER_OF_OUTPUT_CHANNELS = 1;
-const MIN_BUFFER_SIZE = 128;
+const MIN_BUFFER_SIZE = 256;
 const MAX_BUFFER_SIZE = 16384;
 
 class ScriptProcessorNode extends AudioNode {

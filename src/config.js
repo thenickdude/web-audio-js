@@ -3,6 +3,6 @@
 export default {
   sampleRate: 44100,
   numberOfChannels: 2,
-  blockSize: 128,
+  blockSize: 256,
   bitDepth: 16,
 };

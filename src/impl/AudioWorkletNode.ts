@@ -74,7 +74,7 @@ export default function AudioWorkletNode(
   const scriptProcessor = context.createScriptProcessor(
     // to match the current impl of AudioWorkletProcessor in browsers
     // https://webaudio.github.io/web-audio-api/#rendering-loop
-    128,
+    256,
     outputChannels,
     outputChannels,
   ) as WorkletScriptProcessorNode;
