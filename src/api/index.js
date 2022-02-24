@@ -25,7 +25,6 @@ export { default as OscillatorNode } from './OscillatorNode';
 export { default as PannerNode } from './PannerNode';
 export { default as PeriodicWave } from './PeriodicWave';
 export { default as ScriptProcessorNode } from './ScriptProcessorNode';
-export { default as SpatialListener } from './SpatialListener';
 export { default as SpatialPannerNode } from './SpatialPannerNode';
 export { default as StereoPannerNode } from './StereoPannerNode';
 export { default as WaveShaperNode } from './WaveShaperNode';
