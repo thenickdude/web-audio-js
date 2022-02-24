@@ -10,5 +10,6 @@ import * as api from './api';
 import * as impl from './impl';
 import * as decoder from './decoder';
 import * as encoder from './encoder';
+import PCMEncoder from './utils/PCMEncoder';
 
-export { api, impl, decoder, encoder };
+export { api, impl, decoder, encoder, PCMEncoder };
