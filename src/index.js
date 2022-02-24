@@ -2,6 +2,7 @@
 
 export { default as OfflineAudioContext } from './context/OfflineAudioContext';
 export { default as StreamAudioContext } from './context/StreamAudioContext';
+export { default as ChunkedOfflineAudioContext } from './context/ChunkedOfflineAudioContext';
 export { default as RenderingAudioContext } from './context/RenderingAudioContext';
 export { default as WebAudioContext } from './context/WebAudioContext';
 export { RawDataAudioContext } from './context/RawDataAudioContext';
