@@ -53,6 +53,11 @@ class AudioParam {
     this._impl.cancelScheduledValues(startTime);
     return this;
   }
+
+  cancelAndHoldAtTime(startTime) {
+    this._impl.cancelAndHoldAtTime(startTime);
+    return this;
+  }
 }
 
 export default AudioParam;

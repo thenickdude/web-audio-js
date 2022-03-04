@@ -16,6 +16,7 @@ import {
   SET_VALUE_AT_TIME,
   SET_VALUE_CURVE_AT_TIME,
 } from '../constants/AudioParamEvent';
+import { computeValueAtTime } from '../utils/AudioParamUtils';
 
 /**
  * @prop {AudioContext}      context
@@ -367,6 +368,26 @@ class AudioParam {
     if (index <= this._currentEventIndex) {
       this._currentEventIndex = index;
       this._remainSamples = 0;
+    }
+  }
+
+  /**
+   * @param {number} startTime
+   */
+  cancelAndHoldAtTime(startTime) {
+    if (this._timeline.length > 0) {
+      startTime = Math.max(0, toNumber(startTime));
+
+      const cancelValue = computeValueAtTime(
+        this._timeline,
+        startTime,
+        undefined,
+      );
+
+      this.cancelScheduledValues(startTime);
+      if (cancelValue !== undefined) {
+        this.setValueAtTime(cancelValue, startTime);
+      }
     }
   }
 
